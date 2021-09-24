@@ -1,0 +1,13 @@
+{
+    "name": "FMDashboard",
+    "alias": "fmdashboard",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\FMDashboard\\Providers\\FMDashboardServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

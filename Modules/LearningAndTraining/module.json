@@ -1,0 +1,13 @@
+{
+    "name": "LearningAndTraining",
+    "alias": "learningandtraining",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LearningAndTraining\\Providers\\LearningAndTrainingServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

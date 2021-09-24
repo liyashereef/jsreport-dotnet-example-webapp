@@ -1,0 +1,13 @@
+{
+    "name": "ClientApp",
+    "alias": "clientapp",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ClientApp\\Providers\\ClientAppServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

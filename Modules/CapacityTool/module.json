@@ -1,0 +1,13 @@
+{
+    "name": "CapacityTool",
+    "alias": "capacitytool",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CapacityTool\\Providers\\CapacityToolServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

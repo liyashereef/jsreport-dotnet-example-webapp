@@ -1,0 +1,13 @@
+{
+    "name": "IdsScheduling",
+    "alias": "idsscheduling",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\IdsScheduling\\Providers\\IdsSchedulingServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

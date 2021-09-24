@@ -1,0 +1,13 @@
+{
+    "name": "KeyManagement",
+    "alias": "keymanagement",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\KeyManagement\\Providers\\KeyManagementServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

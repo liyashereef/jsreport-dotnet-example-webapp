@@ -1,0 +1,13 @@
+{
+    "name": "Osgc",
+    "alias": "osgc",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Osgc\\Providers\\OsgcServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "EmployeeTimeOff",
+    "alias": "employeetimeoff",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\EmployeeTimeOff\\Providers\\EmployeeTimeOffServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

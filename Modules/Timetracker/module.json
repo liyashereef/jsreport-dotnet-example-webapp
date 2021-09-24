@@ -1,0 +1,13 @@
+{
+    "name": "Timetracker",
+    "alias": "timetracker",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Timetracker\\Providers\\TimetrackerServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

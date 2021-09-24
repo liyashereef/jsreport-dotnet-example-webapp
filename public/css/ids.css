@@ -1,0 +1,387 @@
+
+/* IDs Scheduling - Start */
+.time-slot{
+    background-color: #13486b !important;
+    color: #fff !important;
+}
+/* Value from service */
+.days-slot{
+    background-color: #f36905 !important;
+    color: #fff !important;
+}
+/* Value from service */
+.days-slot-weekdys{
+    background-color: #13486b !important;
+    color: #fff !important;
+}
+.scheduled-slot{
+    background-color: #000 !important;
+}
+.tobe-rescheduled-slot{
+    background-color: #e74b23 !important;
+}
+.open-slot{
+    background-color: #fff !important;
+    /* color: #fff !important; */
+}
+.search-slot{
+    background:  #E6E6FA !important;
+}
+.closed-slot{
+    background-color: #d2d2d2 !important;
+
+    /* color: #fff !important; */
+    /* color: #c00000 !important; */
+}
+#ids-slot-scheduling-form .other-option-text .candidate-requisition-no{
+    margin-top: 1%;
+}
+.public-container .open-slot,
+.public-container .closed-slot,
+.public-container .tobe-rescheduled-slot,
+.public-container .scheduled-slot,
+.public-container .search-slot{
+    /* width: 5%; */
+}
+.unavailable-slots{
+    /* width: 5%; */
+}
+.admin-container .open-slot, .admin-container .closed-slot, .admin-container .tobe-rescheduled-slot, .admin-container .scheduled-slot{
+    min-width: 55px !important;
+    max-width: 55px !important;
+    /* max-width: 55px;
+    max-width: 55px; */
+}
+.scheduling-table tr td{
+    border: 1px solid #878787 !important;
+}
+
+.public-container{
+    padding-bottom: 2% !important;
+    /* margin-top: 2%; */
+    overflow-x: auto;
+}
+
+.public-container .scheduling-table{
+    /* width: 53%; */
+    text-align: center;
+}
+
+.admin-container{
+    padding-bottom: 1% !important;
+    /* margin-left: 1%; */
+    max-width: 100%;
+    overflow-x: auto !important;
+}
+
+.admin-container .scheduling-table{
+    max-width: 14% !important;
+    /* width: 70%; */
+    text-align: center;
+    overflow: scroll !important;
+    overflow-x: auto !important;
+}
+
+.ids-office-details-container .title {
+    color: #f36905;
+    font-weight: bold;
+    margin-bottom: 1%;
+    margin-top: 1%;
+
+}
+.ids-office-details-container .add-new {
+    margin: auto;
+
+}
+
+.ids-office-details-container.ids-office-details-box {
+    padding: 0px 8px;
+    border: none;
+    margin-bottom: 0px;
+    height: auto;
+}
+
+.ids-office-details-container {
+    border: 1px solid #15151561;
+    height: 100%;
+    width: 99%;
+}
+
+.ids-office-details-container #office-opening-hours {
+    /* margin-left: -14px; */
+    margin-top: 2%;
+}
+
+div.custom-questions-container {
+    margin-top: 5%;
+    border-top: 1px solid #e9ecef;
+    padding-top: 3%;
+}
+
+.ids-office-details-container #special-instruction{
+    max-height: 240px !important;
+    overflow: auto;
+    text-align: justify;
+    width: 100% !important;
+}
+/**START** Admin rotate  */
+#slot-rescheduling-table th.rotate, #slot-scheduling-table th.rotate {
+    height: 260px !important;
+    white-space: nowrap !important;
+    border: 1px solid #524c4c6e;
+}
+
+#slot-scheduling-table th.rotate > div {
+    /* transform: translateX(50%) translateY(16px) rotate(270deg) !important;
+    width: 30px !important; */
+}
+#slot-rescheduling-table th.rotate > div {
+    /* transform: translateX(0%) translateY(16px) rotate(270deg) !important;
+    width: 30px !important; */
+}
+
+/* #slot-rescheduling-table th.rotate > div > span, #slot-scheduling-table th.rotate > div > span{
+    padding: 16px !important;
+} */
+
+#slot-rescheduling-table th.rotate > span, #slot-scheduling-table th.rotate > span{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    writing-mode: vertical-rl;
+}
+
+/**END** Admin rotate  */
+#slot-scheduling-table th {
+    padding: 1rem;
+}
+#slot-scheduling-table td {
+    padding: 1rem;
+}
+
+.first-col{
+    width: 5% !important;
+    min-width: 5% !important;
+    max-width: 5% !important;
+    visibility: visible !important;
+}
+.public-container .scheduling-table thead th:nth-child(11){
+    border: 2px solid #18486b80;
+}
+
+.public-container .scheduling-table tbody td:nth-child(11){
+    border-left: 2px solid #18486b80 !important;
+    border-right: 2px solid #18486b80 !important;
+}
+
+.public-container .scheduling-table tr td:first-child, .public-container .scheduling-table tr th:first-child {
+    width: 5% !important;
+    min-width: 5% !important;
+    max-width: 5% !important;
+    visibility: visible !important;
+}
+.legend-main-box{
+    margin: 2% 0%;
+}
+.legend-box{
+    /* background: black; */
+    width: 50px;
+    height: 30px;
+    float: left;
+    margin-right: 3%;
+    border: 1px solid #15151561 !important;
+}
+
+.legend-main-box div {
+    margin: 2px;
+}
+
+span.legend-text {
+    width: auto;
+    padding-left: 5px;
+    padding-top: 4px;
+}
+
+#toBeRescheduleModalButton{
+    margin: 15px 0px;
+}
+
+/* IDS Report - Start */
+#report-table th.rotate {
+    height: 260px !important;
+    white-space: nowrap !important;
+    border: 1px solid #524c4c6e;
+    font-weight: normal;
+}
+
+#report-table th.rotate > span{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    writing-mode: vertical-rl;
+}
+
+.ids-report-table tr td{
+    border: 1px solid #878787 !important;
+}
+.ids-report-table .saturday_sundy{
+    background-color: lightyellow;
+}
+/* IDS Report - End */
+
+
+/***START* IDS Calendar Section */
+#calendar {
+    /* max-width: 100%; */
+    margin: 0px;
+}
+.fc-unthemed td.fc-today {
+    background: #f36424;
+}
+.fc-more-popover {
+    width:23%
+}
+.fc-event, .fc-event-dot {
+    background-color: #0e3a63;
+}
+.fc-content .fc-title{
+    color: #fff !important;
+}
+.fc-event {
+    border: 1px solid #0e3a63;
+}
+.fc-day-grid-event .fc-content {
+    white-space: none !important;
+    /* overflow: hidden; */
+}
+.fc-highlight {
+    background: #9595f9 !important;
+}
+.fc-day-header{
+    background: #2c3e50;
+    padding: 10px !important;
+    color: #fafafa;
+}
+.fc-toolbar h2 {
+    float: left;
+    /* margin: 0px 10px 0px 10px !important; */
+}
+.fc-prev-button{
+    float: left;
+}
+
+.fc h2 {
+    font-size: 23px;
+    margin-top: 6px;
+}
+.fc-button-primary {
+    color: #000;
+    background-color: #ffffff;
+    height: 34px;
+    margin-top: 4px;
+}
+.fc-icon{
+    margin-top: -1px;
+}
+
+/***END* IDS Calendar Section */
+
+
+/***START* IDS Calendar & Day Details Section */
+.section-display{
+    display:none !important;
+}
+.day-details-section{
+    max-width: 100%;
+    margin: 0px;
+    border: 1px solid #ddd !important;
+    margin-top: 63px ;
+}
+
+.day-details-title{
+    border-bottom: 1px solid #ddd !important;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px !important;
+    background: #2c3e50;
+    color: #fafafa;
+}
+.day-slot-list{
+    /* height: 1118px !important; */
+    /* height: 646px !important; */
+    overflow-y: scroll;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card .container {
+    padding: 2px 16px;
+    max-width: 100%;
+
+}
+.booked-slot{
+  border-left: 8px solid #000000 !important;
+  cursor: pointer;
+}
+.blocked-slot{
+  border-left: 8px solid #d2d2d2 !important;
+}
+.open-slot{
+  border-left: 8px solid #ea8b65;
+}
+.rescheduled-request-slot{
+    border-left: 8px solid #ff0000 !important;
+    cursor: pointer;
+}
+.booking-item{
+    padding: 5px 10px 5px 10px;
+    width:100%
+}
+.office-slot{
+    color: #000000 !important;
+    font-size : 13px;
+    padding: 5% 2% 5% 1%;
+    width:25%;
+    float: left;
+}
+
+.booking-details{
+    padding: 0px !important;
+    width: 75%;
+}
+.booked-by{
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 4%;
+}
+.service-name{
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+}
+
+.mask-section{
+    padding-left: 0px !important;
+}
+.mask-number-section{
+    /* margin-left: -6px; */
+}
+.mask-section .col-sm-6{
+    /* margin-left: 8px; */
+}
+/***END* IDS Calendar Day Details Section */
+.orange {
+    background: #e74c24 !important;
+    border-color: #e74c24 !important;
+}
+
+/* IDs Scheduling - End */
+

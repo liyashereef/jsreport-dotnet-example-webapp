@@ -1,0 +1,13 @@
+{
+    "name": "UniformScheduling",
+    "alias": "uniformscheduling",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\UniformScheduling\\Providers\\UniformSchedulingServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

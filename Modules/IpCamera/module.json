@@ -1,0 +1,13 @@
+{
+    "name": "IpCamera",
+    "alias": "ipcamera",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\IpCamera\\Providers\\IpCameraServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

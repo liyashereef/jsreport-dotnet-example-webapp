@@ -1,0 +1,13 @@
+{
+    "name": "Management",
+    "alias": "management",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Management\\Providers\\ManagementServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

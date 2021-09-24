@@ -1,0 +1,13 @@
+{
+    "name": "VideoPost",
+    "alias": "videopost",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VideoPost\\Providers\\VideoPostServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

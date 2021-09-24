@@ -1,0 +1,271 @@
+@font-face {
+  font-family: 'TradeGothicLT-Bold';
+  src: url('../fonts/TradeGothicLT-Bold.eot?#iefix') format('embedded-opentype'),  url('../fonts/TradeGothicLT-Bold.woff') format('woff'), url('../fonts/TradeGothicLT-Bold.ttf')  format('truetype'), url('../fonts/TradeGothicLT-Bold.svg#TradeGothicLT-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TradeGothicLTStd';
+  src: url('../fonts/TradeGothicLTStd.eot?#iefix') format('embedded-opentype'),  url('../fonts/TradeGothicLTStd.otf')  format('opentype'),
+	     url('../fonts/TradeGothicLTStd.woff') format('woff'), url('../fonts/TradeGothicLTStd.ttf')  format('truetype'), url('../fonts/TradeGothicLTStd.svg#TradeGothicLTStd') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* global */
+body{
+  /* font-family: 'TradeGothicLTStd'; */
+}
+.font-bold{
+  /* font-family: 'TradeGothicLT-Bold'; */
+}
+.color-primary{
+  color: #13486b!important;
+}
+.color-high{
+  color: #f26322!important;
+}
+.color-dark{
+  color: #313131!important;
+}
+.color-light{
+  color:#b6b6b6!important;
+}
+.white-bg{
+    background-color: #fff;
+}
+.primary-bg{
+  background-color: #13486b!important;
+}
+.heading-main{
+  font-size: 22px;
+   font-weight: bold;
+}
+.bshadow{
+   box-shadow:0px 0px 9px 3px rgba(0, 0, 0, 0.05)!important;
+}
+.border-radius{
+  border-radius: 2px!important;
+}
+.card-box-lg,.card-box{
+/*   height: 100%;*/
+}
+.card-box-lg{
+  padding: 38px 30px;
+}
+.card-box{
+  padding: 0px;
+}
+.themehr{
+    border-color:rgba(204, 204, 204, 0.44)
+}
+/* global END*/
+
+.dboard-search input[type="search"]::placeholder{
+  opacity: .6;
+}
+.dboard-search input[type="search"] {
+  border: none;
+  width: 300px;
+  background-color: #eeeeee;
+  height: 38px;
+  border-radius: 5px 0 0 5px;
+  padding: 5px 20px;
+  font-size: 15px;
+}
+.dboard-search button {
+  border-radius: 0 5px 5px 0;
+  border: none;
+  color: #fff;
+  height: 38px;
+  position: relative;
+  top: 0px;
+  padding: 5px 20px;
+  font-size: 15px;
+   cursor: pointer;
+}
+.round-icohold {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 8px;
+  transition: all .4s;
+  -webkit-transition: all .4s; /* For Safari 3.1 to 6.0 */
+}
+.round-icohold img{
+  background-size: 20px;
+}
+.round-icohold.todo-ico{
+  background: url("../images/to-do-icon.png") #feefe8 no-repeat center center;
+}
+.mcard-grid:hover .round-icohold.todo-ico,.mcard-grid.m-linkactive .round-icohold.todo-ico{
+  background: url("../images/todo-icohover.png") #f26321 no-repeat center center;
+}
+.round-icohold.completed-ico{
+  background: url("../images/completed-icon.png") #feefe8 no-repeat center center;
+}
+.mcard-grid:hover .round-icohold.completed-ico,.mcard-grid.m-linkactive .round-icohold.completed-ico{
+  background: url("../images/completed-icon-png.png") #f26321 no-repeat center center;
+}
+.round-icohold.overdue-ico{
+  background: url("../images/overdue-icon.png") #feefe8 no-repeat center center;
+}
+.mcard-grid:hover .round-icohold.overdue-ico,.mcard-grid.m-linkactive .round-icohold.overdue-ico{
+  background: url("../images/overdue-icon-png.png") #f26321 no-repeat center center;
+}
+.round-icohold.courselib-ico{
+  background: url("../images/course-library-icon.png") #feefe8 no-repeat center center;
+}
+.mcard-grid:hover .round-icohold.courselib-ico,.mcard-grid.m-linkactive .round-icohold.courselib-ico{
+  background: url("../images/course-library.png") #f26321 no-repeat center center;
+}
+.round-icohold.recommend-ico{
+  background: url("../images/recommended-icon.png") #feefe8 no-repeat center center;
+}
+.mcard-grid:hover .round-icohold.recommend-ico,.mcard-grid.m-linkactive .round-icohold.recommend-ico{
+  background: url("../images/recommended-hover-icon.png") #f26321 no-repeat center center;
+}
+.round-icohold {
+    background-size: 20px!important;
+}
+.training-title h2{
+  line-height: 26px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.training-title h3{
+  font-size: 15px;
+  -webkit-transition: all .1s; /* For Safari 3.1 to 6.0 */
+  transition: all .1s;
+  position: relative;
+  left: 0
+}
+.mcard-grid{
+  border-right: solid 2px rgba(204, 204, 204, 0.44);
+  width: 100%;
+  padding: 0 15px;
+}
+.mcard-grid:first-child{
+  padding-left: 0!important;
+}
+.mcard-grid:last-child{
+  border-right: none;
+}
+.dashboard-card-nrm h2{
+  font-size: 18px;
+  font-weight: bold;
+}
+.dashboard-card-nrm h3{
+  font-size: 14px;
+  font-weight: bold;
+}
+.card-box .card-intro{
+    height: 197px;
+    object-fit: cover;
+    object-position: top;
+}
+.card-box .card-logo {
+  max-width: 100%;
+  max-height: 57px;
+  margin: 45px auto 68px;
+  padding: 0 20px;
+  width: 100%;
+}
+.card-bodycontent{
+  padding: 20px 20px;
+  /* height: 100%; */
+}
+.due-day{
+  font-size: 12px;
+}
+.right-colcard{
+  height: calc(100% - 15px);
+}
+.bodylink-component{
+/*
+    margin-left:-20px;
+    margin-right:-20px;
+*/
+}
+.bodylink-component .card-col-1 {
+    padding: 0 8px;
+}
+.bodylink-component .card-col-2{
+    padding: 0 8px;
+}
+.badge-ico {
+  width: 42px;
+  max-width: 100%;
+  margin-right: 15px;
+  height: 42px;
+}
+.a-link{
+    font-size: 15px;
+}
+
+.mcard-grid:hover h2,.mcard-grid.m-linkactive h2,.mcard-grid.m-linkactive h3, .mcard-grid:hover h3,.a-link:hover{
+  color:#f26321!important
+}
+.mcard-grid:hover .training-title h3,.mcard-grid.m-linkactive h3{
+  left: 4px;
+}
+
+/* responsive */
+@media only screen and (max-width: 1024px) {
+    .card-box .card-intro{
+        height: 144px;
+    }
+  .mainlink-component .listline-link{
+    flex-flow: column;
+  }
+  .mcard-grid{
+    justify-content: flex-start!important;
+    padding: 18px 0;
+    border-right: none;
+    border-bottom: solid 1px rgba(204, 204, 204, 0.22);
+  }
+  .bodylink-component{
+/*    display: block!important;*/
+  }
+  .dashboard-card-nrm{
+    display: block!important;
+    text-align: center;
+  }
+  .card-box .card-logo{
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .card-bodycontent{
+    text-align: left;
+  }
+  .training-title h2{
+    font-size: 20px;
+  }
+  .dboard-search button{
+    min-width: 142px;
+  }
+  
+}
+@media only screen and (max-width: 768px) {
+  .content-component{
+    padding-top: 90px!important;
+  }
+  .dboard-search{
+    margin-top: 10px;
+  }
+  .dboard-search{
+    width: 100%;
+  }
+  .dboard-search input[type="search"]{
+    width: 100%;
+  }
+  .round-icohold{
+    width: 60px;
+    min-width: 60px;
+    height: 60px;
+  }
+  .card-box-lg{
+    padding: 20px 30px;
+  }
+}

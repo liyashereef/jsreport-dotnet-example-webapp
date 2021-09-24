@@ -1,0 +1,318 @@
+body{
+    background-color: #fff;
+}
+.form-align .form-group {
+    margin-bottom: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+table tr td .form-group {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.dt-buttons {
+    background: #ccc;
+    text-align: right;
+    border: 1px solid #808080;
+    width: 100%;
+}
+
+div.dt-buttons {
+    position: absolute;
+    float: left;
+}
+
+.dataTables_wrapper .dataTables_info {
+    position: relative;
+    left: 5px;
+    margin-right: 10px;
+    z-index: 1;
+    top: 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: left;
+    position: relative;
+    left: 0;
+    z-index: 1;
+    top: 5px;
+}
+
+/*.dataTables_paginate .paging_simple_numbers{
+   float:left;
+   margin-top:-50px;
+}*/
+button.dt-button,
+div.dt-button,
+a.dt-button {
+    border: none !important;
+    background: none !important;
+    border-right: 1px solid gray !important;
+    border-radius: 0 !important;
+    font-size: 24px !important;
+    color: #0686F5;
+    margin-bottom: 0px;
+    right: 38%;
+}
+
+button.dt-button,
+div.dt-button,
+a.dt-button:first-child {
+    border-left: 1px solid gray !important;
+}
+
+.fa-print {
+    color: #0686F5 !important;
+}
+
+.fa-file-excel-o {
+    color: #008000 !important;
+}
+
+.fa-file-pdf-o {
+    color: #f00 !important;
+}
+
+.fa-envelope-o {
+    color: #BB7A03 !important;
+}
+
+table.dataTable.no-footer {
+    border-bottom: 0px;
+}
+
+/*upload file section alignment STARTS */
+
+.upload-file-align {
+    padding-right: 84px;
+}
+
+.upload-btn-file {
+    position: absolute;
+    right: 8px;
+    top: 0;
+}
+
+.upload-file-align input[type="file"] {
+    padding-bottom: 9%;
+}
+
+/*upload file section alignment ENDS */
+
+/* Pagination and Information - Start */
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+}
+
+/* Pagination and Information - End */
+
+
+/*** Training - DashBord CSS Start ***/
+
+.visit-log-card
+{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px;
+    background-color: #f26321;
+    color: #fff;
+    height: 100px;
+    text-align: center;
+    padding-top: 17px;
+
+}
+.visit-log-card-padding
+{
+    padding-left: 9px;
+    padding-right: 9px;
+}
+.add-new {
+    float: right;
+    width: 200px;
+    background-color: #f26222;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.exit {
+    float: right;
+    width: 100px;
+    background-color: #003b63;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+#addnew_div {
+    width: 100%;
+    padding-left: 40px;
+    min-height: 70vh;
+    transition: all 0.3s;
+}
+#visitor-log-form-content {
+    width: 100%;
+    padding-left: 20px;
+}
+.visit-log-count-text {
+    font-weight: bold;
+    font-size: 150%;
+    margin-top: 5px;
+}
+/***Training - DashBord CSS End ***/
+
+.icon-style{
+    font-size: 30px;
+    color: #fff !important;
+}
+
+.back-to-course {
+    width: 200px;
+    background-color: #f26222;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.course-read {
+    text-align: center !important;
+}
+
+.module-next {
+    width: 200px;
+    background-color: #f26222;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0px;
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/*addded */
+.progress-circle{
+    margin-top: 10px;
+}
+.progress-circle strong {
+    color: #fff;
+    position: absolute;
+    left: -2px;
+    bottom: 38px;
+    font-size: 17px;
+    width: 100%;
+    text-align: center;
+}
+ .pdf-read-btn{
+    background-color: #f26222;
+    color: #fff; 
+ }
+
+.rating-text {
+    height: 20px;
+    padding-top: 5px;
+}
+ .rating_div i{
+    font-size: 24px;
+    padding: 3px;
+ }
+.title-lin {
+    font-size: 21px;
+    font-weight: normal;
+    line-height: 28px;
+    color: #f26222;
+}
+body .rating-title {
+    font-size: 17px;
+    font-weight: normal;
+    margin: 0 0 5px;
+    line-height: normal;
+}
+body.stop-scrolling footer{
+    position: relative;
+}
+
+/* Toggle button in test settings creation - Start */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 47px;
+    height: 20px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #003A63;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #003A63;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Toggle button in test settings creation - End */

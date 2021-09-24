@@ -1,0 +1,13 @@
+{
+    "name": "Uniform",
+    "alias": "uniform",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Uniform\\Providers\\UniformServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

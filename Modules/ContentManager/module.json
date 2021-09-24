@@ -1,0 +1,13 @@
+{
+    "name": "ContentManager",
+    "alias": "contentmanager",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ContentManager\\Providers\\ContentManagerServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

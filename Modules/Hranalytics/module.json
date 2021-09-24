@@ -1,0 +1,13 @@
+{
+    "name": "Hranalytics",
+    "alias": "hranalytics",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Hranalytics\\Providers\\HranalyticsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

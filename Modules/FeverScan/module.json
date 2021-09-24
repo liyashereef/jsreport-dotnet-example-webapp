@@ -1,0 +1,13 @@
+{
+    "name": "FeverScan",
+    "alias": "feverscan",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\FeverScan\\Providers\\FeverScanServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

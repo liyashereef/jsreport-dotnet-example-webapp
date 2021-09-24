@@ -1,0 +1,13 @@
+{
+    "name": "Supervisorpanel",
+    "alias": "supervisorpanel",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Supervisorpanel\\Providers\\SupervisorpanelServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

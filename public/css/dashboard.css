@@ -1,0 +1,147 @@
+/*search bar*/
+
+.search-btn,
+.clear-btn {
+    margin-bottom: 0;
+    width: 39px;
+    height: 38px;
+    border: none;
+    background-color: transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.search-btn:focus,
+.clear-btn:focus {
+    outline: none;
+}
+
+.search-btn:hover .search-ico,
+.clear-btn:hover .clear-ico {
+    fill: #f26321;
+}
+
+.search-btn .search-ico,
+.clear-btn .clear-ico {
+    width: 30px;
+    height: 20px;
+    fill: #969696;
+}
+
+.clear-ico {
+    width: 25px!important;
+    height: 13px!important;
+}
+
+.dboard-search .select2-container,
+.dboard-search .clear-btn {
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+}
+
+.dboard-search .clear-btn {
+    display: none;
+}
+
+.dboard-search .select2-container,
+.dboard-search .select2-container>.selection {
+    width: 100%
+}
+
+.dboard-search .select2-container>.selection>.select2-selection.select2-selection--multiple {
+    border: none;
+    background-color: #eeeeee;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+}
+
+.dboard-search .select2-container>.selection>.select2-selection.select2-selection--multiple ul.select2-selection__rendered {
+    margin-top: 0;
+}
+
+.dboard-search.search-handler .select2-container,
+.dboard-search.search-handler .clear-btn {
+    opacity: 1;
+    display: block;
+    pointer-events: auto;
+}
+
+.dboard-search.search-handler .search-btn {
+    display: none;
+}
+
+.dboard-search .select2-container .select2-search--inline .select2-search__field {
+    margin-top: 0;
+}
+
+.dboard-search .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-top: 0;
+    color: #fff;
+    font-size: 14px;
+}
+
+.dboard-search.search-handler .select2-container {
+    max-height: 38px;
+    overflow: auto;
+}
+
+
+/*search bar END*/
+
+
+/* begin expense tabs */
+
+.nav-tabs .nav-link.expense.active {
+    color: #ffffff;
+    background: #003b63;
+    margin-right: 1px;
+    margin-left: 1px;
+    cursor: pointer;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    font-size: 15px;
+    text-align: center;
+    white-space: nowrap;
+    height: 38px;
+}
+
+.nav-tabs .nav-link.expense {
+    color: #ffffff;
+    background: #F2351F;
+    cursor: pointer;
+    margin-right: 1px;
+    margin-left: 1px;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border: 2px solid #003b63;
+    font-size: 15px;
+    text-align: center;
+    white-space: nowrap;
+    height: 38px;
+}
+
+.nav-tabs .nav-link.arrow {
+    color: #f26321;
+    background: #F2351F;
+    cursor: pointer;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border: 2px solid #003b63;
+    font-size: 13px;
+    white-space: nowrap;
+    height: 38px;
+}
+
+.nav-tabs {
+    border-bottom: 0px solid #dee2e6 !important;
+}
+
+#dashboard_tab_details {
+    margin-right: -2% !important;
+}
+
+
+/* end expense tabs */
