@@ -63,6 +63,21 @@ return [
             ]) : [],
         ],
 
+        'mysql_rec' => [
+            'driver' => env('DB_CONNECTION_REC'),
+            'host' => env('DB_HOST_REC', '127.0.0.1'),
+            'port' => env('DB_PORT_REC', '3306'),
+            'database' => env('DB_DATABASE_REC', 'forge'),
+            'username' => env('DB_USERNAME_REC', 'forge'),
+            'password' => env('DB_PASSWORD_REC', ''),
+            'unix_socket' => env('DB_SOCKET_REC', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -91,6 +106,18 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => explode(',', env('DB_MONGO_HOSTS')),
+            'port'     => env('DB_MONGO_PORT',27017),
+            'database' => env('DB_MONGO_DATABASE','prod_cgl360'),
+            'username' => env('DB_MONGO_USER'),
+            'password' => env('DB_MONGO_PASSWORD'),
+            'options'  => [
+                'ssl'        => env('DB_MONGO_SSL', true),
+                'retryWrites' => true,
+            ],
+        ],
     ],
 
     /*

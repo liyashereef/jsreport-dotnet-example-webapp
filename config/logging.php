@@ -100,6 +100,116 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'customlog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/custom.log'),
+            'level' => 'info',
+        ],
+        'travelpath' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/travelpath.log'),
+            'level' => 'debug',
+        ],
+
+        'mailQueueError' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/mailQueueError.log'),
+            'level' => 'debug',
+        ],
+
+        'apiError' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/apiError.log'),
+            'level' => 'debug',
+        ],
+
+        'moduleEntriesLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/moduleEntriesLog.log'),
+            'level' => 'debug',
+        ],
+
+        'zipFileDeleteLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/zipFileDeleteLog.log'),
+            'level' => 'debug',
+        ],
+
+        'landingPageCustomerSearchSession' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/landingPageCustomerSearchSession.log'),
+            'level' => 'info',
+        ],
+        'reportLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/reportLog.log'),
+            'level' => 'debug',
+            'permission' => 0660,
+        ],
+        'timeSheetApprovalRatingLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/timeSheetApprovalRatingLog.log'),
+            'level' => 'debug',
+            'permission' => 0660,
+        ],
+        'fileDeleteJobLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/fileDeleteJobLog.log'),
+            'level' => 'debug',
+
+        ],
+        'matchScoreLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/matchScoreLog.log'),
+            'level' => 'debug',
+        ],
+
+        'motionSensor' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/motionSensorLog.log'),
+            'level' => 'debug',
+
+        ],
+        'timesheetApproval' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/timesheetApprovalLog.log'),
+            'level' => 'debug',
+
+        ],
+        'kpiLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/kpi.log'),
+            'level' => 'info',
+        ],
+        'googleApi' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/googleApiLog.log'),
+            'level' => 'debug',
+
+        ],
+        'osgcPayment' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/osgc/osgcPayment.log'),
+            'level' => 'debug',
+
+        ],
+        'idsPayment' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/ids/idsPayment.log'),
+            'level' => 'debug',
+            'permission' => 0660,
+        ],
+        'contractExpiryReminderLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/contractExpiryReminderLog.log'),
+            'level' => 'info',
+        ],
+        'summaryDashboardLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/summaryDashboard.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];
