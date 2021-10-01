@@ -63,5 +63,14 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'cors' => \App\Http\Middleware\Cors::class,
+        'prevent-back-history' => \Modules\Hranalytics\Http\Middleware\PreventBackHistory::class,
+        'motion-sensor-topic' => \Modules\Sensors\Http\Middleware\InitializeSensorRequestMiddleware::class,
+        'checkIp' => \Modules\Jitsi\Http\Middleware\flagIpMiddleware::class,
+        'read-osgc-course' => \Modules\Osgc\Http\Middleware\CanReadOsgcCourseMiddleware::class,
+        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
     ];
 }
