@@ -130,9 +130,9 @@ class DocumentsController extends Controller
      * @return json
      */
 
-    public function getNameList($id){
+    public function getNameList($id,Request $request){
 
-        $typeID =  Input::get('typeid');
+        $typeID = $request->input('typeid');
         return response()->json($this->documentRepository ->getDocumentNames($id,$typeID));
     }
 
@@ -219,8 +219,8 @@ class DocumentsController extends Controller
         }
     }
 
-    public function otherVendor($id){
-
+    public function otherVendor($id = null){
+    
         $result = $this->OtherCategorylookup->select('id','category_name','document_type_id')->with('otherCategoryname')->where('id',$id)->get();
         return view('documents::add-vendor-document', compact('result'));
     }
