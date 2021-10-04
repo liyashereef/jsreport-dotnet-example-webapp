@@ -13,8 +13,8 @@ use DB;
 
 class AttachmentController extends Controller
 {
-    
-    
+
+
     public function __construct(AttachmentRepository $attachment_repository)
     {
         $this->attachment_repository = $attachment_repository;
@@ -48,7 +48,7 @@ class AttachmentController extends Controller
      */
     public function store(Request $request, $module_name = null, $custom_name = null)
     {
-       
+
         try {
             DB::beginTransaction();
             $save_result = $this->attachment_repository->saveAttachmentFile($request->module, $request, null, $custom_name);
@@ -66,7 +66,9 @@ class AttachmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($file_id, $module, $attachment = false, Request $request)
+    //v8 changes - optional parameter after required param
+    //public function show($file_id, $module, $attachment = false, Request $request)
+    public function show($file_id, $module, Request $request, $attachment = false)
     {
         try {
             $arr = array();

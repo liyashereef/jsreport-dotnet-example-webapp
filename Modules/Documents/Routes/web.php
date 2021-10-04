@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware' => ['web','auth','permission:view_documents'], 'prefix' => 'documents', 'namespace' => 'Modules\Documents\Http\Controllers'], function()
+Route::group(['middleware' => ['web','auth','permission:view_documents'], 'prefix' => 'documents', ], function()
 {
     // Route::get('/', 'DocumentsController@index');
     Route::group(['middleware' => ['permission:view_employee_document|add_employee_document|add_allocated_employee_document|view_allocated_employee_document']], function () {

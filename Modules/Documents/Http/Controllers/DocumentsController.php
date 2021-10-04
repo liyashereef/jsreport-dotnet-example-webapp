@@ -219,7 +219,7 @@ class DocumentsController extends Controller
         }
     }
 
-    public function otherVendor($id){
+    public function otherVendor($id= null){
 
         $result = $this->OtherCategorylookup->select('id','category_name','document_type_id')->with('otherCategoryname')->where('id',$id)->get();
         return view('documents::add-vendor-document', compact('result'));
