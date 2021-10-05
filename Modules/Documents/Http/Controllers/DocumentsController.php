@@ -130,9 +130,9 @@ class DocumentsController extends Controller
      * @return json
      */
 
-    public function getNameList($id){
+    public function getNameList($id,Request $request){
 
-        $typeID =  Input::get('typeid');
+        $typeID = $request->input('typeid');
         return response()->json($this->documentRepository ->getDocumentNames($id,$typeID));
     }
 

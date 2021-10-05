@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware' => ['web','auth','permission:view_documents'], 'prefix' => 'documents', ], function()
+Route::group(['middleware' => ['web','auth','permission:view_documents'], 'prefix' => 'documents',], function()
 {
     // Route::get('/', 'DocumentsController@index');
     Route::group(['middleware' => ['permission:view_employee_document|add_employee_document|add_allocated_employee_document|view_allocated_employee_document']], function () {
@@ -29,7 +29,8 @@ Route::group(['middleware' => ['web','auth','permission:view_documents'], 'prefi
     Route::get('add-document/{typeid?}/{id?}', array('as' => 'add-client.document', 'uses' => 'DocumentsController@addClientDocument'));
     Route::post('documents/{module}/store', array('as' => 'documents.store', 'uses' => 'DocumentsController@store'));
     Route::get('employee-document/documentnames/{id?}', array('as' => 'document-name-details.single', 'uses' => 'DocumentsController@getNameList'));
-    Route::get('/other-vendor/{type_id?}', array('as' => 'documents.other-vendor', 'uses' => 'DocumentsController@otherVendor'));
+    Route::get('/other-vendor/{id?}', array('as' => 'documents.other-vendor', 'uses' => 'DocumentsController@otherVendor'));
+    
     Route::get('other-vendor/list/{typeid?}/{id?}', array('as' => 'other-vendor.list', 'uses' => 'DocumentsController@otherVendorlist'));
     Route::get('documents/remove/{id}', array('as' => 'documents.destroy', 'uses' => 'DocumentsController@destroy'));
     Route::post('archive-documents', array('as' => 'documents.archive', 'uses' => 'DocumentsController@archive'));
