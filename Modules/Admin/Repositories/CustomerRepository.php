@@ -31,6 +31,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Modules\Recruitment\Models\RecDocumentAllocation;
 use Modules\Recruitment\Models\RecJobDocumentAllocation;
+use Illuminate\Support\Arr;
 
 class CustomerRepository
 {
@@ -239,7 +240,7 @@ class CustomerRepository
             $customer = $customer_obj->whereIn('id', $customer_id)->get();
             foreach ($customer as $key => $each_customer) {
                 $customer_arr = $each_customer->toArray();
-                $customer_details[$key]["details"] = array_except($customer_arr, ["employee_latest_customer_supervisor", "employee_latest_customer_area_manager"]);
+                $customer_details[$key]["details"] = Arr::except($customer_arr, ["employee_latest_customer_supervisor", "employee_latest_customer_area_manager"]);
                 $customer_details[$key]["areamanager"] = $this->getManagerDetailsArr($each_customer, "area_manager");
                 $customer_details[$key]["supervisor"] = $this->getManagerDetailsArr($each_customer, "supervisor");
             }
@@ -249,7 +250,7 @@ class CustomerRepository
             //     return null;
             // }
             $customer_arr = $customer->toArray();
-            $customer_details["details"] = array_except($customer_arr, ["employee_latest_customer_supervisor", "employee_latest_customer_area_manager"]);
+            $customer_details["details"] = Arr::except($customer_arr, ["employee_latest_customer_supervisor", "employee_latest_customer_area_manager"]);
             $customer_details["areamanager"] = $this->getManagerDetailsArr($customer, "area_manager");
             $customer_details["supervisor"] = $this->getManagerDetailsArr($customer, "supervisor");
         }
@@ -541,7 +542,17 @@ class CustomerRepository
      * @param type Request $request, $status
      * @return object
      */
-    public function getAllCandidatesMap($status = 'Applied', $request)
+  //v8 changes- optional parameter after required param  
+ /*   public function getAllCandidatesMap($status = 'Applied', $request)
+    {
+        $id = $request->get('candidate_id_array');
+        $candidate_id = explode(',', $id);
+        $query = $this->candidateModel->with(['availability', 'jobs', 'guardingexperience', 'wageexpectation', 'experience'])
+            ->whereIn('id', $candidate_id);
+        $candidates = $query->get();
+        return $candidates;
+    } */
+    public function getAllCandidatesMap( $request, $status = 'Applied')
     {
         $id = $request->get('candidate_id_array');
         $candidate_id = explode(',', $id);
@@ -557,7 +568,20 @@ class CustomerRepository
      * @param type Request $request, $status
      * @return object
      */
-    public function getAllEmployeesMap($status = 'Applied', $request)
+    //v8 changes- optional parameter after required param  
+  /*  public function getAllEmployeesMap($status = 'Applied', $request)
+    {
+        $id = $request->get('employee_id_array');
+        $employee_id = explode(',', $id);
+        $query = Employee::with(['employee_availability', 'user.userCertificate.certificateMaster', 'user.securityClearanceUser.securityClearanceLookups', 'user' => function ($query) {
+            $query->select('id', 'email', 'first_name', 'last_name', \DB::raw("CONCAT(first_name,' ',COALESCE(last_name,'')) as name"));
+        }, 'user.candidate_transition.candidate.latestJobApplied', 'user.multipleFillShift', 'user.eventlog_score', 'user.employee_shift_payperiods.availableShift'])->whereHas('user.roles.permissions', function ($q) {
+            $q->whereNotIn('name', ['admin', 'super_admin']);
+        })->whereIn('user_id', $employee_id);
+        $employees = $query->get();
+        return $employees;
+    } */
+    public function getAllEmployeesMap($request,$status = 'Applied')
     {
         $id = $request->get('employee_id_array');
         $employee_id = explode(',', $id);
@@ -616,8 +640,8 @@ class CustomerRepository
             $relation = "employee_latest_customer_supervisor";
             $full_name = $each_customer->employeeLatestCustomerSupervisor->supervisor->full_name;
         }
-        $emp_arr = array_merge($customer_arr[$relation][$role], array_except($customer_arr[$relation][$role]["employee"], ['id', 'user_id', 'created_at', 'updated_at', 'deleted_at']));
-        $emp_arr = array_except($emp_arr, ['employee']);
+        $emp_arr = array_merge($customer_arr[$relation][$role], Arr::except($customer_arr[$relation][$role]["employee"], ['id', 'user_id', 'created_at', 'updated_at', 'deleted_at']));
+        $emp_arr = Arr::except($emp_arr, ['employee']);
         $emp_arr['full_name'] = $full_name;
         return $emp_arr;
     }
