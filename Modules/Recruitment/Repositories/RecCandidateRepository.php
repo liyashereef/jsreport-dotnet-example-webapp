@@ -34,7 +34,7 @@ use Modules\Recruitment\Models\RecJob;
 use Log;
 use File;
 use PDF;
-use Carbon;
+use Carbon\Carbon;
 use App\Repositories\AttachmentRepository;
 use Modules\LearningAndTraining\Models\TrainingUserCourseAllocation;
 
