@@ -38,7 +38,7 @@
                     <label class="filter-text">Customer Name</label>
                 </div>
                 <div class="col-md-8">
-                     <input type="text" name="survey" class="form-control" value="{{ $data->customer->client_name or '--'}}" readonly>
+                     <input type="text" name="survey" class="form-control" value="{{ $data->customer->client_name ?? '--'}}" readonly>
                     <span class="help-block"></span>
                 </div>
             </div>

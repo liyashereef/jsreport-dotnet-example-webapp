@@ -217,7 +217,7 @@ class JobRepository
             if ((int) $request->get('id') == 0) {
                 $request['unique_key'] = $this->getUniqueJobKey($request);
             }
-            $request['time'] = \Carbon::createFromFormat('h:i a', $request->get('time'))->format('H:i');
+            $request['time'] = Carbon::createFromFormat('h:i a', $request->get('time'))->format('H:i');
             $request['shifts'] = json_encode($request->get('shifts'));
             $request['days_required'] = json_encode($request->get('days_required'));
             $request['criterias'] = json_encode($request->get('criterias'));

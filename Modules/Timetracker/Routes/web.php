@@ -14,7 +14,7 @@
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_timetracker'],
     'prefix' => 'timetracker',
-    'namespace' => 'Modules\Timetracker\Http\Controllers'
+    
 ], function () {
     Route::get('/', 'TimetrackerController@index');
     Route::get('vlogs', 'API\v2\VisitorLogApiController@getPeerSyncVisitorLogs');

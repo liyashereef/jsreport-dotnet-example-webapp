@@ -154,7 +154,7 @@
                 <div class="col-sm-6">
                     <div id="force_div">
                     <input type="hidden" name="force_file" value="{{ $candidateJob->candidate->force->attachment_id}}" id="force_file">
-                    <a class="nav-link score-document" target="_blank" href="{{ route('force-document.download', ['file_name'=>$candidateJob->candidate->force->attachment_id])}}" />Click here to download the file
+                    <a class="nav-link score-document" target="_blank" href="{{ route('force-document.download', ['file'=>$candidateJob->candidate->force->attachment_id])}}" />Click here to download the file
                     </a>
                     </div>
                 </div>

@@ -1,11 +1,11 @@
 <?php
 
-Route::group(['middleware' => ['web', 'prevent-back-history'], 'namespace' => 'Modules\Hranalytics\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'prevent-back-history']], function () {
     Route::get('apply/{id}/view', array('as' => 'applyjob.view', 'uses' => 'JobApplicationController@viewApplication'));
     Route::get('apply', array('as' => 'applyjob', 'uses' => 'JobApplicationController@applyjob'));
 });
 
-Route::group(['middleware' => ['web'], 'namespace' => 'Modules\Hranalytics\Http\Controllers'], function () {
+Route::group(['middleware' => ['web'],], function () {
     /* Apply job - candidate - start */
 
     Route::post('apply/login', array('as' => 'applyjob.login', 'uses' => 'JobApplicationController@login'));
@@ -38,7 +38,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'Modules\Hranalytics\Http\
     /* Apply job - candidate - end */
 });
 
-Route::group(['middleware' => ['web', 'auth', 'permission:view_hranalytics'], 'prefix' => 'hranalytics', 'namespace' => 'Modules\Hranalytics\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth', 'permission:view_hranalytics'], 'prefix' => 'hranalytics'], function () {
     Route::get('/', 'HranalyticsController@index');
     Route::middleware(['permission:create-job|edit-job|delete-job|archive-job|job-approval|hr-tracking|job-attachement-settings|list-jobs-from-all|candidate-mapping|view_all_candidates_candidate_geomapping'])->group(function () {
         Route::name('job')->get('job', 'JobController@index');

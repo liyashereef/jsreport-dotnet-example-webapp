@@ -18,28 +18,28 @@ class CandidateRequest extends Request
     public function rules()
     {
         $threshold = SecurityGuardLicenceThreshold::first();
-        $job_post_finding = Input::get('job_post_finding');
-        $guard_licence = Input::get('guard_licence');
-        $use_of_force = Input::get('use_of_force');
-        $applied_employment = Input::get('applied_employment');
-        $employed_by_corps = Input::get('employed_by_corps');
-        $veteran_of_armedforce = Input::get('veteran_of_armedforce');
-        $criminal_convicted = Input::get('criminal_convicted');
-        $position_availibility = Input::get('position_availibility');
-        $current_employee_commissionaries = Input::get('current_employee_commissionaries');
+        $job_post_finding = request('job_post_finding');
+        $guard_licence = request('guard_licence');
+        $use_of_force = request('use_of_force');
+        $applied_employment = request('applied_employment');
+        $employed_by_corps = request('employed_by_corps');
+        $veteran_of_armedforce = request('veteran_of_armedforce');
+        $criminal_convicted = request('criminal_convicted');
+        $position_availibility = request('position_availibility');
+        $current_employee_commissionaries = request('current_employee_commissionaries');
         $today=Carbon::today();
-        $test_score_doc_id = Input::get('test_score_doc_id');
-        $force_doc_id = Input::get('force_file');
+        $test_score_doc_id = request('test_score_doc_id');
+        $force_doc_id = request('force_file');
         if ($guard_licence == "Yes") {
-            $security_clearance = Input::get('security_clearance');
-            $start_date_guard_license = Input::get('start_date_guard_license');
+            $security_clearance = request('security_clearance');
+            $start_date_guard_license = request('start_date_guard_license');
             $diff_date =Carbon::today()->subMonth($threshold['threshold']);
         }
 
         if ($use_of_force == "Yes") {
-            $force_certification = Input::get('force_certification');
-            $force_expiry = Input::get('force_expiry');
-            $force_file = Input::get('force_file');
+            $force_certification = request('force_certification');
+            $force_expiry = request('force_expiry');
+            $force_file = request('force_file');
         }
 
         $rules = [

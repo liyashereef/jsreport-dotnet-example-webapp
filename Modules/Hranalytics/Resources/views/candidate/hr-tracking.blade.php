@@ -45,7 +45,7 @@
                 <div class="form-group" id="date">
                     <label for="date" class="col-sm-12 control-label">Date Stamp:</label>
                     <div class="col-sm-12">
-                        {{ Form::text('date',\Carbon::now()->format('d-m-Y'),array('class'
+                        {{ Form::text('date',\Carbon\Carbon::now()->format('d-m-Y'),array('class'
                         =>'form-control','readonly'=>true))
                         }}
                         <small class="help-block"></small>
@@ -54,7 +54,7 @@
                 <div class="form-group" id="time">
                     <label for="time" class="col-sm-12 control-label">Time Stamp:</label>
                     <div class="col-sm-12">
-                        {{ Form::text('time',\Carbon::now()->format('h : i A'),array('class'
+                        {{ Form::text('time',\Carbon\Carbon::now()->format('h : i A'),array('class'
                         =>'form-control','readonly'=>true))
                         }}
                         <small class="help-block"></small>
@@ -75,7 +75,7 @@
     $(function(){
     swal({
                                 title: "Terminated",
-                                text: "Application Terminated on: {{ \Carbon::parse($candidateJob->candidate->termination->created_at)->format('l F d, Y h:i A') }}\n\n By: {{ $candidateJob->candidate->termination->user->full_name }}\n\n Reason: {{ $candidateJob->candidate->termination->reasonLookup->reason }}\n\nNotes: {{ preg_replace('/[\r\n]*/','',$candidateJob->candidate->termination->reason) }}",
+                                text: "Application Terminated on: {{ \Carbon\Carbon::parse($candidateJob->candidate->termination->created_at)->format('l F d, Y h:i A') }}\n\n By: {{ $candidateJob->candidate->termination->user->full_name }}\n\n Reason: {{ $candidateJob->candidate->termination->reasonLookup->reason }}\n\nNotes: {{ preg_replace('/[\r\n]*/','',$candidateJob->candidate->termination->reason) }}",
                                 type: "info",
                                 showCancelButton: false,
                                 showLoaderOnConfirm: true,

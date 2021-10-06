@@ -466,7 +466,7 @@
             // clear timer
             clearTimeout(this.clock);
             if (this.date == null) {
-                this.date = new Date('{{ \Carbon::now() }}');
+                this.date = new Date('{{ \Carbon\Carbon::now() }}');
             } else {
                 this.date = new Date(this.date.getTime() + 1 * 1000);
             }
