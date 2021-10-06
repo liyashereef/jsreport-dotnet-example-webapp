@@ -2,8 +2,6 @@
 
 namespace Modules\Hranalytics\Http\Requests;
 
-use Illuminate\Support\Facades\Input;
-
 class JobRequest extends Request
 {
 

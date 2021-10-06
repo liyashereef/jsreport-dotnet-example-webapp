@@ -9,7 +9,7 @@ class ClientEmployeeFeedback extends Model
 {
     use SoftDeletes;
     public $timestamps = true;
-
+    public $table='client_employee_feedbacks';
     protected $fillable = ['user_id', 'employee_rating_lookup_id', 'client_feedback', 'customer_id', 'created_by', 'updated_by', 'feedback_id','status_lookup_id','reg_manager_notes'];
 
     /**

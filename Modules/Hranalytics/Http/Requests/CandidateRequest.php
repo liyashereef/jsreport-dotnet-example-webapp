@@ -3,7 +3,6 @@
 namespace Modules\Hranalytics\Http\Requests;
 
 use DB;
-use Illuminate\Support\Facades\Input;
 use Modules\Admin\Models\SecurityGuardLicenceThreshold;
 use Carbon\Carbon;
 
