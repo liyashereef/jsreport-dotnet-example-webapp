@@ -5,18 +5,33 @@
   <h4>Compliance Module</h4>
 </div>
 <div class="row dashboard-row">
-  {{-- <div class="col-sm-3 dashboard-box">
+   <div class="col-sm-3 dashboard-box">
         <div class="progressbar-text">Compliance Module</div>
-    </div> --}}
+    </div>
      <div class="col-sm-4 dashboard-box">
- <span class="chart">  {!! $policy_count_chart->render() !!}</span>
+         <div id="chart" style="height: 300px;"></div>
+         <!-- Charting library -->
+         <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+         <!-- Chartisan -->
+         <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+         <!-- Your application script -->
+         <script>
+             const chart = new Chartisan({
+                 el: '#chart',
+                 // url: "@chart('compliance_chart')",
+                 {{--data: JSON.parse('{!! $policy_count_chart !!}'),--}}
+                 hooks: new ChartisanHooks()
+                     .datasets('doughnut')
+             })
+         </script>
+{{-- <span class="chart">  {!! $policy_count_chart->render() !!}</span>--}}
  </div>
-  <div class="col-sm-4 dashboard-box">
- <span class="chart">  {!! $compliant_count_chart->render() !!}</span>
-</div>
-  <div class="col-sm-4 dashboard-box">
- <span class="chart">  {!! $average->render() !!}</span>
-</div>
+{{--  <div class="col-sm-4 dashboard-box">--}}
+{{-- <span class="chart">  {!! $compliant_count_chart->render() !!}</span>--}}
+{{--</div>--}}
+{{--  <div class="col-sm-4 dashboard-box">--}}
+{{-- <span class="chart">  {!! $average->render() !!}</span>--}}
+{{--</div>--}}
 </div>
 <div class="table-responsive">
   <table class="table table-bordered" id="policy-table">
@@ -55,7 +70,7 @@
     }
 
 </style>
-<script>{!! Charts::assets() !!}</script>
+{{--<script>{!! Charts::assets() !!}</script>--}}
 <script>
   $(document).ready(function() {
     setTimeout(() => {
@@ -64,7 +79,7 @@
         $($("svg text")[i]).attr('y',130);
       }
     }, 5000);
-    
+
     var table = $('#policy-table').DataTable({
       fixedHeader: true,
       processing: false,

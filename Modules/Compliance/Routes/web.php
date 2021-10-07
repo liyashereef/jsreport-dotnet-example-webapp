@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth', 'permission:view_compliance_all|view_analytics|view_compliance'], 'prefix' => 'compliance', 'namespace' => 'Modules\Compliance\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth', 'permission:view_compliance_all|view_analytics|view_compliance'], 'prefix' => 'compliance',], function () {
 
     Route::get('policy/dashboard', array('as' => 'policy.dashboard', 'uses' => 'ComplianceController@index'));
     Route::get('policy/list/{id?}', array('as' => 'policyTable.list', 'uses' => 'ComplianceController@policyList'));

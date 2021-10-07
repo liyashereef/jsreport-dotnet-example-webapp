@@ -113,7 +113,7 @@ class ComplianceRepository
         } else {
             $each_row["role_name"]= User::find($id)->getRoleNames()->first();
         }
-        
+
         foreach ($policy as $key => $each_policy) {
             $each_row["reference_code"] = $each_policy->reference_code;
             $each_row["policy_name"] = $each_policy->policy_name;
@@ -184,13 +184,26 @@ class ComplianceRepository
      */
     public function prepareChart($element, $element_label)
     {
+        $data = array(
+            "chart" => array(
+                "labels" => $element_label
+            ),
+            "datasets" => array(
+                array(
+                    array("name" => "Sample 1", "values" => $element,)
+                )
+            )
+        );
 
-        return Charts::create('percentage', 'justgage')
-            ->title(false)
-            ->dimensions(0, 250) // Width x Height
-            ->template("material")
-            ->elementLabel($element_label)
-            ->values($element);
+        return (json_encode($data));
+        //array('element' => $element, 'element_label' => $element_label);
+
+//        return Charts::create('percentage', 'justgage')
+//            ->title(false)
+//            ->dimensions(0, 250) // Width x Height
+//            ->template("material")
+//            ->elementLabel($element_label)
+//            ->values($element);
     }
 
     /**
@@ -259,12 +272,12 @@ class ComplianceRepository
         } else {
             $average[] = 0;
         }
-        return Charts::create('percentage', 'justgage')
-            ->title(false)
-            ->dimensions(0, 250) // Width x Height
-            ->template("material")
-            ->elementLabel('Average')
-            ->values($average);
+//        return Charts::create('percentage', 'justgage')
+//            ->title(false)
+//            ->dimensions(0, 250) // Width x Height
+//            ->template("material")
+//            ->elementLabel('Average')
+//            ->values($average);
     }
     /**
      *  To get the policy acceptance along with the agree reason
@@ -312,7 +325,7 @@ class ComplianceRepository
             $new_item['date_completed'] = date('Y-m-d', strtotime($item->created_at));
             return $new_item;
         })  ;
-                             
+
         return $policy_count;
     }
 
@@ -347,7 +360,7 @@ class ComplianceRepository
             $compliant_user_ids = $policy_count->pluck('employee_id');
             $roles =  $this->compliancePolicyRoleRepository->getComplianceRoles($policy_id);
             $role_user_ids =  $this->userRepository->getUserLookup($roles, null, $active = true, $full_object = true, null, false, false)->pluck('id');
-            
+
             $pending_users = $this->userRepository->getAllByUserIds($role_user_ids, $active = true, $compliant_user_ids);
 
             $policy_count = $pending_users->map(function ($item) {
@@ -359,8 +372,8 @@ class ComplianceRepository
                 return $new_item;
             })  ;
         }
-                         
-                             
+
+
         return $policy_count;
     }
 

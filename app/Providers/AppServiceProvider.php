@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use ConsoleTVs\Charts\Registrar as Charts;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
         //
         Schema::defaultStringLength(191);
@@ -71,5 +73,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Validator::extend('recaptcha', 'App\\Rules\\ReCaptcha@validate');
+
+        $charts->register([
+            \App\Charts\ComplianceChart::class
+        ]);
     }
 }
