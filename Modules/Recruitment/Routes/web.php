@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'recruitment', 'namespace' => 'Modules\Recruitment\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'recruitment',], function () {
     Route::get('/', 'RecruitmentController@index');
 
 

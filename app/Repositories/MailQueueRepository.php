@@ -53,7 +53,7 @@ class MailQueueRepository
             $mailQueue->bcc = ($bcc) ? $bcc : '';
             $mailQueue->subject = $subject;
             $mailQueue->message = $message;
-            $mailQueue->mail_time = ($mail_time != null) ? $mail_time : \Carbon::now();
+            $mailQueue->mail_time = ($mail_time != null) ? $mail_time : Carbon::now();
             $mailQueue->created_by = ($created_by != null) ? $created_by : \Auth::id();
             // $mailQueue->attachment_id = $attachment_id;
             $mailQueue->attachment_id = $attachment_id ? $attachment_id : null;

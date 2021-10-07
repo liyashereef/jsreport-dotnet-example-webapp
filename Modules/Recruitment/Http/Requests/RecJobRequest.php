@@ -1,9 +1,6 @@
 <?php
 
 namespace Modules\Recruitment\Http\Requests;
-
-use Illuminate\Support\Facades\Input;
-
 class RecJobRequest extends Request
 {
 
@@ -53,14 +50,14 @@ class RecJobRequest extends Request
             'hours_per_week'=>'bail|required|numeric|max:168',
 
         ];
-        $experiences = Input::get('experiences');
+        $experiences = request('experiences');
         foreach ($experiences as $key => $experience) {
             if ($experience['experience_id'] != null) {
                 $rules['experiences.' . $key . '.year'] = 'bail|required|numeric|max:100';
             }
         }
 
-        $op = strip_tags(Input::get('job_description'));
+        $op = strip_tags(request('job_description'));
         $clean_description = str_replace("&nbsp;", " ", $op);
         if (strlen($clean_description) < 50 && !null) {
             $rules['job_description'] = 'bail|min:50|max:10000';
