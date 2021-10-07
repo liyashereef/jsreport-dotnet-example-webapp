@@ -14,7 +14,7 @@ use Modules\Hranalytics\Models\EventLogEntry;
 use Modules\Hranalytics\Models\ScheduleCustomerMultipleFillShifts;
 use Modules\Hranalytics\Repositories\BonusRepository;
 use App\Services\HelperService;
-
+use Carbon\Carbon;
 use Validator;
 
 class StcBonusController extends Controller
@@ -89,11 +89,11 @@ class StcBonusController extends Controller
                 function ($qry) use ($request) {
                     return
                         $qry->whereBetween("start_date", [
-                            \Carbon::parse($request->start_date),
-                            \Carbon::parse($request->end_date)->addHours(23)
+                            Carbon::parse($request->start_date),
+                            Carbon::parse($request->end_date)->addHours(23)
                         ])->orwhereBetween("end_date", [
-                            \Carbon::parse($request->start_date),
-                            \Carbon::parse($request->end_date)->addHours(23)
+                            Carbon::parse($request->start_date),
+                            Carbon::parse($request->end_date)->addHours(23)
                         ]);
                 }
             )->when($request->editprogram > 0, function ($q) use ($request) {
@@ -307,7 +307,7 @@ class StcBonusController extends Controller
             )->orderBy('rank_day', 'desc')->first();
             if ($bonusLogs) {
                 $rankData = $bonusLogs->rank_data;
-                $createdAt = isset($bonusLogs->rank_day) ? \Carbon::parse($bonusLogs->rank_day)->format("d M Y") : "";
+                $createdAt = isset($bonusLogs->rank_day) ? Carbon::parse($bonusLogs->rank_day)->format("d M Y") : "";
             }
         }
 

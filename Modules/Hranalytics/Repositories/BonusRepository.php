@@ -50,7 +50,7 @@ class BonusRepository
         $bonusPoolAmount = $settingData->bonus_amount;
         $noticeCap = $settingData->noticecap_percentage;
         if ($settingData->end_date > date("Y-m-d")) {
-            $calculationDate = \Carbon::now()->format("Y-m-d");
+            $calculationDate = Carbon::now()->format("Y-m-d");
         } else {
             $calculationDate = $settingData->end_date;
         }
@@ -86,7 +86,7 @@ class BonusRepository
                 ->where(
                     "shift_to",
                     "<=",
-                    \Carbon::parse($calculationDate)->format("Y-m-d")
+                    Carbon::parse($calculationDate)->format("Y-m-d")
                 )->pluck("schedule_customer_requirement_id")->toArray();
 
             $sparesBonusArray = [];
@@ -106,7 +106,7 @@ class BonusRepository
                 $filledShifts = $customerRequirement->multifill;
                 $reqIdArray[] = $customerRequirement->id;
                 foreach ($filledShifts as $filledShift) {
-                    if ($filledShift->shift_from <= \Carbon::now()->endOfDay()) {
+                    if ($filledShift->shift_from <= Carbon::now()->endOfDay()) {
                         if ($filledShift->assigned > 0) {
                             $totalAssignedShifts++;
                         }
@@ -205,8 +205,8 @@ class BonusRepository
                         "unadjusted_bonus" => 0,
                         "rank" => 0,
                         "created_by" => null !== (\Auth::user()) ? \Auth::user()->id : 0,
-                        "created_at" => \Carbon::now()->format("Y-m-d h:i:s"),
-                        "updated_at" => \Carbon::now()->format("Y-m-d h:i:s")
+                        "created_at" => Carbon::now()->format("Y-m-d h:i:s"),
+                        "updated_at" => Carbon::now()->format("Y-m-d h:i:s")
                     ];
                 }
             }
@@ -253,8 +253,8 @@ class BonusRepository
                 "rank_day" => $calculationDate,
                 "average_accepted_rate" => ($totalAcceptedRate > 0 && $noOfShifts > 0) ? $totalAcceptedRate / $noOfShifts : 0,
                 "per_shift_amount" => $perShiftAmount,
-                "created_at" => \Carbon::now()->format("Y-m-d h:i:s "),
-                "updated_at" => \Carbon::now()->format("Y-m-d h:i:s ")
+                "created_at" => Carbon::now()->format("Y-m-d h:i:s "),
+                "updated_at" => Carbon::now()->format("Y-m-d h:i:s ")
             ]);
             return $insertDataArray;
         } else {

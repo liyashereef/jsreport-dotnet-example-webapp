@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'fmdashboard', 'namespace' => 'Modules\FMDashboard\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'fmdashboard',], function()
 {
 
     Route::get('facility-management-dashboard', array('as' => 'facility-management-dashboard.index', 'uses' => 'FacilityManagementDashboardController@index'));

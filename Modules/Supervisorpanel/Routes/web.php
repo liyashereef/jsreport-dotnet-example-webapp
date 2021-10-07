@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth', 'permission:view_supervisorpanel'], 'prefix' => 'supervisorpanel', 'namespace' => 'Modules\Supervisorpanel\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth', 'permission:view_supervisorpanel'], 'prefix' => 'supervisorpanel'], function () {
 
     Route::get('customers/mapping/{stc?}', array('as' => 'customers.mapping', 'uses' => 'SupervisorPanelController@index'));
     Route::get('average/color-name/{avg}', array('as' => 'customers.average-color-name', 'uses' => 'SupervisorPanelController@getColorByAverage'));

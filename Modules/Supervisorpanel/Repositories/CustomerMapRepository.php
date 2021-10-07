@@ -15,6 +15,7 @@ use Modules\Admin\Repositories\PayPeriodRepository;
 use Modules\Supervisorpanel\Models\CustomerPayperiodTemplate;
 use Modules\Supervisorpanel\Models\CustomerReport;
 use Modules\Supervisorpanel\Repositories\GuardTourRepository;
+use Illuminate\Support\Arr;
 
 class CustomerMapRepository
 {
@@ -157,9 +158,9 @@ class CustomerMapRepository
             }
             $customer_arr = $each_customer->toArray();
             if ($no_user_details) {
-                $customer_score[$key]['customer']['details'] = array_except($customer_arr, ["customer_payperiod_template", "rating_details"]);
+                $customer_score[$key]['customer']['details'] = Arr::except($customer_arr, ["customer_payperiod_template", "rating_details"]);
             } else {
-                $customer_score[$key]['customer']['details'] = array_except($customer_arr, ["employee_latest_customer_supervisor", "employee_latest_customer_area_manager", "customer_payperiod_template", "rating_details"]);
+                $customer_score[$key]['customer']['details'] = Arr::except($customer_arr, ["employee_latest_customer_supervisor", "employee_latest_customer_area_manager", "customer_payperiod_template", "rating_details"]);
                 $customer_score[$key]['customer']['areamanager'] = $this->customer_repository->getManagerDetailsArr($each_customer, "area_manager");
 
                 $customer_score[$key]['customer']['supervisor'] = $this->customer_repository->getManagerDetailsArr($each_customer, "supervisor");

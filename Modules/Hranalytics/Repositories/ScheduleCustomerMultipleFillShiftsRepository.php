@@ -340,11 +340,11 @@ class ScheduleCustomerMultipleFillShiftsRepository
             $shiftTo = $multipleFillShiftObject->shift_to;
 
             //fetch time restriction start from
-            $shiftStart = \Carbon::parse($shiftFrom);
+            $shiftStart = Carbon::parse($shiftFrom);
             $timeRestrictionStart = $shiftStart->subHours($thresholdHours)->addMinutes(1);
 
             //fetch time restriction end upto
-            $shiftEnd = \Carbon::parse($shiftTo);
+            $shiftEnd = Carbon::parse($shiftTo);
             $timeRestrictionEnd = $shiftEnd->addHours($thresholdHours)->subMinutes(1);
 
             $statusGroup = EventLogEntry::select('multiple_shift_id', DB::raw('MAX(id) as latest_id'))

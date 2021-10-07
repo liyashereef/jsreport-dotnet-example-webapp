@@ -14,7 +14,7 @@ class EventLogRequest extends Request
      */
     public function rules()
     {
-        $status = Input::get('status');
+        $status = request('status');
         $rules = [
             'status' => 'bail|required',
             'accepted_rate' => ['nullable', 'numeric', 'regex:/^\d*(\.\d{1,3})?$/', 'between:1,9999999999'],

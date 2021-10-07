@@ -11,7 +11,7 @@
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label  col-xs-3"><b>Project Number</b></label>
-            <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['project_number'] or "--"}}
+            <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['project_number'] ?? "--"}}
                 <input type="hidden" name="customerid" id="customerid" value="{{$id}}" /></label>
 
             </div>
@@ -19,7 +19,7 @@
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label  col-xs-3"><b>Client Contact</b></label>
-                <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['contact_person_name'] or "--"}}
+                <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['contact_person_name'] ?? "--"}}
                 </label>
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label  col-xs-3"><b>Client</b></label>
-                <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['client_name'] or "--"}}
+                <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['client_name'] ?? "--"}}
                 </label>
             </div>
         </div>
@@ -70,21 +70,21 @@
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label  col-xs-3"><b>Address</b></label>
-                <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['address'] or ""}}, {{$customer['details']['city'] or ""}}, {{$customer['details']['province'] or ""}}, {{$customer['details']['postal_code'] or ""}}.
+                <label class="col-md-6 col-form-label col-xs-3">{{$customer['details']['address'] ?? ""}}, {{$customer['details']['city'] ?? ""}}, {{$customer['details']['province'] ?? ""}}, {{$customer['details']['postal_code'] ?? ""}}.
                 </label>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label  col-xs-3"><b>Client Email</b></label>
-                <label class="col-md-6 col-form-label col-xs-3 email-break">{{$customer['details']['contact_person_email_id'] or "--"}}</label>
+                <label class="col-md-6 col-form-label col-xs-3 email-break">{{$customer['details']['contact_person_email_id'] ?? "--"}}</label>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label col-xs-3"><b>Supervisor Email</b></label>
                 <label class="col-md-6 col-form-label  col-xs-3 email-break">
-                    {{$customer['supervisor']['email'] or "--"}}
+                    {{$customer['supervisor']['email'] ?? "--"}}
                 </label>
             </div>
         </div>
@@ -93,7 +93,7 @@
             <div class="row styled-form-readonly">
                 <label class="col-md-6 label-adjust col-form-label col-xs-3"><b>Alternate Email</b></label>
                 <label class="col-md-6 label-adjust col-form-label  col-xs-3 email-break">
-                    {{$customer['supervisor']['alternate_email'] or "--"}}
+                    {{$customer['supervisor']['alternate_email'] ?? "--"}}
                 </label>
             </div>
         </div> --}}
@@ -101,7 +101,7 @@
             <div class="row styled-form-readonly">
                 <label class="col-md-6 col-form-label col-xs-3"><b>Area Manager Email</b></label>
                 <label class="col-md-6 col-form-label  col-xs-3 email-break">
-                    {{$customer['areamanager']['email'] or "--"}}
+                    {{$customer['areamanager']['email'] ?? "--"}}
                 </label>
             </div>
         </div>

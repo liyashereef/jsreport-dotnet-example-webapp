@@ -62,8 +62,8 @@ class StcScheduleGeoMappingRepository
         }
 
         $query->whereHas('multifill', function ($query) use ($filterInputs) {
-            $startDay = \Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['start_date'] . ' ' . $filterInputs['start_time']);
-            $endDay = \Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['end_date'] . ' ' . $filterInputs['end_time']);
+            $startDay = Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['start_date'] . ' ' . $filterInputs['start_time']);
+            $endDay = Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['end_date'] . ' ' . $filterInputs['end_time']);
             $query->whereBetween('shift_from', [$startDay, $endDay])
                 ->where('assigned_employee_id', '!=', null);
         });
@@ -94,10 +94,10 @@ class StcScheduleGeoMappingRepository
 
         $resultArray = [];
         $resultOut = [];
-        $shiftFrom = \Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['start_date'] . ' ' . $filterInputs['start_time']);
-        $shiftTo = \Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['end_date'] . ' ' . $filterInputs['end_time']);
-        $startDate = \Carbon::createFromFormat('Y-m-d H:i:s', $filterInputs['start_date'] . ' 00:00:00');
-        $endDate = \Carbon::createFromFormat('Y-m-d H:i:s', $filterInputs['end_date'] . ' 23:59:59');
+        $shiftFrom = Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['start_date'] . ' ' . $filterInputs['start_time']);
+        $shiftTo = Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['end_date'] . ' ' . $filterInputs['end_time']);
+        $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $filterInputs['start_date'] . ' 00:00:00');
+        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $filterInputs['end_date'] . ' 23:59:59');
 
         //for stc customers
         if (!empty($stcCustomerSchedules)) {
@@ -208,8 +208,8 @@ class StcScheduleGeoMappingRepository
 
             $multipleShift = $record->shift;
             if (!empty($multipleShift)) {
-                $startDay = \Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['start_date'] . ' ' . $filterInputs['start_time']);
-                $endDay = \Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['end_date'] . ' ' . $filterInputs['end_time']);
+                $startDay = Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['start_date'] . ' ' . $filterInputs['start_time']);
+                $endDay = Carbon::createFromFormat('Y-m-d h:i A', $filterInputs['end_date'] . ' ' . $filterInputs['end_time']);
                 $shiftFrom = Carbon::parse($multipleShift->shift_from);
                 $shiftTo = Carbon::parse($multipleShift->shift_to);
 

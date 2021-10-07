@@ -23,21 +23,21 @@
             <div class="form-group row">
                 <label for="subject" class="col-sm-4 col-form-label">Subject<span class="mandatory">*</span></label>
                 <div class="col-sm-8">
-                <input id="site-note-subject" class="form-control" required="" name="subject" type="text" value="{{$note_data->subject or ''}}" maxlength="50">
+                <input id="site-note-subject" class="form-control" required="" name="subject" type="text" value="{{$note_data->subject ?? ''}}" maxlength="50">
                     <div class="form-control-feedback"><span class="help-block text-danger align-middle font-12" id="note-data-subject"></span></div>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="attendees" class="col-sm-4 col-form-label">Attendees<span class="mandatory">*</span></label>
                 <div class="col-sm-8">
-                    <input id="site-note-attendees" class="form-control" required="" name="attendees" type="text" value="{{$note_data->attendees or ''}}" maxlength="100">
+                    <input id="site-note-attendees" class="form-control" required="" name="attendees" type="text" value="{{$note_data->attendees ?? ''}}" maxlength="100">
                     <div class="form-control-feedback"><span class="help-block text-danger align-middle font-12" id="note-data-attendees"></span></div>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="location" class="col-sm-4 col-form-label">Location<span class="mandatory">*</span></label>
                 <div class="col-sm-8">
-                    <input id="site-note-location" class="form-control" required="" name="location" type="text" value="{{$note_data->location or ''}}" maxlength="100">
+                    <input id="site-note-location" class="form-control" required="" name="location" type="text" value="{{$note_data->location ?? ''}}" maxlength="100">
                     <div class="form-control-feedback"><span class="help-block text-danger align-middle font-12" id="note-data-location"></span></div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-form-label">Notes<span class="mandatory">*</span></label>
                 <div class="col-sm-12">
-                <textarea id="site-note-notes" class="form-control" name="notes" cols="100" maxlength="10000">{{$note_data->notes or ''}}</textarea>
+                <textarea id="site-note-notes" class="form-control" name="notes" cols="100" maxlength="10000">{{$note_data->notes ?? ''}}</textarea>
                     <div class="form-control-feedback"><span class="help-block text-danger align-middle font-12"  id="note-data-notes"></span></div>
                 </div>
             </div>
@@ -170,7 +170,7 @@ $(document).ready(function(){
     function fetchData(task){
         var base_url = "{{ route('customer.sitenotes.save',[':customer_id',':note_id']) }}";
         var url = base_url.replace(':customer_id', {{$customer_id}});
-        url = url.replace(':note_id', {{$note_data->id or 0}});
+        url = url.replace(':note_id', {{$note_data->id ?? 0}});
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
