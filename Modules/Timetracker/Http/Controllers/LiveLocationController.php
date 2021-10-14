@@ -3,12 +3,12 @@
 namespace Modules\Timetracker\Http\Controllers;
 
 use App\Services\HelperService;
-use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Models\Customer;
+use Modules\Admin\Models\User;
 use Modules\Admin\Repositories\CustomerEmployeeAllocationRepository;
 use Modules\Admin\Repositories\EmployeeAllocationRepository;
 use Modules\Admin\Repositories\UserRepository;

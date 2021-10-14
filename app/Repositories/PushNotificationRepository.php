@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Services\AppId;
 use Carbon\Carbon;
 use App\Services\FireBase;
-use Modules\Timetracker\Models\DispatchUserDevice;
+use Modules\Timetracker\Models\UserDevice;
 use Modules\Timetracker\Models\PushNotificationLog;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Log;
@@ -25,7 +26,7 @@ class PushNotificationRepository
         $inputs['request_id'] = $request_id;
         $inputs['request_type'] = $request_type;
 
-        $user_devices = DispatchUserDevice::whereIn('user_id', $userIds)
+        $user_devices = UserDevice::whereIn('user_id', $userIds)
             ->select('id', 'device_token', 'user_id')
             ->get();
         $sound = "default";
@@ -33,7 +34,7 @@ class PushNotificationRepository
             $sound = "cglmeet";
         }
         foreach ($user_devices as $device) {
-            $response = $firebase->pushToUser(
+            $response = $firebase->sendNotification(
                 $device->device_token,
                 [
                     "notification" => [
@@ -60,7 +61,8 @@ class PushNotificationRepository
                     ],
                     'priority' => 'high',
                     'restricted_package_name' => '',
-                ]
+                ],
+                AppId::TIME_TRACKER
             );
 
             //For log creation in mongoDB
@@ -117,6 +119,6 @@ class PushNotificationRepository
 
     public function updateDeviceToken($deviceTokenIds)
     {
-        return  DispatchUserDevice::whereIn('id', $deviceTokenIds)->delete();
+        return  UserDevice::whereIn('id', $deviceTokenIds)->delete();
     }
 }
