@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware' => ['web', 'permission:view_contracts', 'auth'], 'prefix' => 'contracts', 'namespace' => 'Modules\Contracts\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'permission:view_contracts', 'auth'], 'prefix' => 'contracts'], function () {
     /* Contracts CMUF Form - start */
     Route::post('cmuf-attachment-file', array('as' => 'contracts.attachfile', 'uses' => 'ContractsController@attachfile'));
     Route::post('cmuf-add-more-amendment-form', array('as' => 'contracts.addmoreamendmentsblock', 'uses' => 'ContractsController@addmoreamendmentview'));
@@ -44,7 +44,7 @@ Route::group(['middleware' => ['web', 'permission:view_contracts', 'auth'], 'pre
     Route::get('contracr-expiry/email', array('as' => 'contracts.expiry', 'uses' => 'ContractsController@contractExpiryEmailNotification'));
 });
 
-Route::group(['middleware' => ['web','auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Contracts\Http\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web','auth'], 'prefix' => 'admin',], function () {
 
     Route::get('contract-expiry/settings',array('as' => 'client-onboarding-settings',
         'uses' => 'ContractExpirySettingsController@index'));
@@ -53,7 +53,7 @@ Route::group(['middleware' => ['web','auth'], 'prefix' => 'admin', 'namespace' =
 });
 
 // RFP module Start
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'rfp', 'namespace' => 'Modules\Contracts\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'rfp'], function () {
 
     Route::group(['middleware' => ['permission:create_rfp']], function () {
         Route::get('create', array('as' => 'rfp.create', 'uses' => 'RfpController@create'));
@@ -122,7 +122,7 @@ Route::group(
     [
         'middleware' => ['web', 'auth'],
         'prefix' => 'post-order',
-        'namespace' => 'Modules\Contracts\Http\Controllers'
+        
     ],
     function () {
         Route::group(['middleware' => ['permission:create_post_order|create_allocated_post_order']], function () {
@@ -144,7 +144,7 @@ Route::group(
     [
         'middleware' => ['web', 'auth'],
         'prefix' => 'rfp-catalogue',
-        'namespace' => 'Modules\Contracts\Http\Controllers'
+        
     ],
     function () {
 

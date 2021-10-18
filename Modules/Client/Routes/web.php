@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'auth', 'permission:view_client'], 'prefix' => 'client', 'namespace' => 'Modules\Client\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth', 'permission:view_client'], 'prefix' => 'client',], function () {
     //Route::get('/', 'ClientController@index');
     Route::get('/employee-feedback', array('as' => 'client.employee-rating', 'uses' => 'ClientEmployeeFeedbackController@index'));
     Route::group(['middleware' => ['permission:review_client_feedback']], function () {
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_client'], 'prefix
 
 Route::group([
     'middleware' => ['web', "auth"], 'as' => 'clientsurvey.',
-    'prefix' => 'clientsurvey', 'namespace' => 'Modules\Client\Http\Controllers'
+    'prefix' => 'clientsurvey',
 ], function () {
     Route::get('/', ["as" => "index", "uses" => 'ClientSurveyController@index']);
     Route::post('/surveydata', ["as" => "surveydata", "uses" => 'ClientSurveyController@getSurveyData']);

@@ -22,6 +22,7 @@ use Modules\Employeescheduling\Repositories\SchedulingRepository;
 use Session;
 use Spatie\Permission\Models\Permission;
 use View;
+use \Carbon\Carbon;
 
 class EmployeeschedulingController extends Controller
 {
@@ -599,7 +600,7 @@ class EmployeeschedulingController extends Controller
             return $q->where("name", "area_manager")->whereNotIn("name", ["admin", "super_admin"]);
         })->orderBy("first_name", "asc")->get();
         $payperiods = $this->payPeriodRepository->getRecentPeriods(EmployeeschedulingController::PAYPERIOD_PAST, EmployeeschedulingController::PAYPERIOD_FUTURE);
-        $lastFewPayperiods = $payperiods->where("start_date", '<=', \Carbon::now()->addDays(365))->pluck("id")->toArray();
+        $lastFewPayperiods = $payperiods->where("start_date", '<=', Carbon::now()->addDays(365))->pluck("id")->toArray();
         return view('employeescheduling::schedule-approval-page', compact(
             'payperiods',
             'haveDeletePermission',
@@ -1118,8 +1119,8 @@ class EmployeeschedulingController extends Controller
         $startDate = null;
         $endDate = null;
         if (isset($request->start_date) && isset($request->end_date)) {
-            $startDate = \Carbon::createFromFormat('Y-m-d H:i:s', \Carbon::parse($request->start_date)->format('Y-m-d') . ' 00:00:00');
-            $endDate = \Carbon::createFromFormat('Y-m-d H:i:s', \Carbon::parse($request->end_date)->format('Y-m-d') . ' 23:59:59');
+            $startDate = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::parse($request->start_date)->format('Y-m-d') . ' 00:00:00');
+            $endDate = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::parse($request->end_date)->format('Y-m-d') . ' 23:59:59');
         }
 
         //fetch prepared data by filter

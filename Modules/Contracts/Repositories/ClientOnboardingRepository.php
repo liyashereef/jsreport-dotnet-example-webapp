@@ -8,7 +8,6 @@ use App\Services\HelperService;
 use Carbon\Carbon;
 use Dompdf\Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Modules\Admin\Models\PostOrderGroup;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AttachmentRepository;
@@ -163,9 +162,9 @@ class ClientOnboardingRepository
     public function storeClientOnboarding()
     {
         $section_id = array();
-        $inputData = Input::all();
-        $data['id'] = Input::get('id') ?? null;
-        $data['rfp_details_id'] = Input::get('rfpDetailsId');
+        $inputData = request()->all();
+        $data['id'] = request('id') ?? null;
+        $data['rfp_details_id'] = request('rfpDetailsId');
         $rfp_id = $data['rfp_details_id'];
 
         if (!isset($data['id'])) {
@@ -174,7 +173,7 @@ class ClientOnboardingRepository
         $data['updated_by'] = Auth::user()->id;
         $clientOnboardingId = $this->model->updateOrCreate(array('id' => $data['id']), $data);
         $inputData['client-onboarding-id'] = $clientOnboardingId->id;
-
+        
 
         // Section //
         //-- delete --//

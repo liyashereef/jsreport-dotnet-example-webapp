@@ -8,7 +8,7 @@ class MobileSecurityPatrolFenceData extends Model
 {
 
     public $timestamps = true;
-
+    public $table='mobile_security_patrol_fence_datas';
     /**
      * The attributes that are mass assignable.
      *

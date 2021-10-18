@@ -15,6 +15,7 @@ use Modules\Admin\Repositories\CustomerRepository;
 use Modules\Client\Repositories\VisitorLogScreeningSubmissionRepository;
 use Modules\Client\Http\Resources\VisitorLogScreeningSubmissionResource;
 use Modules\Client\Repositories\VisitorLogRepository;
+use \Carbon\Carbon;
 
 class VisitorLogScreeningSubmissionController extends Controller
 {
@@ -118,9 +119,9 @@ class VisitorLogScreeningSubmissionController extends Controller
                 $results[$key]['uid'] = $screeningEntry->uid;
                 $results[$key]['passed'] = $screeningEntry->passed;
                 $results[$key]['passed_str'] = ($screeningEntry->passed == 1)? 'Passed' : 'Failed';
-                $results[$key]['created_at'] = (!empty($screeningEntry->screened_at))? \Carbon::parse($screeningEntry->screened_at)->format('Y-m-d H:i:s'): '';
-                $results[$key]['created_date'] = (!empty($screeningEntry->screened_at))? \Carbon::parse($screeningEntry->screened_at)->format('M d Y'): '';
-                $results[$key]['created_time'] = (!empty($screeningEntry->screened_at))? \Carbon::parse($screeningEntry->screened_at)->format('H:i A'): '';
+                $results[$key]['created_at'] = (!empty($screeningEntry->screened_at))? Carbon::parse($screeningEntry->screened_at)->format('Y-m-d H:i:s'): '';
+                $results[$key]['created_date'] = (!empty($screeningEntry->screened_at))? Carbon::parse($screeningEntry->screened_at)->format('M d Y'): '';
+                $results[$key]['created_time'] = (!empty($screeningEntry->screened_at))? Carbon::parse($screeningEntry->screened_at)->format('H:i A'): '';
                 $results[$key]['customer_id'] = $screeningEntry->customer_id;
                 $results[$key]['client_name_and_number'] = $screeningEntry->customer->client_name_and_number;
                 $results[$key]['visitor_log_screening_template_id'] = $screeningEntry->visitor_log_screening_template_id;

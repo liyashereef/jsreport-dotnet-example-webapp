@@ -1443,7 +1443,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
     Route::post('sitesettings/store', array('as' => 'sitesettings.store', 'uses' => 'SiteSettingsController@storeSiteSettings'));
 });
 /* Site Settings - End */
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin'], function () {
     Route::get('customer/customershifts', array('as' => 'customer.customershifts', 'uses' => 'CustomerController@getCustomershifts'));
 });
 /* Ids Scheduling - Start */

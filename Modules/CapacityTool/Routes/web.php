@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'auth', 'permission:view_capacitytool'], 'prefix' => 'capacitytool', 'namespace' => 'Modules\CapacityTool\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth', 'permission:view_capacitytool'], 'prefix' => 'capacitytool',], function () {
     Route::get('/', array('as' => 'capacitytool', 'uses' => 'CapacityToolController@index'));
 
     Route::group(['middleware' => ['permission:create_entry']], function () {

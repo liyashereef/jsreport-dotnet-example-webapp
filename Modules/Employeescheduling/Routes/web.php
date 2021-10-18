@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware' => 'web', 'prefix' => 'employeescheduling', 'namespace' => 'Modules\Employeescheduling\Http\Controllers'], function () {
+Route::group(['middleware' => 'web', 'prefix' => 'employeescheduling'], function () {
     Route::get('/', 'EmployeeschedulingController@index');
     Route::get('createschedule/{rejected_id?}', array('as' => 'scheduling.create', 'uses' => 'EmployeeschedulingController@createschedule'));
     Route::get('getProcessedblock', array('as' => 'scheduling.processedblock', 'uses' => 'EmployeeschedulingController@getProcessedblock'));
