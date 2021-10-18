@@ -3,7 +3,7 @@
 namespace Modules\Client\Http\Controllers;
 
 use App\Services\HelperService;
-use Carbon;
+use \Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;

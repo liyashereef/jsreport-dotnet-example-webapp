@@ -15,8 +15,7 @@
 Route::group([
     'middleware' => ['web', 'permission:view_all_expense_claim|view_allocated_expense_claim'],
     'prefix' => 'expense',
-    'namespace' => 'Modules\Expense\Http\Controllers'
-], function () {
+    ], function () {
     Route::get('expense-dashboard/{viewmyexpense?}', array('as' => 'expense-dashboard.index', 'uses' => 'ExpenseDashboardController@index'));
     Route::get('expense-claims/list/{viewmyexpense?}/{startdate?}/{enddate?}/{status?}/{employee?}', array('as' => 'expense-claims.list', 'uses' => 'ExpenseDashboardController@getList'));
     Route::get('expense-claims/{id}', array('as' => 'expense-claims-single', 'uses' => 'ExpenseDashboardController@edit'));
@@ -33,8 +32,7 @@ Route::group([
 Route::group([
     'middleware' => ['web', 'permission:view_all_mileage_claim|view_allocated_mileage_claim'],
     'prefix' => 'mileage',
-    'namespace' => 'Modules\Expense\Http\Controllers'
-], function () {
+    ], function () {
     Route::get('mileage-dashboard/{viewmyexpense?}', array('as' => 'mileage-dashboard.index', 'uses' => 'MileageDashboardController@index'));
     Route::get('mileage-claims/list/{viewmyexpense?}/{startdate?}/{enddate?}/{status?}/{employee?}', array('as' => 'mileage-claims.list', 'uses' => 'MileageDashboardController@getList'));
     Route::get('mileage-claims/{id}', array('as' => 'mileage-claims-single', 'uses' => 'MileageDashboardController@edit'));
@@ -48,8 +46,7 @@ Route::group([
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_admin'],
     'prefix' => 'admin',
-    'namespace' => 'Modules\Expense\Http\Controllers\Admin'
-], function () {
+    ], function () {
 
     Route::group(['middleware' => ['permission:expense_masters']], function () {
         //Tax Master section

@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth','permission:view_keymanagement'], 'prefix' => 'keymanagement', 'namespace' => 'Modules\KeyManagement\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'auth','permission:view_keymanagement'], 'prefix' => 'keymanagement',], function()
 {
     Route::group(['middleware' => ['permission:view_all_customers_keys|view_allocated_customers_keys']], function () {
         Route::name('key-setting')->get('key-setting', 'CustomerKeyDetailController@index');
