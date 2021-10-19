@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'learningandtraining', 'namespace' => 'Modules\LearningAndTraining\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'learningandtraining'], function () {
 
     Route::get('dashboard', array('as' => 'learningandtraining.dashboard', 'uses' => 'Admin\DashboardController@index'));
     Route::get('dashboard/courses', array('as' => 'learningandtraining.dashboard.courses', 'uses' => 'Admin\DashboardController@getCourses'));
@@ -93,7 +93,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'learningandtraining'
     /*** Exam Questions - End ------ **/
 });
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'learning', 'namespace' => 'Modules\LearningAndTraining\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'learning',], function () {
 
     Route::get('dashboard', array('as' => 'learning.dashboard', 'uses' => 'Learner\DashboardController@index'));
     Route::get('dashboard/course-list/{id}', array('as' => 'learning.dashboard.course-list', 'uses' => 'Learner\DashboardController@getCourseList'));

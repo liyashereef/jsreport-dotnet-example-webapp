@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\AttachmentRepository;
 use Modules\Contracts\Models\PostOrder;
 use Modules\Admin\Repositories\CustomerEmployeeAllocationRepository;
+use \Carbon\Carbon;
 
 class PostOrderRepository
 {
@@ -149,7 +150,7 @@ class PostOrderRepository
 
     public function changeStatus($request)
     {
-    return $this->model->where('id',$request->id)->update(['reviewed_status'=>$request->status,'reviewed_by'=>\Auth::user()->id,'reviewed_at'=>\Carbon::now()]);
+    return $this->model->where('id',$request->id)->update(['reviewed_status'=>$request->status,'reviewed_by'=>\Auth::user()->id,'reviewed_at'=>Carbon::now()]);
     }
 
     public function preparePostOrderArray($postOrderData)

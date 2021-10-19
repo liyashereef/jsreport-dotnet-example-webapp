@@ -4,6 +4,7 @@ namespace Modules\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class CpidLookup extends Model
 {
@@ -39,7 +40,7 @@ class CpidLookup extends Model
     public function effectiveDate()
     {
         return $this->hasOne('Modules\Admin\Models\CpidRates', 'cp_id', 'id')
-        ->whereDate('effective_from', '<=', \Carbon::now())
+        ->whereDate('effective_from', '<=', Carbon::now())
         ->orderBy('effective_from','DESC')
         ->orderBy('created_at','DESC')
         ->withTrashed();

@@ -21,8 +21,8 @@
                 </div>
                  @endif
            @elseif($eachfield->field_type == 5)
-               <input type='text' class='form-control col-sm-3' readonly name='checkintime' id='checkintime' value="{{ \Carbon::now()->format('H : i A')}}" >
-               <input type='hidden' class='checkin' id='checkin' name='{{$eachfield->fieldname}}' value="{{ \Carbon::now()->toDateTimeString()}}" >
+               <input type='text' class='form-control col-sm-3' readonly name='checkintime' id='checkintime' value="{{ \Carbon\Carbon::now()->format('H : i A')}}" >
+               <input type='hidden' class='checkin' id='checkin' name='{{$eachfield->fieldname}}' value="{{ \Carbon\Carbon::now()->toDateTimeString()}}" >
            @elseif($eachfield->field_type == 2 && $eachfield->fieldname == 'visitor_type_id')  
              @foreach($visitor_type as $eachtype)
 

@@ -25,6 +25,7 @@ use Modules\Supervisorpanel\Repositories\CustomerMapRepository;
 use Modules\Supervisorpanel\Repositories\CustomerReportRepository;
 use mysql_xdevapi\Exception;
 use View;
+use \Carbon\Carbon;
 
 class RfpController extends Controller
 {
@@ -265,7 +266,7 @@ class RfpController extends Controller
                 //here admin will give 10 days gap or 5 days its editable in rfp_award_dates
                 $awardDateGap = RfpAwardDateLookups::first();
                 $awardDate = $awardDateGap->award_dates;
-                $currentDate = \Carbon::now();
+                $currentDate = Carbon::now();
                 $dt = $currentDate->toDateString();
 
                 $newAddedDate = date('Y-m-d', strtotime($estimatedAwardDate . ' - ' . $awardDate . 'days'));

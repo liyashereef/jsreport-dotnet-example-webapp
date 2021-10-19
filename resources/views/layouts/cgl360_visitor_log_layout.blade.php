@@ -69,10 +69,10 @@
                                     <div class="info">
                                         <p class="user-name" style="color:#f36424;text-align:right;margin-top: 9px;">Hello {{
                                             ucfirst(auth()->user()->full_name) }}</p>
-                                        <p class="user-time" style="color: #44617f">It's {{ \Carbon::now()->format('l F d, Y') }}
+                                        <p class="user-time" style="color: #44617f">It's {{ \Carbon\Carbon::now()->format('l F d, Y') }}
                                         <!--Monday September 17, 2018-->
                                         </p>
-                                        <p id="myclock" class="text-right" style="color:#44617f">{{ \Carbon::now()->format('H : i
+                                        <p id="myclock" class="text-right" style="color:#44617f">{{ \Carbon\Carbon::now()->format('H : i
                                             A')}}</p>
                                     </div>
                                     </div>
@@ -82,10 +82,10 @@
                                     <div class="info">
                                         <p class="user-name" style="color:#f36424;text-align:right;margin-top: 9px;">Hello {{
                                             ucfirst(auth()->user()->full_name) }}</p>
-                                        <p class="user-time" style="color: #44617f">It's {{ \Carbon::now()->format('l F d, Y') }}
+                                        <p class="user-time" style="color: #44617f">It's {{ \Carbon\Carbon::now()->format('l F d, Y') }}
                                         <!--Monday September 17, 2018-->
                                         </p>
-                                        <p id="myclock" class="text-right" style="color:#44617f">{{ \Carbon::now()->format('H : i
+                                        <p id="myclock" class="text-right" style="color:#44617f">{{ \Carbon\Carbon::now()->format('H : i
                                             A')}}</p>
                                     </div>
                                     </div>
@@ -116,7 +116,7 @@
         <div id="content">
             @yield('content')
             <footer>
-                <p> &copy; CGL360 {{ \Carbon::now()->format('Y') }} All rights reserved</p>
+                <p> &copy; CGL360 {{ \Carbon\Carbon::now()->format('Y') }} All rights reserved</p>
             </footer>
         </div>
     </div>
@@ -157,7 +157,7 @@ function UpdateClock() {
     // clear timer
     clearTimeout(clock);
     if(date==null){
-        date = new Date('{{ \Carbon::now() }}');
+        date = new Date('{{ \Carbon\Carbon::now() }}');
     }else{
         date = new Date(date.getTime() + 1*1000);
     }

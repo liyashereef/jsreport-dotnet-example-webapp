@@ -11,7 +11,7 @@
 |
 */
 
-Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin', 'namespace' => 'Modules\Vehicle\Http\Controllers\Admin'], function()
+Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin',], function()
 {
     //Route::get('/', 'VehicleController@index');
     //Vehicle lists
@@ -43,7 +43,7 @@ Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefi
 });
 
 
-Route::group([  'middleware' => ['web', 'auth','permission:view_vehicle'],'namespace' => 'Modules\Vehicle\Http\Controllers'], function()
+Route::group([  'middleware' => ['web', 'auth','permission:view_vehicle']], function()
 {
 
     Route::middleware(['permission:initiate_vehicle|edit_initiated_vehicle'])->group(function () {

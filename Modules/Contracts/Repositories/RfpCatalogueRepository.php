@@ -5,7 +5,7 @@ namespace Modules\Contracts\Repositories;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AttachmentRepository;
 use Modules\Contracts\Models\RfpCatalogue;
-
+use \Carbon\Carbon;
 class RfpCatalogueRepository
 {
     /**
@@ -140,7 +140,7 @@ class RfpCatalogueRepository
     {
     return $this->model
         ->where('id',$request->id)
-        ->update(['reviewed_status'=>$request->status,'reviewed_by'=>\Auth::user()->id,'reviewed_at'=>\Carbon::now()]);
+        ->update(['reviewed_status'=>$request->status,'reviewed_by'=>\Auth::user()->id,'reviewed_at'=>Carbon::now()]);
     }
 
     

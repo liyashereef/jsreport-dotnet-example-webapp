@@ -115,7 +115,7 @@ function cpidWorkTypeOptionsList($customer_id){
                         @endif
                         @php
                         if(!empty($eachshift->end) && !empty($eachshift->start)){
-                            $actualHours = (new Carbon($eachshift->end))->diff(new Carbon($eachshift->start))->format('%h:%I');
+                            $actualHours = (new \Carbon\Carbon($eachshift->end))->diff(new \Carbon\Carbon($eachshift->start))->format('%h:%I');
                             $time = explode(':', $actualHours);
                             $minutes = ($time[0]*60) + ($time[1]);
                             $totalHours += $minutes;
@@ -144,7 +144,7 @@ function cpidWorkTypeOptionsList($customer_id){
                     @php
                         if(!empty($eachshift->employeeScheduleTimeLog->hours))
                         {
-                        $ScheduledParsedHours = new Carbon($eachshift->employeeScheduleTimeLog->hours);
+                        $ScheduledParsedHours = new \Carbon\Carbon($eachshift->employeeScheduleTimeLog->hours);
                         $ScheduledFormattedHours  = $ScheduledParsedHours->format('H:i');
                         $scheduledTime = explode(':', $ScheduledFormattedHours);
                         $scheduledMinutes = ($scheduledTime[0]*60) + ($scheduledTime[1]);
@@ -158,7 +158,7 @@ function cpidWorkTypeOptionsList($customer_id){
                             }
                         }
                         }else if(isset($dateWiseScheduleArray[date("Y-m-d", strtotime($eachshift->start))])){
-                            $ScheduledParsedHours = new Carbon($dateWiseScheduleArray[date("Y-m-d", strtotime($eachshift->start))]["expected_hours"]);
+                            $ScheduledParsedHours = new \Carbon\Carbon($dateWiseScheduleArray[date("Y-m-d", strtotime($eachshift->start))]["expected_hours"]);
                             $ScheduledFormattedHours  = $ScheduledParsedHours->format('H:i');
                             $scheduledTime = explode(':', $ScheduledFormattedHours);
                             $scheduledMinutes = ($scheduledTime[0]*60) + ($scheduledTime[1]);

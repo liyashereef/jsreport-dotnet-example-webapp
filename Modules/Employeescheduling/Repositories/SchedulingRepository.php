@@ -385,8 +385,7 @@ class SchedulingRepository
             ->whereIn('customer_id', $customeridarray)
             ->select("*", \DB::raw('(select start_datetime from employee_schedule_time_logs where employee_schedule_id=employee_schedules.id order by id asc limit 0,1) as contractstartdate'))
             ->addSelect(\DB::raw('(select total_hours_perweek from cmufs where contract_name=employee_schedules.customer_id and DATE(contract_startdate)<contractstartdate and DATE(contract_enddate)>contractstartdate order by contract_startdate desc limit 0,1) as cmuf_total_hours_perweek'))
-            ->with(['scheduleTimeLogs'], function ($q) {
-            })
+            ->with('scheduleTimeLogs')
             ->orderBy('id', 'desc')
             ->get();
         return $result;
@@ -403,8 +402,7 @@ class SchedulingRepository
             ->whereIn('customer_id', $customeridarray)
             ->select("*", \DB::raw('(select start_datetime from employee_schedule_time_logs where employee_schedule_id=employee_schedules.id order by id asc limit 0,1) as contractstartdate'))
             ->addSelect(\DB::raw('(select total_hours_perweek from cmufs where contract_name=employee_schedules.customer_id and DATE(contract_startdate)<contractstartdate and DATE(contract_enddate)>contractstartdate order by contract_startdate desc limit 0,1) as cmuf_total_hours_perweek'))
-            ->with(['scheduleTimeLogs'], function ($q) {
-            })
+            ->with('scheduleTimeLogs')
             ->when($payperiod, function ($q) use ($payperiod) {
                 return $q->whereHas('scheduleTimeLogs', function ($query) use ($payperiod) {
                     return $query->whereIn('payperiod_id', $payperiod);
@@ -1460,8 +1458,8 @@ class SchedulingRepository
             if (empty($scheduleId) && $scheduleObject->status != 1) {
                 continue;
             }
-            $startTime = \Carbon::createFromFormat('Y-m-d H:i:s', $scheduleTimeLog->start_datetime);
-            $endTime = \Carbon::createFromFormat('Y-m-d H:i:s', $scheduleTimeLog->end_datetime);
+            $startTime = Carbon::createFromFormat('Y-m-d H:i:s', $scheduleTimeLog->start_datetime);
+            $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $scheduleTimeLog->end_datetime);
 
             $userId = $scheduleTimeLog->user->id;
             $userName = ucwords(strtolower($scheduleTimeLog->user->first_name)) . ' ' . ucwords(strtolower($scheduleTimeLog->user->last_name));
@@ -1496,7 +1494,7 @@ class SchedulingRepository
             $detail['hours'] = $scheduleTimeLog->hours;
             $detail['user_name'] = $scheduleTimeLog->user->full_name;
 
-            $a = \Carbon::createFromFormat('Y-m-d H:i:s', $scheduleTimeLog->start_datetime);
+            $a = Carbon::createFromFormat('Y-m-d H:i:s', $scheduleTimeLog->start_datetime);
             $dateToString = ($a->format("Y-m-d"));
             $dateToCustomString = ($a->format("M d Y"));
             $temporaryArr[$scheduleTimeLog->payperiod_id] = $scheduleTimeLog->payperiod->end_date;
@@ -1728,8 +1726,8 @@ class SchedulingRepository
         foreach ($scheduleData as $key => $scheduleVal) {
             $i++;
             $customerId = $scheduleVal->schedule->customer_id;
-            $signInStartDate = \Carbon::parse($scheduleVal->start_datetime)->subHours(8);
-            $signOutEndDate = \Carbon::parse($scheduleVal->end_datetime)->addHours(8);
+            $signInStartDate = Carbon::parse($scheduleVal->start_datetime)->subHours(8);
+            $signOutEndDate = Carbon::parse($scheduleVal->end_datetime)->addHours(8);
             $shiftPayperiodIds = EmployeeShiftPayperiod::where('pay_period_id', $scheduleVal->payperiod_id)
                 ->where('employee_id', $scheduleVal->user_id)
                 ->where('customer_id', $customerId)
@@ -1749,8 +1747,8 @@ class SchedulingRepository
 
             $result['late_in_minutes'] = (isset($shiftLateIn[0]) && ($shiftLateIn[0]->start > $scheduleVal->start_datetime)) ? $shiftLateIn[0]->diffminutes : 0;
             $result['early_out_minutes'] = (isset($shiftEarlyOut[0]) && ($shiftEarlyOut[0]->end < $scheduleVal->end_datetime)) ? $shiftEarlyOut[0]->diffminutes : 0;
-            $actualIn = (isset($shiftLateIn[0])) ? \Carbon::parse($shiftLateIn[0]->start)->format('h:i A') : '-';
-            $actualOut = (isset($shiftEarlyOut[0])) ? \Carbon::parse($shiftEarlyOut[0]->end)->format('h:i A') : '-';
+            $actualIn = (isset($shiftLateIn[0])) ? Carbon::parse($shiftLateIn[0]->start)->format('h:i A') : '-';
+            $actualOut = (isset($shiftEarlyOut[0])) ? Carbon::parse($shiftEarlyOut[0]->end)->format('h:i A') : '-';
             // $result['actual_in'] = $actualIn;
             // $result['actual_out'] = $actualOut;
             $result['noShow'] = false;
@@ -1782,8 +1780,8 @@ class SchedulingRepository
                     if (($actualIn == "-") || ($actualOut == "-")) {
                         $popArray = array_diff($popArray, array("4"));
                     } else {
-                        $actualTimeDifference = \Carbon::parse($shiftEarlyOut[0]->end)->diffInMinutes(\Carbon::parse($shiftLateIn[0]->start));
-                        $scheduleTimeDifference = \Carbon::parse($scheduleVal->end_datetime)->diffInMinutes(\Carbon::parse($scheduleVal->start_datetime));
+                        $actualTimeDifference = Carbon::parse($shiftEarlyOut[0]->end)->diffInMinutes(Carbon::parse($shiftLateIn[0]->start));
+                        $scheduleTimeDifference = Carbon::parse($scheduleVal->end_datetime)->diffInMinutes(Carbon::parse($scheduleVal->start_datetime));
 
                         if ($actualTimeDifference < $scheduleTimeDifference) {
                             $popArray = array_diff($popArray, array("4"));
