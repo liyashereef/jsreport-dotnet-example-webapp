@@ -326,7 +326,7 @@ class FacilityBookingRepository
                     //Looping upto end date for setting slot data.
                     while (strtotime($end_date) >= strtotime($incrementDate)) {
                         $result['displayFormat'][$index]['date'] = $incrementDate;
-                        $result['displayFormat'][$index]['is_today'] = \Carbon::parse($incrementDate)->isToday();
+                        $result['displayFormat'][$index]['is_today'] = Carbon::parse($incrementDate)->isToday();
                         $result['displayFormat'][$index]['title'] = date('l F d, Y', strtotime($incrementDate));
                         $result['displayFormat'][$index]['booking'] = true;
                         $result['displayFormat'][$index]['weekend'] = false;
@@ -408,8 +408,8 @@ class FacilityBookingRepository
 
                             foreach ($result['displayFormat'][$index]['timings'] as $timings) {
                                 //Start and end time differance is greater or equal to slot intervel.
-                                $diffStartTime = \Carbon\Carbon::parse($timings->start_time);
-                                $diffEndTime = \Carbon\Carbon::parse($timings->end_time);
+                                $diffStartTime = Carbon::parse($timings->start_time);
+                                $diffEndTime = Carbon::parse($timings->end_time);
                                 $diffInMinutes = $diffStartTime->diffInMinutes($diffEndTime);
                                 // dd($diff_in_minutes,$intervelMinutes,$result['displayFormat'][$index]['intervel']);
                                 if ($diffInMinutes >= $intervelMinutes) {

@@ -23,6 +23,7 @@ use \Firebase\JWT\JWT;
 use Modules\Jitsi\Models\ConferenceRecording;
 use Modules\Jitsi\Models\ConferenceRecordingServer;
 use Auth;
+use \Carbon\Carbon;
 
 class JitsiController extends Controller
 {
@@ -49,8 +50,8 @@ class JitsiController extends Controller
     {
         $user = \Auth::user();
         $activeguards = $this->employeeShiftRepository->getAllActiveGuards($user);
-        $filterstarttime  = \Carbon::now()->subMinutes(30)->format('Y-m-d h:i');
-        $filterendtime  = \Carbon::now()->addMinutes(30)->format('Y-m-d h:i');
+        $filterstarttime  = Carbon::now()->subMinutes(30)->format('Y-m-d h:i');
+        $filterendtime  = Carbon::now()->addMinutes(30)->format('Y-m-d h:i');
         $activeconference = ConferenceStatus::find(1)->conferencecount;
         $recordingservercount = ConferenceRecordingServer::get()->count();
         $restriction = 0;
