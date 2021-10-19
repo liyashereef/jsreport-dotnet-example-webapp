@@ -44,7 +44,7 @@ Route::group(['middleware' => ['web', 'permission:view_contracts', 'auth'], 'pre
     Route::get('contracr-expiry/email', array('as' => 'contracts.expiry', 'uses' => 'ContractsController@contractExpiryEmailNotification'));
 });
 
-Route::group(['middleware' => ['web','auth'], 'prefix' => 'admin','namespace' => 'Modules\Contracts\Http\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web','auth'], 'prefix' => 'admin','namespace' => 'Admin'], function () {
 
     Route::get('contract-expiry/settings',array('as' => 'client-onboarding-settings',
         'uses' => 'ContractExpirySettingsController@index'));

@@ -11,20 +11,20 @@
 |
 */
 
-Route::group(['middleware' => ['web'], 'prefix' => 'uniform', 'namespace' => 'Modules\UniformScheduling\Http\Controllers'], function(){
+Route::group(['middleware' => ['web'], 'prefix' => 'uniform',], function(){
     Route::get('/', 'UserLoginController@index');
     Route::get('/login', 'UserLoginController@index')->name('uniform.login');
     Route::post('/login', 'UserLoginController@login');
     Route::get('/booking', array('as' => 'uniform.booking-page', 'uses' => 'UniformSchedulingBookingController@index'));
 });
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'uniform', 'namespace' => 'Modules\UniformScheduling\Http\Controllers'], function(){
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'uniform',], function(){
     Route::post('/logout',  array('as' => 'uniform.logout', 'uses' => 'UserLoginController@logout'));
     Route::get('/booking-data', array('as' => 'uniform.booking-data', 'uses' => 'UniformSchedulingBookingController@bookingData'));
     Route::post('/booking', array('as' => 'uniform.book-slot', 'uses' => 'UniformSchedulingBookingController@slotBooking'));
 });
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'uniform-admin', 'namespace' => 'Modules\UniformScheduling\Http\Controllers\Admin'], function(){
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'uniform-admin', 'namespace' => 'Admin'], function(){
     // Booking management
     Route::get('/',array('as' => 'uniform-admin', 'uses' => 'UniformSchedulingEntriesController@index'));
     Route::get('/slot-timings',array('as' => 'uniform-admin.slot-timings-booking', 'uses' => 'UniformSchedulingEntriesController@getOfficeSlotTimings'));

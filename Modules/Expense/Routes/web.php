@@ -46,7 +46,7 @@ Route::group([
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_admin'],
     'prefix' => 'admin',
-    'namespace' => 'Modules\Expense\Http\Controllers\Admin'
+    'namespace' => 'Admin'
     ], function () {
 
     Route::group(['middleware' => ['permission:expense_masters']], function () {

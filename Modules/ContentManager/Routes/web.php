@@ -19,7 +19,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'contentmanager',], function ()
 
 Route::group([
     'middleware' => ['web', 'auth'],
-    'prefix' => 'admin', 'namespace' => 'Modules\ContentManager\Http\Controllers\Admin'
+    'prefix' => 'admin', 'namespace' => 'Admin'
 ], function () {
     Route::get('content-manager/view', array('as' => 'content-manager.view', 'uses' => 'ManageContentController@index'));
     Route::get('content-manager/list/{id?}', array('as' => 'content-manager.list', 'uses' => 'ManageContentController@getList'));
