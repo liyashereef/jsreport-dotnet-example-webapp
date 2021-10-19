@@ -11,7 +11,7 @@
 |
 */
 
-Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin',], function()
+Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin', 'namespace' => 'Modules\Vehicle\Http\Controllers\Admin'], function()
 {
     //Route::get('/', 'VehicleController@index');
     //Vehicle lists
