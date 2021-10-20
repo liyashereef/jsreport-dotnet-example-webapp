@@ -34,7 +34,7 @@ Route::prefix('facility')
         });
     });
 
-Route::group(['middleware' => ['web','auth'], 'prefix' => 'cbs', 'namespace' => 'Modules\Facility\Http\Controllers'], function()
+Route::group(['middleware' => ['web','auth'], 'prefix' => 'cbs',], function()
 {
 
     Route::post('cbs/populateuserdata',array('as' => 'cbs.populateuserdata', 'uses' => 'FacilityController@populateuserdata'));

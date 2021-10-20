@@ -15,6 +15,7 @@ use App\Repositories\MailQueueRepository;
 use Modules\UniformScheduling\Repositories\UniformSchedulingCustomQuestionRepository;
 use Modules\Admin\Models\UniformSchedulingMeasurementPoints;
 use Modules\UniformScheduling\Repositories\UniformMeasurementsRepository;
+use \Carbon\Carbon;
 
 class UniformSchedulingEntriesController extends Controller
 {
@@ -138,7 +139,7 @@ class UniformSchedulingEntriesController extends Controller
                 $inputs['id'] = $request->input('id');
                 $inputs['is_canceled'] = $request->input('is_canceled');
                 $inputs['deleted_by'] = \Auth::user()->id;
-                $inputs['deleted_at'] = \Carbon::now()->format('Y-m-d H:i:s');
+                $inputs['deleted_at'] = Carbon::now()->format('Y-m-d H:i:s');
                 $this->entriesRepository->updateEntry($inputs);
                 \DB::commit();
                 return response()->json($this->helperService->returnTrueResponse());
@@ -191,7 +192,7 @@ class UniformSchedulingEntriesController extends Controller
                         $inputs['rescheduled_at'] = date('Y-m-d');
                         $inputs['rescheduled_by'] = \Auth::id();
                         $inputs['deleted_by'] = \Auth::id();
-                        $inputs['deleted_at'] = \Carbon::now();
+                        $inputs['deleted_at'] = Carbon::now();
                     }
                 }
 

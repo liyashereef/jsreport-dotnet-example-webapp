@@ -13,6 +13,7 @@ use Modules\Admin\Models\EmailAccountsMaster;
 use Modules\Jitsi\Jobs\SendBlastEmailJob;
 
 use Modules\Jitsi\Models\EmailBlastLog;
+use \Carbon\Carbon;
 
 class SendQueuedBlastMail implements ShouldQueue
 {
@@ -81,7 +82,7 @@ class SendQueuedBlastMail implements ShouldQueue
             // $html = $mailMessage;
 
             $html = $html->render();
-            $start = \Carbon::now()->addSeconds(BLASTMAIL_START);
+            $start = Carbon::now()->addSeconds(BLASTMAIL_START);
 
             foreach ($mailRecipients as $key => $usr) {
 

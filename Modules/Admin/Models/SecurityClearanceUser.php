@@ -5,7 +5,7 @@ namespace Modules\Admin\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Services\HelperService;
-use Carbon;
+use \Carbon\Carbon;
 
 class SecurityClearanceUser extends Model
 {

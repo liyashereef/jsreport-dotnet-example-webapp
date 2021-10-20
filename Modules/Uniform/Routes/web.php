@@ -16,7 +16,6 @@
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_uniform'], //TODO:change later
     'prefix' => 'uniform',
-    'namespace' => 'Modules\Uniform\Http\Controllers'
 ], function () {
     Route::group(['middleware' => ['permission:view_ura_transactions']], function () {
         //Ura transaction
@@ -42,7 +41,7 @@ Route::group([
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_admin'],
     'prefix' => 'admin',
-    'namespace' => 'Modules\Uniform\Http\Controllers\Admin'
+    'namespace' => 'Admin'
 ], function () {
     //Ura rates
     Route::get('ura-rates', ['as' => 'ura.rates', 'uses' => 'UraRateController@index']);

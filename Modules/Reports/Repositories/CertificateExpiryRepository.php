@@ -3,7 +3,7 @@
 namespace Modules\Reports\Repositories;
 
 use DB;
-use Carbon;
+use \Carbon\Carbon;
 use Modules\Admin\Models\SecurityClearanceUser;
 use Modules\Admin\Models\UserCertificate;
 use Modules\Admin\Models\EmailNotificationType;

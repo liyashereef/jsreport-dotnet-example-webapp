@@ -15,8 +15,7 @@
 Route::group([
     'middleware' => ['web', 'auth'],
     'prefix' => 'meet',
-    'namespace' => 'Modules\Jitsi\Http\Controllers'
-], function () {
+    ], function () {
     Route::get('/', array(
         'as' => 'jitsi.index',
         'uses' => 'JitsiController@index'
@@ -141,8 +140,7 @@ Route::group([
 Route::group([
     'middleware' => ['web'],
     'prefix' => 'jitsiapp',
-    'namespace' => 'Modules\Jitsi\Http\Controllers'
-], function () {
+    ], function () {
     Route::get(
         'appmeetingroom/{roomname}/{username}/{owner}',
         'JitsiController@appJoinMeeting'

@@ -527,7 +527,7 @@ class FacilityController extends Controller
         $booking_window =  $data->getFacility->facilitydata->booking_window;
 
 
-        return view('facility::partials.editfacilityservice', compact('facilityid', 'data', 'facilitydata', 'facilitytiming', 'slot_interval', 'expiry_date', 'booking_window'));
+        return view('facility::partials.editfacilityservice', compact('facilityid', 'data', 'facilitydata', 'slot_interval', 'expiry_date', 'booking_window'));
     }
 
 
