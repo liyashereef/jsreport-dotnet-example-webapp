@@ -352,10 +352,12 @@ class IdsSlotBookingController extends Controller
      */
 
     public function slotBooking(IdsEntriesRequest $request)
-    { 
+    {  //dd($request->all());
         try {
             \DB::beginTransaction();
             $input = $request->all();
+            $photoId = $request->input('passport_photo_service_id');
+
             $blocked['ids_office_id'] = $request->input('ids_office_id');
             $blocked['slot_block_date'] = $request->input('slot_booked_date');
             $blocked['ids_office_slot_id'] = $request->input('ids_office_slot_id');
@@ -384,6 +386,10 @@ class IdsSlotBookingController extends Controller
                 $isFederalBilling=$request->input('is_federal_billing');
                 if ($isCandidate == 0 && $isFederalBilling == 0) {
                     $input['is_online_payment_received'] = 0;
+                }elseif($photoId != null && ($isCandidate != 0 || $isFederalBilling != 0)){
+                    $input['is_online_payment_received'] = 0;
+                }else{
+
                 }
                 $result = $this->idsEntriesRepositories->store($input);
                 if ($result) {
@@ -403,12 +409,15 @@ class IdsSlotBookingController extends Controller
                         ];
                     }
                     $taxAmount = 0;
+                    $taxPercentage = 0;
+                    $photoRate = 0;
                     // Passport photo service fee add in split up.
                     if ($request->has(['passport_photo_service_id']) && $request->filled('passport_photo_service_id')) {
                         $photoService = $this->idsPassportPhotoServiceRepository->getById($request->input('passport_photo_service_id'));
                         if (!empty($photoService)) {
                             $serviceName = $serviceName .' and '.$photoService->name;
                             $given_rate = $given_rate + $photoService->rate;
+                            $photoRate = $photoService->rate;
                             $splitUp[sizeof($splitUp)] = [
                                 'type'=>2,
                                 'entry_id'=>$result->id,
@@ -430,6 +439,7 @@ class IdsSlotBookingController extends Controller
                             $taxAmount = ($service->taxMaster->taxMasterLog->tax_percentage / 100) * $given_rate;
                             $taxAmount = floor($taxAmount*100)/100;
                             $given_rate = $given_rate + $taxAmount;
+                            $taxPercentage = $service->taxMaster->taxMasterLog->tax_percentage;
                             if ($given_rate > 0) {
                                 $splitUp[sizeof($splitUp)] = [
                                     'type'=>0,
@@ -462,7 +472,9 @@ class IdsSlotBookingController extends Controller
                     }
 
                     //Send email
-                    if ($storeAnswers['success'] == true && ($isCandidate != 0 || $isFederalBilling != 0)) {
+                    if ($storeAnswers['success'] == true &&
+                    $photoId == null && ($isCandidate != 0 || $isFederalBilling != 0)
+                    ) {
 
                         $to = $request->input('email');
                         $model_name = 'Modules\IdsScheduling\Models\IdsEntries';
@@ -505,9 +517,28 @@ class IdsSlotBookingController extends Controller
                     }
                 }
 
+                $onlinePay = false;
+                $onlineFee = 0;
+
                 if ($isCandidate == 0 && $isFederalBilling == 0 && !empty($result)) {
-                    $paymentParams=array('id'=>$result->id,'amount'=>$given_rate,'office_name'=>$office->name,'service_name'=>$service->name,'photoService'=> $photoService->name ?? '');
-        // dd($paymentParams,$given_rate,$givenRateArray,$splitUp);
+                    $onlinePay = true;
+                    $onlineFee = $given_rate;
+                }
+                if($photoId != null && ($isCandidate != 0 || $isFederalBilling != 0)){
+                    $onlinePay = true;
+                    $onlineFee = $photoRate;
+                    if($taxPercentage > 0){
+                        $taxFee = ($taxPercentage / 100) * $photoRate;
+                        $onlineFee = $photoRate + $taxFee;
+                        $onlineFeeArray = explode(".",strval($onlineFee));
+                        if(sizeof($onlineFeeArray) == 2){
+                            $onlineFee = floatval($onlineFeeArray[0].'.'.substr($onlineFeeArray[1],0,2));
+                        }
+                    }
+
+                }
+                if ($onlinePay) {
+                    $paymentParams=array('id'=>$result->id,'amount'=>$onlineFee,'office_name'=>$office->name,'service_name'=>$service->name,'photoService'=> $photoService->name ?? '');
                     $session=$this->idsPaymentRepository->doPayment($request, $paymentParams);
                     $return =['sessionId' => $session->id,'message' => 'Redirect to checkout page.'];
                     $jobParams=array('entry_id'=>$result->id,'payment_intent'=>$session->payment_intent);
