@@ -25,7 +25,7 @@
     .ids-service-label p{
         color: #dc3545!important;
         font-size: 13px;
-        font-weight: 500px;
+        font-weight: 500;
         margin-top: -3%;
     }
     .swal-booking-notes li{
@@ -897,15 +897,26 @@
                 $('#ids-slot-scheduling-form #mdl_save_change').show();
                 $('#ids-slot-scheduling-form #payment-confirmation-message').hide();
             }else{
+                let label = 'Pay CA$'+totaFee;
+                $("#checkout-button").attr('value', label);
                 $('#checkout-button').show();
                 $('#ids-slot-scheduling-form #mdl_save_change').hide();
+                $('#photoFeeLabel').html(" ");
                 $('#ids-slot-scheduling-form #payment-confirmation-message').show();
             }
 
             $('#ids-slot-scheduling-form #offline-payment-message').hide();
             if(photoId > 0 && (isCandidate == 1 || isFederalBilling == 1)){
-                $('#ids-slot-scheduling-form #offline-payment-message').html("Passport photo fee $"+photoFeeTax+" must be paid in the office.");
-                $('#ids-slot-scheduling-form #offline-payment-message').show();
+
+                let label = 'Pay CA$'+photoFeeTax;
+                $("#checkout-button").attr('value', label);
+                $('#checkout-button').show();
+                $('#ids-slot-scheduling-form #mdl_save_change').hide();
+                $('#ids-slot-scheduling-form #payment-confirmation-message').show();
+                $('#photoFeeLabel').html("Passport photo fee of $"+photoFeeTax+" must be paid.");
+                // $('#ids-slot-scheduling-form #offline-payment-message').html("Passport photo fee $"+photoFeeTax+" must be paid in the office.");
+                // $('#ids-slot-scheduling-form #offline-payment-message').show();
+
             }
             // $('#ids-slot-scheduling-form #idsPaymentReasonId').prop('required',false);
 

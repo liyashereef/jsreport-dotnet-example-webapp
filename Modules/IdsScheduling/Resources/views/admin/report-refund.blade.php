@@ -243,17 +243,17 @@
                                 <small class="help-block"></small>
                             </div>
                         </div>
-                        <!-- <div class="form-group row" id="refund_amount" >
+                        <div class="form-group row" id="refund_amount" >
                             <label for="refund_amount" class="col-sm-3 control-label">Refund Amount</label>
                             <div class="col-sm-9">
                                 {{ Form::text('refund_amount', null, array('class'=>'form-control', 'placeholder'=>'Refund Amount','id'=>'refundAmount')) }}
                                 <small class="help-block"></small>
                             </div>
-                        </div> -->
-                        <div class="form-group row" id="rejected_reason" >
-                            <label for="rejected_reason" class="col-sm-3 control-label">Reason</label>
+                        </div>
+                        <div class="form-group row" id="refund_note" >
+                            <label for="refund_note" class="col-sm-3 control-label">Note</label>
                             <div class="col-sm-9">
-                                {{ Form::textArea('rejected_reason', null, array('class'=>'form-control', 'placeholder'=>'Reason','rows'=>3,'id'=>'rejectedReason')) }}
+                                {{ Form::textArea('refund_note', null, array('class'=>'form-control', 'placeholder'=>'Note','rows'=>3,'id'=>'refundNote')) }}
                                 <small class="help-block"></small>
                             </div>
                         </div>
@@ -320,17 +320,21 @@
                 });
 
                 $("body").on("click", ".refundConfirm", function(){
+                   
                     $('#refundConfirmModel').modal();
                     $('#refundConfirmModel').find('.form-group').removeClass('has-error').find('.help-block').text('');
                     $('#ids-refund-form')[0].reset();
                     $('#refundConfirmModel input[name="entry_id"]').val($(this).data("id"));
-                    $('#refundConfirmModel #rejected_reason').hide();
-                    // $('#refundConfirmModel input[name="refund_amount"]').val('');
-                    // $('#refundConfirmModel #refund_amount').hide();
+                    $('#refundConfirmModel input[name="refund_amount"]').val($(this).data("refundamount"));
+                    $('#refundConfirmModel #refund_amount').hide();
                 });
                 @can('ids_refund_update_status')
                     $('#ids-refund-form').submit(function (e) {
                         e.preventDefault();
+                        $('body').loading({
+                            stoppable: false,
+                            message: 'Please wait...'
+                        });
                         var $form = $(this);
                         var url = "{{ route('idsscheduling-admin.office.refund-confirm') }}";
                         var formData = new FormData($('#ids-refund-form')[0]);
@@ -342,12 +346,13 @@
                             type: 'POST',
                             data: formData,
                             success: function (data) {
+                                $('body').loading('stop');
                                 if (data.success) {
                                     $('#refundConfirmModel').find('.form-group').removeClass('has-error').find('.help-block').text('');
                                     $('#refundConfirmModel').modal('hide');
                                     swal({
                                         title: "Refund status updated",
-                                        text: "Refund status successfully updated",
+                                        text: data.message,
                                         type: "success",
                                         confirmButtonText: "OK",
                                     },function(){
@@ -458,8 +463,16 @@
                     slotList += `<td class="record-center" data-order="${refundAmount}">${refundAmount}</td>`;
                     slotList += '<td class="record-center" >';
                     let refundStatus = '';
+                    var historyArr=value.ids_transaction_history;
+                    var lastRow = historyArr[historyArr.length-1];
                     if(value.refund_status == 1){
-                        refundStatus = 'Requested';
+                        if(lastRow.refund_status ==4 || lastRow.refund_status ==5)
+                        {
+                            refundStatus = 'Stripe Processing';
+                        }else{
+                            refundStatus = 'Requested';
+                        }
+                        
                     }else if(value.refund_status == 2){
                         refundStatus = 'Approved';
                     }else if(value.refund_status == 3){
@@ -484,14 +497,21 @@
                     @can('ids_refund_update_status')
                         slotList += '<td class="">';
                         var note='';
-                        var historyArr=value.ids_transaction_history;
-                        var lastRow = historyArr[historyArr.length-1];
                         if(lastRow.refund_note)
                         {
                             note=lastRow.refund_note;
                         }
-                        if(value.refund_status == 1){
-                            slotList += '<a href="#" class="refundConfirm fa fa-check" data-toggle="tooltip"  data-id="'+value.id+'" data-refundAmount="'+refundAmount+'" title="'+note+'"></a>';
+                         var onlineRefundStatus=1;
+                         if(value.ids_online_refund){
+                             if(value.ids_online_refund.refund_status ==3){
+                                 onlineRefundStatus=1;
+                             }else{
+                                 onlineRefundStatus=0;
+                             }
+                         }
+                        if(value.refund_status == 1 && onlineRefundStatus==1){
+                            
+                            slotList += '<a href="#" class="refundConfirm fa fa-check" data-toggle="tooltip"  data-id="'+value.id+'" data-refundamount="'+refundAmount+'" title="'+note+'"></a>';
                         }else if(value.refund_status == 3){
                            slotList += '<a href="#" class="fa fa-comments-o reject" data-toggle="tooltip"  title="'+note+'"></a>';
                         }
@@ -555,32 +575,10 @@
 
         $('#idsRefundStatus').on('change', function() {
             if($(this).val() == 3){
-                $("#rejected_reason").show();
-                //$("#refund_amount").hide();
+                $("#refund_amount").hide();
             }else{
-                $("#rejected_reason").hide();
-                //$("#refund_amount").show();
-                // var id =  $('#refundConfirmModel input[name="entry_id"]').val();
-                // var url = "{{route('idsscheduling-admin.office.slot-single-booking-trashed')}}";
-                // $.ajax({
-                //     url: url,
-                //     type: 'GET',
-                //     data: {'ids_booking_id': id},
-                //     success: function(result) {
-                //         if(result)
-                //         {
-                //             $('#refundConfirmModel input[name="refund_amount"]').val(result.ids_online_payment.amount);
-                //         }
-
-                //     },
-                //     error: function (xhr, textStatus, thrownError) {
-                //         if (xhr.status === 401) {
-                //             window.location = "{{ route('login') }}";
-                //         }
-                //     }
-
-                // });
-
+                $("#refund_amount").show();
+                
             }
         });
 
@@ -632,6 +630,7 @@
                             $("#entryDetailsModal #isFederalBilling").text(isFederalBillingLabel);
                             let refundDetails = '';
                             refundDetails += '<ul>';
+                            var isPending=false;
                             $.each(slot.ids_transaction_history, function(index, value) {
                                 if(value.refund_status == null && value.user_id == null){
                                     refundDetails += "<li> $"+value.amount+" received through "+value.ids_payment_method.full_name +" payment on "+moment(value.created_at).format('MMMM Do YYYY, h:mm:ss A')+"</li>";
@@ -645,14 +644,41 @@
                                 }else if(value.refund_status == 1){
                                     message = 'requested';
                                 }else if(value.refund_status == 2){
-                                    message = 'request approved';
+                                    if(isPending ==true)
+                                    {
+                                        message = 'request approved from stripe';
+                                    }else{
+                                        message = 'request approved';
+                                    }
                                 }else if(value.refund_status == 3){
                                     message = 'request rejected';
+                                }
+                                else if(value.refund_status == 4){
+                                    isPending=true;
+                                    message = "request approved by "+value.user.name_with_emp_no+" and initiated to stripe";
+                                }else if(value.refund_status == 5){
+                                    isPending=true;
+                                    message = 'request pending from stripe';
+                                }else if(value.refund_status == 6){
+                                    message = 'request failed from stripe';
                                 }else{
                                 }
                                 if(message){
                                     refundDetails += '<li> Refund ($'+value.amount+') '+message;
-                                    refundDetails +=" by "+value.user.name_with_emp_no+' on '+moment(value.created_at).format('MMMM Do YYYY, h:mm:ss A')+'.';
+                                    var createdDate=value.created_at;
+                                    if(value.refund){
+                                        if(value.refund.refund_end_time && ( value.refund_status == 2 || value.refund_status == 6)){
+                                            createdDate=value.refund.refund_end_time;
+                                        }
+                                        if(value.refund.refund_start_time &&  value.refund_status == 4 ||  value.refund_status == 5){
+                                            createdDate=value.refund.refund_start_time;
+                                        }
+                                    }
+                                    if(value.refund_status == 4 || value.refund_status == 5 || value.refund_status == 6 || isPending ==true){
+                                        refundDetails +=' on '+moment(createdDate).format('MMMM Do YYYY, h:mm:ss A')+'.';
+                                    }else{
+                                        refundDetails +=" by "+value.user.name_with_emp_no+' on '+moment(createdDate).format('MMMM Do YYYY, h:mm:ss A')+'.';
+                                    }
                                     if(value.refund_note){
                                         refundDetails +=" <br/> Refund Note : "+value.refund_note;
                                     }

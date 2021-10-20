@@ -739,11 +739,15 @@ class IdsEntriesRepositories
                         'user_id',
                         'refund_note',
                         'refund_status',
+                        'online_refund_id',
                         'created_at'
                     );
                 },
                 'idsTransactionHistory.user' => function ($query) {
                     return $query->select('id', 'first_name', 'last_name');
+                },
+                'idsTransactionHistory.refund' => function ($query) {
+                    return $query->select('id', 'ids_online_refund_id', 'refund_end_time','refund_start_time');
                 },
                 'idsTransactionHistory.idsPaymentMethod'=> function ($query) {
                     return $query->select('id', 'short_name', 'full_name');
@@ -940,6 +944,9 @@ class IdsEntriesRepositories
                 'idsTransactionHistory.user' => function ($query) {
                     return $query->select('id', 'first_name', 'last_name');
                 },
+                'idsOnlineRefund' => function ($query) {
+                    return $query->select('id', 'entry_id', 'ids_online_refund_id','refund_status');
+                },
                 'idsTransactionHistory.idsPaymentMethod'=> function ($query) {
                     return $query->select('id', 'short_name', 'full_name');
                 },
@@ -966,7 +973,10 @@ class IdsEntriesRepositories
             },
             'idsTransactionHistory' => function ($query) {
                 return $query->select('id', 'entry_id', 'ids_online_payment_id','ids_payment_method_id',
-                'amount','transaction_type','user_id','refund_note','refund_status', 'created_at');
+                'amount','transaction_type','user_id','refund_note','refund_status', 'created_at','online_refund_id');
+            },
+            'idsTransactionHistory.refund' => function ($query) {
+                return $query->select('id', 'ids_online_refund_id', 'refund_end_time','refund_start_time');
             },
             'idsTransactionHistory.user' => function ($query) {
                 return $query->select('id', 'first_name', 'last_name');

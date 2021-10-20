@@ -216,9 +216,9 @@
                 let is_candidate = $("#isFederalBilling").val();
                 if (is_candidate == 1) {
                     $("#federal_billing_employer").show();
-                    $('#federal_billing_employer').prop('required', true);
+                    // $('#federal_billing_employer').prop('required', true);
                 } else {
-                    $('#federal_billing_employer').prop('required', false);
+                    // $('#federal_billing_employer').prop('required', false);
                     $("#federal_billing_employer").hide();
                 }
             });
@@ -682,9 +682,9 @@
 
                 if (root.ref.bookingData.is_federal_billing == 1) {
                     $("#federal_billing_employer").show();
-                    $('#federal_billing_employer').prop('required', true);
+                    // $('#federal_billing_employer').prop('required', true);
                 } else {
-                    $('#federal_billing_employer').prop('required', false);
+                    // $('#federal_billing_employer').prop('required', false);
                     $("#federal_billing_employer").hide();
                 }
 
@@ -866,9 +866,9 @@
             if (slot.is_federal_billing == 1) {
                 $("#federal_billing_employer").show();
                 $("#rescheduleModal #federal_billing_employer").val(slot.federal_billing_employer);
-                $('#federal_billing_employer').prop('required', true);
+                // $('#federal_billing_employer').prop('required', true);
             } else {
-                $('#federal_billing_employer').prop('required', false);
+                // $('#federal_billing_employer').prop('required', false);
                 $("#federal_billing_employer").hide();
             }
 
@@ -891,6 +891,7 @@
             // Transaction history details log.
             let refundDetails = '';
             refundDetails += '<ul>';
+            var isPending=false;
             $.each(slot.ids_transaction_history, function(index, value) {
                 if (value.refund_status == null && value.user_id == null) {
                     refundDetails += "<li> $" + value.amount + " received through " + value.ids_payment_method.full_name + " payment on " + moment(value.created_at).format('MMMM Do YYYY, h:mm:ss A') + "</li>";
@@ -904,13 +905,40 @@
                 } else if (value.refund_status == 1) {
                     message = 'requested';
                 } else if (value.refund_status == 2) {
-                    message = 'request approved';
+                    if(isPending ==true)
+                    {
+                        message = 'request approved from stripe';
+                    }else{
+                        message = 'request approved';
+                    }
+
                 } else if (value.refund_status == 3) {
                     message = 'request rejected';
+                }else if(value.refund_status == 4){
+                    isPending=true;
+                    message = "request approved by "+value.user.name_with_emp_no+" and initiated to stripe";
+                }else if(value.refund_status == 5){
+                    isPending=true;
+                    message = 'request pending from stripe';
+                }else if(value.refund_status == 6){
+                    message = 'request failed from stripe';
                 } else {}
                 if (message) {
-                    refundDetails += '<li> Refund ($' + value.amount + ') ' + message + " by " + value.user.name_with_emp_no;
-                    refundDetails += ' on ' + moment(value.created_at).format('MMMM Do YYYY, h:mm:ss A') + ".";
+                    refundDetails += '<li> Refund ($' + value.amount + ') ' + message;
+                    var createdDate=value.created_at;
+                    if(value.refund){
+                        if(value.refund.refund_end_time && ( value.refund_status == 2 || value.refund_status == 6)){
+                            createdDate=value.refund.refund_end_time;
+                        }
+                        if(value.refund.refund_start_time &&  value.refund_status == 4 ||  value.refund_status == 5){
+                            createdDate=value.refund.refund_start_time;
+                        }
+                    }
+                    if(value.refund_status == 4 || value.refund_status == 5 || value.refund_status == 6 || isPending ==true){
+                        refundDetails += ' on ' + moment(createdDate).format('MMMM Do YYYY, h:mm:ss A') + ".";
+                    }else{
+                        refundDetails += " by " + value.user.name_with_emp_no+' on ' + moment(createdDate).format('MMMM Do YYYY, h:mm:ss A') + ".";
+                    }
                     if (value.refund_note) {
                         refundDetails += " <br/> Refund Note : " + value.refund_note;
                     }

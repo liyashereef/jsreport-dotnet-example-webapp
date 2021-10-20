@@ -24,7 +24,7 @@ class RescheduleBookingRequest extends Request
             'payment_reason'=>"required_if:ids_payment_reason_id,1",
             'is_mask_given'=>"required_if:is_client_show_up,1",
             'no_masks_given'=>"required_if:is_mask_given,1",
-            'federal_billing_employer'=>"required_if:is_federal_billing,1",
+            // 'federal_billing_employer'=>"required_if:is_federal_billing,1",
             'notes'=>"max:300"
         ];
         $balanceFeeRules = [];

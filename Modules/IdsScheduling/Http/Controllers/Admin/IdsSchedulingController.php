@@ -24,6 +24,10 @@ use Modules\Admin\Repositories\IdsPassportPhotoServiceRepository;
 use Modules\IdsScheduling\Repositories\IdsEntryAmountSplitUpRepository;
 use Modules\IdsScheduling\Repositories\IdsTransactionRepository;
 use Modules\IdsScheduling\Repositories\IdsPaymentRepository;
+use Modules\IdsScheduling\Repositories\IdsRefundRepository;
+use Modules\IdsScheduling\Jobs\CheckRefundStatusJob;
+use Modules\IdsScheduling\Jobs\CheckRefundStatusJobByPaymentIntent;
+
 class IdsSchedulingController extends Controller
 {
 
@@ -41,8 +45,9 @@ class IdsSchedulingController extends Controller
     private $idsTransactionHistoryRepository;
     private $idsPaymentRepository;
     private $idsPaymentMethodsRepository;
+    private $idsRefundRepository;
 
-     /**
+    /**
      * Create a new Model instance.
      *
      * @param IdsOfficeRepository $idsOfficeRepository
@@ -59,6 +64,7 @@ class IdsSchedulingController extends Controller
      * @param IdsPaymentMethodsRepository $idsPaymentMethodsRepository
      * @param MailQueueRepository $mailQueueRepository
      * @param HelperService $helperService
+     * @param IdsRefundRepository $idsRefundRepository
      */
     public function __construct(
         IdsOfficeRepository $idsOfficeRepository,
@@ -74,9 +80,9 @@ class IdsSchedulingController extends Controller
         IdsPaymentRepository $idsPaymentRepository,
         IdsPaymentMethodsRepository $idsPaymentMethodsRepository,
         MailQueueRepository $mailQueueRepository,
-        HelperService $helperService
-    )
-    {
+        HelperService $helperService,
+        IdsRefundRepository $idsRefundRepository
+    ) {
         $this->idsOfficeRepository = $idsOfficeRepository;
         $this->idsOfficeSlotsRepositories = $idsOfficeSlotsRepositories;
         $this->idsEntriesRepositories = $idsEntriesRepositories;
@@ -92,7 +98,7 @@ class IdsSchedulingController extends Controller
         $this->helperService = $helperService;
         // $this->idsPaymentMethods = new IdsPaymentMethods();
         $this->idsPaymentMethods = $idsPaymentMethodsRepository;
-
+        $this->idsRefundRepository = $idsRefundRepository;
     }
 
     /**
@@ -101,25 +107,26 @@ class IdsSchedulingController extends Controller
      */
     public function index()
     {
-         $officeList = $this->idsOfficeRepository->getPermissionBaseLocationList();
-         $offices = $officeList->pluck('office_name_and_address','id')->toArray();
-         $paymentMethods = $this->idsPaymentMethods->getPaymentMethodsInArray();
-         $paymentReasons = collect($this->idsPaymentReasonsRepository->getAll())->pluck('name','id')->toArray();
-         $paymentReasons[1] = 'Other';
-         $photoServices = $this->idsPassportPhotoServiceRepository->allArray()->toArray();
-         return view('idsscheduling::admin.index', compact('officeList','offices','paymentMethods','paymentReasons','photoServices'));
+        $officeList = $this->idsOfficeRepository->getPermissionBaseLocationList();
+        $offices = $officeList->pluck('office_name_and_address', 'id')->toArray();
+        $paymentMethods = $this->idsPaymentMethods->getPaymentMethodsInArray();
+        $paymentReasons = collect($this->idsPaymentReasonsRepository->getAll())->pluck('name', 'id')->toArray();
+        $paymentReasons[1] = 'Other';
+        $photoServices = $this->idsPassportPhotoServiceRepository->allArray()->toArray();
+        return view('idsscheduling::admin.index', compact('officeList', 'offices', 'paymentMethods', 'paymentReasons', 'photoServices'));
     }
 
-    public function getOfficeSlotTimings(Request $request){
+    public function getOfficeSlotTimings(Request $request)
+    {
 
         $result = $request->all();
-        if($request->has('ids_office_id')){
+        if ($request->has('ids_office_id')) {
 
             //By default, Current month data will be displayed
-            if(!$request->filled('start_date')){
+            if (!$request->filled('start_date')) {
                 $result['start_date'] = date('Y-m-01');
             }
-            if(!$request->filled('end_date')){
+            if (!$request->filled('end_date')) {
                 $result['end_date'] = date("Y-m-t", strtotime(date('Y-m-d')));
             }
 
@@ -143,14 +150,15 @@ class IdsSchedulingController extends Controller
             unset($result['is_admin']);
         }
         return $result;
-     }
+    }
 
 
-     /**
+    /**
      * We will show 20 day window
      */
 
-     public function getDateArray($inputs){
+    public function getDateArray($inputs)
+    {
 
         $result['start_date'] = date('Y-m-d', strtotime($inputs['start_date']));
         $result['end_date'] = date('Y-m-d', strtotime($inputs['end_date']));
@@ -158,7 +166,7 @@ class IdsSchedulingController extends Controller
         $index = 0;
         $incrementDate =  $result['start_date'];
 
-        while(strtotime($inputs['end_date']) >= strtotime($incrementDate)){
+        while (strtotime($inputs['end_date']) >= strtotime($incrementDate)) {
 
             $result['date'][$index] = $incrementDate;
             $result['end_date'] = $incrementDate;
@@ -166,7 +174,7 @@ class IdsSchedulingController extends Controller
             $result['display_date'][$index]['name'] = date('l F d, Y', strtotime($incrementDate));
             $result['display_date'][$index]['weekdys'] = false;
 
-            if(date('l', strtotime($incrementDate)) == 'Saturday' || date('l', strtotime($incrementDate)) == 'Sunday'){
+            if (date('l', strtotime($incrementDate)) == 'Saturday' || date('l', strtotime($incrementDate)) == 'Sunday') {
                 $result['display_date'][$index]['weekdys'] = true;
             }
             $incrementDate = date('Y-m-d', strtotime('+1 day', strtotime($incrementDate)));
@@ -176,7 +184,8 @@ class IdsSchedulingController extends Controller
         return $result;
     }
 
-    public function getBookingEntryById(Request $request){
+    public function getBookingEntryById(Request $request)
+    {
         return $this->idsEntriesRepositories->getEntryById($request->input('ids_booking_id'));
     }
     /**
@@ -185,16 +194,17 @@ class IdsSchedulingController extends Controller
      * @return object
      */
 
-    public function getOfficeSlots(Request $request){
+    public function getOfficeSlots(Request $request)
+    {
 
         $result = [];
-        if($request->has('ids_office_id')){
+        if ($request->has('ids_office_id')) {
             $result = $request->all();
             //By default, Current month data will be displayed
-            if(!$request->filled('start_date')){
+            if (!$request->filled('start_date')) {
                 $result['start_date'] = date('Y-m-01');
             }
-            if(!$request->filled('end_date')){
+            if (!$request->filled('end_date')) {
                 $result['end_date'] = date("Y-m-t", strtotime($result['start_date']));
             }
 
@@ -203,34 +213,31 @@ class IdsSchedulingController extends Controller
             $index = 0;
             $incrementDate = $result['start_date'];
             // $result['display_date'][0] = date('l F d, Y', strtotime($incrementDate));
-            while(strtotime($result['end_date']) >= strtotime($incrementDate)){
+            while (strtotime($result['end_date']) >= strtotime($incrementDate)) {
 
                 $result['date'][$index] = $incrementDate;
                 // $result['display_date'][$index] = date('l F d, Y', strtotime($incrementDate));
 
                 $result['display_date'][$index]['name'] = date('l F d, Y', strtotime($incrementDate));
                 $result['display_date'][$index]['weekdys'] = false;
-                if(date('l', strtotime($incrementDate)) == 'Saturday' || date('l', strtotime($incrementDate)) == 'Sunday'){
+                if (date('l', strtotime($incrementDate)) == 'Saturday' || date('l', strtotime($incrementDate)) == 'Sunday') {
                     $result['display_date'][$index]['weekdys'] = true;
                 }
                 $incrementDate = date('Y-m-d', strtotime('+1 day', strtotime($incrementDate)));
                 $index++;
-
             }
-               //Fetching slot details along with booked and blocked details
-               $result['is_admin'] = true;
-               $result['slot-staus'] = ['0=Free','1=Booked','2=Blocked','3=To Be Rescheduled'];
-               $result['slots'] = $this->idsOfficeSlotsRepositories->officeSlotDetails($result);
+            //Fetching slot details along with booked and blocked details
+            $result['is_admin'] = true;
+            $result['slot-staus'] = ['0=Free', '1=Booked', '2=Blocked', '3=To Be Rescheduled'];
+            $result['slots'] = $this->idsOfficeSlotsRepositories->officeSlotDetails($result);
 
-               $result['success'] = true;
-               $result['message'] = "Data fetched";
-
-            }else{
-                $result['success'] = false;
-                $result['message'] = "Office is required";
-            }
+            $result['success'] = true;
+            $result['message'] = "Data fetched";
+        } else {
+            $result['success'] = false;
+            $result['message'] = "Office is required";
+        }
         return $result;
-
     }
 
     /**
@@ -238,20 +245,21 @@ class IdsSchedulingController extends Controller
      * @param ids_entries_id.
      * @return message.
      */
-    public function deleteSlotBooking(Request $request){
+    public function deleteSlotBooking(Request $request)
+    {
 
-        if($request->has(['id','is_canceled'])){
+        if ($request->has(['id', 'is_canceled'])) {
             try {
                 \DB::beginTransaction();
 
                 $idsEntryDetails = $this->idsEntriesRepositories->getById($request->input('id'));
                 $editUpTo = \Carbon::now()->subDays(7)->format('Y-m-d');
 
-                if($idsEntryDetails && $idsEntryDetails->slot_booked_date >= $editUpTo){
+                if ($idsEntryDetails && $idsEntryDetails->slot_booked_date >= $editUpTo) {
 
                     $inputs['id'] = $request->input('id');
                     $inputs['is_canceled'] = $request->input('is_canceled');
-                    if($request->has(['refund_status'])){
+                    if ($request->has(['refund_status'])) {
                         $inputs['refund_status'] = $request->input('refund_status');
                         $inputs['refund_initiated_by'] = \Auth::id();
                         $inputs['refund_initiated_date'] = \Carbon::now()->format('Y-m-d H:i:s');
@@ -266,20 +274,20 @@ class IdsSchedulingController extends Controller
                     // $office =$idsEntryDetails->load('IdsOffice');
                     // $service =$idsEntryDetails->load('IdsServices');
                     $transaction = collect($idsEntryDetails->idsTransactionHistory)
-                    ->where('transaction_type','Received')
-                    ->first();
+                        ->where('transaction_type', 'Received')
+                        ->first();
                     $inputs['balance_fee'] = 0;
                     // if($transaction && $request->input('refund_status') ==1){
-                    if($transaction){
+                    if ($transaction) {
                         $inputs['balance_fee'] = 0 - $transaction->amount;
                     }
 
                     $update = $this->idsEntriesRepositories->updateEntry($inputs);
 
-                    if($update){
+                    if ($update) {
                         //Refund mail to employee.
                         $refunMail = false;
-                        if($transaction && $transaction->amount > 0 && $request->input('refund_status') ==1){
+                        if ($transaction && $transaction->amount > 0 && $request->input('refund_status') == 1) {
                             // $stripe =$this->idsPaymentMethods->getByShortName('STRIPE');
                             // if($stripe){
                             //     $history['ids_payment_method_id'] = $stripe->id;
@@ -296,21 +304,21 @@ class IdsSchedulingController extends Controller
                             //Refund mail to employee.
                             $refunMail = true;
                         }
-                        if($inputs['is_canceled'] == 1){
+                        if ($inputs['is_canceled'] == 1) {
                             $to = $idsEntryDetails->email;
                             $model_name = 'Modules\IdsScheduling\Models\IdsEntries';
                             $phoneNumber = $idsEntryDetails->IdsOffice->phone_number;
-                            if($idsEntryDetails->IdsOffice->phone_number_ext){
-                                $phoneNumber .=" ext.".$idsEntryDetails->IdsOffice->phone_number_ext;
+                            if ($idsEntryDetails->IdsOffice->phone_number_ext) {
+                                $phoneNumber .= " ext." . $idsEntryDetails->IdsOffice->phone_number_ext;
                             }
                             $helper_variables = array(
-                                '{serviceName}'=> $idsEntryDetails->idsServicesWithTrashed->name,
+                                '{serviceName}' => $idsEntryDetails->idsServicesWithTrashed->name,
                                 '{bookingDate}' => date('l F d, Y', strtotime($idsEntryDetails->slot_booked_date)),
-                                '{bookingTime}' => date("h:i A",strtotime($idsEntryDetails->IdsOfficeSlots->start_time)),
+                                '{bookingTime}' => date("h:i A", strtotime($idsEntryDetails->IdsOfficeSlots->start_time)),
                                 '{cancelingDate}' => \Carbon::now()->format('Y-m-d'),
                                 '{cancelingTime}' => \Carbon::now()->format('H : i A'),
                                 '{officePhoneNumber}' => $phoneNumber,
-                                '{receiverFullName}'=> $idsEntryDetails->first_name.' '.$idsEntryDetails->last_name,
+                                '{receiverFullName}' => $idsEntryDetails->first_name . ' ' . $idsEntryDetails->last_name,
                                 '{refundFee}' => $inputs['balance_fee'],
                             );
 
@@ -332,22 +340,21 @@ class IdsSchedulingController extends Controller
                         }
 
                         //Refund mail to employee.
-                        if($refunMail){
+                        if ($refunMail) {
                             $this->schedulingRefundMail($request->input('id'));
                         }
                     }
+                } else {
 
-                }else{
-
-                    if(empty($idsEntryDetails)){
+                    if (empty($idsEntryDetails)) {
                         $msg = array('success' => false, 'message' => 'Booking not avaliable.');
-                    } elseif($idsEntryDetails->slot_booked_date <= $editUpTo){
+                    } elseif ($idsEntryDetails->slot_booked_date <= $editUpTo) {
                         $message = 'Booking removal not allowed.';
-                        if($request->input('is_canceled') == 1){
+                        if ($request->input('is_canceled') == 1) {
                             $message = 'Booking cancel not allowed.';
                         }
                         $msg = array('success' => false, 'message' => $message);
-                    }else{
+                    } else {
                         $msg = array('success' => false, 'message' => 'Something went wrong. Please try again.');
                     }
                     return response()->json($msg);
@@ -359,21 +366,22 @@ class IdsSchedulingController extends Controller
                 \DB::rollBack();
                 return response()->json($this->helperService->returnFalseResponse($e));
             }
-        }else{
+        } else {
             return response()->json($this->helperService->returnFalseResponse());
         }
     }
 
     /**
      * Admin/Employees : Slot Booking.
-    *      Update
-    *      Reschedule
-    *      Remove old entry after reschedule.
-    *      After Reschedule send mail.
+     *      Update
+     *      Reschedule
+     *      Remove old entry after reschedule.
+     *      After Reschedule send mail.
      * @param  \Modules\IdsScheduling\Http\Requests\RescheduleBookingRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateSlotBooking(RescheduleBookingRequest $request){
+    public function updateSlotBooking(RescheduleBookingRequest $request)
+    {
 
         try {
             \DB::beginTransaction();
@@ -382,72 +390,72 @@ class IdsSchedulingController extends Controller
             $booking = $this->idsEntriesRepositories->getById($inputs['id']);
             $editUpTo = \Carbon::now()->subDays(7)->format('Y-m-d');
 
-            if($booking && $booking->slot_booked_date >= $editUpTo){
+            if ($booking && $booking->slot_booked_date >= $editUpTo) {
                 $service = $this->idsServicesRepository->getById($inputs['ids_service_id']);
                 // $amountSplitUps = $this->idsEntryAmountSplitUpRepository->getByEntryId($inputs['id']);
 
                 /**start** Client show up  */
-                if($request->input('is_client_show_up') == 0){
-                    $inputs['ids_payment_method_id'] =null;
-                    $inputs['ids_payment_reason_id'] =null;
-                    $inputs['is_payment_received'] =null;
-                    $inputs['payment_reason'] =null;
-                    $inputs['is_mask_given'] =null;
-                    $inputs['no_masks_given'] =null;
-                    $inputs['refund_status'] =null;
-                    $inputs['refund_initiated_by'] =null;
-                    $inputs['refund_initiated_date'] =null;
-                    $inputs['refund_completed_by'] =null;
-                    $inputs['refund_completed_date'] =null;
+                if ($request->input('is_client_show_up') == 0) {
+                    $inputs['ids_payment_method_id'] = null;
+                    $inputs['ids_payment_reason_id'] = null;
+                    $inputs['is_payment_received'] = null;
+                    $inputs['payment_reason'] = null;
+                    $inputs['is_mask_given'] = null;
+                    $inputs['no_masks_given'] = null;
+                    $inputs['refund_status'] = null;
+                    $inputs['refund_initiated_by'] = null;
+                    $inputs['refund_initiated_date'] = null;
+                    $inputs['refund_completed_by'] = null;
+                    $inputs['refund_completed_date'] = null;
                 }
-                if($request->input('is_client_show_up') == 1 && $request->input('balance_fee') <= 0){
-                    $inputs['ids_payment_method_id'] =null;
-                    $inputs['ids_payment_reason_id'] =null;
-                    $inputs['is_payment_received'] =null;
-                    $inputs['payment_reason'] =null;
-                    if($booking->refund_status != 3 && $request->has('refund_status')){
-                        $inputs['refund_status'] =null;
-                        $inputs['refund_initiated_by'] =null;
-                        $inputs['refund_initiated_date'] =null;
-                        $inputs['refund_completed_by'] =null;
-                        $inputs['refund_completed_date'] =null;
+                if ($request->input('is_client_show_up') == 1 && $request->input('balance_fee') <= 0) {
+                    $inputs['ids_payment_method_id'] = null;
+                    $inputs['ids_payment_reason_id'] = null;
+                    $inputs['is_payment_received'] = null;
+                    $inputs['payment_reason'] = null;
+                    if ($booking->refund_status != 3 && $request->has('refund_status')) {
+                        $inputs['refund_status'] = null;
+                        $inputs['refund_initiated_by'] = null;
+                        $inputs['refund_initiated_date'] = null;
+                        $inputs['refund_completed_by'] = null;
+                        $inputs['refund_completed_date'] = null;
                     }
                 }
                 /**end** Client show up  */
 
                 /**start** Payment received option  */
-                if($request->input('is_payment_received') == 0){
-                    $inputs['ids_payment_method_id'] =null;
-                }elseif($request->input('is_payment_received') == 1){
-                    $inputs['ids_payment_reason_id'] =null;
-                    $inputs['payment_reason'] =null;
-                }else{
-                    $inputs['ids_payment_reason_id'] =null;
-                    $inputs['ids_payment_method_id'] =null;
-                    $inputs['payment_reason'] =null;
-                    $inputs['is_payment_received'] =null;
+                if ($request->input('is_payment_received') == 0) {
+                    $inputs['ids_payment_method_id'] = null;
+                } elseif ($request->input('is_payment_received') == 1) {
+                    $inputs['ids_payment_reason_id'] = null;
+                    $inputs['payment_reason'] = null;
+                } else {
+                    $inputs['ids_payment_reason_id'] = null;
+                    $inputs['ids_payment_method_id'] = null;
+                    $inputs['payment_reason'] = null;
+                    $inputs['is_payment_received'] = null;
                 }
-                if($request->input('ids_payment_reason_id') != 1){
-                    $inputs['payment_reason'] =null;
+                if ($request->input('ids_payment_reason_id') != 1) {
+                    $inputs['payment_reason'] = null;
                 }
 
-                if($request->input('is_candidate') != 1){
+                if ($request->input('is_candidate') != 1) {
                     unset($inputs['candidate_requisition_no']);
                 }
-                if($request->input('is_federal_billing') != 1){
+                if ($request->input('is_federal_billing') != 1) {
                     unset($inputs['federal_billing_employer']);
                 }
-                if($request->input('is_client_show_up') == 1 && $request->input('is_candidate') != 1){
+                if ($request->input('is_client_show_up') == 1 && $request->input('is_candidate') != 1) {
                     $inputs['candidate_requisition_no'] = null;
                 }
-                if($request->input('is_client_show_up') == 1 && $request->input('is_federal_billing') != 1){
+                if ($request->input('is_client_show_up') == 1 && $request->input('is_federal_billing') != 1) {
                     $inputs['federal_billing_employer'] = null;
                 }
-                if(
+                if (
                     $request->input('balance_fee') < 0 &&
                     ($request->input('is_candidate') == 1 ||
-                    $request->input('is_federal_billing') == 1)
-                ){
+                        $request->input('is_federal_billing') == 1)
+                ) {
                     $inputs['ids_payment_reason_id'] = $request->input('ids_payment_reason_id');
                     $inputs['payment_reason'] = $request->input('payment_reason');
                 }
@@ -457,9 +465,10 @@ class IdsSchedulingController extends Controller
 
                 //For reschedule
                 $rescheduleFlag = false;
-                if( $request->has(['ids_office_slot_id','slot_booked_date']) &&
+                if (
+                    $request->has(['ids_office_slot_id', 'slot_booked_date']) &&
                     $request->filled('ids_office_slot_id') && $request->filled('slot_booked_date')
-                ){
+                ) {
                     $rescheduleFlag = true;
                     $inputs['postal_code'] = $booking->postal_code;
                     $inputs['ids_recommend_office_id'] = $booking->ids_recommend_office_id;
@@ -489,7 +498,7 @@ class IdsSchedulingController extends Controller
                     // unset($inputs['refund_initiated_by']);
                     // unset($inputs['refund_initiated_date']);
 
-                    if($entry){
+                    if ($entry) {
                         $reshedule['old_ids_entry_id'] = $request->input('id');
                         $reshedule['ids_entry_id'] = $entry->id;
                         $this->idsCustomQuestionRepository->resheduleEntry($reshedule);
@@ -501,13 +510,13 @@ class IdsSchedulingController extends Controller
                         $rescheduleUpdate['rescheduled_by'] = \Auth::id();
                         $rescheduleUpdate['deleted_by'] = \Auth::id();
                         $rescheduleUpdate['deleted_at'] = \Carbon::now();
-                        $rescheduleUpdate['ids_payment_method_id'] =$booking->ids_payment_method_id;
-                        $rescheduleUpdate['payment_reason'] =$booking->payment_reason;
-                        $rescheduleUpdate['is_payment_received'] =$booking->is_payment_received;
+                        $rescheduleUpdate['ids_payment_method_id'] = $booking->ids_payment_method_id;
+                        $rescheduleUpdate['payment_reason'] = $booking->payment_reason;
+                        $rescheduleUpdate['is_payment_received'] = $booking->is_payment_received;
                         $rescheduleUpdate['id'] = $request->input('id');
                         $store = $this->idsEntriesRepositories->updateEntry($rescheduleUpdate);
                     }
-                }else{
+                } else {
                     unset($inputs['ids_office_id']);
                     unset($inputs['ids_office_slot_id']);
                     unset($inputs['slot_booked_date']);
@@ -517,13 +526,13 @@ class IdsSchedulingController extends Controller
                     $store = $this->idsEntriesRepositories->updateEntry($inputs);
                 }
 
-                if($store){
+                if ($store) {
 
-                /**Start* Amount split  management...  */
+                    /**Start* Amount split  management...  */
                     $entryId = $request->input('id');
                     $lastTaxEntry = $this->idsEntryAmountSplitUpRepository->getTaxByEntryId($entryId);
-                    if(isset($rescheduleUpdate['rescheduled_id']) && $rescheduleUpdate['rescheduled_id'] != null){
-                        $splitUpDelete = ['entry_id'=>$entryId];
+                    if (isset($rescheduleUpdate['rescheduled_id']) && $rescheduleUpdate['rescheduled_id'] != null) {
+                        $splitUpDelete = ['entry_id' => $entryId];
                         $this->idsEntryAmountSplitUpRepository->deleteByEntry($splitUpDelete);
                         $entryId = $rescheduleUpdate['rescheduled_id'];
                     }
@@ -535,230 +544,231 @@ class IdsSchedulingController extends Controller
                     $given_rate = $service->rate;
                     $serviceName = $service->name;
                     //If service changes, delete and add service fee and its tax.
-                    if($given_rate > 0){
+                    if ($given_rate > 0) {
                         $splitUp[0] = [
-                            'type'=>1,
-                            'entry_id'=>$entryId,
-                            'service_id'=>$request->input('ids_service_id'),
-                            'rate'=>$given_rate,
-                            'tax_percentage'=>null,
-                            'created_at'=>\Carbon::now(),
-                            'updated_at'=>\Carbon::now()
+                            'type' => 1,
+                            'entry_id' => $entryId,
+                            'service_id' => $request->input('ids_service_id'),
+                            'rate' => $given_rate,
+                            'tax_percentage' => null,
+                            'created_at' => \Carbon::now(),
+                            'updated_at' => \Carbon::now()
                         ];
                     }
                     //Rescheduled or service change, delete splitup amount entry.
-                    if($request->input('ids_service_id') != $booking->ids_service_id || isset($rescheduleUpdate['rescheduled_id'])){
-                        $type = [1,0];
+                    if ($request->input('ids_service_id') != $booking->ids_service_id || isset($rescheduleUpdate['rescheduled_id'])) {
+                        $type = [1, 0];
                     }
 
                     // Passport photo service fee add in split up.
-                    if($request->has(['passport_photo_service_id']) && $request->filled('passport_photo_service_id') ){
+                    if ($request->has(['passport_photo_service_id']) && $request->filled('passport_photo_service_id')) {
                         $photoService = $this->idsPassportPhotoServiceRepository->getById($request->input('passport_photo_service_id'));
-                        if(!empty($photoService)){
-                            $serviceName = $serviceName .' and '.$photoService->name;
+                        if (!empty($photoService)) {
+                            $serviceName = $serviceName . ' and ' . $photoService->name;
                             $given_rate = $given_rate + $photoService->rate;
                             $splitUp[sizeof($splitUp)] = [
-                                'type'=>2,
-                                'entry_id'=>$entryId,
-                                'service_id'=>$request->input('passport_photo_service_id'),
-                                'rate'=>$photoService->rate,
-                                'tax_percentage'=>null,
-                                'created_at'=>\Carbon::now(),
-                                'updated_at'=>\Carbon::now()
+                                'type' => 2,
+                                'entry_id' => $entryId,
+                                'service_id' => $request->input('passport_photo_service_id'),
+                                'rate' => $photoService->rate,
+                                'tax_percentage' => null,
+                                'created_at' => \Carbon::now(),
+                                'updated_at' => \Carbon::now()
                             ];
                         }
                     }
                     //Rescheduled or photo service changed, delete splitup amount entry.
-                    if($request->input('passport_photo_service_id') != $booking->passport_photo_service_id || isset($rescheduleUpdate['rescheduled_id'])){
-                        array_push($type,2);
-                        array_push($type,0);
+                    if ($request->input('passport_photo_service_id') != $booking->passport_photo_service_id || isset($rescheduleUpdate['rescheduled_id'])) {
+                        array_push($type, 2);
+                        array_push($type, 0);
                     }
 
                     // Adding tax for service fee in split up.
                     $taxAmount = 0;
 
-                    if(
+                    if (
                         !empty($lastTaxEntry) &&
                         $request->input('ids_service_id') == $booking->ids_service_id
-                    ){
-                        if($given_rate > 0){
+                    ) {
+                        if ($given_rate > 0) {
                             $taxAmount = ($lastTaxEntry->tax_percentage / 100) * $given_rate;
-                            $taxAmount = floor($taxAmount*100)/100;
+                            $taxAmount = floor($taxAmount * 100) / 100;
                             $given_rate = $given_rate + $taxAmount;
                             $splitUp[sizeof($splitUp)] = [
-                                'type'=>0,
-                                'entry_id'=>$entryId,
-                                'service_id'=>null,
-                                'rate'=>$taxAmount,
-                                'tax_percentage'=>$lastTaxEntry->tax_percentage,
-                                'created_at'=>\Carbon::now(),
-                                'updated_at'=>\Carbon::now()
+                                'type' => 0,
+                                'entry_id' => $entryId,
+                                'service_id' => null,
+                                'rate' => $taxAmount,
+                                'tax_percentage' => $lastTaxEntry->tax_percentage,
+                                'created_at' => \Carbon::now(),
+                                'updated_at' => \Carbon::now()
                             ];
                         }
-
-                    }elseif(
+                    } elseif (
                         $request->input('ids_service_id') != $booking->ids_service_id &&
                         !empty($service->taxMaster) &&
                         !empty($service->taxMaster->taxMasterLog)
-                    ){
+                    ) {
 
                         $today = \Carbon::parse($request->input('slot_booked_date'))->format('Y-m-d');
                         $effectiveFrom = \Carbon::parse($service->taxMaster->taxMasterLog->effective_from_date)->format('Y-m-d');
-                        if($today >= $effectiveFrom){
-                            if($given_rate > 0){
+                        if ($today >= $effectiveFrom) {
+                            if ($given_rate > 0) {
                                 $taxAmount = ($service->taxMaster->taxMasterLog->tax_percentage / 100) * $given_rate;
-                                $taxAmount = floor($taxAmount*100)/100;
+                                $taxAmount = floor($taxAmount * 100) / 100;
                                 $given_rate = $given_rate + $taxAmount;
                                 $splitUp[sizeof($splitUp)] = [
-                                    'type'=>0,
-                                    'entry_id'=>$entryId,
-                                    'service_id'=>null,
-                                    'rate'=>$taxAmount,
-                                    'tax_percentage'=>$service->taxMaster->taxMasterLog->tax_percentage,
-                                    'created_at'=>\Carbon::now(),
-                                    'updated_at'=>\Carbon::now()
+                                    'type' => 0,
+                                    'entry_id' => $entryId,
+                                    'service_id' => null,
+                                    'rate' => $taxAmount,
+                                    'tax_percentage' => $service->taxMaster->taxMasterLog->tax_percentage,
+                                    'created_at' => \Carbon::now(),
+                                    'updated_at' => \Carbon::now()
                                 ];
                             }
                         }
-                    }else{
-                        array_push($type,0);
+                    } else {
+                        array_push($type, 0);
                     }
 
                     // $given_rate = number_format($given_rate,2);
                     // dd($given_rate,$splitUp);
                     //Delete old amount split up values.
-                    if(sizeof($type) > 0){
+                    if (sizeof($type) > 0) {
                         $splitUpDelete = [
-                            'type'=>$type,
-                            'entry_id'=>$entryId
+                            'type' => $type,
+                            'entry_id' => $entryId
                         ];
                         $this->idsEntryAmountSplitUpRepository->deleteByEntry($splitUpDelete);
                     }
                     //Store amount split up values.
-                    if(sizeof($splitUp) > 0){
+                    if (sizeof($splitUp) > 0) {
                         $this->idsEntryAmountSplitUpRepository->updateOrCreate($splitUp);
 
                         $updates['balance_fee'] = 0;
                         $updates = [
-                            'given_rate'=>$given_rate,
-                            'id'=>$entryId
+                            'given_rate' => $given_rate,
+                            'id' => $entryId
                         ];
-                        if($request->input('balance_fee') && $booking->is_online_payment_received != 2){
+                        if ($request->input('balance_fee') && $booking->is_online_payment_received != 2) {
                             $updates['balance_fee'] = $request->input('balance_fee');
                         }
                         //refund_status is rejected and No change in `Request for refund` no need to updates.
-                        if($booking->refund_status != 3 && $request->has('refund_status')){
+                        if ($booking->refund_status != 3 && $request->has('refund_status')) {
                             $updates['refund_status'] = null;
                             $updates['refund_initiated_by'] = null;
-                            if($request->input('is_client_show_up') == 1 &&  $request->filled(['refund_status']))
-                            {
+                            if ($request->input('is_client_show_up') == 1 &&  $request->filled(['refund_status'])) {
                                 $updates['refund_status'] = $request->input('refund_status');
                                 $updates['refund_initiated_by'] = \Auth::id();
                                 $updates['refund_initiated_date'] = \Carbon::now()->format('Y-m-d H:i:s');
                             }
                         }
-                        if($updates){
+                        if ($updates) {
                             //Update entry total fee.
                             $this->idsEntriesRepositories->updateEntry($updates);
                         }
-
                     }
-                /**End* Amount split  management...  */
+                    /**End* Amount split  management...  */
 
-                /**Start* Store transaction history...  */
+                    /**Start* Store transaction history...  */
 
                     // $this->idsTransactionHistoryRepository->deleteWithOutOnlinePayment($request->input('id'));
                     $history = [];
-                    if($rescheduleFlag){
+                    if ($rescheduleFlag) {
                         $idsEntryId = $entry->id;
-                    }else{
+                    } else {
                         $idsEntryId = $request->input('id');
                     }
                     $refunMail = false;
-                    if($request->input('is_payment_received') == 1 && $request->input('is_client_show_up') == 1 &&
-                    $request->input('balance_fee') > 0 && $request->filled('ids_payment_method_id')){
+                    if (
+                        $request->input('is_payment_received') == 1 && $request->input('is_client_show_up') == 1 &&
+                        $request->input('balance_fee') > 0 && $request->filled('ids_payment_method_id')
+                    ) {
                         $history['ids_payment_method_id'] = $request->input('ids_payment_method_id');
                         $history['amount'] = $request->input('balance_fee');
                         $history['transaction_type'] = 'Received';
                     }
-                    if($request->input('is_client_show_up') == 1 &&
+                    if (
+                        $request->input('is_client_show_up') == 1 &&
                         $request->input('balance_fee') < 0
                         //&& $request->filled('refund_status')
                         // $request->input('refund_status') == 1
-                    ){
-                        $history['amount'] = str_replace('-','',$request->input('balance_fee'));
+                    ) {
+                        $history['amount'] = str_replace('-', '', $request->input('balance_fee'));
                         $history['transaction_type'] = 'Refund';
                         $history['refund_note'] = $request->input('ids_refund_note');
-                        if($request->input('refund_status') == 1){
+                        if ($request->input('refund_status') == 1) {
                             //Refund mail to employee.
                             $refunMail = true;
                         }
                     }
 
-                    if(sizeof($history)>0){
-                        $history['entry_id'] =$idsEntryId;
+                    if (sizeof($history) > 0) {
+                        $history['entry_id'] = $idsEntryId;
                         $history['user_id'] = \Auth::id();
                         $history['refund_status'] = $request->input('refund_status');
                         $transactionHistory = $this->idsTransactionHistoryRepository->getLastEntry($idsEntryId);
                         $submitHistory = false;
-                        if($transactionHistory && ($transactionHistory->amount != $request->input('balance_fee') ||
-                         $transactionHistory->refund_status != $request->input('refund_status'))
-                         ){
+                        if (
+                            $transactionHistory && ($transactionHistory->amount != $request->input('balance_fee') ||
+                                $transactionHistory->refund_status != $request->input('refund_status'))
+                        ) {
                             $submitHistory = true;
-                            if($transactionHistory->refund_status == 3 && $request->input('refund_status') == 0){
+                            if ($transactionHistory->refund_status == 3 && $request->input('refund_status') == 0) {
                                 $submitHistory = false;
                             }
-
-                        }elseif(empty($transactionHistory)){
+                        } elseif (empty($transactionHistory)) {
                             $submitHistory = true;
-                        }else{
+                        } else {
                         }
-                        if($submitHistory){
+                        if ($submitHistory) {
                             $this->idsTransactionHistoryRepository->store($history);
                         }
                     }
 
-                /**End* Store transaction history...  */
+                    /**End* Store transaction history...  */
 
                     $sentMail = false;
-                    if($store && $request->has(['ids_office_slot_id','slot_booked_date']) &&
-                        $request->filled('ids_office_slot_id') && $request->filled('slot_booked_date'))
-                    {
+                    if (
+                        $store && $request->has(['ids_office_slot_id', 'slot_booked_date']) &&
+                        $request->filled('ids_office_slot_id') && $request->filled('slot_booked_date')
+                    ) {
                         $sentMail = true;
                     }
-                    if($request->input('ids_service_id') != $booking->ids_service_id ||
+                    if (
+                        $request->input('ids_service_id') != $booking->ids_service_id ||
                         $request->input('passport_photo_service_id') != $booking->passport_photo_service_id
-                    ){
+                    ) {
                         $sentMail = true;
                     }
 
-                    if($sentMail == true)
-                    {
-                        if($request->filled('ids_office_slot_id')){
+                    if ($sentMail == true) {
+                        if ($request->filled('ids_office_slot_id')) {
                             $slot = $this->idsOfficeSlotsRepositories->getById($request->input('ids_office_slot_id'));
-                        }else{
+                        } else {
                             $slot = $this->idsOfficeSlotsRepositories->getById($booking->ids_office_slot_id);
                         }
-                        if($request->has(['slot_booked_date']) && $request->filled('slot_booked_date')){
+                        if ($request->has(['slot_booked_date']) && $request->filled('slot_booked_date')) {
                             $slot_booked_date = $request->input('slot_booked_date');
-                        }else{
+                        } else {
                             $slot_booked_date = $booking->slot_booked_date;
                         }
                         $office = $this->idsOfficeRepository->getById($request->input('ids_office_id'));
                         $to = $request->input('email');
                         $model_name = 'Modules\IdsScheduling\Models\IdsEntries';
                         $phoneNumber = $office->phone_number;
-                        if($office->phone_number_ext){
-                            $phoneNumber .=" ext.".$office->phone_number_ext;
+                        if ($office->phone_number_ext) {
+                            $phoneNumber .= " ext." . $office->phone_number_ext;
                         }
                         $helper_variables = array(
                             '{serviceName}' => $serviceName,
-                            '{serviceRate}' => '$'.$given_rate,
+                            '{serviceRate}' => '$' . $given_rate,
                             '{bookingDate}' => date('l F d, Y', strtotime($slot_booked_date)),
-                            '{bookingTime}' => date("h:i A",strtotime($slot->start_time)),
-                            '{location}' => $office->name.', '.$office->adress,
+                            '{bookingTime}' => date("h:i A", strtotime($slot->start_time)),
+                            '{location}' => $office->name . ', ' . $office->adress,
                             '{officePhoneNumber}' => $phoneNumber,
-                            '{receiverFullName}'=> $request->input('first_name').' '.$request->input('last_name')
+                            '{receiverFullName}' => $request->input('first_name') . ' ' . $request->input('last_name')
                         );
                         $this->mailQueueRepository->prepareMailTemplate(
                             "ids_rescheduling",
@@ -778,26 +788,24 @@ class IdsSchedulingController extends Controller
                     }
 
                     //Refund mail to employee.
-                    if($refunMail){
+                    if ($refunMail) {
                         $this->schedulingRefundMail($idsEntryId);
                     }
-
                 }
                 $msg = $this->helperService->returnTrueResponse();
-            }else{
+            } else {
 
-                if(empty($booking)){
+                if (empty($booking)) {
                     $msg = array('success' => false, 'message' => 'Booking not avaliable.');
-                } elseif($booking->slot_booked_date <= $editUpTo){
+                } elseif ($booking->slot_booked_date <= $editUpTo) {
                     $msg = array('success' => false, 'message' => 'Booking update not allowed.');
-                }else{
+                } else {
                     $msg = array('success' => false, 'message' => 'Something went wrong. Please try again.');
                 }
             }
 
             \DB::commit();
             return response()->json($msg);
-
         } catch (\Exception $e) {
             \DB::rollBack();
             return response()->json($this->helperService->returnFalseResponse($e));
@@ -811,7 +819,8 @@ class IdsSchedulingController extends Controller
      * @return \Illuminate\Http\Response,
      */
 
-    public function setToBeReshedule(Request $request){
+    public function setToBeReshedule(Request $request)
+    {
         $rules = [
             'office_id' => "required",
             'schedule_date' => "required|date|date_format:Y-m-d|after_or_equal:today",
@@ -826,10 +835,10 @@ class IdsSchedulingController extends Controller
         if ($validator->fails()) {
             $return = [
                 'success' => false,
-                'message'=>'All fields are required',
-                'error'=>$validator->errors()
-                ];
-                return response()->json($return);
+                'message' => 'All fields are required',
+                'error' => $validator->errors()
+            ];
+            return response()->json($return);
         }
 
         try {
@@ -845,25 +854,25 @@ class IdsSchedulingController extends Controller
             $this->idsOfficeSlotsBlocksRepositories->store($block);
 
             \DB::commit();
-            $return = ['success' => true,'message'=>'Success'];
+            $return = ['success' => true, 'message' => 'Success'];
 
             return response()->json($return);
         } catch (\Exception $e) {
             \DB::rollBack();
             return response()->json($this->helperService->returnFalseResponse($e));
         }
-
     }
 
     /**
      * Free office slot by
      * @param slot_booked_date and office
      */
-    public function getOfficeFreeSlot(Request $request){
+    public function getOfficeFreeSlot(Request $request)
+    {
         $input = $request->all();
         $input['date'] = $request->input('slot_booked_date');
         $input['today'] = false;
-        if(strtotime($input['date']) == strtotime(date('Y-m-d'))){
+        if (strtotime($input['date']) == strtotime(date('Y-m-d'))) {
             $input['today'] = true;
         }
         return $this->idsOfficeSlotsRepositories->getOfficeFreeSlot($input);
@@ -872,21 +881,23 @@ class IdsSchedulingController extends Controller
     /**
      * Get Calender page with office list
      */
-    public function getCalendar(){
+    public function getCalendar()
+    {
         $officeList = $this->idsOfficeRepository->getPermissionBaseLocationList();
-        $offices = $officeList->pluck('office_name_and_address','id')->toArray();
+        $offices = $officeList->pluck('office_name_and_address', 'id')->toArray();
         $paymentMethods = $this->idsPaymentMethods->getPaymentMethodsInArray();
-        $paymentReasons = collect($this->idsPaymentReasonsRepository->getAll())->pluck('name','id')->toArray();
+        $paymentReasons = collect($this->idsPaymentReasonsRepository->getAll())->pluck('name', 'id')->toArray();
         $paymentReasons[1] = 'Other';
         $photoServices = $this->idsPassportPhotoServiceRepository->allArray()->toArray();
-        return view('idsscheduling::admin.calendar', compact('officeList','offices','paymentMethods','paymentReasons','photoServices'));
+        return view('idsscheduling::admin.calendar', compact('officeList', 'offices', 'paymentMethods', 'paymentReasons', 'photoServices'));
     }
 
     /**
      * Calendar data.
      * @param ids_office_id.
      */
-    public function getCalendarData(Request $request){
+    public function getCalendarData(Request $request)
+    {
         $inputs = $request->all();
         $inputs['startDate'] = \Carbon::parse($request->input('date'))->subMonths(1);
         $inputs['endDate'] = \Carbon::parse($request->input('date'))->addMonth()->endOfMonth();
@@ -899,14 +910,15 @@ class IdsSchedulingController extends Controller
     /**
      * Calendar data formating.
      */
-    public function formatCalendarData($data){
+    public function formatCalendarData($data)
+    {
         $result = [];
-        foreach($data as $key=>$d){
-            if($d->is_online_payment_received == 1 || is_null($d->is_online_payment_received)){
+        foreach ($data as $key => $d) {
+            if ($d->is_online_payment_received == 1 || is_null($d->is_online_payment_received)) {
                 $result[$key]['start'] = $d->slot_booked_date;
-                $result[$key]['title'] = $d->total.' - '.$d->IdsServices->name;
-                if(!empty($d->IdsServices->short_name)){
-                    $result[$key]['title'] = $d->total.' - '.$d->IdsServices->short_name;
+                $result[$key]['title'] = $d->total . ' - ' . $d->IdsServices->name;
+                if (!empty($d->IdsServices->short_name)) {
+                    $result[$key]['title'] = $d->total . ' - ' . $d->IdsServices->short_name;
                 }
             }
         }
@@ -916,16 +928,17 @@ class IdsSchedulingController extends Controller
     /**
      * Calendar day slot details.
      */
-    public function getDaySlotDetails(Request $request){
+    public function getDaySlotDetails(Request $request)
+    {
 
-        if($request->has(['ids_office_id','calendar_date']) && $request->filled(['ids_office_id','calendar_date'])){
+        if ($request->has(['ids_office_id', 'calendar_date']) && $request->filled(['ids_office_id', 'calendar_date'])) {
 
             $inputs = $request->all();
             $inputs['date'] = [];
-            array_push($inputs['date'],$request->input('calendar_date'));
+            array_push($inputs['date'], $request->input('calendar_date'));
             $date = $request->input('calendar_date');
-            $titleStart = str_split(date('l', strtotime($date)),3);
-            $result['slotTitle'] = $titleStart[0].', '.date('d F Y', strtotime($date));
+            $titleStart = str_split(date('l', strtotime($date)), 3);
+            $result['slotTitle'] = $titleStart[0] . ', ' . date('d F Y', strtotime($date));
             $inputs['start_date'] = $request->input('calendar_date');
             $inputs['end_date'] = $request->input('calendar_date');
             //Fetching slot details along with booked and blocked details
@@ -937,65 +950,67 @@ class IdsSchedulingController extends Controller
             // dd($result['slots']);
             $result['success'] = true;
             $result['message'] = "Data fetched";
-        }else{
+        } else {
             $result['success'] = false;
             $result['message'] = "Office and date is required";
         }
 
         return $result;
-
     }
 
     /**
      * Get canceled schedule list page
      */
-    public function getCancelledSchedule(){
+    public function getCancelledSchedule()
+    {
         $officeList = $this->idsOfficeRepository->getPermissionBaseLocation(false);
-        $services = $this->idsServicesRepository->getAllServices()->pluck('name','id')->toArray();;
-        return view('idsscheduling::admin.cancelled-list', compact('officeList','services'));
+        $services = $this->idsServicesRepository->getAllServices()->pluck('name', 'id')->toArray();;
+        return view('idsscheduling::admin.cancelled-list', compact('officeList', 'services'));
     }
 
-    public function getCancelledScheduleData(Request $request){
+    public function getCancelledScheduleData(Request $request)
+    {
         $inputs = $request->all();
         $inputs['is_canceled'] = 1;
-        if(!$request->filled('ids_office_id')){
+        if (!$request->filled('ids_office_id')) {
             $officeList = $this->idsOfficeRepository->getPermissionBaseLocation(false);
-            $inputs['ids_office_id'] = array_keys( $officeList);
+            $inputs['ids_office_id'] = array_keys($officeList);
         }
         return $this->idsEntriesRepositories->getReports($inputs);
     }
-     /**
+    /**
      * IDS Sheduling Refund Mail
      */
-    public function schedulingRefundMail($entryId){
-        $entryDetails=$this->idsEntriesRepositories->getByIdWithTrashed($entryId);
+    public function schedulingRefundMail($entryId)
+    {
+        $entryDetails = $this->idsEntriesRepositories->getByIdWithTrashed($entryId);
         $model_name = 'Modules\IdsScheduling\Models\IdsEntries';
         $phoneNumber = $entryDetails->IdsOffice->phone_number;
-        if($entryDetails->IdsOffice->phone_number_ext){
-            $phoneNumber .=" ext.".$entryDetails->IdsOffice->phone_number_ext;
+        if ($entryDetails->IdsOffice->phone_number_ext) {
+            $phoneNumber .= " ext." . $entryDetails->IdsOffice->phone_number_ext;
         }
         $serviceName = $entryDetails->idsServicesWithTrashed->name;
-        if(!empty($entryDetails->idsPassportPhotoServiceWithTrashed)){
-            $serviceName = $serviceName .' and '.$entryDetails->idsPassportPhotoServiceWithTrashed->name;
+        if (!empty($entryDetails->idsPassportPhotoServiceWithTrashed)) {
+            $serviceName = $serviceName . ' and ' . $entryDetails->idsPassportPhotoServiceWithTrashed->name;
         }
         $transaction = collect($entryDetails->idsTransactionHistory)
-                ->where('transaction_type','Refund')
-                ->first();
+            ->where('transaction_type', 'Refund')
+            ->first();
         $helper_variables = array(
             '{serviceName}' => $serviceName,
-            '{serviceRate}' => '$'.$entryDetails['given_rate'],
-            '{refundRate}' => '$'.$transaction->amount,
+            '{serviceRate}' => '$' . $entryDetails['given_rate'],
+            '{refundRate}' => '$' . $transaction->amount,
             '{bookingDate}' => date('l F d, Y', strtotime($entryDetails['slot_booked_date'])),
             '{refundDate}' => \Carbon\Carbon::now()->format('l F d, Y'),
-            '{bookingTime}' => date("h:i A",strtotime($entryDetails->IdsOfficeSlots->start_time)),
-            '{location}' => $entryDetails->IdsOffice->name.', '.$entryDetails->IdsOffice->adress,
+            '{bookingTime}' => date("h:i A", strtotime($entryDetails->IdsOfficeSlots->start_time)),
+            '{location}' => $entryDetails->IdsOffice->name . ', ' . $entryDetails->IdsOffice->adress,
             '{officePhoneNumber}' => $phoneNumber,
-            '{clientFullName}'=> $entryDetails['first_name']. ' ' .$entryDetails['last_name'],
-            '{email}'=> $entryDetails['email'],
-            '{phoneNumber}'=> $entryDetails['phone_number'],
-            '{refundInitiatedBy}'=> $entryDetails->refundInitiatedBy->name_with_emp_no ?? '',
-            '{paymentId}'=> $entryDetails->idsOnlinePayment->payment_intent ?? '',
-            '{onlinePaid}'=> $entryDetails->idsOnlinePayment->amount ?? ''
+            '{clientFullName}' => $entryDetails['first_name'] . ' ' . $entryDetails['last_name'],
+            '{email}' => $entryDetails['email'],
+            '{phoneNumber}' => $entryDetails['phone_number'],
+            '{refundInitiatedBy}' => $entryDetails->refundInitiatedBy->name_with_emp_no ?? '',
+            '{paymentId}' => $entryDetails->idsOnlinePayment->payment_intent ?? '',
+            '{onlinePaid}' => $entryDetails->idsOnlinePayment->amount ?? ''
         );
         $this->mailQueueRepository->prepareMailTemplate(
             "ids_scheduling_refund",
@@ -1010,84 +1025,148 @@ class IdsSchedulingController extends Controller
             $mail_time = null,
             $created_by = null,
             $attachment_id = null,
-            $to= null
+            $to = null
         );
     }
-
     public function getRefundConfirm(Request $request)
     {
         $entries = $this->idsEntriesRepositories->getByIdWithTrashed($request->input('entry_id'));
-        //$onlinePaid=$entries->idsOnlinePayment->amount;
-
+        $refundAmount =str_replace('-', '', $entries->balance_fee);
         $rules = [
             'entry_id' => "required",
             'refund_status' => "required",
-           // 'refund_amount' => 'bail|required_if:refund_status,==,2|lte:'.$onlinePaid
+            'refund_amount' => 'bail|required_if:refund_status,==,2|lte:' . $refundAmount,
+            'refund_note' => 'bail|required_if:refund_status,==,3'
         ];
         //Custom error messages
         $messages = [
             'entry_id.required' => 'Something went wrong. Reload and Try again.',
             'refund_status.required' => 'Refund status is required.',
-            // 'refund_amount.required_if' => 'Refund Amount is required.',
-            // 'refund_amount.lte' => 'Refund Amount should be valid',
+            'refund_amount.required_if' => 'Refund Amount is required.',
+            'refund_note.required_if' => 'Refund Note is required.',
+            'refund_amount.lte' => 'Refund Amount should be valid',
         ];
         $validator = \Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $return = [
                 'success' => false,
-                'message'=>'All fields are required',
-                'error'=>$validator->errors()
-                ];
-                return response()->json($return);
+                'message' => 'All fields are required',
+                'error' => $validator->errors()
+            ];
+            return response()->json($return);
         }
 
         try {
             \DB::beginTransaction();
 
-            if($entries && $entries->refund_status == 1){
+            if ($entries && $entries->refund_status == 1) {
                 $inputs = $request->all();
                 unset($inputs['_token']);
-                unset($inputs['rejected_reason']);
-
+                unset($inputs['refund_note']);
+                unset($inputs['refund_amount']);
                 $inputs['refund_completed_by'] = \Auth::user()->id;
                 $inputs['refund_completed_date'] = \Carbon\Carbon::now();
-
-                // Calling stripe Refund Api //
-                // if($entries->idsOnlinePayment->payment_intent)
-                // {
-                //     $refundDetails=$this->idsPaymentRepository->initiateRefund($entries->idsOnlinePayment->payment_intent,$request->input('refund_amount'));
-                //     $retrieveRefund=$this->idsPaymentRepository->retrieveRefund($entries->idsOnlinePayment->payment_intent);
-                // }
-                // // Calling stripe Refund Api //
-                // if($refundDetails['success'] ==true){
-                //     if(isset($refundDetails->result->status) && $refundDetails->result->status =='succeeded')
-                //     {
-
-                //     }
-                // }else{
-                //     return $refundDetails;
-                // }
-
-                $update = $this->idsEntriesRepositories->updateRefundStatus($inputs);
-                if($update){
-                    $history['amount'] = str_replace('-','',$entries->balance_fee);
-                    $history['transaction_type'] = 'Refund';
-                    $history['entry_id'] = $request->input('entry_id');
-                    $history['user_id'] = \Auth::id();
-                    $history['refund_status'] = $request->input('refund_status');
-                    $history['refund_note'] = $request->input('rejected_reason');
-                    $this->idsTransactionHistoryRepository->store($history);
+                $refundNote = $request->input('refund_note');
+                if ($request->input('refund_status') == 2) {
+                    $refundArr = array(
+                        'ids_online_payment_id' => $entries->idsOnlinePayment->id,
+                        'amount' => $request->input('refund_amount'),
+                        'user_id' => \Auth::id(),
+                        'entry_id' => $request->input('entry_id'),
+                        'refund_status' => 1,
+                        'refund_start_time' => \Carbon\Carbon::now()
+                    );
+                    $saveRefundDetails = $this->idsRefundRepository->store($refundArr);
+                    $refundId = $saveRefundDetails->id;
+                    //Calling stripe Refund Api //
+                    $refundInput = array(
+                        'refund_id' => $refundId,
+                        'payment_intent' => $entries->idsOnlinePayment->payment_intent,
+                        'amount' => ($request->input('refund_amount')) * 100
+                    );
+                    $alreadyCharged=false;
+                    $retrieveRefunds = $this->idsPaymentRepository->retrieveRefundByPaymentIntent($refundInput['payment_intent']);
+                    if(isset($retrieveRefunds->count) && $retrieveRefunds->count ==1){
+                        if (isset($retrieveRefunds->data[0]->status) && $retrieveRefunds->data[0]->status == 'succeeded') {
+                            $alreadyCharged=true;
+                        }else if (isset($retrieveRefunds->data[0]->status) && $retrieveRefunds->data[0]->status == 'pending') 
+                        {
+                            $alreadyCharged=true;
+                        }
+                        else{
+                            CheckRefundStatusJobByPaymentIntent::dispatch($refundInput)->delay(now()->addMinutes(3));
+                            unset($refundInput['refund_id']);
+                            $refundDetails = $this->idsPaymentRepository->initiateRefund($refundInput);
+                        }
+                    }else{
+                        CheckRefundStatusJobByPaymentIntent::dispatch($refundInput)->delay(now()->addMinutes(3));
+                        unset($refundInput['refund_id']);
+                        $refundDetails = $this->idsPaymentRepository->initiateRefund($refundInput);
+                    }
+                    
+                    
+                    // Calling stripe Refund Api //
+                    /*
+                    refund Status:
+                        1- Refund Requested
+                        2- Refund Approved
+                        3- Refund Rejected
+                        4- Refund Initiated from stripe
+                        5- Refund Pending
+                        6- Refund Failed
+                     */
+                    if (isset($refundDetails['success']) && $refundDetails['success'] == true) {
+                        $status = 4;
+                        $refundUpdatedArr = array(
+                            'ids_online_refund_id' => $refundDetails['result']['id'],
+                            'ids_online_charge_id' => $refundDetails['result']['charge'],
+                            'balance_transaction_id' => $refundDetails['result']['balance_transaction'],
+                            'refund_start_time' => date("Y-m-d H:i:s", $refundDetails['result']['created'])
+                        );
+                        $this->idsRefundRepository->update($refundId, $refundUpdatedArr);
+                        $return = ['success' => true, 'message' => 'Please wait while your refund is being processed'];
+                        $jobParams = array('refund_id' => $refundDetails['result']['id'], 'id' => $refundId);
+                        CheckRefundStatusJob::dispatch($jobParams)->delay(now()->addMinutes(2));
+                    } else {
+                        if($alreadyCharged ==true)
+                        {
+                            $status = 4;
+                            CheckRefundStatusJobByPaymentIntent::dispatch($refundInput)->delay(now()->addMinutes(1));
+                            $return = ['success' => true, 'message' => 'Please wait while your refund is being processed'];
+                        }else{
+                            $status = 6;
+                            $refundUpdatedArr = array('refund_end_time' => \Carbon\Carbon::now(), 'refund_status' => 3);
+                            $this->idsRefundRepository->update($refundId, $refundUpdatedArr);
+                            $refundNote = $refundDetails['message'] ?? '';
+                            $return = $refundDetails;
+                        }
+                        
+                    }
+                    
+                        
+                } else {
+                    if ($request->input('refund_status') == 3) {
+                        $status = 3;
+                        $this->idsEntriesRepositories->updateRefundStatus($inputs);
+                        $return = ['success' => true, 'message' => 'Refund status successfully updated'];
+                    }
                 }
-                $return = ['success' => true,'message'=>'Success'];
-            }else{
-                if(!$entries){
-                    $return = ['success' => false,'message'=>'Data not found.'];
-                }elseif($entries && $entries->refund_status != 1){
-                    $return = ['success' => false,'message'=>'Refund request canceled.'];
-                }else{
 
+                $history['amount'] = $request->input('refund_amount');
+                $history['transaction_type'] = 'Refund';
+                $history['entry_id'] = $request->input('entry_id');
+                $history['user_id'] = \Auth::id();
+                $history['refund_status'] = $status;
+                $history['refund_note'] = $refundNote;
+                $history['online_refund_id'] = $refundId ?? 0;
+                $this->idsTransactionHistoryRepository->store($history);
+            } else {
+                if (!$entries) {
+                    $return = ['success' => false, 'message' => 'Data not found.'];
+                } elseif ($entries && $entries->refund_status != 1) {
+                    $return = ['success' => false, 'message' => 'Refund request canceled.'];
+                } else {
                 }
-
             }
 
             \DB::commit();
@@ -1097,11 +1176,286 @@ class IdsSchedulingController extends Controller
             return response()->json($this->helperService->returnFalseResponse($e));
         }
     }
-    public function getEntryByIdWithTrashed(Request $request){
+    public function oldgetRefundConfirm(Request $request)
+    {
+        $entries = $this->idsEntriesRepositories->getByIdWithTrashed($request->input('entry_id'));
+        $onlinePaid = $entries->idsOnlinePayment->amount;
+
+        $rules = [
+            'entry_id' => "required",
+            'refund_status' => "required",
+            'refund_amount' => 'bail|required_if:refund_status,==,2|lte:' . $onlinePaid
+        ];
+        //Custom error messages
+        $messages = [
+            'entry_id.required' => 'Something went wrong. Reload and Try again.',
+            'refund_status.required' => 'Refund status is required.',
+            'refund_amount.required_if' => 'Refund Amount is required.',
+            'refund_amount.lte' => 'Refund Amount should be valid',
+        ];
+        $validator = \Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            $return = [
+                'success' => false,
+                'message' => 'All fields are required',
+                'error' => $validator->errors()
+            ];
+            return response()->json($return);
+        }
+
+        try {
+            \DB::beginTransaction();
+
+            if ($entries && $entries->refund_status == 1) {
+                $inputs = $request->all();
+                unset($inputs['_token']);
+                unset($inputs['refund_note']);
+                unset($inputs['refund_amount']);
+                $inputs['refund_completed_by'] = \Auth::user()->id;
+                $inputs['refund_completed_date'] = \Carbon\Carbon::now();
+                $refundNote = $request->input('refund_note');
+                if ($request->input('refund_status') == 2) {
+                    $refundArr = array(
+                        'ids_online_payment_id' => $entries->idsOnlinePayment->id,
+                        'amount' => $request->input('refund_amount'),
+                        'user_id' => \Auth::id(),
+                        'entry_id' => $request->input('entry_id'),
+                        'refund_status' => 1,
+                        'refund_start_time' => \Carbon\Carbon::now()
+                    );
+                    $saveRefundDetails = $this->idsRefundRepository->store($refundArr);
+                    $refundId = $saveRefundDetails->id;
+                    //Calling stripe Refund Api //
+                    $refundInput = array(
+                        'payment_intent' => $entries->idsOnlinePayment->payment_intent,
+                        'amount' => ($request->input('refund_amount')) * 100
+                    );
+                    $refundDetails = $this->idsPaymentRepository->initiateRefund($refundInput);
+                    // Calling stripe Refund Api //
+                    /*
+                    refund Status:
+                        1- Refund Requested
+                        2- Refund Approved
+                        3- Refund Rejected
+                        4- Refund Initiated from stripe
+                        5- Refund Pending
+                        6- Refund Failed
+                     */
+                    $status = 4;
+                    if ($refundDetails['success'] == true) {
+                        $retrieveRefunds=$this->idsPaymentRepository->retrieveRefund($refundDetails['result']['id']);
+                        if (isset($retrieveRefunds->status) && $retrieveRefunds->status == 'succeeded') {
+                            $refundUpdatedArr = array(
+                                'refund_end_time' => date("Y-m-d H:i:s", $retrieveRefunds->created),
+                                'refund_status' => 2,
+                                'ids_online_refund_id' => $retrieveRefunds->id,
+                                'ids_online_charge_id' => $retrieveRefunds->charge,
+                                'balance_transaction_id' => $retrieveRefunds->balance_transaction,
+                            );
+                            $status = 2;
+                            $update = $this->idsEntriesRepositories->updateRefundStatus($inputs);
+                            $return = ['success' => true, 'message' => 'Refund status successfully updated'];
+                        } else if (isset($retrieveRefunds->status) && $retrieveRefunds->status == 'pending') {
+                            //job//
+                            $jobParams = array('refund_id' => $refundDetails['result']['id'], 'id' => $refundId);
+                            CheckRefundStatusJob::dispatch($jobParams)->delay(now()->addMinutes(5));
+                            $status = 5;
+                            $refundUpdatedArr = array(
+                                'refund_end_time' => date("Y-m-d H:i:s", $retrieveRefunds->created),
+                                'refund_status' => 1,
+                                'ids_online_refund_id' => $retrieveRefunds->id,
+                                'ids_online_charge_id' => $retrieveRefunds->charge,
+                                'balance_transaction_id' => $retrieveRefunds->balance_transaction,
+                            );
+                            $return = ['success' => true, 'message' => 'Please wait while your refund is being processed'];
+                        } else {
+                            $status = 6;
+                            $refundUpdatedArr = array(
+                                'refund_end_time' => date("Y-m-d H:i:s", $retrieveRefunds->created),
+                                'refund_status' => 3,
+                                'ids_online_refund_id' => $retrieveRefunds->id,
+                                'ids_online_charge_id' => $retrieveRefunds->charge,
+                                'balance_transaction_id' => $retrieveRefunds->balance_transaction,
+                            );
+                            $return = ['success' => false, 'message' => 'Please try again'];
+                        }
+                    } else {
+                        $status = 6;
+                        $refundUpdatedArr = array('refund_end_time' => \Carbon\Carbon::now(), 'refund_status' => 3);
+                        $return = $refundDetails;
+                        $refundNote = $refundDetails['message'] ?? '';
+                    }
+                    $this->idsRefundRepository->update($refundId, $refundUpdatedArr);
+                } else {
+                    if ($request->input('refund_status') == 3) {
+                        $status = 3;
+                        $this->idsEntriesRepositories->updateRefundStatus($inputs);
+                        $return = ['success' => true, 'message' => 'Refund status successfully updated'];
+                    }
+                }
+
+                $history['amount'] = $request->input('refund_amount');
+                $history['transaction_type'] = 'Refund';
+                $history['entry_id'] = $request->input('entry_id');
+                $history['user_id'] = \Auth::id();
+                $history['refund_status'] = $status;
+                $history['refund_note'] = $refundNote;
+                $history['online_refund_id'] = $refundId ?? 0;
+                $this->idsTransactionHistoryRepository->store($history);
+            } else {
+                if (!$entries) {
+                    $return = ['success' => false, 'message' => 'Data not found.'];
+                } elseif ($entries && $entries->refund_status != 1) {
+                    $return = ['success' => false, 'message' => 'Refund request canceled.'];
+                } else {
+                }
+            }
+
+            \DB::commit();
+            return response()->json($return);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            return response()->json($this->helperService->returnFalseResponse($e));
+        }
+    }
+     /**
+     *Job for checking refund updates from stripe by refund id
+     * @param refund_id
+     */
+    function checkRefundProceesingStatus($inputs)
+    {
+        $refundId = $inputs['refund_id']; // stripe refund Id
+        $id = $inputs['id']; // id from ids_online_refund_id table
+        $refundDetails = $this->idsRefundRepository->getByOnlineRefundId($inputs);
+        if ($refundDetails->refund_status == 1) {
+            $retrieveRefunds = $this->idsPaymentRepository->retrieveRefund($refundId); 
+            $status = $retrieveRefunds->status ?? '';
+            if ($status == 'succeeded') {
+                $historyStatus = 2;
+                $updatedArr = array(
+                    'refund_end_time' => date("Y-m-d H:i:s", $retrieveRefunds->created),
+                    'refund_status' => 2,
+                );
+                $this->idsRefundRepository->update($id, $updatedArr);
+                $entryArr = array(
+                    'entry_id' => $refundDetails->entry_id,
+                    'refund_status' => 2,
+                    'refund_completed_by' => $refundDetails->user_id,
+                    'refund_completed_date' => date("Y-m-d H:i:s", $retrieveRefunds->created),
+                );
+                $this->idsEntriesRepositories->updateRefundStatus($entryArr);
+            } elseif ($status == 'pending') {
+                CheckRefundStatusJob::dispatch($inputs)->delay(now()->addMinutes(5));
+                $historyStatus = 5;
+            } else {
+                if(isset($retrieveRefunds->failure_reason) && $retrieveRefunds->failure_reason!='')
+                {
+                    $note=$retrieveRefunds->failure_reason;
+                }
+                if(isset($retrieveRefunds->created) && $retrieveRefunds->created!='')
+                {
+                    $endTime=$retrieveRefunds->created;
+                }else{
+                    $endTime= \Carbon\Carbon::now();
+                }
+                $historyStatus = 6;
+                $updatedArr = array(
+                    'refund_end_time' => date("Y-m-d H:i:s", $endTime),
+                    'refund_status' => 3,
+                );
+                $this->idsRefundRepository->update($id, $updatedArr);
+            }
+            $insertFlag = 0;
+            if ($historyStatus == 5) {
+                $historyDetails = $this->idsTransactionHistoryRepository->getLastEntry($refundDetails->entry_id);
+                if ($historyDetails->refund_status == 5) {
+                    $insertFlag = 1;
+                }
+            }
+            if ($insertFlag == 0) {
+                $history['amount'] = $refundDetails->amount;
+                $history['transaction_type'] = 'Refund';
+                $history['entry_id'] = $refundDetails->entry_id;
+                $history['user_id'] = $refundDetails->user_id;
+                $history['refund_status'] = $historyStatus;
+                $history['refund_note'] = $note ?? '';
+                $history['online_refund_id'] = $id;
+                $this->idsTransactionHistoryRepository->store($history);
+            }
+        }
+    }
+     /**
+     *Job for checking refund updates from stripe by paymnet intent id
+     * @param paymentIntentId
+     */
+    function checkRefundStatusByPaymentIntent($inputs)
+    {
+        $refundDetails = $this->idsRefundRepository->getById($inputs['refund_id']);
+        if ($refundDetails->refund_status != 2 && $refundDetails->ids_online_refund_id == NULL) {
+            $retrieveRefunds = $this->idsPaymentRepository->retrieveRefundByPaymentIntent($inputs['payment_intent']); 
+            if(isset($retrieveRefunds->count) && $retrieveRefunds->count ==1){
+                if (isset($retrieveRefunds->data[0]->status) && $retrieveRefunds->data[0]->status == 'succeeded') {
+                    $historyStatus = 2;
+                    $updatedArr = array(
+                        'ids_online_refund_id' => $retrieveRefunds->data[0]->id,
+                        'ids_online_charge_id' => $retrieveRefunds->data[0]->charge,
+                        'balance_transaction_id' => $retrieveRefunds->data[0]->balance_transaction,
+                        'refund_end_time' => date("Y-m-d H:i:s", $retrieveRefunds->data[0]->created),
+                        'refund_status' => 2
+                    );
+                    $this->idsRefundRepository->update($inputs['refund_id'], $updatedArr);
+                    $entryArr = array(
+                        'entry_id' => $refundDetails->entry_id,
+                        'refund_status' => 2,
+                        'refund_completed_by' => $refundDetails->user_id,
+                        'refund_completed_date' => date("Y-m-d H:i:s", $retrieveRefunds->data[0]->created),
+                    );
+                    $this->idsEntriesRepositories->updateRefundStatus($entryArr);
+                } elseif (isset($retrieveRefunds->data[0]->status) && $retrieveRefunds->data[0]->status == 'pending') {
+                    $updatedArr = array(
+                        'ids_online_refund_id' => $retrieveRefunds->data[0]->id,
+                        'ids_online_charge_id' => $retrieveRefunds->data[0]->charge,
+                        'balance_transaction_id' => $retrieveRefunds->data[0]->balance_transaction
+                    );
+                    $this->idsRefundRepository->update($inputs['refund_id'], $updatedArr);
+                    $jobParams = array('refund_id' => $retrieveRefunds->data[0]->id, 'id' => $inputs['refund_id']);
+                    CheckRefundStatusJob::dispatch($jobParams)->delay(now()->addMinutes(5));
+                    $historyStatus = 5;
+                } else {
+                    if(isset($retrieveRefunds->data[0]->failure_reason) && $retrieveRefunds->data[0]->failure_reason!='')
+                    {
+                        $note=$retrieveRefunds->data[0]->failure_reason;
+                    }
+                    $historyStatus = 6;
+                    $updatedArr = array(
+                        'ids_online_refund_id' => $retrieveRefunds->data[0]->id,
+                        'ids_online_charge_id' => $retrieveRefunds->data[0]->charge,
+                        'balance_transaction_id' => $retrieveRefunds->data[0]->balance_transaction,
+                        'refund_end_time' => date("Y-m-d H:i:s", $retrieveRefunds->data[0]->created),
+                        'refund_status' => 3,
+                    );
+                    $this->idsRefundRepository->update($inputs['refund_id'], $updatedArr);
+                }
+               
+                $history['amount'] = $refundDetails->amount;
+                $history['transaction_type'] = 'Refund';
+                $history['entry_id'] = $refundDetails->entry_id;
+                $history['user_id'] = $refundDetails->user_id;
+                $history['refund_status'] = $historyStatus;
+                $history['refund_note'] = $note ?? '';
+                $history['online_refund_id'] =$inputs['refund_id'];
+                $this->idsTransactionHistoryRepository->store($history);
+                
+            }
+        }
+    }
+    public function getEntryByIdWithTrashed(Request $request)
+    {
         return $this->idsEntriesRepositories->getByIdWithTrashed($request->input('ids_booking_id'));
     }
 
-    public function rescheduleBugFix(){
+    public function rescheduleBugFix()
+    {
         $entrySplitUps =  \DB::select("select * from ids_entry_amount_split_ups
                 where id not in (select
                                     ieasu1.id as id1
@@ -1120,59 +1474,57 @@ class IdsSchedulingController extends Controller
                 and created_at >= '2021-04-28'
                 and type =1");
 
-            $entryids = collect($entrySplitUps)->pluck('entry_id')->unique();
+        $entryids = collect($entrySplitUps)->pluck('entry_id')->unique();
 
-            foreach($entryids as $entryid){
-                $inputs = [];
-                $splitUp = [];
-                $entry = IdsEntries::withTrashed()->find($entryid);
-                if(!isset($entry)) {
-                    continue;
-                }
-                $given_rate = (float)$entry->given_rate;
-                $taxAmount = floor(($given_rate * 0.13)*100)/100;
-                $given_rate = $given_rate + $taxAmount;
-                $givenRateArray = explode(".",strval($given_rate));
-                if(sizeof($givenRateArray) == 2){
-                    $given_rate = floatval($givenRateArray[0].'.'.substr($givenRateArray[1],0,2));
-                }
-
-                $rescheduledEntry = IdsEntries::where('rescheduled_id',$entryid)->withTrashed()->first();
-                if(isset($rescheduledEntry)) {
-                    $inputs['online_processing_fee'] = $rescheduledEntry->online_processing_fee;
-                }
-                $inputs['given_rate'] = $given_rate;
-                // $inputs['id'] = $entryid;
-
-                IdsEntries::withTrashed()->where('id',$entryid)->update($inputs);
-
-                $splitUp = [
-                    'type'=>0,
-                    'entry_id'=>$entryid,
-                    'service_id'=>null,
-                    'rate'=>$taxAmount,
-                    'tax_percentage'=>13.00,
-                    'created_at'=>\Carbon::now(),
-                    'updated_at'=>\Carbon::now()
-                ];
-
-
-                $idsEntryAmountSplitUp = new IdsEntryAmountSplitUp();
-                $idsEntryAmountSplitUp->type = 0;
-                $idsEntryAmountSplitUp->entry_id = $entryid;
-                $idsEntryAmountSplitUp->service_id = null;
-                $idsEntryAmountSplitUp->rate = $taxAmount;
-                $idsEntryAmountSplitUp->tax_percentage = 13.00;
-                $idsEntryAmountSplitUp->created_at = \Carbon::now();
-                $idsEntryAmountSplitUp->updated_at = \Carbon::now();
-                if(isset($entry->deleted_at)){
-                    $idsEntryAmountSplitUp->deleted_at = \Carbon::now();
-                }
-                $idsEntryAmountSplitUp->save();
-                // IdsEntryAmountSplitUp::create($splitUp);
-                // dd($entryid,$given_rate,$taxAmount,$inputs,$splitUp,$entry,$rescheduledEntry);
+        foreach ($entryids as $entryid) {
+            $inputs = [];
+            $splitUp = [];
+            $entry = IdsEntries::withTrashed()->find($entryid);
+            if (!isset($entry)) {
+                continue;
+            }
+            $given_rate = (float)$entry->given_rate;
+            $taxAmount = floor(($given_rate * 0.13) * 100) / 100;
+            $given_rate = $given_rate + $taxAmount;
+            $givenRateArray = explode(".", strval($given_rate));
+            if (sizeof($givenRateArray) == 2) {
+                $given_rate = floatval($givenRateArray[0] . '.' . substr($givenRateArray[1], 0, 2));
             }
 
-      }
+            $rescheduledEntry = IdsEntries::where('rescheduled_id', $entryid)->withTrashed()->first();
+            if (isset($rescheduledEntry)) {
+                $inputs['online_processing_fee'] = $rescheduledEntry->online_processing_fee;
+            }
+            $inputs['given_rate'] = $given_rate;
+            // $inputs['id'] = $entryid;
 
+            IdsEntries::withTrashed()->where('id', $entryid)->update($inputs);
+
+            $splitUp = [
+                'type' => 0,
+                'entry_id' => $entryid,
+                'service_id' => null,
+                'rate' => $taxAmount,
+                'tax_percentage' => 13.00,
+                'created_at' => \Carbon::now(),
+                'updated_at' => \Carbon::now()
+            ];
+
+
+            $idsEntryAmountSplitUp = new IdsEntryAmountSplitUp();
+            $idsEntryAmountSplitUp->type = 0;
+            $idsEntryAmountSplitUp->entry_id = $entryid;
+            $idsEntryAmountSplitUp->service_id = null;
+            $idsEntryAmountSplitUp->rate = $taxAmount;
+            $idsEntryAmountSplitUp->tax_percentage = 13.00;
+            $idsEntryAmountSplitUp->created_at = \Carbon::now();
+            $idsEntryAmountSplitUp->updated_at = \Carbon::now();
+            if (isset($entry->deleted_at)) {
+                $idsEntryAmountSplitUp->deleted_at = \Carbon::now();
+            }
+            $idsEntryAmountSplitUp->save();
+            // IdsEntryAmountSplitUp::create($splitUp);
+            // dd($entryid,$given_rate,$taxAmount,$inputs,$splitUp,$entry,$rescheduledEntry);
+        }
+    }
 }

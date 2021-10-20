@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\IdsScheduling\Repositories;
+
 use \Stripe\Stripe;
 use \Stripe\Checkout\Session;
 use Illuminate\Support\Facades\Log;
@@ -8,6 +9,7 @@ use Modules\IdsScheduling\Repositories\IdsEntriesRepositories;
 use Modules\IdsScheduling\Models\IdsOnlinePayment;
 use Modules\Admin\Repositories\IdsPaymentMethodsRepository;
 use Modules\IdsScheduling\Repositories\IdsTransactionRepository;
+
 class IdsPaymentRepository
 {
 
@@ -16,23 +18,23 @@ class IdsPaymentRepository
     protected $idsPaymentMethodsRepository;
     protected $idsTransactionRepository;
 
-    public function __construct(IdsOnlinePayment $model,
-    IdsPaymentMethodsRepository $idsPaymentMethodsRepository,
-    IdsEntriesRepositories $idsEntriesRepositories,
-    IdsTransactionRepository $idsTransactionRepository
-    )
-    {
+    public function __construct(
+        IdsOnlinePayment $model,
+        IdsPaymentMethodsRepository $idsPaymentMethodsRepository,
+        IdsEntriesRepositories $idsEntriesRepositories,
+        IdsTransactionRepository $idsTransactionRepository
+    ) {
         $this->stripe_secret_key = config('globals.ids_stripe_secret_key');
         $this->idsEntriesRepositories = $idsEntriesRepositories;
         $this->model = $model;
         $this->idsPaymentMethodsRepository = $idsPaymentMethodsRepository;
         $this->idsTransactionRepository = $idsTransactionRepository;
     }
-     /**
+    /**
      * Initializing Payment
      * @param entry_id, amount,office_name
      */
-    public function doPayment($request,$paymentParams)
+    public function doPayment($request, $paymentParams)
     {
 
       $amount=$paymentParams['amount'];
@@ -65,31 +67,30 @@ class IdsPaymentRepository
         'success_url' => url('ids/paymentSuccess?session_id={CHECKOUT_SESSION_ID}'),
         'cancel_url' => route('idsscheduling'),
         ]);
-        $updateArr=[
-            'entry_id'=>$entriId,
-            'status'=>0,
-            'started_time'=>\Carbon\Carbon::now(),
-            'amount'=>$amount,
-            'transaction_id'=>$session->id,
-            'payment_intent'=>$session->payment_intent
-            ];
-        $this->updatePaymentDetails($updateArr,['transaction_id'=>$session->id]);
-        $this->paymentLog($session,"IDS Session Initiate:");
+        $updateArr = [
+            'entry_id' => $entriId,
+            'status' => 0,
+            'started_time' => \Carbon\Carbon::now(),
+            'amount' => $amount,
+            'transaction_id' => $session->id,
+            'payment_intent' => $session->payment_intent
+        ];
+        $this->updatePaymentDetails($updateArr, ['transaction_id' => $session->id]);
+        $this->paymentLog($session, "IDS Session Initiate:");
         // update metadata
-        $metadata=array('type' => 'IDS','office' => $officeName,'service'=>$serviceName,'photoService'=>$paymentParams['photoService'] ?? '');
-        $updatePaymentIntent=$this->updatePaymentIntent($session->payment_intent,$metadata);
+        $metadata = array('type' => 'IDS', 'office' => $officeName, 'service' => $serviceName, 'photoService' => $paymentParams['photoService'] ?? '');
+        $updatePaymentIntent = $this->updatePaymentIntent($session->payment_intent, $metadata);
 
 
         return $session;
     }
-     /**
+    /**
      * Update payment details to ids_online_payment table
      * @param payment related parameters
      */
-    public function updatePaymentDetails($updateArr,$condArr)
+    public function updatePaymentDetails($updateArr, $condArr)
     {
-        return $this->model->updateOrCreate($condArr,$updateArr);
-
+        return $this->model->updateOrCreate($condArr, $updateArr);
     }
     /**
      * After payment checkout, need to retrieve the payment details like status for updation
@@ -97,28 +98,29 @@ class IdsPaymentRepository
      */
     public function retrievePayment($sessionId)
     {
-        $status='Failed';
-        $session=$this->retrieveSession($sessionId);
-        $payment_intent=$session->payment_intent ?? '';
-        $paymentDetails=$this->getByPaymentIntent($payment_intent);
-        if($paymentDetails->status !=1){
+        $status = 'Failed';
+        $session = $this->retrieveSession($sessionId);
+        $payment_intent = $session->payment_intent ?? '';
+        $paymentDetails = $this->getByPaymentIntent($payment_intent);
+        $intent = $this->retrievePaymentIntent($payment_intent);
+        if ($paymentDetails->status != 1) {
 
-            $this->paymentLog($session,"Retrieve IDS Session Details in success page:");
-            if(isset($session->customer_details->email) && $session->customer_details->email !=''){
-                $email=$session->customer_details->email;
+            $this->paymentLog($session, "Retrieve IDS Session Details in success page:");
+            if (isset($session->customer_details->email) && $session->customer_details->email != '') {
+                $email = $session->customer_details->email;
             }
-            if($payment_intent){
+            if ($payment_intent) {
                 $intent = $this->retrievePaymentIntent($payment_intent);
-                $status=$intent->status ?? '';
+                $status = $intent->status ?? '';
             }
 
-            if($status == 'succeeded'){
-                $updateArr=array(
-                    'status'=>1,
-                    'email'=>$email ?? '',
-                    'end_time'=>\Carbon\Carbon::now()
+            if ($status == 'succeeded') {
+                $updateArr = array(
+                    'status' => 1,
+                    'email' => $email ?? '',
+                    'end_time' => \Carbon\Carbon::now()
                 );
-                $entriArr=array('is_online_payment_received'=>1,'id'=>$paymentDetails->entry_id);
+                $entriArr = array('is_online_payment_received' => 1, 'id' => $paymentDetails->entry_id);
                 if (isset($intent->charges->data[0]->balance_transaction) && $intent->charges->data[0]->balance_transaction != '') {
                     $updateArr['balance_transaction_id'] = $intent->charges->data[0]->balance_transaction;
                     $balanceTransaction = $this->retrieveBalanceTransaction($intent->charges->data[0]->balance_transaction);
@@ -128,33 +130,31 @@ class IdsPaymentRepository
                 }
                 $this->idsEntriesRepositories->updateEntry($entriArr);
                 $this->storeTransactionHistory($paymentDetails);
-
-            }else if($status == 'processing'){
-                $updateArr=array(
-                    'status'=>2,
-                    'email'=>$email ?? ''
+            } else if ($status == 'processing') {
+                $updateArr = array(
+                    'status' => 2,
+                    'email' => $email ?? ''
                 );
-
-            }else{
-                $updateArr=array(
-                    'status'=>0,
-                    'email'=>$email ?? '',
-                    'end_time'=>\Carbon\Carbon::now()
+            } else {
+                $updateArr = array(
+                    'status' => 0,
+                    'email' => $email ?? '',
+                    'end_time' => \Carbon\Carbon::now()
                 );
             }
-            $this->model->where('payment_intent','=',$payment_intent)->update($updateArr);
-            $returnArr=array('status'=>$status,'entry_id'=>$paymentDetails->entry_id,'refreshMultipleTime'=>false);
+            $this->model->where('payment_intent', '=', $payment_intent)->update($updateArr);
+            $returnArr = array('status' => $status, 'entry_id' => $paymentDetails->entry_id, 'refreshMultipleTime' => false);
             return $returnArr;
-         }else{
-            if($paymentDetails->status ==1){
+        } else {
+            if ($paymentDetails->status == 1) {
                 $status = 'succeeded';
-                $returnArr=array('status'=>$status,'entry_id'=>$paymentDetails->entry_id,'refreshMultipleTime'=>true);
+                $returnArr = array('status' => $status, 'entry_id' => $paymentDetails->entry_id, 'refreshMultipleTime' => true);
                 return $returnArr;
             }
-         }
+        }
     }
 
-     /**
+    /**
      * Stripe api for retrieve session details
      * @param sessionId
      */
@@ -163,7 +163,7 @@ class IdsPaymentRepository
 
         \Stripe\Stripe::setApiKey($this->stripe_secret_key);
         $session = \Stripe\Checkout\Session::retrieve($sessionId);
-        $this->paymentLog($session,"Retrieve IDS Session Details:");
+        $this->paymentLog($session, "Retrieve IDS Session Details:");
         return  $session;
     }
     /**
@@ -175,24 +175,22 @@ class IdsPaymentRepository
 
         \Stripe\Stripe::setApiKey($this->stripe_secret_key);
         $result = \Stripe\PaymentIntent::retrieve($paymentId);
-        $this->paymentLog($result,"Retrieve IDS Payment Intent:");
+        $this->paymentLog($result, "Retrieve IDS Payment Intent:");
         return  $result;
-
     }
     /**
      * Stripe api for update payment intent details like metadata
      * @param metadata
      */
-    public function updatePaymentIntent($paymentId,$metadataArr)
+    public function updatePaymentIntent($paymentId, $metadataArr)
     {
 
         \Stripe\Stripe::setApiKey($this->stripe_secret_key);
-        $result = \Stripe\PaymentIntent::update($paymentId,[
-                'metadata' => $metadataArr,
-            ]);
-        $this->paymentLog($result,"Update metadata:");
+        $result = \Stripe\PaymentIntent::update($paymentId, [
+            'metadata' => $metadataArr,
+        ]);
+        $this->paymentLog($result, "Update metadata:");
         return  $result;
-
     }
     /**
      * Stripe api for cancel payment intent
@@ -202,15 +200,88 @@ class IdsPaymentRepository
     {
 
         $stripe = new \Stripe\StripeClient(
-        $this->stripe_secret_key
+            $this->stripe_secret_key
         );
-        $result=$stripe->paymentIntents->cancel($paymentId);
-        $this->paymentLog($result,"Cancel IDS Payment Intent:");
+        $result = $stripe->paymentIntents->cancel($paymentId);
+        $this->paymentLog($result, "Cancel IDS Payment Intent:");
         return $result;
-
-
     }
 
+    /**
+     * Store payment log
+     * @param payment response
+     */
+    public function paymentLog($response, $type)
+    {
+        Log::channel('idsPayment')
+            ->info(
+                $type . json_encode([
+                    'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                    'time' => \Carbon\Carbon::now()->format('H:i:s'),
+                    'response' => $response
+                ])
+            );
+    }
+
+    public function updateOnlinePayment($inputs)
+    {
+        return $this->model
+            ->where('entry_id', $inputs['old_ids_entry_id'])
+            ->update([
+                'entry_id' => $inputs['ids_entry_id'],
+                'entry_id_updated_at' => \Carbon::now()
+            ]);
+    }
+
+
+    public function storeTransactionHistory($paymentDetails)
+    {
+        $getMethod = $this->idsPaymentMethodsRepository->getByShortName('STRIPE');
+        $transactionArr = array(
+            'entry_id' => $paymentDetails['entry_id'],
+            'ids_online_payment_id' => $paymentDetails['id'],
+            'ids_payment_method_id' => $getMethod->id,
+            'amount' => $paymentDetails['amount'],
+            'transaction_type' => 'Received'
+        );
+        return $this->idsTransactionRepository->store($transactionArr);
+    }
+    public function getByPaymentIntent($paymentIntent)
+    {
+        return $this->model->where('payment_intent', $paymentIntent)->first();
+    }
+    /**
+     * Stripe api for initiate Refund
+     * @param payment intent,amount
+     */
+    public function initiateRefund($inputs)
+    {
+        try {
+            $stripe = new \Stripe\StripeClient($this->stripe_secret_key);
+            $result = $stripe->refunds->create($inputs);
+            $this->paymentLog($result, "Initiate Refund:");
+            return array('success' => true, 'result' => $result, 'message' => 'Success');
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            $this->paymentLog($e->getError(), "Initiate Refund-error:");
+            return array('success' => false, 'result' => [], 'message' => $e->getMessage(),'err' => $e->getError());
+        }
+    }
+    /**
+     * Stripe api for retrieve Refund
+     * @param refundId
+     */
+    public function retrieveRefund($refundId)
+    {
+        try {
+            $stripe = new \Stripe\StripeClient($this->stripe_secret_key);
+            $result = $stripe->refunds->retrieve($refundId);
+            $this->paymentLog($result, "Retrieve Refund Details:");
+            return $result;
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            $this->paymentLog($e->getError(), "Retrieve Refund-error:");
+            return array('success' => false, 'result' => [], 'message' => $e->getMessage());
+        }
+    }
     /**
      * Stripe api for retrieve Balance Transaction
      * @param balaceTransactionId
@@ -222,72 +293,39 @@ class IdsPaymentRepository
         $this->paymentLog($result, "Retrieve Balance Transaction Details:");
         return $result;
     }
-
     /**
-     * Store payment log
-     * @param payment response
+     * Stripe api for retrieve Refund By Payment intent
+     * @param refundId
      */
-    public function paymentLog($response,$type){
-        Log::channel('idsPayment')
-            ->info($type.json_encode(['date' => \Carbon\Carbon::now()->format('Y-m-d'),
-            'time' => \Carbon\Carbon::now()->format('H:i:s'),
-            'response'=>$response
-            ])
-        );
+    public function retrieveRefundByPaymentIntent($paymentIntent)
+    {
+        try {
+            $stripe = new \Stripe\StripeClient($this->stripe_secret_key);
+            $result = $stripe->refunds->all(['payment_intent' => $paymentIntent]);
+            return $result;
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            $this->paymentLog($e->getError(), "Retrieve Refund-error By Payment Intent:");
+            return array('success' => false, 'result' => [], 'message' => $e->getMessage());
+        }
     }
 
-    public function updateOnlinePayment($inputs){
-        return $this->model
-        ->where('entry_id',$inputs['old_ids_entry_id'])
-        ->update([
-            'entry_id'=>$inputs['ids_entry_id'],
-            'entry_id_updated_at'=>\Carbon::now()
-        ]);
-    }
-
-
-    public function storeTransactionHistory($paymentDetails){
-        $getMethod=$this->idsPaymentMethodsRepository->getByShortName('STRIPE');
-        $transactionArr=array(
-            'entry_id'=>$paymentDetails['entry_id'],
-            'ids_online_payment_id'=>$paymentDetails['id'],
-            'ids_payment_method_id'=>$getMethod->id,
-            'amount'=>$paymentDetails['amount'],
-            'transaction_type'=>'Received'
-        );
-        return $this->idsTransactionRepository->store($transactionArr);
-    }
-    public function getByPaymentIntent($paymentIntent){
-        return $this->model->where('payment_intent',$paymentIntent)->first();
-    }
     /**
-     * Stripe api for initiate Refund
-     * @param payment intent,amount
+     * Stripe api for retrieve Charge
+     * @param paymentIntentId
      */
-    // public function initiateRefund($paymentId,$amount)
-    // {
-    //     try{
-    //         $stripe = new \Stripe\StripeClient($this->stripe_secret_key);
-    //         $result =$stripe->refunds->create([
-    //         'payment_intent' => $paymentId,
-    //         'amount'=>$amount*100
-    //         ]);
-    //         $this->paymentLog($result,"Initiate Refund:");
-    //         return array('success'=>true,'result'=>$result,'message'=>'Success');
-    //     }catch (\Exception $e) {
-    //         return array('success'=>false,'result'=>[],'message'=>$e->getMessage());
-    //     }
-
-    // }
-    /**
-     * Stripe api for retrieve Refund
-     * @param payment intent
-    */
-    // public function retrieveRefund($paymentIntent)
-    // {
-    //     $stripe = new \Stripe\StripeClient($this->stripe_secret_key);
-    //     $result=$stripe->refunds->all(['payment_intent' => $paymentIntent]);
-    //     $this->paymentLog($result,"Retrieve Refund Details:");
-    //     return $result;
-    // }
+    public function retrieveCharge($paymentIntentId)
+    {
+        try {
+            $stripe = new \Stripe\StripeClient($this->stripe_secret_key);
+            $result = $stripe->charges->all([
+                'payment_intent' => $paymentIntentId,
+              ]);
+            $this->paymentLog($result, "Retrieve Charge Details:");
+            return $result;
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            $this->paymentLog($e->getError(), "Retrieve Charge-error:");
+            return array('success' => false, 'result' => [], 'message' => $e->getMessage());
+        }
+    }
+    
 }

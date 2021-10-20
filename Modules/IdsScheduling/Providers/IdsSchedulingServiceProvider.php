@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\Factory;
 class IdsSchedulingServiceProvider extends ServiceProvider
 {
     /**
-     * @var string $moduleName
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
      */
-    protected $moduleName = 'IdsScheduling';
-
-    /**
-     * @var string $moduleNameLower
-     */
-    protected $moduleNameLower = 'idsscheduling';
+    protected $defer = false;
 
     /**
      * Boot the application events.
@@ -27,7 +24,8 @@ class IdsSchedulingServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->registerFactories();
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
@@ -37,7 +35,7 @@ class IdsSchedulingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(RouteServiceProvider::class);
+        //
     }
 
     /**
@@ -48,10 +46,10 @@ class IdsSchedulingServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
+            __DIR__.'/../Config/config.php' => config_path('idsscheduling.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            __DIR__.'/../Config/config.php', 'idsscheduling'
         );
     }
 
@@ -62,15 +60,17 @@ class IdsSchedulingServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+        $viewPath = resource_path('views/modules/idsscheduling');
 
-        $sourcePath = module_path($this->moduleName, 'Resources/views');
+        $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
             $sourcePath => $viewPath
-        ], ['views', $this->moduleNameLower . '-module-views']);
+        ],'views');
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+        $this->loadViewsFrom(array_merge(array_map(function ($path) {
+            return $path . '/modules/idsscheduling';
+        }, \Config::get('view.paths')), [$sourcePath]), 'idsscheduling');
     }
 
     /**
@@ -80,12 +80,24 @@ class IdsSchedulingServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
+        $langPath = resource_path('lang/modules/idsscheduling');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
+            $this->loadTranslationsFrom($langPath, 'idsscheduling');
         } else {
-            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
+            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'idsscheduling');
+        }
+    }
+
+    /**
+     * Register an additional directory of factories.
+     * 
+     * @return void
+     */
+    public function registerFactories()
+    {
+        if (! app()->environment('production')) {
+            app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
     }
 
@@ -97,16 +109,5 @@ class IdsSchedulingServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
-                $paths[] = $path . '/modules/' . $this->moduleNameLower;
-            }
-        }
-        return $paths;
     }
 }

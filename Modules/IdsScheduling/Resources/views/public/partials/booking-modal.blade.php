@@ -124,6 +124,7 @@
                      <div class="form-group row" id="payment-confirmation-message">
                         <p class="col-sm-12 text-danger align-middle" style="font-size: 15.5px;">
                             You will be redirected to a secure payment gateway. Please complete the payment within 10 minutes.
+                        <span id="photoFeeLabel"></span>
                         </p>
                      </div>
                      <div class="form-group row col-sm-12 text-danger align-middle" style="font-size: 15.5px;" id="offline-payment-message">

@@ -83,10 +83,12 @@ class IdsEntries extends Model
     {
         return $this->hasMany('Modules\IdsScheduling\Models\IdsEntryAmountSplitUp', 'entry_id');
     }
-    public function idsPassportPhotoService(){
+    public function idsPassportPhotoService()
+    {
         return $this->belongsTo('Modules\Admin\Models\IdsPassportPhotoService', 'passport_photo_service_id')->withTrashed();
     }
-    public function idsPassportPhotoServiceWithTrashed(){
+    public function idsPassportPhotoServiceWithTrashed()
+    {
         return $this->belongsTo('Modules\Admin\Models\IdsPassportPhotoService', 'passport_photo_service_id')->withTrashed();
     }
     public function idsOnlinePayments()
@@ -95,7 +97,7 @@ class IdsEntries extends Model
     }
     public function idsOnlinePayment()
     {
-        return $this->hasOne('Modules\IdsScheduling\Models\IdsOnlinePayment', 'entry_id')->where('status',1);
+        return $this->hasOne('Modules\IdsScheduling\Models\IdsOnlinePayment', 'entry_id')->where('status', 1);
     }
     public function idsTransactionHistory()
     {
@@ -108,5 +110,9 @@ class IdsEntries extends Model
     public function refundCompletedBy()
     {
         return $this->belongsTo('Modules\Admin\Models\User', 'refund_completed_by')->withTrashed();
+    }
+    public function idsOnlineRefund()
+    {
+        return $this->hasOne('Modules\IdsScheduling\Models\IdsOnlineRefund', 'entry_id')->orderBy('id','DESC');
     }
 }
