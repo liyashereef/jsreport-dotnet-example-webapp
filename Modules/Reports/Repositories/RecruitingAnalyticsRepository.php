@@ -92,7 +92,7 @@ class RecruitingAnalyticsRepository
                 $each_row['candiate_phone'] = $each_list->candidate->phone_cellular;
                 $each_row['job_intially_applied_to'] = $each_list->job->unique_key;
                 $each_row['client_name'] =  $each_list->job->customer->client_name;
-                $each_row['date_required'] =  \Carbon::parse($each_list->job->required_job_start_date)->format('m/d/Y');
+                $each_row['date_required'] =  Carbon::parse($each_list->job->required_job_start_date)->format('m/d/Y');
                 $each_row['position_open'] =  $each_list->job->no_of_vaccancies;
                 $each_row['position_role'] =  ($each_list->job->positionBeeingHired) ? $each_list->job->positionBeeingHired->position : '';
                 $each_row['job_code_reassignment'] =  ($each_list->job_reassigned_id != 0) ? $each_list->jobReassigned->unique_key : 'none';

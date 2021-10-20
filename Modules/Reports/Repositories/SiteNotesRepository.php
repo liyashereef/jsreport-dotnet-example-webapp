@@ -3,7 +3,7 @@
 namespace Modules\Reports\Repositories;
 
 use DB;
-use Carbon;
+use \Carbon\Carbon;
 use Modules\Supervisorpanel\Models\SiteNote;
 use Modules\Supervisorpanel\Models\SiteNoteTask;
 

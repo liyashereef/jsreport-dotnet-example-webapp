@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'reports', 'namespace' => 'Modules\Reports\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'reports',], function () {
 
     Route::get('/', array('as' => 'reports', 'uses' => 'ReportsController@index'));
     Route::get('dailytransactions', array('as' => 'reports.dailytransactions', 'uses' => 'CovidReportController@getDailyTransactions'));

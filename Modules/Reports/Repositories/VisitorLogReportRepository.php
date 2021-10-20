@@ -3,7 +3,7 @@
 namespace Modules\Reports\Repositories;
 
 use DB;
-use Carbon;
+use \Carbon\Carbon;
 use Modules\Client\Models\VisitorLogDetails;
 use Modules\Admin\Repositories\CustomerEmployeeAllocationRepository;
 use Modules\Admin\Repositories\CustomerRepository;

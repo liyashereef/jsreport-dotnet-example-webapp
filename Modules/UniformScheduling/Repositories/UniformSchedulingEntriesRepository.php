@@ -6,6 +6,8 @@ use Modules\UniformScheduling\Models\UniformSchedulingEntries;
 use Modules\Admin\Repositories\UniformSchedulingOfficesRepository;
 use Modules\Admin\Repositories\UniformSchedulingOfficeTimingsRepository;
 use Modules\Admin\Repositories\UniformSchedulingOfficesBlockRepository;
+use \Carbon\Carbon;
+
 class UniformSchedulingEntriesRepository
 {
     /**
@@ -122,7 +124,7 @@ class UniformSchedulingEntriesRepository
                     //Looping upto end date for setting slot data.
                     while (strtotime($end_date) >= strtotime($incrementDate)) {
                         $result['displayFormat'][$index]['date'] = $incrementDate;
-                        $result['displayFormat'][$index]['is_today'] = \Carbon::parse($incrementDate)->isToday();
+                        $result['displayFormat'][$index]['is_today'] = Carbon::parse($incrementDate)->isToday();
                         $result['displayFormat'][$index]['title'] = date('l F d, Y', strtotime($incrementDate));
                         $result['displayFormat'][$index]['booking'] = true;
                         $result['displayFormat'][$index]['startTime'] = '';
