@@ -38,6 +38,7 @@ use Modules\Management\Http\Requests\CustomerFenceRequest;
 use Modules\Management\Http\Requests\CustomerPreferenceRequest;
 use Modules\Management\Http\Requests\CustomerProfileRequest;
 use Modules\Management\Repositories\CustomerViewRepository;
+use Illuminate\Support\Arr;
 
 class CustomerViewController extends Controller
 {
@@ -159,7 +160,11 @@ class CustomerViewController extends Controller
         $incidentData = CustomerIncidentSubjectAllocation::with(['subject', 'incidentPriority', 'category', 'incidentReport'])
             ->where('customer_id', $id)->get();
 
-        $allocatedIncidentSubjects = array_pluck(
+        /*
+         *  Laravel 8 update
+         *  Change array_pluck to Arr::pluck()
+        */
+        $allocatedIncidentSubjects = Arr::pluck(
             $singleCustomer->subjectAllocation,
             'subject.subject',
             'subject.id'

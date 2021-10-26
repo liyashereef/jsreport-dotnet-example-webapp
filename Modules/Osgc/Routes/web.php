@@ -60,7 +60,7 @@ Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefi
     /*** osgc users - End ------ **/
 
 });
-Route::group(['middleware' => ['web', 'auth', 'permission:view_osgc_registered_users'],'prefix' => 'osgc', 'namespace' => 'Modules\Osgc\Http\Controllers\Osgc'], function()
+Route::group(['middleware' => ['web', 'auth', 'permission:view_osgc_registered_users'],'prefix' => 'osgc', 'namespace' => 'Osgc'], function()
 {
     Route::get('registered-users', array('as' => 'osgc.registered-users', 'uses' => 'OsgcController@index'));
     Route::get('registered-users/list/{course_completion_status?}', array('as' => 'registered-users.list', 'uses' => 'OsgcController@getList'));
@@ -68,7 +68,6 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_osgc_registered_u
 
 Route::prefix('osgc')
     ->name('osgc.')
-    ->namespace('Modules\Osgc\Http\Controllers')
     ->middleware(['web'])
     ->group(function()
     {

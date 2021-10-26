@@ -11,6 +11,7 @@ use Modules\ProjectManagement\Models\PmRatingTolerance;
 use Modules\ProjectManagement\Repositories\TaskOwnerRepository;
 use Modules\Admin\Models\User;
 use Modules\Admin\Repositories\EmployeeRatingLookupRepository;
+use \Carbon\Carbon;
 
 class TaskRepository
 {
@@ -177,7 +178,7 @@ class TaskRepository
         if ($task_started_type != null) {
             $customer_list = CustomerTemplateEmail::where('template_id', $task_started_type->id)->pluck('customer_id')->toArray();
         }
-        $current = date_create(\Carbon::now()->toDateString());
+        $current = date_create(Carbon::now()->toDateString());
         $due_date = date_create($data->due_date);
         $diff = date_diff($due_date, $current);
         $customerObject = $this->customerRepository->getSingleCustomer($data['site_id']);

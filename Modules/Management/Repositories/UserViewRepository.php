@@ -2,7 +2,7 @@
 
 namespace Modules\Management\Repositories;
 
-use Carbon;
+use \Carbon\Carbon;
 use Modules\Admin\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

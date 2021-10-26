@@ -14,7 +14,6 @@
 Route::group([
     'middleware' => ['web', 'auth'],
     'prefix' => 'projectmanagement',
-    'namespace' => 'Modules\ProjectManagement\Http\Controllers'
 ], function () {
 // project-report.rating.list
 

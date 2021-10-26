@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => ['web','auth','permission:user_view'],
-    'prefix' => 'management', 'namespace' => 'Modules\Management\Http\Controllers'], function () {
+    'prefix' => 'management',], function () {
     Route::get('user-list', array('as' => 'management.userList', 'uses' => 'UserViewController@getList'));
     Route::get('user-list/view', array('as' => 'management.userViewList', 'uses' => 'UserViewController@getListView'));
     Route::get(
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['web','auth','permission:user_view'],
 });
 
 Route::group(['middleware' => ['web','auth','permission:customer_view'],
-    'prefix' => 'management', 'namespace' => 'Modules\Management\Http\Controllers'], function () {
+    'prefix' => 'management',], function () {
     Route::get('customer-list', array('as' => 'management.customerList', 'uses' => 'CustomerViewController@getList'));
     Route::get(
         'customer-list/view',

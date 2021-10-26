@@ -3,6 +3,7 @@
 namespace Modules\ProjectManagement\Repositories;
 
 use Modules\ProjectManagement\Models\PmTaskStatus;
+use \Carbon\Carbon;
 
 class TaskStatusRepository
 {
@@ -83,7 +84,7 @@ class TaskStatusRepository
                 $data['task_id']=$task_id;
                 $data['percentage']=$percentage;
                 $data['notes']=$notes;
-                $data['status_date']=\Carbon::now();
+                $data['status_date']=Carbon::now();
                 $data['id']=$id;
         return $this->model->updateOrCreate(array('id' => $data['id']), $data);
     }

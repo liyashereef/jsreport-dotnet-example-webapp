@@ -818,7 +818,7 @@ overflow-x: hidden;
         <div class="col-sm-2 sec-status">
             <b>Status</b><br><br>
             @foreach ($securityDataLookup as $user)
-            @if($user->valid_until < \Carbon::today() )
+            @if($user->valid_until < \Carbon\Carbon::today() )
             <button type="button" class="btn btn-danger userexpiry ">Expired</button><br>
             @else
             <button type="button" class="btn btn-success userexpiry">Active</button><br>
@@ -885,7 +885,7 @@ overflow-x: hidden;
             <b>Status</b><br><br>
             @foreach ($user_certificate as $user)
             @if($user->certificateMaster)
-            @if($user->expires_on < \Carbon::today() )
+            @if($user->expires_on < \Carbon\Carbon::today() )
             <button type="button" class="btn btn-danger userexpiry">Expired</button><br>
             @else
             <button type="button" class="btn btn-success userexpiry ">Active</button><br>

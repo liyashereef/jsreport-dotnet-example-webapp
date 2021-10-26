@@ -9,7 +9,7 @@ use Modules\Osgc\Repositories\OsgcUserRepository;
 use Modules\Osgc\Repositories\OsgcCourseRepository;
 use Modules\Osgc\Http\Requests\OsgcUserRequest;
 use Modules\Osgc\Http\Requests\OsgcChangePasswordRequest;
-use Carbon;
+use \Carbon\Carbon;
 class OsgcUserController extends Controller
 {
     protected $osgcUserrepository;

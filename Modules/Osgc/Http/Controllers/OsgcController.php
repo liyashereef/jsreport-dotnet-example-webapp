@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Osgc\Repositories\OsgcCourseRepository;
 use Modules\Osgc\Repositories\OsgcPaymentRepository;
 use App\Services\HelperService;
+use Illuminate\Support\Str;
 class OsgcController extends Controller
 {
   protected $helperService;
@@ -20,6 +21,8 @@ class OsgcController extends Controller
     /**
      * Display a listing of the resource.
      * @return Response
+     *  Laravel 8 update
+     *  Change str_limit to Str::limit() 
      */
     public function index()
     {
@@ -63,7 +66,7 @@ class OsgcController extends Controller
             $dataStr.='</div></div>';
             $dataStr.='<div class="col-md-7 content-area">';
             $dataStr.='<p class="course-title">'.$row->title.'</p>';
-            $dataStr.='<div id="readMoreDiv'.$row->id.'"><p class="color-light readmore">'.str_limit($row->description, 350, $readmore).'</p></div>';
+            $dataStr.='<div id="readMoreDiv'.$row->id.'"><p class="color-light readmore">'.Str::limit($row->description, 350, $readmore).'</p></div>';
             $dataStr.='</div>';
             $dataStr.='<div class="col-md-2">';
             $dataStr.='<div align="center" class="price-div align-items-center justify-content-center">';
@@ -71,7 +74,7 @@ class OsgcController extends Controller
 
             if(!empty($row->CoursePayment))
             {
-              $dataStr.='<a class="btn viewCourse" href="'.route('osgc.course', ['id' => $row->id]).'">Go to course</a>';
+              $dataStr.='<a class="btn viewCourse" href="'.route('osgc.course', ['course_id' => $row->id]).'">Go to course</a>';
               $flag=1;
               
               

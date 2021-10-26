@@ -3,7 +3,7 @@
 namespace Modules\ProjectManagement\Http\Controllers;
 
 use App\Services\HelperService;
-use Carbon;
+use \Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -91,8 +91,8 @@ class ProjectManagementController extends Controller
         }
         $args['projects'] = $this->projectRepository->getAsArray(array_keys($args['customers']));
         $taskDetails = $this->taskRepository->getByTaskUniqueId($taskId);
-        $args['site_id'] = $taskDetails['site_id'];
-        $args['project_id'] = $taskDetails['project_id'];
+        $args['site_id'] = $taskDetails['site_id'] ?? '';
+        $args['project_id'] = $taskDetails['project_id'] ?? '';
 
         $args['followerConfigurationValue'] = 0;
         $followerConfiguration = $this->taskFollowerConfigurationRepository->getFirstData();

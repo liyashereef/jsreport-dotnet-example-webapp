@@ -122,7 +122,7 @@ class OsgcUserRepository
             $each_row["id"] = $each_record->id;
             $each_row["name"] = $each_record->first_name.' '.$each_record->last_name;
             $each_row["email"] = $each_record->email;
-            $each_row["created_at"] = \Carbon::parse($each_record->created_at)->format('Y-m-d h:i:s');
+            $each_row["created_at"] = Carbon::parse($each_record->created_at)->format('Y-m-d h:i:s');
 
             if($each_record->active ==1)
             {
@@ -161,7 +161,7 @@ class OsgcUserRepository
                     $each_row["course_title"] = $each_payment->osgcCourses->title;
                     $each_row["amount"] = $each_payment->amount;
                     $each_row["payment_intent"] = $each_payment->payment_intent;
-                    $each_row["paid_date"] = \Carbon::parse($each_payment->created_at)->format('M Y');
+                    $each_row["paid_date"] = Carbon::parse($each_payment->created_at)->format('M Y');
                     if($each_payment->status==1)
                     {
                         $each_row["status"] = 'Paid';

@@ -205,7 +205,7 @@
               <ul id="tab-button" class="tabclass">
                     @foreach($result->ActiveCourseHeaders as $key=> $header)
                     <?php $headId=$header->courseUserCompletion->course_header_id ?? 0;?>
-                      <li class="@if($isheaderComplted[$header->id] ==true) {{'header-watched'}}@endif " id="{{$header->id}}"><a href="#tab{{$key}}"   >@if($trimValue !=''){{str_limit($header->name, $trimValue, '..')}}@else {{$header->name}} @endif</a></li>
+                      <li class="@if($isheaderComplted[$header->id] ==true) {{'header-watched'}}@endif " id="{{$header->id}}"><a href="#tab{{$key}}"   >@if($trimValue !=''){{Illuminate\Support\Str::limit($header->name, $trimValue, '..')}}@else {{$header->name}} @endif</a></li>
                     @endforeach
                 </ul>
                @foreach($result->ActiveCourseHeaders as $key1=> $header)
