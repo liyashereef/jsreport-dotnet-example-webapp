@@ -391,7 +391,7 @@
 
         $("#report_start_date").val(findDateByParam(new Date(), 2));
         $("#report_end_date").val(findDateByParam(new Date()));
-        <?php Log::channel('googleApi')->info(['Date' => Carbon::now()->format('Y-m-d'), 'Time' => Carbon::now()->format('H:i:s'), 'Service' => 'maps', 'Page' => 'appointment-geomap'])?>
+        <?php Log::channel('googleApi')->info(['Date' => \Carbon\Carbon::now()->format('Y-m-d'), 'Time' => \Carbon\Carbon::now()->format('H:i:s'), 'Service' => 'maps', 'Page' => 'appointment-geomap'])?>
         GeoMap.init();
         $(".search-input").click(function () {
             $(".filter-details").toggleClass("toggled").css("display", "block");

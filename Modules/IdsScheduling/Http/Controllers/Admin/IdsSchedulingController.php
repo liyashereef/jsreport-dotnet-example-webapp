@@ -27,6 +27,7 @@ use Modules\IdsScheduling\Repositories\IdsPaymentRepository;
 use Modules\IdsScheduling\Repositories\IdsRefundRepository;
 use Modules\IdsScheduling\Jobs\CheckRefundStatusJob;
 use Modules\IdsScheduling\Jobs\CheckRefundStatusJobByPaymentIntent;
+use \Carbon\Carbon;
 
 class IdsSchedulingController extends Controller
 {
@@ -253,7 +254,7 @@ class IdsSchedulingController extends Controller
                 \DB::beginTransaction();
 
                 $idsEntryDetails = $this->idsEntriesRepositories->getById($request->input('id'));
-                $editUpTo = \Carbon::now()->subDays(7)->format('Y-m-d');
+                $editUpTo = Carbon::now()->subDays(7)->format('Y-m-d');
 
                 if ($idsEntryDetails && $idsEntryDetails->slot_booked_date >= $editUpTo) {
 
@@ -262,10 +263,10 @@ class IdsSchedulingController extends Controller
                     if ($request->has(['refund_status'])) {
                         $inputs['refund_status'] = $request->input('refund_status');
                         $inputs['refund_initiated_by'] = \Auth::id();
-                        $inputs['refund_initiated_date'] = \Carbon::now()->format('Y-m-d H:i:s');
+                        $inputs['refund_initiated_date'] = Carbon::now()->format('Y-m-d H:i:s');
                     }
                     $inputs['deleted_by'] = \Auth::user()->id;
-                    $inputs['deleted_at'] = \Carbon::now()->format('Y-m-d H:i:s');
+                    $inputs['deleted_at'] = Carbon::now()->format('Y-m-d H:i:s');
 
                     // $idsEntryDetails=$this->idsEntriesRepositories->getById($request->input('id'));
                     // $slotDetails = $this->idsOfficeSlotsRepositories->getById($idsEntryDetails->ids_office_slot_id);
@@ -315,8 +316,8 @@ class IdsSchedulingController extends Controller
                                 '{serviceName}' => $idsEntryDetails->idsServicesWithTrashed->name,
                                 '{bookingDate}' => date('l F d, Y', strtotime($idsEntryDetails->slot_booked_date)),
                                 '{bookingTime}' => date("h:i A", strtotime($idsEntryDetails->IdsOfficeSlots->start_time)),
-                                '{cancelingDate}' => \Carbon::now()->format('Y-m-d'),
-                                '{cancelingTime}' => \Carbon::now()->format('H : i A'),
+                                '{cancelingDate}' => Carbon::now()->format('Y-m-d'),
+                                '{cancelingTime}' => Carbon::now()->format('H : i A'),
                                 '{officePhoneNumber}' => $phoneNumber,
                                 '{receiverFullName}' => $idsEntryDetails->first_name . ' ' . $idsEntryDetails->last_name,
                                 '{refundFee}' => $inputs['balance_fee'],
@@ -388,7 +389,7 @@ class IdsSchedulingController extends Controller
             $inputs = $request->all();
             $rescheduleUpdate = [];
             $booking = $this->idsEntriesRepositories->getById($inputs['id']);
-            $editUpTo = \Carbon::now()->subDays(7)->format('Y-m-d');
+            $editUpTo = Carbon::now()->subDays(7)->format('Y-m-d');
 
             if ($booking && $booking->slot_booked_date >= $editUpTo) {
                 $service = $this->idsServicesRepository->getById($inputs['ids_service_id']);
@@ -509,7 +510,7 @@ class IdsSchedulingController extends Controller
                         $rescheduleUpdate['rescheduled_at'] = date('Y-m-d');
                         $rescheduleUpdate['rescheduled_by'] = \Auth::id();
                         $rescheduleUpdate['deleted_by'] = \Auth::id();
-                        $rescheduleUpdate['deleted_at'] = \Carbon::now();
+                        $rescheduleUpdate['deleted_at'] = Carbon::now();
                         $rescheduleUpdate['ids_payment_method_id'] = $booking->ids_payment_method_id;
                         $rescheduleUpdate['payment_reason'] = $booking->payment_reason;
                         $rescheduleUpdate['is_payment_received'] = $booking->is_payment_received;
@@ -551,8 +552,8 @@ class IdsSchedulingController extends Controller
                             'service_id' => $request->input('ids_service_id'),
                             'rate' => $given_rate,
                             'tax_percentage' => null,
-                            'created_at' => \Carbon::now(),
-                            'updated_at' => \Carbon::now()
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
                         ];
                     }
                     //Rescheduled or service change, delete splitup amount entry.
@@ -572,8 +573,8 @@ class IdsSchedulingController extends Controller
                                 'service_id' => $request->input('passport_photo_service_id'),
                                 'rate' => $photoService->rate,
                                 'tax_percentage' => null,
-                                'created_at' => \Carbon::now(),
-                                'updated_at' => \Carbon::now()
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
                             ];
                         }
                     }
@@ -600,8 +601,8 @@ class IdsSchedulingController extends Controller
                                 'service_id' => null,
                                 'rate' => $taxAmount,
                                 'tax_percentage' => $lastTaxEntry->tax_percentage,
-                                'created_at' => \Carbon::now(),
-                                'updated_at' => \Carbon::now()
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
                             ];
                         }
                     } elseif (
@@ -610,8 +611,8 @@ class IdsSchedulingController extends Controller
                         !empty($service->taxMaster->taxMasterLog)
                     ) {
 
-                        $today = \Carbon::parse($request->input('slot_booked_date'))->format('Y-m-d');
-                        $effectiveFrom = \Carbon::parse($service->taxMaster->taxMasterLog->effective_from_date)->format('Y-m-d');
+                        $today = Carbon::parse($request->input('slot_booked_date'))->format('Y-m-d');
+                        $effectiveFrom = Carbon::parse($service->taxMaster->taxMasterLog->effective_from_date)->format('Y-m-d');
                         if ($today >= $effectiveFrom) {
                             if ($given_rate > 0) {
                                 $taxAmount = ($service->taxMaster->taxMasterLog->tax_percentage / 100) * $given_rate;
@@ -623,8 +624,8 @@ class IdsSchedulingController extends Controller
                                     'service_id' => null,
                                     'rate' => $taxAmount,
                                     'tax_percentage' => $service->taxMaster->taxMasterLog->tax_percentage,
-                                    'created_at' => \Carbon::now(),
-                                    'updated_at' => \Carbon::now()
+                                    'created_at' => Carbon::now(),
+                                    'updated_at' => Carbon::now()
                                 ];
                             }
                         }
@@ -661,7 +662,7 @@ class IdsSchedulingController extends Controller
                             if ($request->input('is_client_show_up') == 1 &&  $request->filled(['refund_status'])) {
                                 $updates['refund_status'] = $request->input('refund_status');
                                 $updates['refund_initiated_by'] = \Auth::id();
-                                $updates['refund_initiated_date'] = \Carbon::now()->format('Y-m-d H:i:s');
+                                $updates['refund_initiated_date'] = Carbon::now()->format('Y-m-d H:i:s');
                             }
                         }
                         if ($updates) {
@@ -899,8 +900,8 @@ class IdsSchedulingController extends Controller
     public function getCalendarData(Request $request)
     {
         $inputs = $request->all();
-        $inputs['startDate'] = \Carbon::parse($request->input('date'))->subMonths(1);
-        $inputs['endDate'] = \Carbon::parse($request->input('date'))->addMonth()->endOfMonth();
+        $inputs['startDate'] = Carbon::parse($request->input('date'))->subMonths(1);
+        $inputs['endDate'] = Carbon::parse($request->input('date'))->addMonth()->endOfMonth();
         // $inputs['startDate'] = date('Y-m-d');
         // $inputs['endDate'] = date('Y-m-d');
         $data = $this->idsEntriesRepositories->getCalendarData($inputs);
@@ -1001,7 +1002,7 @@ class IdsSchedulingController extends Controller
             '{serviceRate}' => '$' . $entryDetails['given_rate'],
             '{refundRate}' => '$' . $transaction->amount,
             '{bookingDate}' => date('l F d, Y', strtotime($entryDetails['slot_booked_date'])),
-            '{refundDate}' => \Carbon\Carbon::now()->format('l F d, Y'),
+            '{refundDate}' => Carbon::now()->format('l F d, Y'),
             '{bookingTime}' => date("h:i A", strtotime($entryDetails->IdsOfficeSlots->start_time)),
             '{location}' => $entryDetails->IdsOffice->name . ', ' . $entryDetails->IdsOffice->adress,
             '{officePhoneNumber}' => $phoneNumber,
@@ -1065,7 +1066,7 @@ class IdsSchedulingController extends Controller
                 unset($inputs['refund_note']);
                 unset($inputs['refund_amount']);
                 $inputs['refund_completed_by'] = \Auth::user()->id;
-                $inputs['refund_completed_date'] = \Carbon\Carbon::now();
+                $inputs['refund_completed_date'] = Carbon::now();
                 $refundNote = $request->input('refund_note');
                 if ($request->input('refund_status') == 2) {
                     $refundArr = array(
@@ -1074,7 +1075,7 @@ class IdsSchedulingController extends Controller
                         'user_id' => \Auth::id(),
                         'entry_id' => $request->input('entry_id'),
                         'refund_status' => 1,
-                        'refund_start_time' => \Carbon\Carbon::now()
+                        'refund_start_time' => Carbon::now()
                     );
                     $saveRefundDetails = $this->idsRefundRepository->store($refundArr);
                     $refundId = $saveRefundDetails->id;
@@ -1135,7 +1136,7 @@ class IdsSchedulingController extends Controller
                             $return = ['success' => true, 'message' => 'Please wait while your refund is being processed'];
                         }else{
                             $status = 6;
-                            $refundUpdatedArr = array('refund_end_time' => \Carbon\Carbon::now(), 'refund_status' => 3);
+                            $refundUpdatedArr = array('refund_end_time' => Carbon::now(), 'refund_status' => 3);
                             $this->idsRefundRepository->update($refundId, $refundUpdatedArr);
                             $refundNote = $refundDetails['message'] ?? '';
                             $return = $refundDetails;
@@ -1212,7 +1213,7 @@ class IdsSchedulingController extends Controller
                 unset($inputs['refund_note']);
                 unset($inputs['refund_amount']);
                 $inputs['refund_completed_by'] = \Auth::user()->id;
-                $inputs['refund_completed_date'] = \Carbon\Carbon::now();
+                $inputs['refund_completed_date'] = Carbon::now();
                 $refundNote = $request->input('refund_note');
                 if ($request->input('refund_status') == 2) {
                     $refundArr = array(
@@ -1221,7 +1222,7 @@ class IdsSchedulingController extends Controller
                         'user_id' => \Auth::id(),
                         'entry_id' => $request->input('entry_id'),
                         'refund_status' => 1,
-                        'refund_start_time' => \Carbon\Carbon::now()
+                        'refund_start_time' => Carbon::now()
                     );
                     $saveRefundDetails = $this->idsRefundRepository->store($refundArr);
                     $refundId = $saveRefundDetails->id;
@@ -1281,7 +1282,7 @@ class IdsSchedulingController extends Controller
                         }
                     } else {
                         $status = 6;
-                        $refundUpdatedArr = array('refund_end_time' => \Carbon\Carbon::now(), 'refund_status' => 3);
+                        $refundUpdatedArr = array('refund_end_time' => Carbon::now(), 'refund_status' => 3);
                         $return = $refundDetails;
                         $refundNote = $refundDetails['message'] ?? '';
                     }
@@ -1356,7 +1357,7 @@ class IdsSchedulingController extends Controller
                 {
                     $endTime=$retrieveRefunds->created;
                 }else{
-                    $endTime= \Carbon\Carbon::now();
+                    $endTime= Carbon::now();
                 }
                 $historyStatus = 6;
                 $updatedArr = array(
@@ -1506,8 +1507,8 @@ class IdsSchedulingController extends Controller
                 'service_id' => null,
                 'rate' => $taxAmount,
                 'tax_percentage' => 13.00,
-                'created_at' => \Carbon::now(),
-                'updated_at' => \Carbon::now()
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ];
 
 
@@ -1517,10 +1518,10 @@ class IdsSchedulingController extends Controller
             $idsEntryAmountSplitUp->service_id = null;
             $idsEntryAmountSplitUp->rate = $taxAmount;
             $idsEntryAmountSplitUp->tax_percentage = 13.00;
-            $idsEntryAmountSplitUp->created_at = \Carbon::now();
-            $idsEntryAmountSplitUp->updated_at = \Carbon::now();
+            $idsEntryAmountSplitUp->created_at = Carbon::now();
+            $idsEntryAmountSplitUp->updated_at = Carbon::now();
             if (isset($entry->deleted_at)) {
-                $idsEntryAmountSplitUp->deleted_at = \Carbon::now();
+                $idsEntryAmountSplitUp->deleted_at = Carbon::now();
             }
             $idsEntryAmountSplitUp->save();
             // IdsEntryAmountSplitUp::create($splitUp);
