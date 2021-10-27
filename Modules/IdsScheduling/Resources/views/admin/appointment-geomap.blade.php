@@ -390,7 +390,7 @@
         });
 
         $("#report_start_date").val(findDateByParam(new Date(), 2));
-        $("#report_end_date").val(findDateByParam(new Date()));
+        $("#report_end_date").val(findDateByParam(new Date())); 
         <?php Log::channel('googleApi')->info(['Date' => \Carbon\Carbon::now()->format('Y-m-d'), 'Time' => \Carbon\Carbon::now()->format('H:i:s'), 'Service' => 'maps', 'Page' => 'appointment-geomap'])?>
         GeoMap.init();
         $(".search-input").click(function () {

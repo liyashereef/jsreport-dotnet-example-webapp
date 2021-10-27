@@ -28,7 +28,7 @@ Route::group(['prefix' => 'ids', 'namespace' => 'Modules\IdsScheduling\Http\Cont
     Route::post('/paynow',array('as' => 'ids.paynow', 'uses' => 'IdsPaymentController@index'));
     Route::get('/paymentSuccess',array('as' => 'ids.paymentSuccess', 'uses' => 'IdsPaymentController@bookingPaymentSuccess'));
 });
-
+ 
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'idsscheduling-admin', 'namespace' => 'Admin'], function(){
 
     Route::middleware(['permission:ids_view_all_schedule|ids_view_allocated_locaion_schedule'])->group(function () {

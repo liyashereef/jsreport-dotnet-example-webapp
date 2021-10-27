@@ -19,7 +19,7 @@ use Modules\IdsScheduling\Models\IdsEntries;
 use Modules\IdsScheduling\Models\IdsPaymentMethods;
 use Modules\IdsScheduling\Repositories\IdsCustomQuestionRepository;
 use Modules\IdsScheduling\Repositories\IdsEntriesRepositories;
-
+ 
 class ReportController extends Controller
 {
 

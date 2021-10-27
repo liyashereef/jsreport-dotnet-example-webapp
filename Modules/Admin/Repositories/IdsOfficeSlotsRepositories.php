@@ -6,7 +6,7 @@ use Modules\Admin\Models\IdsOfficeSlots;
 use Modules\Admin\Repositories\IdsOfficeSlotsBlocksRepositories;
 use Modules\Admin\Repositories\IdsOfficeTimingsRepository;
 use Modules\IdsScheduling\Repositories\IdsEntriesRepositories;
-use \Carbon\Carbon;
+use \Carbon\Carbon; 
 
 class IdsOfficeSlotsRepositories
 {
