@@ -16,7 +16,6 @@ Route::group(
     [
         'middleware' => ['web', 'auth'],
         'prefix' => 'ip-camera',
-        'namespace' => 'Modules\IpCamera\Http\Controllers'
     ],
     function () {
         Route::get('/', array('as' => 'ip_camera.widget_view', 'uses' => 'IpCameraController@index'));
@@ -31,7 +30,7 @@ Route::group(
     [
         'middleware' => ['web', 'auth'],
         'prefix' => 'admin/ip-camera',
-        'namespace' => 'Modules\IpCamera\Http\Controllers\Admin'
+        'namespace' => 'Admin'
     ],
     function () {
         Route::get('view/{id?}', array('as' => 'ip_camera.view', 'uses' => 'IpCameraMasterController@index'));

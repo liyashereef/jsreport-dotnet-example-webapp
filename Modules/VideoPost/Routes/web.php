@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'videopost', 'namespace' => 'Modules\VideoPost\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'videopost'], function()
 {
     Route::group(['middleware' => ['permission:view_video_post_summary']], function () {
         Route::get('videopost/summary', array('as' => 'videopost.summary', 'uses' => 'VideoPostController@showVideoPost'));

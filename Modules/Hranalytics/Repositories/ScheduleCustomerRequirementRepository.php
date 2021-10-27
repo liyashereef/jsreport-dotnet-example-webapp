@@ -400,7 +400,7 @@ class ScheduleCustomerRequirementRepository
         $expiry_date = null;
         if ($request->get('expiry_date')) {
             if ($request->get('expiry_time')) {
-                $expiry_date = \Carbon::parse($request->get('expiry_date') . " " . $request->get('expiry_time'));
+                $expiry_date = Carbon::parse($request->get('expiry_date') . " " . $request->get('expiry_time'));
             } else {
                 $expiry_date = $request->get('expiry_date');
             }

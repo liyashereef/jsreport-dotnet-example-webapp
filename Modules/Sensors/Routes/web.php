@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth', 'permission:sensors_admin'], 'prefix' => 'admin', 'namespace' => 'Modules\Sensors\Http\Controllers\Admin'], function () {
+Route::group(['middleware' => ['web', 'auth', 'permission:sensors_admin'], 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('sensors/view/{id?}', array('as' => 'sensors.view', 'uses' => 'SensorController@index'));
     Route::get('sensors/list/{id?}', array('as' => 'sensors.list', 'uses' => 'SensorController@getList'));
     Route::post('sensors/store', array('as' => 'sensors.store', 'uses' => 'SensorController@store'));
@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:sensors_admin']], func
     /* Motion Sensor - Start */
     Route::prefix('admin/sensors')
         ->name('motionSensor.')
-        ->namespace('Modules\Sensors\Http\Controllers\Admin')
+        ->namespace('Admin')
         ->group(function () {
             Route::get(
                 'settings',
@@ -77,7 +77,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:sensors_admin']], func
 });
 
 
-Route::group(['middleware' => ['web', 'auth','permission:view_sensors'], 'prefix' => 'sensors', 'namespace' => 'Modules\Sensors\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'auth','permission:view_sensors'], 'prefix' => 'sensors'], function()
 {
     Route::get('sensors/triggers', array('as' => 'sesors.triggers', 'uses' => 'SensorTriggerController@index'));
     Route::get('sensors/triggers/list', array('as' => 'sensors.triggers.list', 'uses' => 'SensorTriggerController@getList'));

@@ -14,6 +14,7 @@ use Modules\Osgc\Repositories\OsgcTestUserAttemptedQuestionRepository;
 use Modules\Osgc\Repositories\OsgcUserCourseCompletionRepository;
 use Modules\Osgc\Repositories\OsgcUserRepository;
 use Modules\Osgc\Models\UserCourseCompletion;
+use \Carbon\Carbon;
 class OsgcCourseController extends Controller
 {
     protected $osgcCourseRepository;
@@ -103,7 +104,7 @@ class OsgcCourseController extends Controller
             $sectionId=$sectionDet->id;
             $path="osgc/video/".$content;
             $url=\Storage::disk('awsS3Bucket')->temporaryUrl(
-                $path, \Carbon::now()->addMinutes(30)
+                $path, Carbon::now()->addMinutes(30)
             );
             return view('osgc::course.course-content',compact('sectionDet','content','url','sectionId'));   
        }
@@ -235,7 +236,7 @@ class OsgcCourseController extends Controller
         $data['total_exam_score'] = $this->osgcTestUserAttemptedQuestionRepository->getRightAnswerCount($test_user_result_id);
         $data['score_percentage'] = ($data['total_exam_score'] / $result->total_questions)*100;
         $data['status']= 1;
-        $data['submitted_at']= \Carbon::now();
+        $data['submitted_at']= Carbon::now();
 
         if($data['score_percentage'] >= $result->course_pass_percentage){
             $data['is_exam_pass']= 1;
