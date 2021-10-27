@@ -75,7 +75,7 @@
                 <div class="col-sm-6">
                     <div id="ots_file_div">
                         <input type="hidden" name="test_score_path" value="{{ $candidate->guardingexperience->test_score_path}}">
-                        <a class="nav-link score-document" target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($candidate->guardingexperience->test_score_path,Carbon::now()->addMinutes(30)) }}">
+                        <a class="nav-link score-document" target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($candidate->guardingexperience->test_score_path,\Carbon\Carbon::now()->addMinutes(30)) }}">
                             Click here to download the file
                         </a>
                     </div>

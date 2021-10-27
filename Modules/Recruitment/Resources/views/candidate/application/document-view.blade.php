@@ -21,7 +21,7 @@
     <ul class="list-unstyled" id="attachments">
         @foreach($document as $each_document)
         @if($each_document['submitted_file']!="")
-        <li class="col-form-label"><a target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($each_document['submitted_file'],Carbon::now()->addMinutes(60)) }}"><b>{{  $each_document['document_name'] }}</b></a></li>
+        <li class="col-form-label"><a target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($each_document['submitted_file'],\Carbon\Carbon::now()->addMinutes(60)) }}"><b>{{  $each_document['document_name'] }}</b></a></li>
         @endif
         @endforeach
     </ul>

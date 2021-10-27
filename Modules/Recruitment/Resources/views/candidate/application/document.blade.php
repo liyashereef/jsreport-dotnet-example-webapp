@@ -10,7 +10,7 @@
                   <div class="form-group row attachment_div success" id="attachment_file_name.{{$each_document['id']}}" >
                      <div class="form-group row col-sm-12">
                         <div id="attachment_name_div_{{$each_document['id'] }}" class="col-sm-4">
-                           <a class="nav-link" target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($each_document['submitted_file'],Carbon::now()->addMinutes(60)) }}" />Click here to download the file
+                           <a class="nav-link" target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($each_document['submitted_file'],\Carbon\Carbon::now()->addMinutes(60)) }}" />Click here to download the file
                            </a>
                            <input type="hidden" id="uploaded_files_count" value="{{count($attachement_ids)}}">
                         </div>
