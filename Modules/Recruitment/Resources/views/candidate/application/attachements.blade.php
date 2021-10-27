@@ -20,7 +20,7 @@
     
     <ul class="list-unstyled" id="attachments">
         @foreach($candidateJob->candidate->attachements as $eachAttachment)
-        <li class="col-form-label"><a target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($eachAttachment->attachment_file_name,Carbon::now()->addMinutes(60)) }}"><b>{!!is_object($eachAttachment->attachment) ? $eachAttachment->attachment->attachment_name : $eachAttachment->attachment_file_name !!} </b></a></li>
+        <li class="col-form-label"><a target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($eachAttachment->attachment_file_name,\Carbon\Carbon::now()->addMinutes(60)) }}"><b>{!!is_object($eachAttachment->attachment) ? $eachAttachment->attachment->attachment_name : $eachAttachment->attachment_file_name !!} </b></a></li>
 
 
         @endforeach

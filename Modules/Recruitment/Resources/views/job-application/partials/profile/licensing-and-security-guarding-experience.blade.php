@@ -202,7 +202,7 @@
                 <div class="col-sm-6">
                     <div id="force_div">
                     <input type="hidden" name="uof_path" value="{{ $candidate->force->s3_location_path}}" id="attachment-file-aws">
-                    <a class="nav-link score-document" target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($candidate->force->s3_location_path,Carbon::now()->addMinutes(30)) }}">
+                    <a class="nav-link score-document" target="_blank" href="{{Storage::disk('s3-recruitment')->temporaryUrl($candidate->force->s3_location_path,\Carbon\Carbon::now()->addMinutes(30)) }}">
                         Click here to download the file
                     </a>
                     </div>
