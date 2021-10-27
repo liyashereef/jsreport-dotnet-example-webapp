@@ -14,7 +14,7 @@
 Route::get('IDS', function () {
     return redirect()->route('idsscheduling');
 });
-Route::group(['prefix' => 'ids', 'namespace' => 'Modules\IdsScheduling\Http\Controllers'], function(){
+Route::group(['prefix' => 'ids'], function(){
     Route::get('/',array('as' => 'idsscheduling', 'uses' => 'IdsSlotBookingController@index'));
     Route::post('/office/slot/booking',array('as' => 'ids-office.slot-booking', 'uses' => 'IdsSlotBookingController@slotBooking'));
     Route::post('/booking/fee-calculation',array('as' => 'ids-office.slot-booking.fee-calculation', 'uses' => 'IdsSlotBookingController@feeCalculation'));
