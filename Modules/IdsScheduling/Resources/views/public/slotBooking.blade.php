@@ -469,9 +469,9 @@
 
             $.ajax({
                 url: "{{route('ids-office.slot-booking.fee-calculation')}}",
-                 headers: {
-                    'X-CSRF-TOKEN':'{{ csrf_token() }}',
-               },
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                 data: {
                     "ids_service_id":service_id,
                     "passport_photo_service_id":passportPhotoServiceId,
