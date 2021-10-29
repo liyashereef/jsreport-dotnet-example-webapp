@@ -677,7 +677,7 @@ class IncidentReportRepository
             $incident_list = $incident_list->whereIn(\DB::raw("(select `incident_status_list_id` from incident_status_logs where `incident_report_id`=incident_reports.`id` order by created_at desc limit 0,1)"), $statusArray);
         } else {
             $incident_list = $incident_list->whereHas("latestStatus", function ($q) use ($statusList) {
-                $q->whereIn('incident_status_list_id', [$statusList]);
+                $q->whereIn('incident_status_list_id', $statusList);
             });
         }
         return $incident_list->get();
