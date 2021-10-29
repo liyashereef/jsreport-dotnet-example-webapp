@@ -3,7 +3,6 @@
 namespace Modules\Hranalytics\Http\Requests;
 
 use Auth;
-use Illuminate\Support\Facades\Input;
 use Modules\Hranalytics\Models\Job;
 use Session;
 
@@ -17,7 +16,7 @@ class AttachmentRequest extends Request
      */
     public function rules()
     {
-        $value = Input::get('attachment_id');
+        $value = request('attachment_id');
         $session_obj = Session::get('CANINFO');
         $rule = [];
         $rules = [];

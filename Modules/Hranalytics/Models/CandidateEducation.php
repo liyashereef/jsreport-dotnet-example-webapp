@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CandidateEducation extends Model
 {
     public $timestamps = true;
-
+    public $table='candidate_educations';
     protected $fillable = ['candidate_id', 'start_date_education', 'end_date_education', 'grade', 'program', 'school'];
 
     /**

@@ -200,7 +200,7 @@ class JobApplicationController extends Controller
                         'lookups',
                         'otherlanguages',
                         'languages',
-                        'force'
+                        //'force'
                     ));
                 } /* else {
                 $session_obj = null;
