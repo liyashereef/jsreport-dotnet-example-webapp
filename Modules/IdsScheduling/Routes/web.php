@@ -14,7 +14,7 @@
 Route::get('IDS', function () {
     return redirect()->route('idsscheduling');
 });
-Route::group(['prefix' => 'ids', 'namespace' => 'Modules\IdsScheduling\Http\Controllers'], function(){
+Route::group(['prefix' => 'ids'], function(){
     Route::get('/',array('as' => 'idsscheduling', 'uses' => 'IdsSlotBookingController@index'));
     Route::post('/office/slot/booking',array('as' => 'ids-office.slot-booking', 'uses' => 'IdsSlotBookingController@slotBooking'));
     Route::post('/booking/fee-calculation',array('as' => 'ids-office.slot-booking.fee-calculation', 'uses' => 'IdsSlotBookingController@feeCalculation'));
@@ -28,8 +28,8 @@ Route::group(['prefix' => 'ids', 'namespace' => 'Modules\IdsScheduling\Http\Cont
     Route::post('/paynow',array('as' => 'ids.paynow', 'uses' => 'IdsPaymentController@index'));
     Route::get('/paymentSuccess',array('as' => 'ids.paymentSuccess', 'uses' => 'IdsPaymentController@bookingPaymentSuccess'));
 });
-
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'idsscheduling-admin', 'namespace' => 'Modules\IdsScheduling\Http\Controllers\Admin'], function(){
+ 
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'idsscheduling-admin', 'namespace' => 'Admin'], function(){
 
     Route::middleware(['permission:ids_view_all_schedule|ids_view_allocated_locaion_schedule'])->group(function () {
         Route::get('/',array('as' => 'idsscheduling-admin', 'uses' => 'IdsSchedulingController@index'));

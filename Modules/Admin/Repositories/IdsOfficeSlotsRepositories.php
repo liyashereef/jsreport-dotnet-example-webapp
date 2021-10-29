@@ -6,6 +6,8 @@ use Modules\Admin\Models\IdsOfficeSlots;
 use Modules\Admin\Repositories\IdsOfficeSlotsBlocksRepositories;
 use Modules\Admin\Repositories\IdsOfficeTimingsRepository;
 use Modules\IdsScheduling\Repositories\IdsEntriesRepositories;
+use \Carbon\Carbon; 
+
 class IdsOfficeSlotsRepositories
 {
 
@@ -236,7 +238,7 @@ class IdsOfficeSlotsRepositories
                     //Current day slot booking will available after 2 hours of the current time.
                     if ($d == date('Y-m-d')) {
                         $days[$dateKey] = 2; //Blocked
-                        $validTime = \Carbon::parse(date('H:i'))->addMinute(120)->format('H:i:s');
+                        $validTime = Carbon::parse(date('H:i'))->addMinute(120)->format('H:i:s');
                         if ($slot->start_time >= $validTime) {
                             $days[$dateKey] = 0; //Open
                         }
@@ -347,7 +349,7 @@ class IdsOfficeSlotsRepositories
                     $slot[$idsSlotKey]['office_slot_id'] = $idsOfficeSlots->id;
                     $slot[$idsSlotKey]['booking_id'] = null;
                     $slot[$idsSlotKey]['is_candidate'] = 0;
-                    $slot[$idsSlotKey]['title'] = \Carbon::parse($idsOfficeSlots->start_time)->format('h:i A');
+                    $slot[$idsSlotKey]['title'] = Carbon::parse($idsOfficeSlots->start_time)->format('h:i A');
                     $slot[$idsSlotKey]['start_time'] = $idsOfficeSlots->start_time;
                     $slot[$idsSlotKey]['display_name'] = $idsOfficeSlots->display_name;
                     $slot[$idsSlotKey]['status'] = 1;
@@ -363,7 +365,7 @@ class IdsOfficeSlotsRepositories
                             $slot[$idsSlotKey]['status'] = 0;
                         }
                         if($today == 1){
-                            $validTime = \Carbon::parse(date('H:i'))->addMinute(120)->format('H:i:s');
+                            $validTime = Carbon::parse(date('H:i'))->addMinute(120)->format('H:i:s');
                             if ($idsOfficeSlots->start_time <= $validTime) {
                                 $slot[$idsSlotKey]['status'] = 0; //Open
                             }

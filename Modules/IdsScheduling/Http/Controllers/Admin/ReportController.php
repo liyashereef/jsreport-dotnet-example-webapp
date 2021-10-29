@@ -19,7 +19,7 @@ use Modules\IdsScheduling\Models\IdsEntries;
 use Modules\IdsScheduling\Models\IdsPaymentMethods;
 use Modules\IdsScheduling\Repositories\IdsCustomQuestionRepository;
 use Modules\IdsScheduling\Repositories\IdsEntriesRepositories;
-
+ 
 class ReportController extends Controller
 {
 
@@ -228,14 +228,14 @@ class ReportController extends Controller
         // dd($feeForecast,$balanceForecast);
         //Setting data format displaying.
         $result = [];
-        $startFormat = \Carbon::parse($inputs['start_date'])->format('Y-m');
-        $endFormat = \Carbon::parse($inputs['end_date'])->format('Y-m');
+        $startFormat = Carbon::parse($inputs['start_date'])->format('Y-m');
+        $endFormat = Carbon::parse($inputs['end_date'])->format('Y-m');
         $key = 0;
 
         //Setting default value for month which have no booking
         while ($endFormat >= $startFormat) {
             //Set defalut value
-            $result[$key]['title'] = \Carbon::parse($startFormat)->format('M-y');
+            $result[$key]['title'] = Carbon::parse($startFormat)->format('M-y');
             $result[$key]['total_fee'] = 0;
             $serviceFee = floatval($feeForecast->where('month_year', $startFormat)->pluck('service_fee_sum')->first());
             $balanceFee = floatval($balanceForecast->where('month_year', $startFormat)->pluck('service_fee_sum')->first());
@@ -252,7 +252,7 @@ class ReportController extends Controller
             //         $result[$key]['total_fee'] = number_format($d->service_fee_sum);
             //     }
             // }
-            $startFormat = \Carbon::parse($startFormat)->addMonths(1)->format('Y-m');
+            $startFormat = Carbon::parse($startFormat)->addMonths(1)->format('Y-m');
             $key++;
         }
 
@@ -296,14 +296,14 @@ class ReportController extends Controller
                 // $created = \Carbon::parse($bookings->created_at);
                 // $scheduledAt = \Carbon::parse($scheduledAt);
 
-                $scheduledAt = \Carbon::parse(\Carbon::parse($bookings->slot_booked_date)->format('Y-m-d'));
-                $created = \Carbon::parse(\Carbon::parse($bookings->created_at)->format('Y-m-d'));
+                $scheduledAt = Carbon::parse(Carbon::parse($bookings->slot_booked_date)->format('Y-m-d'));
+                $created = Carbon::parse(Carbon::parse($bookings->created_at)->format('Y-m-d'));
 
-                $delta = $created->diffInDays(\Carbon::parse($scheduledAt));
+                $delta = $created->diffInDays(Carbon::parse($scheduledAt));
             }
             $sheduleStartTime = null;
             if (!empty($bookings->IdsOfficeSlots)) {
-                $sheduleStartTime = \Carbon::parse($bookings->IdsOfficeSlots->start_time)->format('H:i:s');
+                $sheduleStartTime = Carbon::parse($bookings->IdsOfficeSlots->start_time)->format('H:i:s');
             }
             $serviceFee = '';
             $photoFee = '';
@@ -337,12 +337,12 @@ class ReportController extends Controller
                 'fullName' => $bookings->first_name . ' ' . $bookings->last_name,
                 'email' => $bookings->email,
                 'phone' => $bookings->phone_number,
-                'transactionAt' => \Carbon::parse($bookings->created_at)->format('Y-m-d H:i:s'),
-                'transactionDate' => \Carbon::parse($bookings->created_at)->format('M d Y'),
-                'transactionTime' => \Carbon::parse($bookings->created_at)->format('H:i:s'),
-                'scheduledAt' => \Carbon::parse($bookings->slot_booked_date)->format('Y-m-d') . ' ' . $sheduleStartTime,
-                'scheduledDate' => \Carbon::parse($bookings->slot_booked_date)->format('M d Y'),
-                'scheduledTime' => (!empty($bookings->IdsOfficeSlots)) ? \Carbon::parse($bookings->IdsOfficeSlots->start_time)->format('H:i') : null,
+                'transactionAt' => Carbon::parse($bookings->created_at)->format('Y-m-d H:i:s'),
+                'transactionDate' => Carbon::parse($bookings->created_at)->format('M d Y'),
+                'transactionTime' => Carbon::parse($bookings->created_at)->format('H:i:s'),
+                'scheduledAt' => Carbon::parse($bookings->slot_booked_date)->format('Y-m-d') . ' ' . $sheduleStartTime,
+                'scheduledDate' => Carbon::parse($bookings->slot_booked_date)->format('M d Y'),
+                'scheduledTime' => (!empty($bookings->IdsOfficeSlots)) ? Carbon::parse($bookings->IdsOfficeSlots->start_time)->format('H:i') : null,
                 'delta' => $delta,
                 'postalCode' => (!empty($bookings->postal_code)) ? $bookings->postal_code : '',
                 'service' => (!empty($bookings->IdsServicesWithTrashed)) ? $bookings->IdsServicesWithTrashed->name : '',
@@ -508,14 +508,14 @@ class ReportController extends Controller
 
         //Setting data format displaying.
         $result = [];
-        $startFormat = \Carbon::parse($inputs['start_date'])->format('Y-m');
-        $endFormat = \Carbon::parse($inputs['end_date'])->format('Y-m');
+        $startFormat = Carbon::parse($inputs['start_date'])->format('Y-m');
+        $endFormat = Carbon::parse($inputs['end_date'])->format('Y-m');
         $key = 0;
 
         //Setting default value for month which have no booking
         while ($endFormat >= $startFormat) {
             //Set defalut value
-            $result[$key]['title'] = \Carbon::parse($startFormat)->format('M-y');
+            $result[$key]['title'] = Carbon::parse($startFormat)->format('M-y');
             $result[$key]['total_fee'] = 0;
             $revenue = floatval(collect($revenueData)->where('month_year', $startFormat)->pluck('service_fee_sum')->first());
             $balance = floatval(collect($balanceFees)->where('month_year', $startFormat)->pluck('service_fee_sum')->first());
@@ -531,7 +531,7 @@ class ReportController extends Controller
             //         $result[$key]['total_fee'] = number_format($d->service_fee_sum);
             //     }
             // }
-            $startFormat = \Carbon::parse($startFormat)->addMonths(1)->format('Y-m');
+            $startFormat = Carbon::parse($startFormat)->addMonths(1)->format('Y-m');
             $key++;
         }
 

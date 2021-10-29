@@ -150,7 +150,7 @@
             @elseif(Route::current()->getPrefix() == "reports")
              @include('layouts.cgl360_navigation_menu_reports_report')
            @else
-             @include('layouts.cgl360_navigation_manu')
+             @include('layouts.cgl360_navigation_menu')
            @endif
         @endif
         <!-- Page Content  -->
