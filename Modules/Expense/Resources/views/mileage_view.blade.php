@@ -139,7 +139,7 @@
     <div class="col-xs-10 col-sm-3 col-md-3">
             <div class="row styled-form-readonly">
                 <label class="col-md-5 col-sm-6 col-form-label  col-xs-4"><b>@if($result->status_id ==2) Rejected On @else Approved On @endif </b></label>
-                <label class="col-md-7 col-sm-6 col-form-label col-xs-4" style="margin-left: -25px;">{{str_limit($result->updated_at , 10,'') ?? ''}}
+                <label class="col-md-7 col-sm-6 col-form-label col-xs-4" style="margin-left: -25px;">{{\Illuminate\Support\Str::limit($result->updated_at , 10,'') ?? ''}}
                 </label>
             </div>
         </div>

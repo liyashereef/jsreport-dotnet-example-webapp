@@ -558,7 +558,7 @@ class TimetrackerRepository
             $employee_to = $users['created_at'];
             $projectid = $users["employee_shift_payperiods"][0]["customer_id"];
             foreach ($users['employee_shift_payperiods'] as $key => $value) {
-                $customer_arr[] = array("project_number" => $value['customer']['project_number'], "client_name" => $value['customer']['client_name']);
+                $customer_arr[] = array("project_number" => $value['customer']['project_number'] ?? '', "client_name" => $value['customer']['client_name'] ?? '');
             }
 
             foreach ($users['trashed_allocated_supervisor'] as $key => $aloc_history) {

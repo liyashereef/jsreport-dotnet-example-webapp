@@ -78,7 +78,7 @@ class MobileSecurityPatrolRepository
             $mobile_security_patrol[$key]['created_at'] = $patrol['created_at']->toFormattedDateString();
             $mobile_security_patrol[$key]['created_time'] = date("g:i A", strtotime($patrol['created_at']));
             $mobile_security_patrol[$key]['reported_by'] = $patrol['user']['full_name'];
-            $mobile_security_patrol[$key]['subject'] = $patrol['subject']['subject'];
+            $mobile_security_patrol[$key]['subject'] = $patrol['subject']['subject'] ?? '';
             $mobile_security_patrol[$key]['description'] = $patrol['description'];
         }
 

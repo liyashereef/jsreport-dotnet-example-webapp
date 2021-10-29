@@ -258,8 +258,8 @@ class TripRepository
             $formatted_mobile_patrols[$key]['first_name'] = $mobile_patrol['shift_payperiod']['trashed_user']['full_name'];
             $formatted_mobile_patrols[$key]['employee_name'] = $mobile_patrol['shift_payperiod']['trashed_user']['full_name'];
             $formatted_mobile_patrols[$key]['pay_period'] = $mobile_patrol['shift_payperiod']['trashed_payperiod']['pay_period_name'];
-            $formatted_mobile_patrols[$key]['project_number'] = $mobile_patrol['shift_payperiod']['customer']['project_number'];
-            $formatted_mobile_patrols[$key]['client_name'] = $mobile_patrol['shift_payperiod']['customer']['client_name'];
+            $formatted_mobile_patrols[$key]['project_number'] = $mobile_patrol['shift_payperiod']['customer']['project_number'] ?? '';
+            $formatted_mobile_patrols[$key]['client_name'] = $mobile_patrol['shift_payperiod']['customer']['client_name'] ?? '';
             $formatted_mobile_patrols[$key]['incident_reported'] = $mobile_patrol['mobile_security_patrol_incident_reported'] == 1 ? "Yes" : "No";
 
             $total_km = 0;

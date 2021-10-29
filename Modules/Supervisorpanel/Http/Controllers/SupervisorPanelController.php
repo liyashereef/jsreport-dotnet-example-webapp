@@ -948,7 +948,7 @@ class SupervisorPanelController extends Controller
             $customers_arr['customer_score'] = $customers_arr_filer;
         }
         /* END * Get Customer Ids from Session and Filter */
-
+        
         $shift_flag = 1;
         if (count($customers_arr['customer_score']) > 0) {
             $customer_score = $customers_arr['customer_score'];
@@ -1471,8 +1471,8 @@ class SupervisorPanelController extends Controller
         $customerId = request('id');
         $customer_details = Customer::with('employeeLatestCustomerSupervisor', 'employeeLatestCustomerAreaManager', 'ratingDetails.user.trashedEmployee')->where('id', $customerId)->get()->toArray();
         $customer['rating_details'] = $customer_details[0]['rating_details'];
-        $customer['areamanager'] = $customer_details[0]['employee_latest_customer_area_manager']['area_manager'];
-        $customer['supervisor'] = $customer_details[0]['employee_latest_customer_supervisor']['supervisor'];
+        $customer['areamanager'] = $customer_details[0]['employee_latest_customer_area_manager']['area_manager'] ?? '';
+        $customer['supervisor'] = $customer_details[0]['employee_latest_customer_supervisor']['supervisor'] ?? '';
         return $customer;
     }
 }
