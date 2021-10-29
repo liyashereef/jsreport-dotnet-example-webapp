@@ -120,7 +120,7 @@
                 </div>
             </div>
         </nav>
-        @include('layouts.cgl360_navigation_manu')
+        @include('layouts.cgl360_navigation_menu')
         <!-- Page Content  -->
         <div id="content">
             @yield('content')
