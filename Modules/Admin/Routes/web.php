@@ -18,7 +18,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     /* Profile updation - End */
 });
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::get('payperiod/getCurrentPayPeriod', array('as' => 'payperiod.getCurrentPayPeriod', 'uses' => 'PayPeriodController@getCurrentPayPeriod'));
 });
 
@@ -1438,7 +1438,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
 });
 
 /* Site Settings - Start */
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::get('sitesettings', array('as' => 'sitesettings', 'uses' => 'SiteSettingsController@index'));
     Route::post('sitesettings/store', array('as' => 'sitesettings.store', 'uses' => 'SiteSettingsController@storeSiteSettings'));
 });
@@ -1447,7 +1447,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin'], function ()
     Route::get('customer/customershifts', array('as' => 'customer.customershifts', 'uses' => 'CustomerController@getCustomershifts'));
 });
 /* Ids Scheduling - Start */
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers\IdsServices'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers\IdsServices'], function () {
     //IDs Service management
     Route::get('idsServices', array('as' => 'idsServices', 'uses' => 'IdsServicesController@index'));
     Route::get('idsServices/getAll', array('as' => 'idsServices.getAll', 'uses' => 'IdsServicesController@getAll'));
@@ -1573,7 +1573,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
     /* Passport Photo - End */
 });
 /* Ids Scheduling - End */
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin/uniform-scheduling/', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin/uniform-scheduling/', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::post('offices/store', array('as' => 'uniform-scheduling.offices.store', 'uses' => 'UniformSchedulingOfficesController@store'));
     Route::get('offices', array('as' => 'uniform-scheduling.offices', 'uses' => 'UniformSchedulingOfficesController@index'));
     Route::get('offices/single/{id}', array('as' => 'uniform-scheduling.office.single', 'uses' => 'UniformSchedulingOfficesController@getById'));
@@ -1653,7 +1653,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin/uniform-schedu
     /* Custom Questions - End */
 });
 /* Threshold Start */
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::name('landing_page.new_configuration_window')->get('landing_page_new_configuration_index', 'LandingPageController@index');
     Route::post('landing_page_widget_layout_details', array('as' => 'landing_page.getWidgetLayoutDetails', 'uses' => 'LandingPageController@getWidgetLayoutDetails'));
     Route::get('landing_page_custom_table_fields_by_module', array('as' => 'landing_page.getCustomTableFieldsByModule', 'uses' => 'LandingPageController@getCustomTableFieldsByModule'));
@@ -1664,7 +1664,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
 });
 /* Threshold End */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::get('recruitment_dashboard_index', array('as' => 'recruitment_dashboard.new_configuration_index', 'uses' => 'RecruitingAnalyticsConfigurationController@index'));
     Route::get('recruitment_dashboard_new', array('as' => 'recruitment_dashboard.new_configuration_new', 'uses' => 'RecruitingAnalyticsConfigurationController@add'));
     Route::post('recruitment_dashboard_widget_layout_details', array('as' => 'recruitment_dashboard.getWidgetLayoutDetails', 'uses' => 'RecruitingAnalyticsConfigurationController@getWidgetLayoutDetails'));
@@ -1692,7 +1692,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
 
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin',
-    'namespace' => 'Modules\Admin\Http\Controllers',
+    'namespace' => '\Modules\Admin\Http\Controllers',
 ], function () {
 
     //KPI master section
@@ -1747,13 +1747,13 @@ Route::group([
     Route::get('kpi/customer-group/single/{id}', array('as' => 'admin.kpi.customer-group.single', 'uses' => 'KpiGroupCustomerAllocationController@getById'));
 });
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::get('stc_threshold_index', array('as' => 'stc_threshold.index', 'uses' => 'StcThresholdSettingsController@index'));
     Route::post('stc_threshold_store', array('as' => 'stc_threshold.store', 'uses' => 'StcThresholdSettingsController@store'));
     Route::get('stc_threshold_details', array('as' => 'stc_threshold.settings', 'uses' => 'StcThresholdSettingsController@getSettings'));
 });
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'Modules\Admin\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => '\Modules\Admin\Http\Controllers'], function () {
     Route::get('summary-dashboard', array('as' => 'admin.summary-dashboard-configuration', 'uses' => 'SummaryDashboardConfigurationController@index'));
     Route::post('summary-dashboard/store', array('as' => 'admin.summary-dashboard-configuration.store', 'uses' => 'SummaryDashboardConfigurationController@store'));
     Route::get('summary-dashboard/list', array('as' => 'admin.summary-dashboard-configuration.list', 'uses' => 'SummaryDashboardConfigurationController@getList'));

@@ -24,7 +24,8 @@
         "spatie/calendar-links": "^1.6",
         "spatie/laravel-permission": "^5.1",
         "stripe/stripe-php": "^7.97",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^1.5",
+        "ckeditor/ckeditor": "4.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
