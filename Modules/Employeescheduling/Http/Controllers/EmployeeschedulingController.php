@@ -233,6 +233,7 @@ class EmployeeschedulingController extends Controller
 
     public function getProcessedblockspares(Request $request)
     {
+        
         $blockcount = $request->session()->get('schedule_block');
         $project = $request->get('projectid');
         $payperiod = $request->get('payperiod');
@@ -261,9 +262,12 @@ class EmployeeschedulingController extends Controller
         //dd($payperioddates);
         $noofdays = count($loopdates);
         $employee = $request->get('employee');
-
-        $contracthours = ($this->contractsrepository->getContractsBetweenTwoDatesByCustomerId($project, $scheduleDate))["total_hours_perweek"];
-
+        try{
+            $contracthours = ($this->contractsrepository->getContractsBetweenTwoDatesByCustomerId($project, $scheduleDate))["total_hours_perweek"];
+        }catch(\Exception $ex)
+        {
+            $contracthours =null;
+        }
         return view('employeescheduling::partials.schedule-block-spares', compact('employee', 'contracthours', 'loopdates', 'payperiod', 'noofdays', 'payperiodarray'));
     }
 
