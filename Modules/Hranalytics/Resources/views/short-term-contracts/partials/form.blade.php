@@ -169,7 +169,7 @@
     <label for="requester_position" class="col-sm-5 col-form-label">Requestor Position</label>
     <div class="col-sm-6">
         @if(isset($customer) && $customer->requesterDetails!=null)
-        {{ Form::text('requester_position', isset($customer->requesterDetails->employee) ? old('requester_position',$customer->requesterDetails->employee->employeePosition->position) : null, array('class'=>'form-control', 'placeholder'=>'Requestor Position','readonly'=>true)) }}
+        {{ Form::text('requester_position', isset($customer->requesterDetails->employee) ? old('requester_position',$customer->requesterDetails->employee->employeePosition->position ?? null) : null, array('class'=>'form-control', 'placeholder'=>'Requestor Position','readonly'=>true)) }}
         @else
        {{ Form::text('requester_position', isset($customer) ? old('requester_position',$customer->requester_position) : null, array('class'=>'form-control', 'placeholder'=>'Requestor Position','readonly'=>true)) }}
         @endif
