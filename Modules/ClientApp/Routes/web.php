@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'web', 'prefix' => 'clientapp', 'namespace' => 'Modules\ClientApp\Http\Controllers'], function()
+Route::group(['middleware' => 'web', 'prefix' => 'clientapp',], function()
 {
     Route::get('/', 'ClientAppController@index');
 });

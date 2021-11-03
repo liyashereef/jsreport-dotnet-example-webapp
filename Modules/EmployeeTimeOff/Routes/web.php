@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'employee', 'namespace' => 'Modules\EmployeeTimeOff\Http\Controllers'], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'employee',], function () {
 
     // Route::group(['middleware' => ['permission:manage-masters','permission:manage-customers','permission:manage-users']], function () {
 

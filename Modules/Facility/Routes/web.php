@@ -13,7 +13,7 @@
 
 Route::prefix('facility')
     ->name('facility.')
-    ->namespace('Modules\Facility\Http\Controllers\FacilityUser')
+    ->namespace('FacilityUser')
     ->middleware(['web'])
     ->group(function()
     {

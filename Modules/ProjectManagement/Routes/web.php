@@ -80,7 +80,7 @@ Route::group([
 Route::group([
     'middleware' => ['web', 'auth', 'permission:view_admin'],
     'prefix' => 'admin',
-    'namespace' => 'Modules\ProjectManagement\Http\Controllers\Admin'
+    'namespace' => 'Admin'
 ], function () {
     //Implement admin section
     Route::name('interval')->get('interval', 'SettingsController@index');

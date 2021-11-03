@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'web', 'prefix' => 'kpi', 'namespace' => 'Modules\KPI\Http\Controllers'], function () {
+Route::group(['middleware' => 'web', 'prefix' => 'kpi',], function () {
     //TODO:testing purpose
     Route::get('execute-daily-job', 'KpiWidgetController@executeJob'); //TODO::remove later
     Route::get('execute-bulk-job', 'KpiWidgetController@executeBulkJob'); //TODO::remove later

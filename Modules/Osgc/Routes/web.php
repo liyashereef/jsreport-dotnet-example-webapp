@@ -11,7 +11,7 @@
 |
 */
 
-Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin', 'namespace' => 'Modules\Osgc\Http\Controllers'], function()
+Route::group([  'middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix' => 'admin'], function()
 {
     /* OSGC Course - start */
     Route::name('osgc-course')->get('osgc-course', 'Admin\OsgcCourseLookupController@index');
