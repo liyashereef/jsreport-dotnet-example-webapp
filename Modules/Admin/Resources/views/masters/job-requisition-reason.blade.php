@@ -118,12 +118,12 @@
                         var actions = '';
                         if(o.id=={{ $terminate_id }} || o.id=={{ $resignate_id }}){
                             @can('edit_masters')
-                            actions += '<a class="fa fa-pencil edit-disable" title="Unable to edit" ></a>'
+                            actions += '<a class="{{Config::get('globals.editFontIcon')}} edit-disable" title="Unable to edit" ></a>'
                             @endcan
                         }
                         else{
                             @can('edit_masters')
-                            actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                            actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                            @endcan
                         }
                         return actions;

@@ -1,5 +1,5 @@
 {{-- resources/views/admin/dashboard.blade.php --}} @extends('adminlte::page')
-@section('title', 'Positions')
+@section('title', 'Smart Phone Types')
 @section('content_header')
 <h1>Smart Phone Types</h1>
 @stop
@@ -119,10 +119,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         return actions;
                     },
