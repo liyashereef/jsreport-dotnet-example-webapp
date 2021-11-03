@@ -662,8 +662,9 @@ class IncidentReportRepository
         }
 
         //filter by status
-        $status = $request->input('status');
-        if (!empty($status)) {
+        
+        if (isset($request) && $request->input('status') != null) {
+            $status = $request->input('status');
             $filterString = "";
             $statusArray = [];
             foreach ($status as $key => $value) {
