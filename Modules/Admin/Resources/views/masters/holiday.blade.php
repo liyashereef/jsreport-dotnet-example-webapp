@@ -307,15 +307,15 @@ $(function () {
                         render: function (o) {
                             if (o.holiday >= "{{date('Y-m-d')}}") {
                                 @can('edit_masters')
-                                actions = '<a href="#" class="edit fa fa-pencil" data-id=' + o.id +'></a>';
+                                actions = '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id +'></a>';
                                 @endcan
                                 @can('lookup-remove-entries')
-                                    actions += '<a href="#" class="delete fa fa-trash-o" data-id=' +o.id + '></a>';
+                                    actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' +o.id + '></a>';
                                 @endcan
                             } else {
-                                actions = '<a href="#" class="fa fa-pencil edit-disable"></a>';
+                                actions = '<a href="#" class="{{Config::get('globals.editFontIcon')}} edit-disable"></a>';
                                 @can('lookup-remove-entries')
-                                    actions += '<a href="#" class="delete fa fa-trash-o" data-id=' +o.id + '></a>';
+                                    actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' +o.id + '></a>';
                                 @endcan
                             }
                             return actions;
