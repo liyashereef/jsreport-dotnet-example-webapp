@@ -571,7 +571,7 @@
                                 office_timings: o.uniform_scheduling_office_timings,
                                 office_timings_blocked: o.uniform_scheduling_office_slot_blocks,
                             };
-                            actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                            actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                             let timingsEncoded = btoa(JSON.stringify(timingsDetails))
                             actions += `<a href="#" class="fa fa-calendar office-card" data-event='${timingsEncoded}'></a>`
                             actions += `<a href="#" class="fa fa-ban blocked-card" data-event='${timingsEncoded}'></a>`

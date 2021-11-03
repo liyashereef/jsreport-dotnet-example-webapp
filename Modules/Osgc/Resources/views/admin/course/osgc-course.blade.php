@@ -240,7 +240,7 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         var url_details = '{{ route("osgc-course-contents",'') }}';
                         actions += '<a href="'+url_details+"/"+ o.id +'" class="view fa fa-eye" ></a>'

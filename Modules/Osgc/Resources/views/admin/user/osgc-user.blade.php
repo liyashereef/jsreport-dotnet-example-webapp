@@ -242,7 +242,7 @@
                     render: function (o) {
                        
                         
-                        var actions = '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                        var actions = '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                         
                         if(o.active =='Active')
                         {

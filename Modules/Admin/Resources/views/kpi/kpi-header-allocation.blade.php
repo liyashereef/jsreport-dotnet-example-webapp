@@ -339,7 +339,7 @@
                         render: function(o) {
                             let actions = '';
                             @can('edit_masters')
-                            actions += '<a href="javascript:void(0)" class="edit js-kpih-allocation-edit fa fa-pencil" data-id=' + o.id + '></a>'
+                            actions += '<a href="javascript:void(0)" class="edit js-kpih-allocation-edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                             @endcan
                             @can('lookup-remove-entries')
                             actions += '<a href="javascript:void(0)" class="delete js-kpih-unallocate fa fa-minus-circle" data-id=' + o.id + '></a>';

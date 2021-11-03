@@ -159,7 +159,7 @@
                        var url = "{{route('email-template-allocation',[':type_id'])}}";
                    url = url.replace(':type_id', o.type_id);
                    url = url.replace(':customer_id', o.client_id);
-                   return  '<a href="'+ url +'" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                   return  '<a href="'+ url +'" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                },
            }
                    
