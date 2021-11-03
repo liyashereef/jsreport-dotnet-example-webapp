@@ -111,5 +111,7 @@ return [
     'ids_refund_requested' => 1,
     'ids_refund_approved' => 2,
     'ids_refund_rejected' => 3,
-    'qrPatrolDailyReportTime' => '8:00'
+    'qrPatrolDailyReportTime' => '8:00',
+    'editFontIcon'=>'far fa-edit',
+    'deleteFontIcon'=>'fas fa-trash'
 ];
