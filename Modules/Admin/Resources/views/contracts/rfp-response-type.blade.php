@@ -124,10 +124,10 @@
                         width: "25%",
                         render: function (o) {
                             var actions = '';
-                            actions += '<a href="#" class="edit fa fa-pencil" ' +
+                            actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" ' +
                                 'data-id=' + o.id + ' data-change-title=\'' + o.rfp_response_type + '\' ></a>';
                             @can('lookup-remove-entries')
-                                actions += '<a href="#" class="delete deletereason fa fa-trash-o" ' +
+                                actions += '<a href="#" class="delete deletereason {{Config::get('globals.deleteFontIcon')}}" ' +
                                 'data-id=' + o.id + ' data-change-title=\'' + o.rfp_response_type + '\' ></a>';
                             @endcan
                                 return actions;

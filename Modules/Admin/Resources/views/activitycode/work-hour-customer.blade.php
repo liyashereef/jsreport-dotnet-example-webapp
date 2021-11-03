@@ -166,19 +166,19 @@
                         var actions = '';
                         @can('edit_masters')
                         if (o.is_editable == false) {
-                        actions += '<a href="#" class="edit-disable fa fa-pencil"></a>'
+                        actions += '<a href="#" class="edit-disable {{Config::get('globals.editFontIcon')}}"></a>'
                         }
                         else{
-                          actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';  
+                          actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';  
                         }
                         @endcan
                         @can('lookup-remove-entries')
                         if (o.is_deletable == false) {
-                        actions += '<a href="#" class="edit-disable fa fa-trash-o"></a>';
+                        actions += '<a href="#" class="edit-disable  {{Config::get('globals.deleteFontIcon')}}"></a>';
                         }
                         else
                         {
-                         actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';    
+                         actions += '<a href="#" class="delete  {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';    
                         }
                         @endcan
                         return actions;

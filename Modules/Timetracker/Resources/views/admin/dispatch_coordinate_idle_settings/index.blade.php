@@ -100,7 +100,7 @@
                             sortable: false,
                             render: function (o) {
                                 var actions = '';
-                                actions += '<a href="#" class="edit fa fa-pencil" title="Edit" data-id=' + o.id + '></a>'
+                                actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" title="Edit" data-id=' + o.id + '></a>'
                                 return actions;
                             },
                         }

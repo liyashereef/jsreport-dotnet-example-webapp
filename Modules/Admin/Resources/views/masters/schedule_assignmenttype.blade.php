@@ -127,18 +127,18 @@
                         var actions = '';
                         if(o.is_deletable ==1){
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         }
                         else{
                             @can('edit_masters')
-                            actions +='<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                            actions +='<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                             @endcan
                             @can('lookup-remove-entries')
-                            actions += '<a href="#" title="Unable to Delete" class="edit-disable fa fa-trash-o"></a>';
+                            actions += '<a href="#" title="Unable to Delete" class="edit-disable {{Config::get('globals.deleteFontIcon')}}"></a>';
                             @endcan
                         }
                         return actions;

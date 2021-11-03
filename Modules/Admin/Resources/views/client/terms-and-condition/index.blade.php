@@ -120,10 +120,10 @@
                          var terms_url = '{{ route("customer-terms-and-conditions.edit",":id") }}';
                          var terms_url = terms_url.replace(':id', o.id);
 
-                         actions += '<a href='+terms_url+' class="edit fa fa-pencil"></a>';
+                         actions += '<a href='+terms_url+' class="edit {{Config::get('globals.editFontIcon')}}"></a>';
                          actions += '<a href="#" class="view fa fa-eye" data-id=' + o.id + '></a>';
                          if(o.customer_id!=0) {
-                            actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                            actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         }                           
                         
                      return actions;

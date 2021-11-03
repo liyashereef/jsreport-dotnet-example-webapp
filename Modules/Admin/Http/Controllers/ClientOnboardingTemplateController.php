@@ -46,10 +46,10 @@ class ClientOnboardingTemplateController extends Controller
                 $user = Auth::user();
                 $actionsHtml = '';
                 if ($user->can('edit_masters')) {
-                    $actionsHtml .= '<a href="#" class="edit fa fa-pencil" data-id='.$section->id.'></a>';
+                    $actionsHtml .= '<a href="#" class="edit '.config('globals.editFontIcon').'" data-id='.$section->id.'></a>';
                 }
                 if ($user->can('lookup-remove-entries')) {
-                    $actionsHtml .= '<a href="#" class="delete fa fa-trash-o" data-id='.$section->id.'></a>';
+                    $actionsHtml .= '<a href="#" class="delete '.config('globals.deleteFontIcon').'" data-id='.$section->id.'></a>';
 
                 }
                 return $actionsHtml;

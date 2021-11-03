@@ -159,7 +159,7 @@
                     render: function (o) {
               var shiftname=o.shift_name;
               shiftname=shiftname.replace(/ /g,"_").toLowerCase();
-              actions = '<a href="#" class="edit fa fa-pencil" data-id=' + shiftname + '></a>';
+              actions = '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + shiftname + '></a>';
                     return actions;
                     },
                 }

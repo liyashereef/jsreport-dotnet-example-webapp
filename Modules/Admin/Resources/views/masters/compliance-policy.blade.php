@@ -301,12 +301,12 @@
                             {
                                 actions += '<a href="#" class="edit fa fa-eye" data-id=' + o.id +' data-view="1"></a>'
                             } else {
-                                actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id +
+                                actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id +
                                 '></a>'
                             }
                             @endcan
                             @can('lookup-remove-entries')
-                            actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id +
+                            actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id +
                                 '></a>';
                             @endcan
                             return actions;

@@ -137,7 +137,7 @@
                             render: function (o) {
                                 var actions = '';
                                 @can('lookup-remove-entries')
-                                    actions += '<a href="#" class="delete fa fa-trash-o" title="Delete"  data-id=' + o.id + '></a>';
+                                    actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" title="Delete"  data-id=' + o.id + '></a>';
                                 @endcan
                                     return actions;
                             },

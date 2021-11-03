@@ -121,13 +121,13 @@
                         if(o.is_editable==1)
                         {
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         }
                         else
                         {
                             @can('edit_masters')
-                            actions += '<a class="fa fa-pencil edit-disable" title="Unable to edit" ></a>'
+                            actions += '<a class="{{Config::get('globals.editFontIcon')}} edit-disable" title="Unable to edit" ></a>'
                             @endcan
 
                         }    
@@ -135,7 +135,7 @@
                         if(o.is_deletable != 0)
                         {
                             @can('lookup-remove-entries')
-                            actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                            actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                             @endcan
                         }
 

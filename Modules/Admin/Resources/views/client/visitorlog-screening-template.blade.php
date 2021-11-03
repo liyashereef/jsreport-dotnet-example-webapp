@@ -174,8 +174,8 @@
                          var template_question_url = '{{ route("visitor-log-screening-templates.questions",":id") }}';
                          var template_question_url = template_question_url.replace(':id', o.id);
 
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + ' style="margin: 10px;"></a>';
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + ' style="margin: 10px;"></a>';
                         actions += '<a href="'+template_question_url+'" class="fa fa-question-circle" data-id=' + o.id + '></a>'
 
                      return actions;

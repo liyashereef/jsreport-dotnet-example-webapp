@@ -124,15 +124,15 @@
                          var actions = '';
                         if(o.is_editable==1) {
                     @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                     @endcan
                         } else {
                     @can('edit_masters')
-                        actions += '<a class="fa fa-pencil edit-disable" title="Unable to edit, pay period expired" ></a>'
+                        actions += '<a class="{{Config::get('globals.editFontIcon')}} edit-disable" title="Unable to edit, pay period expired" ></a>'
                     @endcan
                         }
                      @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                     @endcan
                      return actions;
                     },

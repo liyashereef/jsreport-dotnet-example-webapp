@@ -165,9 +165,9 @@
                             sortable: false,
                             render: function (o) {
                                 var actions = '';
-                                actions += '<a href="#" class="edit fa fa-pencil" title="Edit" data-id=' + o.id + '></a>'
+                                actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" title="Edit" data-id=' + o.id + '></a>'
                                 @can('lookup-remove-entries')
-                                    actions += '<a href="#" class="delete fa fa-trash-o" title="Delete"  data-id=' + o.id + '></a>';
+                                    actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" title="Delete"  data-id=' + o.id + '></a>';
                                 @endcan
                                 return actions;
                             },

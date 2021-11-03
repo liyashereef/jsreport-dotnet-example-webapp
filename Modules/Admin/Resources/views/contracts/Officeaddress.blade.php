@@ -147,10 +147,10 @@
                     render: function (o) {
                          var actions = '';
                         
-                        actions += '<a href="#" class="edit editreason fa fa-pencil" data-id=' + o.id + ' data-change-title=\'' + o.addresstitle + '\' data-change-address=\'' + o.address + '\'></a>'
+                        actions += '<a href="#" class="edit editreason {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + ' data-change-title=\'' + o.addresstitle + '\' data-change-address=\'' + o.address + '\'></a>'
                         
                         @can('lookup-remove-entries')
-                            actions += '<a href="#" class="delete deletereason fa fa-trash-o" data-id=' + o.id + ' data-change-title=\'' + o.addresstitle + '\'  data-change-address=\'' + o.address + '\'></a>';
+                            actions += '<a href="#" class="delete deletereason {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + ' data-change-title=\'' + o.addresstitle + '\'  data-change-address=\'' + o.address + '\'></a>';
                             @endcan
                         return actions;
                         },

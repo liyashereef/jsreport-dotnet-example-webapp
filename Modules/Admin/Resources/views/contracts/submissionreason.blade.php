@@ -138,10 +138,10 @@
                     render: function (o) {
                          var actions = '';
                         
-                        actions += '<a href="#" class="edit editreason fa fa-pencil" data-id=' + o.id + ' data-reason=\'' + o.reason + '\' data-sequence=' + o.sequence + '></a>'
+                        actions += '<a href="#" class="edit editreason {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + ' data-reason=\'' + o.reason + '\' data-sequence=' + o.sequence + '></a>'
                         
                         @can('lookup-remove-entries')
-                            actions += '<a href="#" class="delete deletereason fa fa-trash-o" data-id=' + o.id + ' data-reason=\'' + o.reason + '\' data-sequence=' + o.sequence + '></a>';
+                            actions += '<a href="#" class="delete deletereason {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + ' data-reason=\'' + o.reason + '\' data-sequence=' + o.sequence + '></a>';
                             @endcan
                         return actions;
                         },
