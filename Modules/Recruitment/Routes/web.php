@@ -202,7 +202,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'recruitment',], func
 
 Route::group(['middleware' => ['web', 'auth', 'permission:recruitment_masters']], function () {
 
-    Route::prefix('admin/recruitment')->name('recruitment.')->namespace('Modules\Recruitment\Http\Controllers\Admin')->group(function () {
+    Route::prefix('admin/recruitment')->name('recruitment.')->namespace('Admin')->group(function () {
         /* Candidate Brand Awareness - start */
         Route::name('brand-awareness')->get('brand-awareness', 'RecBrandAwarenessController@index');
         Route::get('brand-awareness/list', array('as' => 'brand-awareness.list', 'uses' => 'RecBrandAwarenessController@getList'));

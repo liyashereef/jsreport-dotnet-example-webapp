@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'feverscan', 'namespace' => 'Modules\FeverScan\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'feverscan',], function()
 {
     Route::get('/', 'FeverScanController@index');
     Route::get('site-view', array('as' => 'fever.site-view', 'uses' => 'FeverScanController@siteView'));
