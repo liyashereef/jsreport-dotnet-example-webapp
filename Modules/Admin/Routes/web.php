@@ -13,8 +13,8 @@
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     /* Profile updation - Start */
-    Route::get('profile/edit', array('as' => 'profile.edit', 'uses' => 'Modules\Admin\Http\Controllers\UserController@view'));
-    Route::post('profile/updateProfile/{id}', array('as' => 'profile.updateProfile', 'uses' => 'Modules\Admin\Http\Controllers\UserController@updateProfile'));
+    Route::get('profile/edit', array('as' => 'profile.edit', 'uses' => 'UserController@view'));
+    Route::post('profile/updateProfile/{id}', array('as' => 'profile.updateProfile', 'uses' => 'UserController@updateProfile'));
     /* Profile updation - End */
 });
 
