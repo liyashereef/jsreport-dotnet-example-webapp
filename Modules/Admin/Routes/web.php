@@ -656,8 +656,8 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
         Route::get('templates/list', array('as' => 'templates.list', 'uses' => 'TemplateController@getList'));
         Route::get('templates/add', array('as' => 'templates.add', 'uses' => 'TemplateController@addTemplate'));
         Route::post('templates/add', array('as' => 'templates.add', 'uses' => 'TemplateController@storeTemplate'));
-        Route::get('templates/update/{id}', array('as' => 'templates.update', 'uses' => 'TemplateController@addTemplate'));
-        Route::post('templates/update/{id}', array('as' => 'templates.update', 'uses' => 'TemplateController@storeTemplate'));
+        Route::get('templates/update/{id?}', array('as' => 'templates.update', 'uses' => 'TemplateController@addTemplate'));
+        Route::post('templates/update/{id?}', array('as' => 'templates.update', 'uses' => 'TemplateController@storeTemplate'));
 
         /* Templates - End */
 
