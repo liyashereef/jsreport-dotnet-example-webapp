@@ -17,10 +17,10 @@
     <!-- Main content -->
     <section class="content">
         <div class="form-group row" id="template_name">
-            <input type="hidden" name="id" value="{{$template_arr['id'] or ''}}"/>
+            <input type="hidden" name="id" value="{{$template_arr['id'] ?? ''}}"/>
             <label class="col-form-label col-md-2" for="template_name">Template Name </label>
             <div class=" col-md-10">
-                <input type="text" class="form-control" placeholder="Name" name="template_name" value="{{$template_arr['template_name'] or ''}}" required>
+                <input type="text" class="form-control" placeholder="Name" name="template_name" value="{{$template_arr['template_name'] ?? ''}}" required>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group row" id="template_description">
             <label class="col-form-label col-md-2" for="template_description">Description</label>
             <div class=" col-md-10">
-                <textarea class="form-control" name="template_description" id="" cols="145" rows="4" placeholder="Description"  name="template_description" >{{$template_arr['template_description'] or ''}}</textarea>
+                <textarea class="form-control" name="template_description" id="" cols="145" rows="4" placeholder="Description"  name="template_description" >{{$template_arr['template_description'] ?? ''}}</textarea>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <label class="col-form-label control-label col-xs-12 col-md-1 col-sm-6">From <span class="mandatory">*</span></label>
             <div class="col-md-3 col-xs-12 col-sm-6">
                 <div class="form-group input-group date" data-provide="datepicker" id="start_date">
-                    <input type="text" class="form-control datepicker" name="start_date" value="{{$template_arr['start_date'] or ''}}" required>
+                    <input type="text" class="form-control datepicker" name="start_date" value="{{$template_arr['start_date'] ?? ''}}" required>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <label class=" col-form-label control-label col-xs-12 col-md-1 col-sm-6">To <span class="mandatory">*</span></label>
             <div class="col-md-3 col-xs-12 col-sm-6">
                 <div class="form-group input-group date" data-provide="datepicker" id="end_date">
-                    <input type="text" class="form-control datepicker" name="end_date" value="{{$template_arr['end_date'] or ''}}" required>
+                    <input type="text" class="form-control datepicker" name="end_date" value="{{$template_arr['end_date'] ?? ''}}" required>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -103,7 +103,7 @@
     $(function () {
         questionsObj = {
             childArray: [],
-            questionElementCount: {{$last_template_position or 1}},
+            questionElementCount: {{$last_template_position  ?? 1}},
             questionRowHtml: "",
 
             disableChildAsParent: function(){
