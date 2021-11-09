@@ -935,7 +935,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
         Route::get('visitorlog-templates/list', array('as' => 'visitorlog-templates.list', 'uses' => 'VisitorLogTemplateController@getList'));
         Route::get('visitorlog-templates/add', array('as' => 'visitorlog-templates.add', 'uses' => 'VisitorLogTemplateController@addTemplate'));
         Route::post('visitorlog-templates/store', array('as' => 'visitorlog-templates.store', 'uses' => 'VisitorLogTemplateController@store'));
-        Route::get('visitorlog-templates/update/{id}', array('as' => 'visitorlog-templates.update', 'uses' => 'VisitorLogTemplateController@addTemplate'));
+        Route::get('visitorlog-templates/update/{id?}', array('as' => 'visitorlog-templates.update', 'uses' => 'VisitorLogTemplateController@addTemplate'));
         Route::get('visitorlog-templates/destroy', array('as' => 'visitorlog-templates.destroy', 'uses' => 'VisitorLogTemplateController@destroy'));
         /* Client Visitor Log Templates - End */
 
