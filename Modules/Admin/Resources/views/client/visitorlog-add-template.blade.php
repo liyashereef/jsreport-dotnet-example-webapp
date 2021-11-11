@@ -32,10 +32,10 @@
     <!-- Main content -->
     <section class="content">
         <div class="form-group row" id="template_name">
-            <input type="hidden" name="id" value="{{$template[0]->id or ''}}" />
+            <input type="hidden" name="id" value="{{$template[0]->id ?? ''}}" />
             <label class="col-form-label col-md-2" for="template_name">Template Name </label>
             <div class=" col-md-6">
-                <input type="text" class="form-control" placeholder="Name" name="template_name" value="{{$template[0]->template_name or ''}}" required>
+                <input type="text" class="form-control" placeholder="Name" name="template_name" value="{{$template[0]->template_name ?? ''}}" required>
                 <span class="help-block"></span>
             </div>
         </div>
