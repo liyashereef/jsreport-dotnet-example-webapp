@@ -78,6 +78,15 @@ class ManageContentController extends Controller
         ));
     }
 
+    public function s3index(Request $request){
+        return view("contentmanager::admin.s3index");
+    }
+
+    public function s3uploader(Request $request){
+        $blockId=intval($request->id);
+        return view("contentmanager::admin.s3uploader",compact("blockId"));
+    }
+
     public function getList($id = null)
     {
         return datatables()->of($this->manageContentRepository->getAll($id))->addIndexColumn()->toJson();
