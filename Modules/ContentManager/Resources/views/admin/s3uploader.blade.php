@@ -52,9 +52,8 @@
 
  
     var invokeAfterUpload=(url)=>{
-        //$("#uploadedS3VideoFileName").trigger("change");
-        $("#contentname").val(url).trigger("change")
-
+        $("#uploadedS3VideoFileName").val(url);
+        
     }
 </script>
 <script src="{{ asset('js/app.js') }}" defer></script>

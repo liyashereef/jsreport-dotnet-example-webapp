@@ -6,9 +6,10 @@
           (file, response) => {
             
             const url = response.uploadURL;
+            const awspath='temp/contentmanager/';
             const fileName = file.name;
             const uploadedFileData = JSON.stringify(response.body);
-
+            console.log(response.body.fileName)
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = url;
@@ -23,7 +24,7 @@
             
             inputElementUrlUploadFile.value = url;
             inputElementUrlUploadFile.dispatchEvent(new Event('input'));
-            invokeAfterUpload(url)
+            invokeAfterUpload(awspath+(response.body.fileName))
 
             {{ $extraJSForOnUploadSuccess }}
           };

@@ -108,7 +108,7 @@ class UppyS3MultipartController extends Controller
                 'ContentDisposition' => 'inline',
             ]);
         } catch (Throwable $exception) {
-            dd($exception);
+            //dd($exception);
             return response()
                 ->json([
                     'message' => $exception->getMessage(),
@@ -295,11 +295,13 @@ class UppyS3MultipartController extends Controller
             'MultipartUpload' => ['Parts' => $parts],
         ]);
 
-        $location = $result['Location'];
+        $location = rawurldecode($result['Location']);
+        $path = parse_url($location, PHP_URL_PATH);
 
         return response()
             ->json([
                 'location' => $location,
+                'fileName'=>basename($path),
             ]);
     }
 
