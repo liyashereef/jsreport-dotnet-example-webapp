@@ -26,6 +26,7 @@
 <h3>Visitor Log Templates</h3>
 @stop
 
+
 @section('content')
 <div class="container-fluid container-wrap">
     {{ Form::open(array('route'=> 'visitorlog-templates.store','id'=>'template-add-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
