@@ -202,7 +202,7 @@
                     sortable: false,
                     render: function (o) {
                        var actions = '';
-                        actions += ' <a href="#" title="Edit" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += ' <a href="#" title="Edit" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @can('lookup-remove-entries')
                         actions += ' <a href="#" title="Delete" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
                         @endcan

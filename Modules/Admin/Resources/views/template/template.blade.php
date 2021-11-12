@@ -102,15 +102,15 @@
                     sortable: false,
                     render: function (o) {
                         if(o.end_date < "{{date('Y-m-d')}}"){
-                            actions = '<a title="Unable to edit, template expired" href="#" class="edit-disable fa fa-pencil"></a>';
+                            actions = '<a title="Unable to edit, template expired" href="#" class="edit-disable {{Config::get('globals.editFontIcon')}}"></a>';
                             @can('lookup-remove-entries')
-                                actions += '<a title="Unable to delete" href="#" class="edit-disable fa fa-trash-o"></a>';
+                                actions += '<a title="Unable to delete" href="#" class="edit-disable {{Config::get('globals.deleteFontIcon')}}"></a>';
                             @endcan
                         }
                         else{
-                            actions = '<a href="{{route("templates.update", ["id" => ""])}}/'+ o.id +'" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                            actions = '<a href="{{route("templates.update", ["id" => ""])}}/'+ o.id +'" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                             @can('lookup-remove-entries')
-                                actions +='<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                                actions +='<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                             @endcan
                         }
                         return actions;

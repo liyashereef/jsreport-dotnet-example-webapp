@@ -47,7 +47,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
     Route::get('shift-module-dropdown/list', array('as' => 'shift-module-dropdown.list', 'uses' => 'ShiftModuleDropdownController@getList'));
     Route::get('shift-module-dropdown/add', array('as' => 'shift-module-dropdown.add', 'uses' => 'ShiftModuleDropdownController@addDropdown'));
     Route::post('shift-module-dropdown/add', array('as' => 'shift-module-dropdown.add', 'uses' => 'ShiftModuleDropdownController@storeDropdown'));
-    Route::get('shift-module-dropdown/update/{id}', array('as' => 'shift-module-dropdown.update', 'uses' => 'ShiftModuleDropdownController@addDropdown'));
+    Route::get('shift-module-dropdown/update/{id?}', array('as' => 'shift-module-dropdown.update', 'uses' => 'ShiftModuleDropdownController@addDropdown'));
 
     /* Customer - start */
     Route::group(['middleware' => ['permission:manage-customers']], function () {
@@ -107,7 +107,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
         Route::name('customer-shift-module')->get('customer-shift-module', 'ShiftModuleController@index');
         Route::get('customer-shift-module/list/{customer_id?}', array('as' => 'customer-shift-module.list', 'uses' => 'ShiftModuleController@getModuleList'));
         Route::get('customer-shift-module/add', array('as' => 'customer-shift-module.add', 'uses' => 'ShiftModuleController@addModule'));
-        Route::get('customer-shift-module/update/{id}', array('as' => 'customer-shift-module.update', 'uses' => 'ShiftModuleController@addModule'));
+        Route::get('customer-shift-module/update/{id?}', array('as' => 'customer-shift-module.update', 'uses' => 'ShiftModuleController@addModule'));
         Route::post('customer-shift-module/store', array('as' => 'customer-shift-module.store', 'uses' => 'ShiftModuleController@storeModule'));
         Route::get('customer-shift-module/destroy', array('as' => 'customer-shift-module.destroy', 'uses' => 'ShiftModuleController@destroy'));
         Route::get('customer-shift-module/get', array('as' => 'customer-shift-module.get', 'uses' => 'ShiftModuleController@getCustomerModuleDetails'));
@@ -656,8 +656,8 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
         Route::get('templates/list', array('as' => 'templates.list', 'uses' => 'TemplateController@getList'));
         Route::get('templates/add', array('as' => 'templates.add', 'uses' => 'TemplateController@addTemplate'));
         Route::post('templates/add', array('as' => 'templates.add', 'uses' => 'TemplateController@storeTemplate'));
-        Route::get('templates/update/{id}', array('as' => 'templates.update', 'uses' => 'TemplateController@addTemplate'));
-        Route::post('templates/update/{id}', array('as' => 'templates.update', 'uses' => 'TemplateController@storeTemplate'));
+        Route::get('templates/update/{id?}', array('as' => 'templates.update', 'uses' => 'TemplateController@addTemplate'));
+        Route::post('templates/update/{id?}', array('as' => 'templates.update', 'uses' => 'TemplateController@storeTemplate'));
 
         /* Templates - End */
 
@@ -935,7 +935,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
         Route::get('visitorlog-templates/list', array('as' => 'visitorlog-templates.list', 'uses' => 'VisitorLogTemplateController@getList'));
         Route::get('visitorlog-templates/add', array('as' => 'visitorlog-templates.add', 'uses' => 'VisitorLogTemplateController@addTemplate'));
         Route::post('visitorlog-templates/store', array('as' => 'visitorlog-templates.store', 'uses' => 'VisitorLogTemplateController@store'));
-        Route::get('visitorlog-templates/update/{id}', array('as' => 'visitorlog-templates.update', 'uses' => 'VisitorLogTemplateController@addTemplate'));
+        Route::get('visitorlog-templates/update/{id?}', array('as' => 'visitorlog-templates.update', 'uses' => 'VisitorLogTemplateController@addTemplate'));
         Route::get('visitorlog-templates/destroy', array('as' => 'visitorlog-templates.destroy', 'uses' => 'VisitorLogTemplateController@destroy'));
         /* Client Visitor Log Templates - End */
 

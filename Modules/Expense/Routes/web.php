@@ -54,7 +54,7 @@ Route::group([
         Route::get('tax-master', array('as' => 'tax-master', 'uses' => 'TaxMasterController@index'));
         Route::get('tax-master/list', array('as' => 'tax-master.list', 'uses' => 'TaxMasterController@getList'));
         Route::post('tax-master/store', array('as' => 'tax-master.store', 'uses' => 'TaxMasterController@store'));
-        Route::get('tax-master/single/{id}', array('as' => 'tax-master.single', 'uses' => 'TaxMasterController@getSingle'));
+        Route::get('tax-master/single/{id?}', array('as' => 'tax-master.single', 'uses' => 'TaxMasterController@getSingle'));
         Route::get('tax-master/show/{id}', array('as' => 'tax-master.show', 'uses' => 'TaxMasterController@taxMasterLogShow'));
         Route::get('tax-master/archive/{id}', array('as' => 'tax-master.archive', 'uses' => 'TaxMasterController@taxMasterLogShowTrashed'));
         Route::get('tax-master/getExpenseTracker', array('as' => 'tax-master.getExpenseTracker', 'uses' => 'TaxMasterController@getExpenseTracker'));
