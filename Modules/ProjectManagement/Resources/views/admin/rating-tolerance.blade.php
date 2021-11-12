@@ -50,7 +50,7 @@
         <span class="help-block"></span>
         @else
         <label>Greater than</label> <span style='padding-left : 72px'></span>
-         <input type="text" class="min-item form-control  table-option-adjust" name="min_value[]" id="min_{{isset($key)?($key):'0'}}" readonly="true" value="{{!empty($ratings)?$ratings[$key]:''}}"/>
+         <input type="text" class="min-item form-control  table-option-adjust" name="min_value[]" id="min_{{isset($key)?($key):'0'}}" readonly="true" value="{{$ratings[$key] ?? ''}}"/>
         <span class="help-block"></span>
         @endif
        
@@ -62,7 +62,7 @@
         @if($key==4)   
         <input type="text" class="max-item form-control  table-option-adjust" name="max_value[]" readonly="true"  value="5"/>
         @else
-         <input type="text" class="max-item form-control  table-option-adjust maxvalue" name="max_value[]"   id="max_{{isset($key)?($key):"0"}}"  value="{{$ratings[$key+1] or ''}}"/>
+         <input type="text" class="max-item form-control  table-option-adjust maxvalue" name="max_value[]"   id="max_{{isset($key)?($key):"0"}}"  value="{{$ratings[$key+1] ?? ''}}"/>
          @endif
         <span class="help-block"></span>
         </div>

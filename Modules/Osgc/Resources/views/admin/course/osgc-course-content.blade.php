@@ -325,7 +325,7 @@ function changeFileFlag()
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         actions += '<a href="#" class="doc-new fa fa-file view"  data-id=' + o.id + ' title="Study guide"></a>'
                         
