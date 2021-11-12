@@ -156,7 +156,14 @@
         </div>
     </div>
 </div>
-@stop @section('js')
+@stop
+
+@section('js')
+<style type="text/css">
+.view {
+    padding-right: 8%;
+}
+</style>
 <script>
     $(function() {
 
@@ -278,11 +285,12 @@
                             @can('edit_masters')
                             actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                             @endcan
+                            var url = '{{route("cp-id.history",'')}}';
+                            actions += '<a href="' + url + "/" + o.id + '" title="View" class="view fa fa-eye"></a>'
                             @can('lookup-remove-entries')
                             actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                             @endcan
-                            var url = '{{route("cp-id.history",'')}}';
-                            actions += '<a href="' + url + "/" + o.id + '" title="View" class="fa btn fa-eye"></a>'
+                            
                             return actions;
                         },
                     }
