@@ -1,13 +1,13 @@
 
-<input type="hidden" name="length[]" class="cls-length-id" value="{{$template_form['length'] or "1"}}"/>
+<input type="hidden" name="length[]" class="cls-length-id" value="{{$template_form['length'] ?? "1"}}"/>
     <td aria-controls="position-table" class="cls-slno">@if(isset($key)) {{ $key+1}} @else 1 @endif
         </td>
-        <input type="hidden" class="quest_id" name="question_id[]" value="{{$template_form['id'] or ""}}"/>
+        <input type="hidden" class="quest_id" name="question_id[]" value="{{$template_form['id'] ?? ""}}"/>
   
 
     <td aria-controls="position-table" style="width:500px;" class="cls-question-text">
         <div class="form-group question_text" id="question_text_{{isset($key)?($key):"0"}}">
-            <textarea name="question_text[]" id="" cols="50" rows="4" placeholder="Question" required  @if(isset($is_view)) readonly @endif>{{$template_form['question'] or ''}}</textarea>
+            <textarea name="question_text[]" id="" cols="50" rows="4" placeholder="Question" required  @if(isset($is_view)) readonly @endif>{{$template_form['question'] ?? ''}}</textarea>
         <span class="help-block"></span>
         </div>
     </td>
@@ -25,7 +25,7 @@
 
     <td aria-controls="position-table" style="width:500px;" class="cls-sequence-text" align="center">
         <div class="form-group sequence" id="sequence_{{isset($key)?($key):"0"}}">
-            <input type="number" min="1" style="width: 68px;align-content: center;" name="sequence[]" class="form-control order" value="{{$template_form['sequence'] or ""}}" @if(isset($is_view)) readonly @endif>
+            <input type="number" min="1" style="width: 68px;align-content: center;" name="sequence[]" class="form-control order" value="{{$template_form['sequence'] ??  ""}}" @if(isset($is_view)) readonly @endif>
         <span class="help-block"></span>
         </div>
     </td>

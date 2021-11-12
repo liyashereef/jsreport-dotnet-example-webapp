@@ -473,7 +473,7 @@
                            var office_slot_block_url = office_slot_block_url.replace(':id', o.id);
 
                                 @can('edit_masters')
-                                    actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                                    actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                                 @endcan
                                 let timingsDetails = [];
                                 timingsDetails = {
@@ -486,7 +486,7 @@
                                 actions += '<a href="'+office_slot_url+'" class="fa fa-eye" data-id=' + o.id + '></a>'
                                 actions += '<a href="'+office_slot_block_url+'" class="fa fa-ban" data-id=' + o.id + '></a>'
                                 @can('lookup-remove-entries')
-                                    actions += '<a href="#" class="delete fa fa-trash-o" data-id=' +o.id + '></a>';
+                                    actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' +o.id + '></a>';
                                 @endcan
                             return actions;
                         },
