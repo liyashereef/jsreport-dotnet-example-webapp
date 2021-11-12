@@ -10,19 +10,45 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
             $(document).ready(function () {
-                        setInterval(() => {
+                setInterval(() => {
+                    let videoFile=$("#uploadedS3VideoFileName").val();
                             let uploadFile1=$("#iframe1").contents().find("#uploadedS3VideoFileName").val();
                             let uploadFile2=$("#iframe2").contents().find("#uploadedS3VideoFileName").val();
                             let uploadFile3=$("#iframe3").contents().find("#uploadedS3VideoFileName").val();
                             let uploadFile4=$("#iframe4").contents().find("#uploadedS3VideoFileName").val();
-                            
+                            if(videoFile!="" || uploadFile1!="" || uploadFile2!="" || uploadFile3!="" || uploadFile4!="" ){
+                                $("#mdl_save_change").removeClass("disabled")
+                            }else{
+                                $("#mdl_save_change").addClass("disabled")
+                            }
 
                             //console.log(uploadFile.val());
-                            $("#uploadedS3AttachedFileName1").val(uploadFile1.substring(uploadFile1.lastIndexOf('/')+1))
-                            $("#uploadedS3AttachedFileName2").val(uploadFile2)
-                            $("#uploadedS3AttachedFileName3").val(uploadFile3)
-                            $("#uploadedS3AttachedFileName4").val(uploadFile4)
-                        }, 500);
+                            if(uploadFile1!=""){
+                                $("#uploadedS3AttachedFileName1").val(uploadFile1);
+                            }
+                            if(uploadFile2!=""){
+                                $("#uploadedS3AttachedFileName2").val(uploadFile2);
+                            }
+                            if(uploadFile3!=""){
+                                $("#uploadedS3AttachedFileName3").val(uploadFile3);
+                            }
+                            if(uploadFile2!=""){
+                                $("#uploadedS3AttachedFileName4").val(uploadFile4);
+                            }
+                            // if(uploadFile2!=""){
+                            // {
+                            //     $("#uploadedS3AttachedFileName2").val(uploadFile2);
+                            // }
+                            // if(uploadFile3!=""){
+                            // {
+                            //     $("#uploadedS3AttachedFileName3").val(uploadFile3);
+                            // }
+                            // if(uploadFile4!=""){
+                            // {
+                            //     $("#uploadedS3AttachedFileName4").val(uploadFile4);
+                            // }
+                }, 500);
+                        
             });
            
 
@@ -35,26 +61,46 @@
                 let valid = validateAttachment();
                 let editId=$("input[name=id]").val();
                 let message="";
+                let submit=false;
                 if(valid==true && editId==""){
                     //formSubmit($('#content_form'), "{{ route('content-manager.store') }}", null, e, message);
                     submitForm();
-                    $('body').loading('stop');
                 }else if(editId>0 && valid==true){
                     //formSubmit($('#content_form'), "{{ route('content-manager.store') }}", nulll, e, message);
                     submitForm();
-                    $('body').loading('stop');
                 }else{
                     swal("Warning","Please validate inputs/Click upload","warning")
                     $('body').loading('stop');
                 }
+
+                
   
 
             })
 
             var submitForm=()=>{
-                var formData = new FormData($('#content_form')[0]);
+                swal({
+                    title: "Are you sure?",
+                    text: "You are about to save the data. Proceed?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-primary",
+                    confirmButtonText: "OK",
+                    showLoaderOnConfirm: true,
+                    closeOnConfirm: false
+                },
+                function () {
+                    if(true){
+                        submitFormAction()
+                        
+                    }else{
+                        return false;
+                    }
+                });
+            }
 
-                $.ajax({
+        var submitFormAction=function(){
+            $.ajax({
                     url: "{{ route('content-manager.store') }}",
                     type: 'post',
                     data: {
@@ -78,11 +124,22 @@
                     success: function(data) {
                             // ... do something with the data...
                             $('body').loading('stop');
+                            let routeUrl="{{route("content-manager.view")}}";
+                            swal({
+                                title: "Uploaded",
+                                text: "File Upload Completed",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                                },
+                            function(){
+                                location.href=routeUrl;
+                            });
                     }
                 });
-            }
-
-        
+        }
     var invokeAfterUpload=(url)=>{
         //$("#uploadedS3VideoFileName").trigger("change");
         $("#uploadedS3VideoFileName").val(url);
@@ -150,7 +207,8 @@
         "autoProceed"=> true,
         "allowMultipleUploads"=> true,
         "restrictions"=> [        
-        "maxNumberOfFiles"=> 1
+        "maxNumberOfFiles"=> 1,
+        "allowedFileTypes"=>[".mp4",".MP4"],
         ]
     ],true);
     $uppyOptionsDocument = json_encode([
@@ -166,7 +224,7 @@
         <div class="col-md-12">
             <span class="add-new-label">            
                 <h4>Add New Content</h4>
-                <input type="hidden" name="id" value="">
+                <input type="hidden" name="id" value="{{$contentId>0?$contentId:""}}">
             </span>
 
         </div>
@@ -223,7 +281,7 @@ id="video-results"><!-- server response here --></div>
     <div class="row " style="">
         <label for="title" class="col-sm-3 control-label">Expiry Date</label>
             <div class="col-sm-2">
-                <input type="text" readonly name="expiry_date" id="expiry_date" class="form-control datepicker" />
+                <input type="text" readonly name="expiry_date" id="expiry_date" value="{{$expiryDate!=null?$expiryDate:""}}" class="form-control datepicker" />
                 <small class="help-block"></small>
             </div>
     </div>

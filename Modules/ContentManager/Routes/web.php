@@ -36,8 +36,8 @@ Route::group([
     'middleware' => ['web', 'auth'],
     'prefix' => 'admin', 'namespace' => 'Admin'
 ], function () {
-    Route::get('content-manager/s3view', array('as' => 'content-manager.s3view', 'uses' => 'ManageContentController@s3index'));
-    Route::get('content-manager/s3uploader/{id?}', array('as' => 'content-manager.s3uploader', 'uses' => 'ManageContentController@s3Uploader'));
+    Route::get('content-manager/s3view/{id?}', array('as' => 'content-manager.s3view', 'uses' => 'ManageContentController@s3index'));
+    Route::get('content-manager/s3uploader', array('as' => 'content-manager.s3uploader', 'uses' => 'ManageContentController@s3Uploader'));
     Route::get('content-manager/view', array('as' => 'content-manager.view', 'uses' => 'ManageContentController@index'));
     Route::get('content-manager/list/{id?}', array('as' => 'content-manager.list', 'uses' => 'ManageContentController@getList'));
     Route::post('content-manager/store', array('as' => 'content-manager.store', 'uses' => 'ManageContentController@store'));
