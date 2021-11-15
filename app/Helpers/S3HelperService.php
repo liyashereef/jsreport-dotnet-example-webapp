@@ -24,7 +24,7 @@ class S3HelperService
             S3HelperService::moveFile($awsBucketReference, $fileObjectPath, $destPrefix, $moveFileName, null);
             //dd($awsBucketReference, $fileObjectPath, $destPrefix, $moveFileName);
         } catch (\Throwable $th) {
-            ///dd($th);
+            \Log::info("S3 helper Service".$th);
             return null;
         }
     }
@@ -36,7 +36,7 @@ class S3HelperService
         try {
             return Storage::disk($awsBucketReference)->move($sourceFile, $destPrefix . $fileName);
         } catch (\Throwable $th) {
-            dd($th);
+            \Log::info("S3 helper Service".$th);
             return null;
         }
     }
@@ -48,6 +48,8 @@ class S3HelperService
         try {
             return Storage::disk($awsBucketReference)->move($sourceFile, $destPrefix . $sourceFile);
         } catch (\Throwable $th) {
+            \Log::info("S3 helper Service".$th);
+
             return null;
         }
     }
