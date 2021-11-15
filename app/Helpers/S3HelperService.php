@@ -21,7 +21,7 @@ class S3HelperService
         $moveFileName = ($incrementId > 0 ? $incrementId . "_" : "") . $fileArray[$lastIndex];
         
         try {
-            S3HelperService::moveFile($awsBucketReference, $fileObjectPath, $destPrefix, $moveFileName, null);
+            S3HelperService::moveFile($awsBucketReference, $moveFileName, $fileObjectPath, $destPrefix, null);
             //dd($awsBucketReference, $fileObjectPath, $destPrefix, $moveFileName);
         } catch (\Throwable $th) {
             \Log::info("S3 helper Service".$th);
@@ -31,7 +31,7 @@ class S3HelperService
 
      //v8 changes - optional parameter after required param
     //public static function moveFile($awsBucketReference, $sourceFile = null, $destPrefix = null, $fileName)
-    public static function moveFile($awsBucketReference, $sourceFile = null, $destPrefix = null, $fileName)
+    public static function moveFile($awsBucketReference, $fileName, $sourceFile = null, $destPrefix = null)
     {
         try {
             return Storage::disk($awsBucketReference)->move($sourceFile, $destPrefix . $fileName);

@@ -107,10 +107,8 @@ class ManageContentRepository
                 $fileprefix = "contentmanager/" . date("Y-m-d", strtotime($contentVideoAttachment->created_at)) . "/" . $contentVideoAttachment->content_id . "_";
                 if ($request->uploadedS3VideoFileName != "") {
                     try {
-                        S3HelperService::moveFile(
+                        S3HelperService::trashFile(
                             "awsS3Bucket",
-                            $fileprefix . $attachmentFile,
-                            "trash/",
                             $fileprefix . $attachmentFile
                         );
                     } catch (\Throwable $th) {
