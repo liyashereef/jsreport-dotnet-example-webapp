@@ -11,6 +11,7 @@ use Modules\Admin\Repositories\ConfigAppRepository;
 use Modules\Admin\Repositories\EnvRepository;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Artisan;
 
 class AdminController extends Controller
 {
@@ -76,7 +77,16 @@ class AdminController extends Controller
         $connections = ['mysql', 'sqlite', 'pgsql'];
 
         return view('admin::settings.settings', compact(
-            'locales', 'actualLocale', 'drivers', 'actualDriver', 'timezones', 'actualTimezone', 'caches', 'actualCacheDriver', 'connections', 'actualConnection'
+           // 'locales',
+             'actualLocale',
+             'drivers',
+             'actualDriver',
+           //  'timezones',
+             'actualTimezone',
+             'caches',
+             'actualCacheDriver',
+             'connections',
+             'actualConnection'
         ));
     }
 
