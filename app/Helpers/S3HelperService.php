@@ -19,21 +19,24 @@ class S3HelperService
             $destPrefix .= $fileArray[$i] . "/";
         }
         $moveFileName = ($incrementId > 0 ? $incrementId . "_" : "") . $fileArray[$lastIndex];
-        //dd($awsBucketReference);
+        
         try {
             S3HelperService::moveFile($awsBucketReference, $fileObjectPath, $destPrefix, $moveFileName, null);
+            //dd($awsBucketReference, $fileObjectPath, $destPrefix, $moveFileName);
         } catch (\Throwable $th) {
+            ///dd($th);
             return null;
         }
     }
 
      //v8 changes - optional parameter after required param
     //public static function moveFile($awsBucketReference, $sourceFile = null, $destPrefix = null, $fileName)
-    public static function moveFile($awsBucketReference, $fileName, $sourceFile = null, $destPrefix = null)
+    public static function moveFile($awsBucketReference, $sourceFile = null, $destPrefix = null, $fileName)
     {
         try {
             return Storage::disk($awsBucketReference)->move($sourceFile, $destPrefix . $fileName);
         } catch (\Throwable $th) {
+            dd($th);
             return null;
         }
     }
