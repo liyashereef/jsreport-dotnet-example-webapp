@@ -98,7 +98,7 @@ class UppyS3MultipartController extends Controller
         $fileName = pathinfo($filenameRequest, PATHINFO_FILENAME);
         $fileExtension = pathinfo($filenameRequest, PATHINFO_EXTENSION);
         // $folder = config('filesystems.disks.awsS3Bucket.bucket') ? config('filesystems.disks.awsS3Bucket.bucket') : '';
-        $key = "temp/contentmanager/".Str::of($fileName.'_'.microtime())->slug('_').'.'.$fileExtension;
+        $key = "temp/contentmanager/".date("Y-m-d")."/".Str::of($fileName.'_'.microtime())->slug('_').'.'.$fileExtension;
 
         try {
             $result = $this->client->createMultipartUpload([

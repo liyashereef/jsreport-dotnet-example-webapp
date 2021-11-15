@@ -156,10 +156,14 @@ class ManageContentRepository
                     "sequence" => 1,
                 ]);
             }
-
+            $filePthlink=$request->uploadedS3VideoFileName;
+            if($filePthlink!=""){
+                $explodedFilPath=explode("temp/",$filePthlink);
+                S3HelperService::setPersistent("temp/".$explodedFilPath[1], $Id);  
+            }
             //$this->s3AttachmentRepository->moveFile("s3", "temp", "02_2021", $s3File);
             //S3Helper::moveFile("awsS3Bucket", null, null, $request->uploadedS3VideoFileName, $Id);
-            S3HelperService::setPersistent($request->uploadedS3VideoFileName, $Id);
+            S3HelperService::setPersistent(date("Y-m-d")."/".$request->uploadedS3VideoFileName, $Id);
         }
         for ($i = 1; $i < 5; $i++) {
             if ($request->get("uploadedS3AttachedFileName" . $i)) {
@@ -178,8 +182,12 @@ class ManageContentRepository
                         "sequence" => 1,
                     ]);
                 }
+                $filePthlink=$request->get("uploadedS3AttachedFileName" . $i);
+                if($filePthlink!=""){
+                    $explodedFilPath=explode("temp/",$filePthlink);
+                    S3HelperService::setPersistent("temp/".$explodedFilPath[1], $Id);  
+                }
                 
-                S3HelperService::setPersistent($request->get("uploadedS3AttachedFileName" . $i), $Id);
             }
         }
         return $uploadedFileIndex;
