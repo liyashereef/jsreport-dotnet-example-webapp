@@ -229,198 +229,198 @@ return [
         [
             'text' => 'User Management',
             'url' => 'admin/user',
-            'icon' => 'users',
+            'icon' => 'fas fa-users',
             'can' => 'manage-users',
         ],
         [
             'text' => 'User Allocation',
             'url' => 'admin/allocation',
-            'icon' => 'check-square-o',
+            'icon' => 'fa fa-check-square',
             'can' => 'employee-allocation',
         ],
         'CUSTOMER',
         [
             'text' => 'Customers',
             'url' => 'admin/customer',
-            'icon' => 'male',
+            'icon' => 'fas fa-male',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Customers Shift',
             'url' => 'admin/customers-shift',
-            'icon' => 'male',
+            'icon' => 'fas fa-male',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Customer Fences',
             'url' => 'admin/customerfences',
-            'icon' => 'simplybuilt',
+            'icon' => 'fab fa-simplybuilt',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Email - Client Groups',
             'url' => 'admin/email-groups',
-            'icon' => 'envelope',
+            'icon' => 'fas fa-envelope',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Email Accounts',
             'url' => 'admin/email-accounts',
-            'icon' => 'money',
+            'icon' => 'fas fa-money-bill-alt',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Guard Routes',
             'url' => 'admin/guardroutes',
-            'icon' => 'road',
+            'icon' => 'fas fa-road',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Parent Customer',
             'url' => 'admin/parentcustomer',
-            'icon' => 'male',
+            'icon' => 'fas fa-male',
             'can' => 'manage-customers',
         ],
 
         [
             'text' => 'Customer Allocation',
             'url' => 'admin/customer-allocation',
-            'icon' => 'calendar',
+            'icon' => 'fas fa-calendar',
             'can' => 'customer-allocation',
         ],
         [
             'text' => 'Shift Module',
             'url' => 'admin/customer-shift-module',
-            'icon' => 'calendar',
+            'icon' => 'fas fa-calendar',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Shift Module Dropdown',
             'url' => 'admin/customer-shift-module-dropdown',
-            'icon' => 'caret-square-o-down',
+            'icon' => 'fas fa-caret-square-o-down',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Shift Module Color Settings',
             'url' => 'admin/color_settings',
-            'icon' => 'file-photo-o',
+            'icon' => 'fas fa-file-photo-o',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Customer Rooms',
             'url' => 'admin/customer-rooms',
-            'icon' => 'th',
+            'icon' => 'fas fa-th',
             'can' => 'manage-customers',
         ],
         'RECRUITMENT REVAMP',
         [
             'text' => 'Masters',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' =>  'recruitment_masters',
             'submenu' => [
                 [
                     'text' => 'Process Steps',
                     'url' => 'admin/recruitment/process-steps',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Process Tab',
                     'url' => 'admin/recruitment/process-tab',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
 
                 ],
                 [
                     'text' => 'Brand Awareness',
                     'url' => 'admin/recruitment/brand-awareness',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'English Ratings',
                     'url' => 'admin/recruitment/english-rating',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
 
                     'text' => 'Security Awareness',
                     'url' => 'admin/recruitment/security-awareness',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Experiences',
                     'url' => 'admin/recruitment/experience-lookups',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Experience Rating',
                     'url' => 'admin/recruitment/rate-experiences',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Understandings',
                     'url' => 'admin/recruitment/commissionaires-understanding',
-                    'icon' => 'font-awesome',
+                    'icon' => 'fab fa-font-awesome',
                 ],
                 [
                     'text' => 'Competency Rating',
                     'url' => 'admin/recruitment/competency-matrix-rating',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
 
                 ],
                 [
 
                     'text' => 'Competency Category',
                     'url' => 'admin/recruitment/competency-matrix-category',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Competency',
                     'url' => 'admin/recruitment/competency-matrix',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Criteria Requirements',
                     'url' => 'admin/recruitment/criteria-lookups',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Security Clearance',
                     'url' => 'admin/recruitment/security-clearance',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Uniform Items',
                     'url' => 'admin/recruitment/uniform-items',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Uniform Sizes',
                     'url' => 'admin/recruitment/uniform-sizes',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Uniform Measurements',
                     'url' => 'admin/recruitment/uniform-measurement-points',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Onboarding Documents',
                     'url' =>  'admin/recruitment/onboarding-documents',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Match Score Criteria',
                     'url' => 'admin/recruitment/match-score-criteria',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Job Requisition Reasons',
                     'url' => 'admin/recruitment/job-requisition-reason',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Assignment Types',
                     'url' => 'admin/recruitment/candidate-assignment-type',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Required Timings',
@@ -430,351 +430,351 @@ return [
                 [
                     'text' => 'Required Trainings',
                     'url' => 'admin/recruitment/training',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Job Ticket Settings',
                     'url' => 'admin/recruitment/job-ticket-settings',
-                    'icon' => 'ticket',
+                    'icon' => 'fas fa-ticket',
                 ],
                 [
                     'text' => 'Score Criteria',
                     'url' => 'admin/recruitment/score-criteria',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Candidate Feedback',
                     'url' => 'admin/recruitment/candidate-feedback-lookup',
-                    'icon' => 'edit',
+                    'icon' => 'fas fa-edit',
                 ],
                 [
                     'text' => 'Licence Threshold',
                     'url' => 'admin/recruitment/licence-threshold',
-                    'icon' => 'font-awesome',
+                    'icon' => 'fas fa-font-awesome',
                 ],
             ],
         ],
         [
             'text' => 'Document Allocation',
             'url' =>  'admin/recruitment/document-allocation',
-            'icon' => 'file-text',
+            'icon' => 'fas fa-file-text',
             'can' =>  'recruitment_masters',
         ],
         [
             'text' => 'Uniform Kit',
             'url' =>  'admin/recruitment/customer-uniform-kits',
-            'icon' => 'black-tie',
+            'icon' => 'fas fa-black-tie',
             'can' =>  'recruitment_masters',
         ],
         'MASTERS',
         [
             'text' => 'General',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             // 'can' => 'manage-masters',
             'can' => 'general_masters',
             'submenu' => [
                 [
                     'text' => 'Site Settings',
                     'url' => 'admin/sitesettings',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Client Schedule Settings',
                     'url' => 'admin/threshold',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                     'can' => 'manage-schedule-threshold',
                 ],
                 [
                     'text' => 'Pay Periods',
                     'url' => 'admin/payperiod',
-                    'icon' => 'hourglass',
+                    'icon' => 'fas fa-hourglass',
                 ],
                 [
                     'text' => 'Holidays',
                     'url' => 'admin/holiday',
-                    'icon' => 'plane',
+                    'icon' => 'fas fa-plane',
                 ],
                 [
                     'text' => 'Work Types',
                     'url' => 'admin/worktype',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Positions',
                     'url' => 'admin/position',
-                    'icon' => 'sort-amount-asc',
+                    'icon' => 'fas fa-sort-amount-asc',
                 ],
                 [
                     'text' => 'Regions',
                     'url' => 'admin/region',
-                    'icon' => 'globe',
+                    'icon' => 'fas fa-globe',
                 ],
                 [
                     'text' => 'Industry Sectors',
                     'url' => 'admin/industry-sector',
-                    'icon' => 'industry',
+                    'icon' => 'fas fa-industry',
                 ],
                 [
                     'text' => 'Employee Ratings',
                     'url' => 'admin/employee-rating',
-                    'icon' => 'star',
+                    'icon' => 'fas fa-star',
                 ],
                 [
                     'text' => 'Smart Phone Types',
                     'url' => 'admin/smart-phone-type',
-                    'icon' => 'mobile',
+                    'icon' => 'fas fa-mobile',
                 ],
                 [
                     'text' => 'Role',
                     'url' => 'admin/rolelookup',
-                    'icon' => 'book',
+                    'icon' => 'fas fa-book',
                 ],
                 [
                     'text' => 'User Certificates',
                     'url' => 'admin/user-certificate',
-                    'icon' => 'book',
+                    'icon' => 'fas fa-book',
                 ],
                 [
                     'text' => 'Customer Types',
                     'url' => 'admin/customer-types',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                     // 'can' => 'manage-user-certificate-expiry-settings', //TODO:check later
                 ],
                 [
                     'text' => 'Document Expiry Settings',
                     'url' => 'admin/user-certificate-expiry-settings',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                     'can' => 'manage-user-certificate-expiry-settings',
                 ],
                 [
                     'text' => 'Permission Mapping',
                     'url' => 'admin/permission-mapping',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                 ],
                 [
                     'text' => 'User Payroll Groups',
                     'url' => 'admin/user-payroll-groups',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                     // 'can' => 'manage-schedule-threshold', TODO://add permission
                 ],
                 [
                     'text' => 'Marital Status',
                     'url' => 'admin/marital-status',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                     // 'can' => 'manage-schedule-threshold', TODO://add permission
                 ],
                 [
                     'text' => 'Banks',
                     'url' => 'admin/banks',
-                    'icon' => 'university',
+                    'icon' => 'fas fa-university',
                 ],
                 [
                     'text' => 'Salutation',
                     'url' => 'admin/salutation',
-                    'icon' => 'venus-mars',
+                    'icon' => 'fas fa-venus-mars',
                 ],
                 [
                     'text' => 'Contact Relation',
                     'url' => 'admin/user-emergency-contact-relation',
-                    'icon' => 'male',
+                    'icon' => 'fas fa-male',
                 ],
                 [
                     'text' => 'Summary Dashboard',
                     'url' => 'admin/summary-dashboard',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
             ],
         ],
         [
             'text' => 'Recruiting',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             // 'can' => 'manage-masters',
             'can' => 'recruiting_masters',
             'submenu' => [
                 [
                     'text' => 'Job Requisition Reasons',
                     'url' => 'admin/job-requisition-reason',
-                    'icon' => 'black-tie',
+                    'icon' => 'fas fa-black-tie',
                 ],
                 [
                     'text' => 'Policy and Procedure',
                     'url' => 'admin/rating-policy',
-                    'icon' => 'shield',
+                    'icon' => 'fas fa-shield',
                 ],
 
                 [
                     'text' => 'Assignment Types',
                     'url' => 'admin/candidate-assignment-type',
-                    'icon' => 'calendar-check-o',
+                    'icon' => 'fas fa-calendar-check-o',
                 ],
                 [
                     'text' => 'Required Trainings',
                     'url' => 'admin/training',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Required Timings',
                     'url' => 'admin/training-timing',
-                    'icon' => 'clock-o',
+                    'icon' => 'fas fa-clock-o',
                 ],
                 [
                     'text' => 'Criteria Requirements',
                     'url' => 'admin/criteria',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Experiences',
                     'url' => 'admin/candidate-experience',
-                    'icon' => 'shield',
+                    'icon' => 'fas fa-shield',
                 ],
                 [
                     'text' => 'Candidate Feedback',
                     'url' => 'admin/candidate-feedback-lookup',
-                    'icon' => 'edit',
+                    'icon' => 'fas fa-edit',
                 ],
                 [
                     'text' => 'Tracking Process',
                     'url' => 'admin/tracking-lookup',
-                    'icon' => 'exchange',
+                    'icon' => 'fas fa-exchange',
                 ],
                 [
                     'text' => 'Security Clearance',
                     'url' => 'admin/security-clearance',
-                    'icon' => 'bullseye',
+                    'icon' => 'fas fa-bullseye',
                 ],
                 [
                     'text' => 'Schedule Assignment Types',
                     'url' => 'admin/schedule-assignment-type',
-                    'icon' => 'calendar-check-o',
+                    'icon' => 'fas fa-calendar-check-o',
                 ],
                 [
                     'text' => 'Termination Reasons',
                     'url' => 'admin/candidate-termination-reason',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Exit Termination Reasons',
                     'url' => 'admin/exit-termination-reason',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Exit Resignation Reasons',
                     'url' => 'admin/exit-resignation-reason',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Whistleblower Categories',
                     'url' => 'admin/employee-whistleblower-category',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Whistleblower Priorities',
                     'url' => 'admin/employee-whistleblower-priority',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Brand Awareness',
                     'url' => 'admin/candidate-brand-awareness',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Security Awareness',
                     'url' => 'admin/candidate-security-awareness',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
 
                 [
                     'text' => 'Candidate Password',
                     'url' => 'admin/settings/genericpwd',
-                    'icon' => 'lock',
+                    'icon' => 'fas fa-lock',
                 ],
                 [
                     'text' => 'Schedule Shift Timings',
                     'url' => 'admin/schedule-shift-timings',
-                    'icon' => 'map-marker',
+                    'icon' => 'fas fa-map-marker',
                 ],
                 [
                     'text' => 'Schedule Maximum Hours',
                     'url' => 'admin/schedule-maximum-hours',
-                    'icon' => 'hourglass',
+                    'icon' => 'fas fa-hourglass',
                 ],
                 [
                     'text' => 'Competency Category',
                     'url' => 'admin/competency-matrix-category',
-                    'icon' => 'table',
+                    'icon' => 'fas fa-table',
                 ],
                 [
                     'text' => 'Competency',
                     'url' => 'admin/competency-matrix',
-                    'icon' => 'table',
+                    'icon' => 'fas fa-table',
                 ],
                 [
                     'text' => 'English Ratings',
                     'url' => 'admin/english-rating',
-                    'icon' => 'star',
+                    'icon' => 'fas fa-star',
                 ],
                 [
                     'text' => 'Competency Rating',
                     'url' => 'admin/competency-matrix-rating',
-                    'icon' => 'table',
+                    'icon' => 'fas fa-table',
                 ],
                 [
                     'text' => 'Experience Rating',
                     'url' => 'admin/rate-experiences',
-                    'icon' => 'star',
+                    'icon' => 'fas fa-star',
                 ],
                 [
                     'text' => 'Understandings',
                     'url' => 'admin/commissionaires-understanding',
-                    'icon' => 'font-awesome',
+                    'icon' => 'fas fa-font-awesome',
                 ],
                 [
                     'text' => 'Licence Threshold',
                     'url' => 'admin/licence-threshold',
-                    'icon' => 'font-awesome',
+                    'icon' => 'fas fa-font-awesome',
                 ],
                 [
                     'text' => 'Job Ticket Settings',
                     'url' => 'admin/job-ticket-settings',
-                    'icon' => 'ticket',
+                    'icon' => 'fas fa-ticket',
                 ],
                 [
                     'text' => 'Dashboard Settings',
                     'url' => 'admin/recruitment_dashboard_index',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Job Post Finding',
                     'url' => 'admin/job-post-finding',
-                    'icon' => 'bullseye',
+                    'icon' => 'fas fa-bullseye',
                 ],
                 [
                     'text' => 'Whistleblower Master',
                     'url' => 'admin/whistleblower-master',
-                    'icon' => 'star',
+                    'icon' => 'fas fa-star',
                 ],
             ],
         ],
         [
             'text' => 'Employee Time Off',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             // 'can' => 'manage-masters',
             'can' => 'employee_timeoff_masters',
             'submenu' => [
                 [
                     'text' => 'Create ESA Category',
                     'url' => 'admin/time-off-category',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Manage Request Type',
                     'url' => 'admin/time-off-request-type',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'OC Email',
                     'url' => 'admin/operation-centre-email',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
             ],
         ],
@@ -786,68 +786,68 @@ return [
         ],*/
         [
             'text' => 'Supervisor Panel',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             // 'can' => 'manage-masters',
             'can' => 'supervisor_panel_masters',
             'submenu' => [
                 [
                     'text' => 'Templates',
                     'url' => 'admin/templates',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                     //'can' => 'manage-blog',
                 ],
                 [
                     'text' => 'Template Settings',
                     'url' => 'admin/templatesettings',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                     //'can' => 'manage-blog',
                 ],
                 [
                     'text' => 'Questions Categories',
                     'url' => 'admin/templatequestioncategory',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Incident Categories',
                     'url' => 'admin/incident_categories',
-                    'icon' => 'list-alt',
+                    'icon' => 'fas fa-list-alt',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Incident Report Subjects',
                     'url' => 'admin/incidentreportsubjects',
-                    'icon' => 'book',
+                    'icon' => 'fas fa-book',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Leave Reasons',
                     'url' => 'admin/leavereasons',
-                    'icon' => 'black-tie',
+                    'icon' => 'fas fa-black-tie',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Site Note Status',
                     'url' => 'admin/sitestatus',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'STC Report Colors',
                     'url' => 'admin/stc-template-rule',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'STC Threshold',
                     'url' => 'admin/stc_threshold_index',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Incident Priorities',
                     'url' => 'admin/incident-priority',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
 
                 ],
 
@@ -855,77 +855,77 @@ return [
         ],
         [
             'text' => 'Timetracker',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             // 'can' => 'manage-masters',
             'can' => 'time_tracker_masters',
             'submenu' => [
                 [
                     'text' => 'Mobile App Settings',
                     'url' => 'admin/mobilesettings',
-                    'icon' => 'hourglass',
+                    'icon' => 'fas fa-hourglass',
                 ],
                 [
                     'text' => 'Spare Bonus Model Settings',
                     'url' => 'admin/spare-bonus-model-settings',
-                    'icon' => 'hourglass',
+                    'icon' => 'fas fa-hourglass',
                 ],
                 [
                     'text' => 'Security Patrol Subject',
                     'url' => 'admin/mobile-security-patrol-subject',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Satellite Tracking Settings',
                     'url' => 'timetracker/admin/satellite-tracking-settings',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'QR Patrol Widget Settings',
                     'url' => 'admin/qr-patrol-settings',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                 ],
                 [
                     'text' => 'Timesheet Configuration',
                     'url' => 'admin/timesheet-configuration',
-                    'icon' => 'envelope',
+                    'icon' => 'fas fa-envelope',
                 ],
                 [
                     'text' => 'CPID',
                     'url' => 'admin/cp-id',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'CPID Functions',
                     'url' => 'admin/cpid-function',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Activity Type',
                     'url' => 'admin/work-hour-type',
-                    'icon' => 'envelope',
+                    'icon' => 'fas fa-envelope',
                 ],
                 [
                     'text' => 'Activity Code Setup',
                     'url' => 'admin/work-hour-customer',
-                    'icon' => 'envelope',
+                    'icon' => 'fas fa-envelope',
                 ],
                 [
                     'text' => 'Payroll Settings',
                     'url' => 'admin/payroll-settings',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
             ],
         ],
         [
             'text' => 'Key Management',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'key_management_lookups',
 
             'submenu' => [
                 [
                     'text' => 'Identification Document',
                     'url' => 'admin/identification-document',
-                    'icon' => 'id-card',
+                    'icon' => 'fas fa-id-card',
                 ],
             ],
         ],
@@ -937,17 +937,17 @@ return [
                 [
                     'text' => 'Dispatch Request Type',
                     'url' => 'admin/dispatch-request-types',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Push Notification',
                     'url' => 'admin/push-notification-role-settings',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Coordinate Idle',
                     'url' => 'admin/dispatch-coordinate-settings',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
             ],
         ],
@@ -980,18 +980,18 @@ return [
         ],*/
         [
             'text' => 'Compliance',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'compliance_lookups',
             'submenu' => [
                 [
                     'text' => 'Categories',
                     'url' => 'admin/compliance-policy-category',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Policy Dashboard',
                     'url' => 'admin/policy',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 //                [
                 //                    'text' => 'Policy Analytics',
@@ -1002,37 +1002,37 @@ return [
         ],
         [
             'text' => 'Capacity Tool',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'capacity_tool_lookups',
             'submenu' => [
                 [
                     'text' => 'Area',
                     'url' => 'admin/area',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                     //'can' => 'manage-blog',
                 ],
                 [
                     'text' => 'Task Frequency',
                     'url' => 'admin/task-frequency',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                     //'can' => 'manage-blog',
                 ],
                 [
                     'text' => 'Status',
                     'url' => 'admin/status',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Objective',
                     'url' => 'admin/objective',
-                    'icon' => 'book',
+                    'icon' => 'fas fa-book',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
                     'text' => 'Skill Type',
                     'url' => 'admin/skill-type',
-                    'icon' => 'black-tie',
+                    'icon' => 'fas fa-black-tie',
                     //'can' => 'manage-masters-payperiods',
                 ],
 
@@ -1040,216 +1040,216 @@ return [
         ],
         [
             'text' => 'Client',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'client_lookups',
             'submenu' => [
                 [
                     'text' => 'Feedback Types',
                     'url' => 'admin/client-feedback',
-                    'icon' => 'star',
+                    'icon' => 'fas fa-star',
                 ],
                 [
                     'text' => 'Severity Level',
                     'url' => 'admin/severity',
-                    'icon' => 'hourglass',
+                    'icon' => 'fas fa-hourglass',
                 ],
                 [
                     'text' => 'Visitor Log Template',
                     'url' => 'admin/visitorlog-templates',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Template Allocation',
                     'url' => 'admin/template-allocation',
-                    'icon' => 'check-square-o',
+                    'icon' => 'fas fa-check-square-o',
                 ],
                 [
                     'text' => 'Terms And Conditions',
                     'url' => 'admin/customer-terms-and-conditions',
-                    'icon' => 'legal',
+                    'icon' => 'fas fa-legal',
                 ],
                 [
                     'text' => 'Visitor Status',
                     'url' => 'admin/visitor-log-status-view',
-                    'icon' => 'legal',
+                    'icon' => 'fas fa-legal',
                 ],
                 [
                     'text' => 'Screening Templates',
                     'url' => 'admin/visitor-log/screening-templates',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
 
             ],
         ],
         [
             'text' => 'Contracts',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'contractsadmin',
             'submenu' => [
                 [
                     'text' => 'List Reason for submission',
                     'url' => 'admin/contracts/view-submission-reason',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'List Business Segment',
                     'url' => 'admin/contracts/view-business-segment',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'List Line of Business',
                     'url' => 'admin/contracts/view-business-line',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Billing Rate Changes',
                     'url' => 'admin/contracts/view-billing-rate-changes',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Billing Frequency',
                     'url' => 'admin/contracts/view-billing-cycle',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Payment Methods',
                     'url' => 'admin/contracts/view-payment-methods',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Device Access',
                     'url' => 'admin/contracts/view-device-access',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Office Address',
                     'url' => 'admin/contracts/view-office-address',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Cellphone Provider',
                     'url' => 'admin/contracts/view-cellphone-provider',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Division Lookup',
                     'url' => 'admin/contracts/view-division-lookup',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Holiday Payment',
                     'url' => 'admin/contracts/view-holiday-payment',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'RFP Tracking Process Step',
                     'url' => 'admin/rfp/process-step',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'RFP Response Type',
                     'url' => 'admin/rfp/response-type',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Post Order Topics',
                     'url' => 'admin/contracts/post-order-topics',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Post Order Groups',
                     'url' => 'admin/contracts/post-order-groups',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'RFP Catalog Group',
                     'url' => 'admin/rfp-catalogue/group',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Onboarding Template',
                     'url' => 'admin/client-onboarding/template',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Onboarding Settings',
                     'url' => 'admin/client-onboarding/settings',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Contract Expiry Settings',
                     'url' => 'admin/contract-expiry/settings',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
             ],
         ],
         [
             'text' => 'Documents',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'document_lookups',
             'submenu' => [
 
                 [
                     'text' => 'Document Category',
                     'url' => 'admin/document-category',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Document Names',
                     'url' => 'admin/document-name',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
 
                 [
                     'text' => 'Other Category',
                     'url' => 'admin/other-document-category',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Other Subcategory',
                     'url' => 'admin/other-category',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
 
             ],
         ],
         [
             'text' => 'Vehicle',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'vehicle',
             'submenu' => [
                 [
                     'text' => 'Vehicle Lists',
                     'url' => 'admin/vehicle-list',
-                    'icon' => 'car',
+                    'icon' => 'fas fa-car',
                 ],
                 [
                     'text' => 'Maintenance Category',
                     'url' => 'admin/vehicle-maintenance-category',
-                    'icon' => 'car',
+                    'icon' => 'fas fa-car',
                 ],
                 [
                     'text' => 'Maintenance Type',
                     'url' => 'admin/vehicle-maintenance-type',
-                    'icon' => 'car',
+                    'icon' => 'fas fa-car',
                 ],
                 [
                     'text' => 'Vehicle Vendor',
                     'url' => 'admin/vehicle-vendor-lookup',
-                    'icon' => 'car',
+                    'icon' => 'fas fa-car',
                 ],
 
             ],
         ],
         [
             'text' => 'Expense',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'expense_masters',
             'submenu' => [
                 [
                     'text' => 'Tax Master',
                     'url' => 'admin/tax-master',
-                    'icon' => 'money',
+                    'icon' => 'fas fa-money',
                 ],
 
                 /*  [
@@ -1260,133 +1260,133 @@ return [
                 [
                     'text' => 'Mode of Payment',
                     'url' => 'admin/expense-payment-mode',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Expense Category',
                     'url' => 'admin/expense-category',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
 
                 [
                     'text' => 'GL Code',
                     'url' => 'admin/view-gl-code',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Mileage Reimbursement',
                     'url' => 'admin/mileage-reimbursement',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
 
                 [
                     'text' => 'Cost Center',
                     'url' => 'admin/cost-center',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
                 [
                     'text' => 'Expense Settings',
                     'url' => 'admin/expense-settings',
-                    'icon' => 'file-text',
+                    'icon' => 'fas fa-file-text',
                 ],
             ],
         ],
         [
             'text' => 'Project',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'project_settings',
             'submenu' => [
                 [
                     'text' => 'Interval Settings',
                     'url' => 'admin/interval',
-                    'icon' => 'tasks',
+                    'icon' => 'fas fa-tasks',
                 ],
                 [
                     'text' => 'Rating Tolerance',
                     'url' => 'admin/rating-tolerance',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                 ],
             ],
         ],
         [
             'text' => 'IDS Scheduling',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'ids_admin',
             'submenu' => [
                 [
                     'text' => 'Services',
                     'url' => 'admin/idsServices',
-                    'icon' => 'money',
+                    'icon' => 'fas fa-money',
                 ],
                 [
                     'text' => 'Offices',
                     'url' => 'admin/idsOffice',
-                    'icon' => 'globe',
+                    'icon' => 'fas fa-globe',
                 ],
                 [
                     'text' => 'Location Allocation',
                     'url' => 'admin/location-allocation',
-                    'icon' => 'list-alt',
+                    'icon' => 'fas fa-list-alt',
                 ],
                 [
                     'text' => 'Payment Methods',
                     'url' => 'admin/payment-methods',
-                    'icon' => 'money',
+                    'icon' => 'fas fa-money',
                 ],
                 [
                     'text' => 'Payment Reasons',
                     'url' => 'admin/payment-reasons',
-                    'icon' => 'hourglass',
+                    'icon' => 'fas fa-hourglass',
                 ],
                 [
                     'text' => 'Custom Question',
                     'url' => 'admin/custom-question',
-                    'icon' => 'question-circle',
+                    'icon' => 'fas fa-question-circle',
                 ],
                 [
                     'text' => 'Settings',
                     'url' => 'admin/ids-noshow-settings',
-                    'icon' => 'cogs',
+                    'icon' => 'fas fa-cogs',
                 ],
                 [
                     'text' => 'Passport Photo',
                     'url' => 'admin/ids-passport-photos',
-                    'icon' => 'camera',
+                    'icon' => 'fas fa-camera',
                 ],
 
             ],
         ],
         [
             'text' => 'Training',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'training_learn_lookups',
             'submenu' => [
                 [
                     'text' => 'Training Settings',
                     'url' => 'admin/training-settings',
-                    'icon' => 'graduation-cap',
+                    'icon' => 'fas fa-graduation-cap',
                 ],
             ],
         ],
         [
             'text' => 'KPI Master',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'view_kpi_admin',
             'submenu' => [
                 [
                     'text' => 'Groups',
                     'url' => 'admin/kpi/groups/view',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Headers',
                     'url' => 'admin/kpi/headers',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Dictionary',
                     'url' => 'admin/kpi/view',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
 
                 // [
@@ -1397,156 +1397,156 @@ return [
                 [
                     'text' => 'Header KPI Allocation',
                     'url' => 'admin/kpi/headers-kpi/allocation',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
 
             ],
         ],
         [
             'text' => 'OSGC',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'osgc_lookups',
             'submenu' => [
                 [
                     'text' => 'OSGC Courses',
                     'url' => 'admin/osgc-course',
-                    'icon' => 'graduation-cap',
+                    'icon' => 'fas fa-graduation-cap',
                 ],
                 [
                     'text' => 'Registered Users',
                     'url' => 'admin/osgc-users',
-                    'icon' => 'male',
+                    'icon' => 'fas fa-male',
                 ],
             ],
         ],
         [
             'text' => 'Uniform Scheduling',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'uniform_scheduling_admin',
             'submenu' => [
                 [
                     'text' => 'Offices',
                     'url' => 'admin/uniform-scheduling/offices',
-                    'icon' => 'graduation-cap',
+                    'icon' => 'fas fa-graduation-cap',
                 ],
                 [
                     'text' => 'Custom Question',
                     'url' => 'admin/uniform-scheduling/custom-question',
-                    'icon' => 'question-circle',
+                    'icon' => 'fas fa-question-circle',
                 ],
             ],
         ],
         [
             'text' => 'Sensors',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'sensors_admin',
             'submenu' => [
                 [
                     'text' => 'Sensor',
                     'url' => 'admin/sensors/view',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
                 [
                     'text' => 'Settings',
                     'url' => 'admin/sensors/settings',
-                    'icon' => 'cog',
+                    'icon' => 'fas fa-cog',
                 ],
 
             ],
         ],
         [
             'text' => 'IP Camera',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'view_ipcamera',
             'submenu' => [
                 [
                     'text' => 'IP Camera',
                     'url' => 'admin/ip-camera/view',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
                 [
                     'text' => 'Dashboard Configuration',
                     'url' => 'admin/ip-camera/ip-camera-dashboard-index',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ]
             ],
         ],
         [
             'text' => 'Content Manager',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'content_manager_settings',
             'submenu' => [
                 [
                     'text' => 'Add Content',
                     'url' => 'admin/content-manager/view',
-                    'icon' => 'list-alt',
+                    'icon' => 'fas fa-list-alt',
                 ],
             ],
         ],
         [
             'text' => 'Employee Survey',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'employee_survey_admin',
             'submenu' => [
                 [
                     'text' => 'Template',
                     'url' => 'admin/employee-survey-template',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
 
             ],
         ],
         [
             'text' => 'Departments',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'department_master',
             'submenu' => [
                 [
                     'text' => 'Department Master',
                     'url' => 'admin/department-master',
-                    'icon' => 'graduation-cap',
+                    'icon' => 'fas fa-graduation-cap',
                 ],
 
             ],
         ],
         [
             'text' => 'Uniform',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'uniform_settings',
             'submenu' => [
                 [
                     'text' => 'Uniform Products',
                     'url' => 'admin/uniform-products',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
                 [
                     'text' => 'URA Rates',
                     'url' => 'admin/ura-rates',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
                 [
                     'text' => 'URA Settings',
                     'url' => 'admin/ura-settings',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ],
             ],
         ],
         'SETTINGS',
         [
             'text' => 'Email',
-            'icon' => 'envelope',
+            'icon' => 'fas fa-envelope',
             'can' => 'settings-email',
             'submenu' => [
                 [
                     'text' => 'Settings',
                     'url' => 'admin/settings/mail',
                     'icon' => 'money',
-                    'can' => 'settings-email',
+                    'can' => 'fas fa-settings-email',
                 ],
                 [
                     'text' => 'Email Template',
                     'url' => 'admin/email-template',
-                    'icon' => 'envelope',
+                    'icon' => 'fas fa-envelope',
 
                 ],
 
@@ -1558,7 +1558,7 @@ return [
                 [
                     'text' => 'Customer Email Allocation',
                     'url' => 'admin/email-template-allocation/list',
-                    'icon' => 'envelope',
+                    'icon' => 'fas fa-envelope',
                 ],
             ],
 
@@ -1566,7 +1566,7 @@ return [
         [
             'text' => 'Roles & Permissions',
             'url' => 'admin/role',
-            'icon' => 'users',
+            'icon' => 'fas fa-users',
             'can' => 'manage-roles-permissions',
         ],
     ],
