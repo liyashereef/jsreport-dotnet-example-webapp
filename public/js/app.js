@@ -248,7 +248,7 @@ function _initChunks2() {
   const chunks = [];
   const desiredChunkSize = this.options.getChunkSize(this.file); // at least 5MB per request, at most 10k requests
 
-  const minChunkSize = Math.max(5 * MB, Math.ceil(this.file.size / 10000));
+  const minChunkSize = Math.max(5 * MB, Math.ceil(this.file.size / 2500));
   const chunkSize = Math.max(desiredChunkSize, minChunkSize); // Upload zero-sized files in one zero-sized chunk
 
   if (this.file.size === 0) {
