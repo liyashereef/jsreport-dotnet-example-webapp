@@ -291,19 +291,19 @@ return [
         [
             'text' => 'Shift Module',
             'url' => 'admin/customer-shift-module',
-            'icon' => 'fas fa-calendar',
+            'icon' => ' fas fa-square',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Shift Module Dropdown',
             'url' => 'admin/customer-shift-module-dropdown',
-            'icon' => 'fas fa-caret-square-o-down',
+            'icon' => ' fas fa-square',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Shift Module Color Settings',
             'url' => 'admin/color_settings',
-            'icon' => 'fas fa-file-photo-o',
+            'icon' => ' fas fa-square',
             'can' => 'manage-customers',
         ],
         [
@@ -457,13 +457,13 @@ return [
         [
             'text' => 'Document Allocation',
             'url' =>  'admin/recruitment/document-allocation',
-            'icon' => 'fas fa-file-text',
+            'icon' => 'fas fa-file-text-o',
             'can' =>  'recruitment_masters',
         ],
         [
             'text' => 'Uniform Kit',
             'url' =>  'admin/recruitment/customer-uniform-kits',
-            'icon' => 'fas fa-black-tie',
+            'icon' => 'fas fa-list',
             'can' =>  'recruitment_masters',
         ],
         'MASTERS',
@@ -594,28 +594,28 @@ return [
                 [
                     'text' => 'Job Requisition Reasons',
                     'url' => 'admin/job-requisition-reason',
-                    'icon' => 'fas fa-black-tie',
+                    'icon' => 'fas fa-stream',
                 ],
                 [
                     'text' => 'Policy and Procedure',
                     'url' => 'admin/rating-policy',
-                    'icon' => 'fas fa-shield',
+                    'icon' => 'far fa-sticky-note',
                 ],
 
                 [
                     'text' => 'Assignment Types',
                     'url' => 'admin/candidate-assignment-type',
-                    'icon' => 'fas fa-calendar-check-o',
+                    'icon' => 'fas fa-calendar',
                 ],
                 [
                     'text' => 'Required Trainings',
                     'url' => 'admin/training',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-text-o',
                 ],
                 [
                     'text' => 'Required Timings',
                     'url' => 'admin/training-timing',
-                    'icon' => 'fas fa-clock-o',
+                    'icon' => 'fas fa-calendar',
                 ],
                 [
                     'text' => 'Criteria Requirements',
@@ -625,7 +625,7 @@ return [
                 [
                     'text' => 'Experiences',
                     'url' => 'admin/candidate-experience',
-                    'icon' => 'fas fa-shield',
+                    'icon' => 'fas fa-stream',
                 ],
                 [
                     'text' => 'Candidate Feedback',
@@ -635,7 +635,7 @@ return [
                 [
                     'text' => 'Tracking Process',
                     'url' => 'admin/tracking-lookup',
-                    'icon' => 'fas fa-exchange',
+                    'icon' => ' fas fa-square',
                 ],
                 [
                     'text' => 'Security Clearance',
@@ -645,7 +645,7 @@ return [
                 [
                     'text' => 'Schedule Assignment Types',
                     'url' => 'admin/schedule-assignment-type',
-                    'icon' => 'fas fa-calendar-check-o',
+                    'icon' => 'fas fa-calendar',
                 ],
                 [
                     'text' => 'Termination Reasons',
@@ -805,7 +805,7 @@ return [
                 [
                     'text' => 'Questions Categories',
                     'url' => 'admin/templatequestioncategory',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-text-o',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
@@ -823,7 +823,7 @@ return [
                 [
                     'text' => 'Leave Reasons',
                     'url' => 'admin/leavereasons',
-                    'icon' => 'fas fa-black-tie',
+                    'icon' => 'fas fa-stream',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
@@ -931,7 +931,7 @@ return [
         ],
         [
             'text' => 'MST',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'can' => 'mst_lookups',
             'submenu' => [
                 [
@@ -1020,7 +1020,7 @@ return [
                 [
                     'text' => 'Status',
                     'url' => 'admin/status',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-info-circle',
                     //'can' => 'manage-masters-payperiods',
                 ],
                 [
@@ -1032,7 +1032,7 @@ return [
                 [
                     'text' => 'Skill Type',
                     'url' => 'admin/skill-type',
-                    'icon' => 'fas fa-black-tie',
+                    'icon' => 'fas fa-dot-circle',
                     //'can' => 'manage-masters-payperiods',
                 ],
 
@@ -1061,17 +1061,17 @@ return [
                 [
                     'text' => 'Template Allocation',
                     'url' => 'admin/template-allocation',
-                    'icon' => 'fas fa-check-square-o',
+                    'icon' => 'fas fa-square',
                 ],
                 [
                     'text' => 'Terms And Conditions',
                     'url' => 'admin/customer-terms-and-conditions',
-                    'icon' => 'fas fa-legal',
+                    'icon' => 'fas fa-stream',
                 ],
                 [
                     'text' => 'Visitor Status',
                     'url' => 'admin/visitor-log-status-view',
-                    'icon' => 'fas fa-legal',
+                    'icon' => 'fas fa-stream',
                 ],
                 [
                     'text' => 'Screening Templates',
@@ -1089,97 +1089,97 @@ return [
                 [
                     'text' => 'List Reason for submission',
                     'url' => 'admin/contracts/view-submission-reason',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'List Business Segment',
                     'url' => 'admin/contracts/view-business-segment',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'List Line of Business',
                     'url' => 'admin/contracts/view-business-line',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Billing Rate Changes',
                     'url' => 'admin/contracts/view-billing-rate-changes',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Billing Frequency',
                     'url' => 'admin/contracts/view-billing-cycle',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Payment Methods',
                     'url' => 'admin/contracts/view-payment-methods',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Device Access',
                     'url' => 'admin/contracts/view-device-access',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Office Address',
                     'url' => 'admin/contracts/view-office-address',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Cellphone Provider',
                     'url' => 'admin/contracts/view-cellphone-provider',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Division Lookup',
                     'url' => 'admin/contracts/view-division-lookup',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Holiday Payment',
                     'url' => 'admin/contracts/view-holiday-payment',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'RFP Tracking Process Step',
                     'url' => 'admin/rfp/process-step',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'RFP Response Type',
                     'url' => 'admin/rfp/response-type',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Post Order Topics',
                     'url' => 'admin/contracts/post-order-topics',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Post Order Groups',
                     'url' => 'admin/contracts/post-order-groups',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'RFP Catalog Group',
                     'url' => 'admin/rfp-catalogue/group',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Onboarding Template',
                     'url' => 'admin/client-onboarding/template',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Onboarding Settings',
                     'url' => 'admin/client-onboarding/settings',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Contract Expiry Settings',
                     'url' => 'admin/contract-expiry/settings',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
             ],
         ],
@@ -1192,23 +1192,23 @@ return [
                 [
                     'text' => 'Document Category',
                     'url' => 'admin/document-category',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file',
                 ],
                 [
                     'text' => 'Document Names',
                     'url' => 'admin/document-name',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file',
                 ],
 
                 [
                     'text' => 'Other Category',
                     'url' => 'admin/other-document-category',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file',
                 ],
                 [
                     'text' => 'Other Subcategory',
                     'url' => 'admin/other-category',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file',
                 ],
 
             ],
@@ -1249,7 +1249,7 @@ return [
                 [
                     'text' => 'Tax Master',
                     'url' => 'admin/tax-master',
-                    'icon' => 'fas fa-money',
+                    'icon' => 'fas fa-file-alt',
                 ],
 
                 /*  [
@@ -1260,34 +1260,34 @@ return [
                 [
                     'text' => 'Mode of Payment',
                     'url' => 'admin/expense-payment-mode',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Expense Category',
                     'url' => 'admin/expense-category',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
 
                 [
                     'text' => 'GL Code',
                     'url' => 'admin/view-gl-code',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Mileage Reimbursement',
                     'url' => 'admin/mileage-reimbursement',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
 
                 [
                     'text' => 'Cost Center',
                     'url' => 'admin/cost-center',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
                 [
                     'text' => 'Expense Settings',
                     'url' => 'admin/expense-settings',
-                    'icon' => 'fas fa-file-text',
+                    'icon' => 'fas fa-file-alt',
                 ],
             ],
         ],
@@ -1316,7 +1316,7 @@ return [
                 [
                     'text' => 'Services',
                     'url' => 'admin/idsServices',
-                    'icon' => 'fas fa-money',
+                    'icon' => 'fas fa-money-check',
                 ],
                 [
                     'text' => 'Offices',
@@ -1331,7 +1331,7 @@ return [
                 [
                     'text' => 'Payment Methods',
                     'url' => 'admin/payment-methods',
-                    'icon' => 'fas fa-money',
+                    'icon' => 'fas fa-money-check-alt',
                 ],
                 [
                     'text' => 'Payment Reasons',
