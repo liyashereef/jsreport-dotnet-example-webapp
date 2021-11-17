@@ -4,8 +4,8 @@ namespace  Modules\VisitorLog\Http\Controllers\API;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Modules\VisitorLog\Http\Resources\VisitorResource;
-use Modules\VisitorLog\Http\Resources\ScreeningQuestionsResource;
+use Modules\VisitorLog\Transformers\VisitorResource;
+use Modules\VisitorLog\Transformers\ScreeningQuestionsResource;
 //Models
 use Modules\Admin\Models\Customer;
 use Modules\Admin\Models\VisitorLogTypeLookup;

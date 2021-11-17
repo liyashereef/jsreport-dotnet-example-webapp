@@ -4,7 +4,7 @@ namespace  Modules\VisitorLog\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Modules\Admin\Repositories\UserRepository;
-use Modules\VisitorLog\Http\Resources\API\UserAuthResource;
+use Modules\VisitorLog\Transformers\UserAuthResource;
 
 class AuthController
 {
@@ -16,7 +16,7 @@ class AuthController
     }
 
     public function login(Request $request)
-    { dd(1);
+    {
         try {
             //login the user
             $user = $this->userRepository->loginForApp($request, 'visitorlog_app_admin');
