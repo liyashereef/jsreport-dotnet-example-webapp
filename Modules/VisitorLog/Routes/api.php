@@ -23,10 +23,9 @@ Route::group(
     ],
     function () {
         // Visitor log devices
-        Route::get('activate/device', 'VisitorLogDeviceController@activateDevice');
-        // Route::get('me', 'AuthController@me');
+        // Route::get('activate/device', 'VisitorLogDeviceController@activateDevice');
         Route::post('login', 'AuthController@login');
-        Route::post('app/health', 'ApplicationController@applicationHealth');
+        // Route::post('app/health', 'ApplicationController@applicationHealth');
 
         //Only logged in users can access these routes
         Route::group(
@@ -38,23 +37,23 @@ Route::group(
                 Route::post('logout', 'AuthController@logout');
 
                 //Routes for getting Customers vistor log template
-                Route::get('customers/{customer_id}/templates', 'VisitorLogApiController@getCustomerTemplates');
-                Route::get('customers/{customer_id}/templates/{template_id}', 'VisitorLogApiController@getTemplate');
-                Route::get('customers/visitor-types', 'VisitorLogApiController@getVisitorTypes');
-                Route::get('customers/visitors', 'VisitorLogApiController@fetchVisitors');
-                Route::get('customers/{customer_id}/visitors', 'VisitorLogApiController@fetchVisitorsFallback'); //TODO:remove later
-                Route::get('customers-allocated', 'VisitorLogApiController@getCustomers');
-                Route::post('vlogs/store', 'VisitorLogApiController@storeVisitorLogs');
+                // Route::get('customers/{customer_id}/templates', 'VisitorLogApiController@getCustomerTemplates');
+                // Route::get('customers/{customer_id}/templates/{template_id}', 'VisitorLogApiController@getTemplate');
+                // Route::get('customers/visitor-types', 'VisitorLogApiController@getVisitorTypes');
+                Route::get('visitors', 'VisitorLogApiController@fetchVisitors');
                 Route::post('visitors/store', 'VisitorLogApiController@storeVisitors');
-                Route::get('customers/{customer_id}/terms-and-conditions', 'VisitorLogApiController@getTermsAndCondition');
-                Route::get('vlogs', 'VisitorLogApiController@getPeerSyncVisitorLogs');
+                // Route::get('customers/{customer_id}/visitors', 'VisitorLogApiController@fetchVisitorsFallback'); //TODO:remove later
+                // Route::get('customers-allocated', 'VisitorLogApiController@getCustomers');
+                Route::get('logs', 'VisitorLogApiController@getPeerSyncVisitorLogs');
+                Route::post('logs/store', 'VisitorLogApiController@storeVisitorLogs');
+                Route::get('terms-and-conditions', 'VisitorLogApiController@getTermsAndCondition');
 
                 // Visitor screening questions
-                Route::get('customers/{customer_id}/screening-questions', 'VisitorLogApiController@fetchScreeningQuestions');
+                // Route::get('customers/{customer_id}/screening-questions', 'VisitorLogApiController@fetchScreeningQuestions');
                 Route::post('screening/store', 'VisitorLogApiController@storeScreeningQuestion');
 
                 // Visitor log devices
-                Route::post('activate/device', 'VisitorLogDeviceController@activateDevice');
+                Route::post('devices/activate', 'VisitorLogDeviceController@activateDevice');
             }
         );
     }
