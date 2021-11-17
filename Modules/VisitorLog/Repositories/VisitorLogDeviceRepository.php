@@ -1,0 +1,69 @@
+<?php
+
+namespace Modules\VisitorLog\Repositories;
+
+use Modules\VisitorLog\Models\VisitorLogDevices;
+
+class VisitorLogDeviceRepository
+{
+
+    protected $model;
+
+    public function __construct(VisitorLogDevices $model){
+        $this->model = $model;
+    }
+
+    public function store($inputs){
+        return $this->model->create($inputs);
+    }
+
+    public function updateEntry($inputs){
+        return $this->model->updateOrCreate(['id' => $inputs['id']], $inputs);
+    }
+
+    public function delete($id){
+        return $this->model->where('id', $id)->delete();
+    }
+
+    public function getAll(){
+        return $this->model
+        ->with([
+            'customer' => function ($query){
+                return $query->select('id','project_number','client_name');
+            },
+            'visitorLogDeviceSettings' => function ($query){
+                return $query->select('id','visitor_log_device_id','template_id','camera_mode','scaner_camera_mode');
+            },
+            'visitorLogDeviceSettings.visitorLogTemplates' => function ($query){
+                return $query->select('id','template_name');
+            }
+        ])
+        ->get();
+    }
+
+    public function getByActivateCode($activation_code){
+        return $this->model->where('activation_code', $activation_code)
+        ->where('is_activated',0)
+        ->first();
+    }
+    public function activateDevice($inputs){
+        return $this->model->updateOrCreate(['activation_code' => $inputs['activation_code']], $inputs);
+    }
+
+    public function getById($id){
+        return $this->model
+        ->with([
+            'customer' => function ($query){
+                return $query->select('id','project_number','client_name');
+            },
+            'visitorLogDeviceSettings' => function ($query){
+                // return $query->select('id','visitor_log_device_id','template_id','camera_mode','scaner_camera_mode');
+            },
+            'visitorLogDeviceSettings.visitorLogTemplates' => function ($query){
+                return $query->select('id','template_name');
+            }
+        ])
+        ->find($id);
+    }
+
+}

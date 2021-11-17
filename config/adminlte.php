@@ -1082,6 +1082,17 @@ return [
             ],
         ],
         [
+            'text' => 'Visitor Log',
+            'icon' => 'database',
+            'submenu' => [
+                [
+                    'text' => 'Visitor Devices',
+                    'url' => 'admin/visitor-log/devices',
+                    'icon' => 'microchip',
+                ]
+            ],
+        ],
+        [
             'text' => 'Contracts',
             'icon' => 'database',
             'can' => 'contractsadmin',

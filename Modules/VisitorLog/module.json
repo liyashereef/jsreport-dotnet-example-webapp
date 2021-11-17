@@ -1,0 +1,13 @@
+{
+    "name": "VisitorLog",
+    "alias": "visitorlog",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VisitorLog\\Providers\\VisitorLogServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

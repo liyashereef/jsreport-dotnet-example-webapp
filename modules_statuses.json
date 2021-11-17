@@ -32,5 +32,6 @@
     "Uniform": true,
     "UniformScheduling": true,
     "Vehicle": true,
-    "VideoPost": true
+    "VideoPost": true,
+    "VisitorLog": true
 }
