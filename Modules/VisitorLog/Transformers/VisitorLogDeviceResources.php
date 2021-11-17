@@ -24,9 +24,9 @@ class VisitorLogDeviceResources extends JsonResource
             'customerId'=> $this->customer_id,
             'deviceId'=> $this->device_id,
             'deviceUID'=> $this->uid,
-          //   'screening' => {},
             'visitorTypes' => VisitorLogTypeLookup::orderBy('type')->select('id', 'type as name')->get(),
-            'template' => $this->visitorLogDeviceSettings->visitorLogTemplates
+            'template' => $this->visitorLogDeviceSettings->visitorLogTemplates,
+            'screening' => ($this->screening->VisitorLogScreeningTemplate->VisitorLogScreeningTemplateQuestion)? $this->screening->VisitorLogScreeningTemplate->VisitorLogScreeningTemplateQuestion : '',
 
           ];
     }

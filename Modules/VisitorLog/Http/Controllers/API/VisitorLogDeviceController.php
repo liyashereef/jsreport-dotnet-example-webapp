@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use App\Services\HelperService;
 use Modules\VisitorLog\Transformers\VisitorLogDeviceResources;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
+use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
 
 class VisitorLogDeviceController extends Controller
 {
@@ -17,10 +18,13 @@ class VisitorLogDeviceController extends Controller
 
     public function __construct(
         HelperService $helperService,
-        VisitorLogDeviceRepository $visitorLogDeviceRepository
+        VisitorLogDeviceRepository $visitorLogDeviceRepository,
+        VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository
     ) {
         $this->helperService = $helperService;
         $this->visitorLogDeviceRepository = $visitorLogDeviceRepository;
+        $this->screeningtemplateCustomerAllocationRepository = $visitorLogScreeningTemplateCustomerAllocationRepository;
+
     }
 
     /**
@@ -35,18 +39,22 @@ class VisitorLogDeviceController extends Controller
         try {
             if ($request->has('code')) {
                 $deviceDetails = $this->visitorLogDeviceRepository->getByActivateCode($request->input('code'));
-                if ($deviceDetails) {
+
+                // if ($deviceDetails) {
                     $inputs = $request->all();
                     $inputs['activation_code'] = $request->input('code');
                     $inputs['device_id'] = $request->input('deviceId');
-                    $inputs['is_activated'] = 1;
+                    // $inputs['is_activated'] = 1;
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
                     $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
+                    $r['customerId'] = $deviceDetails->customer_id;
+                    $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($r);
+                    // dd($configData->screening->VisitorLogScreeningTemplate->VisitorLogScreeningTemplateQuestion);
                     $msg = 'Done';
-                } else {
-                    $msg = 'Activation code not found/Already activated';
-                    $status = false;
-                }
+                // } else {
+                //     $msg = 'Activation code not found/Already activated';
+                //     $status = false;
+                // }
             } else {
                 $msg = 'Activation code not found';
                 $status = false;
