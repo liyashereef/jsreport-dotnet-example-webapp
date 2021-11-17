@@ -303,4 +303,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('Modules\Admin\Models\UserSkillUserValue', 'user_id');
     }
+    public function messages()
+    {
+        return $this->hasMany('Modules\Chat\Models\Message', 'user_id');
+    }
 }
