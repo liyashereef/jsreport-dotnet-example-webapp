@@ -13,17 +13,37 @@ class VisitorLogDeviceRepository
         $this->model = $model;
     }
 
+     /**
+     * DB store
+     * @return Response
+     */
+
     public function store($inputs){
         return $this->model->create($inputs);
     }
 
+    /**
+     * Update entry.
+     * @param id, input array
+     * @return Response
+     */
     public function updateEntry($inputs){
         return $this->model->updateOrCreate(['id' => $inputs['id']], $inputs);
     }
 
+    /**
+     * Delete entry.
+     * @param id
+     * @return Response
+     */
     public function delete($id){
         return $this->model->where('id', $id)->delete();
     }
+
+     /**
+     * Fetch all device info with customer and setting and templates.
+     * @return Response
+     */
 
     public function getAll(){
         return $this->model
@@ -46,6 +66,15 @@ class VisitorLogDeviceRepository
         ->where('is_activated',0)
         ->first();
     }
+
+    public function getByCodeAndDeviceId($inputs){
+        return $this->model
+        ->where('activation_code', $inputs['activation_code'])
+        ->where('device_id', $inputs['device_id'])
+        ->where('is_activated',0)
+        ->first();
+    }
+
     public function activateDevice($inputs){
         return $this->model->updateOrCreate(['activation_code' => $inputs['activation_code']], $inputs);
     }

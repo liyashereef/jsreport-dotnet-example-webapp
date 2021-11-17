@@ -19,7 +19,8 @@ use Illuminate\Http\Request;
 
 Route::group(
     [
-        'namespace' => 'API'
+        'namespace' => 'API',
+        'prefix' =>'v1'
     ],
     function () {
         // Visitor log devices

@@ -21,11 +21,13 @@ class VisitorLogDeviceResources extends JsonResource
             'isScreeningEnabled'=> ($this->is_blocked == 1)? true : false,
             'scannerCameraMode'=> $this->visitorLogDeviceSettings->scaner_camera_mode,
             'cameraMode' => $this->visitorLogDeviceSettings->camera_mode,
+            'customerId'=> $this->customer_id,
+            'deviceId'=> $this->device_id,
+            'deviceUID'=> $this->uid,
           //   'screening' => {},
             'visitorTypes' => VisitorLogTypeLookup::orderBy('type')->select('id', 'type as name')->get(),
-            'template' => $this->visitorLogDeviceSettings->visitorLogTemplates,
-            'customerId'=> $this->customer_id,
-            'deviceId'=> $this->device_id
+            'template' => $this->visitorLogDeviceSettings->visitorLogTemplates
+
           ];
     }
 }

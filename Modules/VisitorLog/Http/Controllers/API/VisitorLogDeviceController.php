@@ -39,7 +39,7 @@ class VisitorLogDeviceController extends Controller
                     $inputs = $request->all();
                     $inputs['activation_code'] = $request->input('code');
                     $inputs['device_id'] = $request->input('deviceId');
-                    // $inputs['is_activated'] = 1;
+                    $inputs['is_activated'] = 1;
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
                     $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
                     $msg = 'Done';
