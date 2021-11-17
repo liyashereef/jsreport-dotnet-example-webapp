@@ -147,11 +147,11 @@
                                 var actions = '';
                                 actions = '<a href="{{route("tax-master.single", ["id" => ""])}}/' + row.id + '" class="view fa fa-eye pr-10" data-id=' + row.id + '></a>';
                                 if(((row.tax_master_log) == null)){
-                                  actions += '<a href="#" class="edit fa fa-pencil" data-id=' + row.id + '></a>';
+                                  actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + row.id + '></a>';
                                 }
                                  else if (((row.tax_master_log.effective_from_date) >= "{{(\Illuminate\Support\Carbon::today())->toDateString()}}")	
                                  ||((row.tax_master_log.effective_from_date) < "{{(\Illuminate\Support\Carbon::today())->toDateString()}}")) {
-                                 actions += '<a href="#" class="delete fa fa-trash-o" TITLE="Archive" data-id=' + data.tax_master_log.id + '></a>';	
+                                 actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" TITLE="Archive" data-id=' + data.tax_master_log.id + '></a>';	
                                 }
                                 /*else{
 

@@ -22,6 +22,7 @@ use Modules\Admin\Repositories\CustomerEmployeeAllocationRepository;
 use Modules\Admin\Repositories\CustomerTypeRepository;
 use Modules\Admin\Repositories\CustomerRepository;
 use Modules\Sensors\Repositories\SensorActiveSettingRepository;
+use Illuminate\Support\Arr;
 
 class CustomerController extends Controller
 {
@@ -112,7 +113,7 @@ class CustomerController extends Controller
 
         $singleCustomer = $this->customerRepository->getSingleCustomer($id);
         $customerAllocattedUsers = $this->customerEmployeeAllocation->allocationList($id)->pluck('name_with_emp_no', 'id')->toArray();
-        $allocatedIncidentSubjects = array_pluck(
+        $allocatedIncidentSubjects = Arr::pluck(
             $singleCustomer->subjectAllocation,
             'subject.subject',
             'subject.id'

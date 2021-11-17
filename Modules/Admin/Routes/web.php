@@ -608,7 +608,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:view_admin'], 'prefix'
         Route::post('employee-survey-template/store', array('as' => 'employee-survey-template.store', 'uses' => 'EmployeeSurveyTemplateController@store'));
         // Route::get('customershift/destroy/{id}', array('as' => 'customershift.destroy', 'uses' => 'CustomerShiftController@destroy'));
         Route::get('employee-survey-template/update/{id}/{is_view?}', array('as' => 'employee-survey-template.update', 'uses' => 'EmployeeSurveyTemplateController@addTemplate'));
-        Route::post('employee-survey-template/update/{id}', array('as' => 'employee-survey-template.update', 'uses' => 'EmployeeSurveyTemplateController@store'));
+        Route::post('employee-survey-template/update/{id?}', array('as' => 'employee-survey-template.update', 'uses' => 'EmployeeSurveyTemplateController@store'));
         // Route::get('employee-survey-template/single/{id}', array('as' => 'employee-survey-template.single', 'uses' => 'EmployeeSurveyTemplateController@getSingle'));
     });
     /* Employee Survey - End */

@@ -236,7 +236,7 @@
                     render: function (o) {
                        var url = '{{ route("osgc.exam-questions",'') }}';
                         var actions = '';
-                        actions += ' <a href="#" title="Edit" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += ' <a href="#" title="Edit" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         actions += '<a href="'+url+"/"+ o.id +'" class="fa fa-question-circle view" title="Questions" data-id=' + o.id + '></a>'
                          
                         @can('lookup-remove-entries')
