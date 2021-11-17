@@ -45,11 +45,11 @@
 
 <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Customers Shift</h4>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'customerShift-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}

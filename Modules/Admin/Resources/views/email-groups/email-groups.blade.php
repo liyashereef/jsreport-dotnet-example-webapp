@@ -26,11 +26,11 @@ element.style {
 <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <span id="field_error"></span>
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="myModalLabel">Email Group</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'email-group-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
@@ -38,7 +38,7 @@ element.style {
 
             <div class="modal-body">
 
-            <div class="form-group" id="group_name">
+            <div class="form-group row" id="group_name">
             <label for="group_name" class="col-sm-3">Group Name <span class="mandatory">*</span></label>
             <div class="col-sm-9">
 

@@ -141,7 +141,7 @@
                 <!-- Tabs View - Start -->
                 <div role="tabpanel">
                     <!-- Nav tabs - Start -->
-                    <ul class="nav nav-tabs" role="tablist" id="userTabs">
+                    <ul class="nav nav-tabs" id="userTabs">
                         <li role="presentation" class="active show"><a href="#userTab" aria-controls="userTab" role="tab" data-toggle="tab">User</a></li>
                         <li role="presentation"><a href="#employeeTab" aria-controls="employeeTab" role="tab" data-toggle="tab">Profile</a></li>
                         <li role="presentation"><a href="#securityClearanceTab" aria-controls="securityClearanceTab" role="tab" data-toggle="tab">Security Clearance</a></li>

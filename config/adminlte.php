@@ -242,13 +242,13 @@ return [
         [
             'text' => 'Customers',
             'url' => 'admin/customer',
-            'icon' => 'fas fa-male',
+            'icon' => 'fas fa-user-circle',
             'can' => 'manage-customers',
         ],
         [
             'text' => 'Customers Shift',
             'url' => 'admin/customers-shift',
-            'icon' => 'fas fa-male',
+            'icon' => 'fas fa-user-circle',
             'can' => 'manage-customers',
         ],
         [
@@ -278,7 +278,7 @@ return [
         [
             'text' => 'Parent Customer',
             'url' => 'admin/parentcustomer',
-            'icon' => 'fas fa-male',
+            'icon' => 'fas fa-user-circle',
             'can' => 'manage-customers',
         ],
 
