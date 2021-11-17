@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\VisitorLog\Http\Resources;
+namespace Modules\VisitorLog\Transformers;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
