@@ -64,6 +64,7 @@ class VisitorLogDeviceRepository
     public function getByActivateCode($activation_code){
         return $this->model->where('activation_code', $activation_code)
         ->where('is_activated',0)
+        ->with('visitorLogDeviceSettings')
         ->first();
     }
 
@@ -90,7 +91,11 @@ class VisitorLogDeviceRepository
             },
             'visitorLogDeviceSettings.visitorLogTemplates' => function ($query){
                 return $query->select('id','template_name');
+            },
+            'visitorLogDeviceSettings.visitorLogTemplates.VisitorLogScreeningTemplateQuestion' => function ($query){
+                return $query->select('id','visitor_log_screening_template_id','question','answer');
             }
+
         ])
         ->find($id);
     }

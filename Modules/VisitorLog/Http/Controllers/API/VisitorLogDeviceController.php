@@ -10,20 +10,25 @@ use App\Services\HelperService;
 use Modules\VisitorLog\Transformers\VisitorLogDeviceResources;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
+use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 
 class VisitorLogDeviceController extends Controller
 {
     protected $helperService;
     protected $visitorLogDeviceRepository;
+    protected $visitorLogScreeningTemplateCustomerAllocationRepository;
+    protected $visitorLogTemplateRepository;
 
     public function __construct(
         HelperService $helperService,
         VisitorLogDeviceRepository $visitorLogDeviceRepository,
-        VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository
+        VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository,
+        VisitorLogTemplateRepository $visitorLogTemplateRepository
     ) {
         $this->helperService = $helperService;
         $this->visitorLogDeviceRepository = $visitorLogDeviceRepository;
         $this->screeningtemplateCustomerAllocationRepository = $visitorLogScreeningTemplateCustomerAllocationRepository;
+        $this->visitorLogTemplateRepository = $visitorLogTemplateRepository;
 
     }
 
@@ -47,10 +52,12 @@ class VisitorLogDeviceController extends Controller
                     // $inputs['is_activated'] = 1;
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
                     $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
-                    $r['customerId'] = $deviceDetails->customer_id;
-                    $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($r);
+                    $configData->questions = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);
+
+                    // $r['customerId'] = $deviceDetails->customer_id;
+                    // $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($r);
                     // dd($configData->screening->VisitorLogScreeningTemplate->VisitorLogScreeningTemplateQuestion);
-                    $msg = 'Done';
+                    $msg = '';
                 } else {
                     $msg = 'Activation code not found/Already activated';
                     $status = false;
