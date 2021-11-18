@@ -26,13 +26,14 @@
     </table>
     <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+                     <h4 class="modal-title" id="myModalLabel"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+                   
                 </div>
                 {{ Form::open(array('url'=>'#','id'=>'sensor_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
@@ -269,7 +270,7 @@
                             $('#myModal input:checkbox').prop('disabled', false);
                             $('#statusMessage').html('');
                             $("#myModal").modal();
-                            $('#myModal .modal-title').text("Edit Category: " + data.name)
+                            $('#myModal .modal-title').text("Edit Sensor: " + data.name)
                             if(typeof(data.room_id) != "undefined" && data.room_id !== null) {
                                 $('#myModal input[name="nod_mac"]').prop('readonly',true);
                             }else{

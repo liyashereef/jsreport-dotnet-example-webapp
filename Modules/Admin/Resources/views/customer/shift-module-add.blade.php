@@ -24,17 +24,17 @@
                 <select  name="customer_id" id="customerid" onchange="customerUpdate($(this).val());" class="form-control">
                     <option value=0 selected>Select All</option>
                     @foreach($customer_list as $id=>$data)
-                    <option @if($module_id != 0 && $module[0]->customer_id == $data->id) selected @endif value={{$data->id}}>{{$data->project_number}} - {{$data->client_name}}</option>
+                    <option @if($module_id != 0 && @$module[0]->customer_id == $data->id) selected @endif value={{$data->id}}>{{$data->project_number}} - {{$data->client_name}}</option>
                     @endforeach
                 </select>
                  <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group row" id="module_name">
-            <input type="hidden" name="id" value="{{$module[0]->id or ''}}"/>
+            <input type="hidden" name="id" value="{{@$module[0]->id }}"/>
             <label class="col-form-label col-md-2" for="module_name">Module Name <span class="mandatory">*</span></label>
             <div class=" col-md-4">
-                <input type="text" class="form-control" placeholder="Maximum character limit is 20" name="module_name" value="{{$module[0]->module_name or ''}}" >
+                <input type="text" class="form-control" placeholder="Maximum character limit is 20" name="module_name" value="{{@$module[0]->module_name }}" >
                 <span class="help-block"></span>
             </div>
         </div>
@@ -48,7 +48,6 @@
             </div>
         </div>
         <div class="form-group row hidden" id="dashboard_view">
-
             <label class="col-form-label col-md-2" for="dashboard_view">Show on Dashboard<span class="mandatory">*</span></label>
             <div class=" col-md-4">
             <label> <input type="radio" name="dashboard_view" @if(isset($module[0]->dashboard_view) && ($module[0]->dashboard_view== 1)) checked @endif  value="1" >&nbsp;Yes&nbsp;&nbsp;</label>

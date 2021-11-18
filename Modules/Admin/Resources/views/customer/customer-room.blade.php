@@ -44,11 +44,12 @@
 
 <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Customers Room</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                
             </div>
             {{ Form::open(array('url'=>'#','id'=>'room_name_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
@@ -60,7 +61,7 @@
                      <small class="help-block"></small>
                     </div>
                 </div>
-                <div id="name" class="form-group">
+                <div id="name" class="form-group row">
                     <label for="name" class="col-sm-3 control-label" style="text-align: left;">Room Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder' => 'Room Name')) }}

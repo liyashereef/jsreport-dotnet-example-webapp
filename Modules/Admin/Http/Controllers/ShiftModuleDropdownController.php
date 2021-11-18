@@ -72,6 +72,8 @@ class ShiftModuleDropdownController extends Controller
     public function addDropdown($dropdown_id = null)
     {
         $dropdown_exists = 0;
+        $option_list = null;
+        $dropdown_arr = [];
         if (isset($dropdown_id)) {
             $option_list = ShiftModuleDropdownOption::where('shift_module_dropdown_id', $dropdown_id)->get();
             $dropdown_arr = ShiftModuleDropdown::with('shiftModuleDropdownOption')->where('id', $dropdown_id)->first()->toArray();
