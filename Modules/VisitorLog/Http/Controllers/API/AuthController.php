@@ -35,7 +35,8 @@ class AuthController
             //Return access token
             return response()->json([
                 'tokenType' => 'Bearer',
-                'accessToken' => $tr->accessToken
+                'accessToken' => $tr->accessToken,
+                'id' => $user->id
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -57,7 +58,7 @@ class AuthController
     }
 
     public function me()
-    { dd(11);
+    {
         $user = auth()->user();
         if ($user) {
             return response()->json(new UserAuthResource($user), 200);
