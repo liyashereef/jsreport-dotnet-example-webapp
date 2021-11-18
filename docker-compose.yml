@@ -6,7 +6,6 @@ services:
             context: ./docker/8.0
             dockerfile: Dockerfile
             args:
-                user: 'rahul'
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.0/app
         extra_hosts:
