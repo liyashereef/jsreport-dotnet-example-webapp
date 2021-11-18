@@ -9,7 +9,7 @@ class VisitorLogDeviceSettings extends Model
 {
     use SoftDeletes;
     public $table = 'visitor_log_device_settings';
-    protected $fillable = ['visitor_log_device_id','device_id','template_id','pin','camera_mode','scaner_camera_mode'];
+    protected $fillable = ['visitor_log_device_id','template_id','pin','camera_mode','scaner_camera_mode'];
 
 
     public function visitorLogTemplates()

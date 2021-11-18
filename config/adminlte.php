@@ -1086,7 +1086,7 @@ return [
             'icon' => 'database',
             'submenu' => [
                 [
-                    'text' => 'Visitor Devices',
+                    'text' => 'Devices',
                     'url' => 'admin/visitor-log/devices',
                     'icon' => 'microchip',
                 ]

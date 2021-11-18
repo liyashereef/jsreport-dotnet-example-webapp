@@ -50,6 +50,8 @@ class VisitorLogDeviceController extends Controller
                     $inputs['activation_code'] = $request->input('code');
                     $inputs['device_id'] = $request->input('deviceId');
                     // $inputs['is_activated'] = 1; //TODO::need to uncomment.
+                    $inputs['activated_by'] = \Auth::user()->id;
+                    $inputs['activated_at'] = \Carbon::now();
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
                     $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
                     $configData->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);

@@ -18,7 +18,7 @@ class CreateVisitorLogDevicesTable extends Migration
             $table->integer('customer_id');
             $table->string('uid')->nullable()->comment('For reference');
             $table->string('activation_code')->nullable()->comment('For divice activation code');
-            $table->dateTime('activation_at')->nullable();
+            $table->dateTime('activated_at')->nullable();
             $table->boolean('is_activated')->default(0);
             $table->string('name')->nullable();
             $table->text('description')->nullable();

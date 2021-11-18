@@ -27,12 +27,11 @@
             <th>#</th>
             <th>Customer</th>
             <th>Name</th>
+            <th>Device Pin</th>
             <th>Activation Code</th>
+            <th>Device Activated On</th>
             <th>Last Active Time</th>
             <th>Template</th>
-            <!-- <th>Camera Mode</th>
-            <th>Scaner Camera Mode</th>
-            <th>Created At</th> -->
             <th>Actions</th>
         </tr>
     </thead>
@@ -156,8 +155,16 @@
                         name: 'name',
                     },
                     {
+                        data: 'visitor_log_device_settings.pin',
+                        name: 'visitor_log_device_settings.pin'
+                    },
+                    {
                         data: 'activation_code',
                         name: 'activation_code'
+                    },
+                    {
+                        data: 'activated_at',
+                        name: 'activated_at'
                     },
                     {
                         data: 'last_active_time',
@@ -167,36 +174,6 @@
                         data: 'visitor_log_device_settings.visitor_log_templates.template_name',
                         name: 'visitor_log_device_settings.visitor_log_templates.template_name'
                     },
-                    // {
-                    //     data: null,
-                    //     orderable: false,
-                    //     render: function (o) {
-                    //        actions = "";
-                    //        if(o.visitor_log_device_settings.camera_mode == 1){
-                    //          actions = 'Front Camere';
-                    //        }else{
-                    //         actions = ' Rear Camera';
-                    //        }
-                    //        return actions;
-                    //     },
-                    // },
-                    // {
-                    //     data: null,
-                    //     orderable: false,
-                    //     render: function (o) {
-                    //        actions = "";
-                    //        if(o.visitor_log_device_settings.scaner_camera_mode == 1){
-                    //          actions = 'Front Camere';
-                    //        }else{
-                    //          actions = ' Rear Camera';
-                    //        }
-                    //        return actions;
-                    //     },
-                    // },
-                    // {
-                    //     data: 'created_at',
-                    //     name: 'created_at'
-                    // },
                     {
                         data: null,
                         orderable: false,

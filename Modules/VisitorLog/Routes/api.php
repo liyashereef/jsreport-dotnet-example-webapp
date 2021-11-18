@@ -24,7 +24,7 @@ Route::group(
     ],
     function () {
         // Visitor log devices
-        Route::get('activate/device', 'VisitorLogDeviceController@activateDevice');
+        // Route::get('activate/device', 'VisitorLogDeviceController@activateDevice');
         Route::post('login', 'AuthController@login');
         // Route::post('app/health', 'ApplicationController@applicationHealth');
 

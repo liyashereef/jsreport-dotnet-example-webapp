@@ -9,7 +9,7 @@ class VisitorLogDevices extends Model
 {
     use SoftDeletes;
     public $table = 'visitor_log_devices';
-    protected $fillable = ['customer_id','uid','activation_code','is_activated','activation_at','name','description',
+    protected $fillable = ['customer_id','uid','activation_code','is_activated','activated_at','activated_by','name','description',
     'device_id','last_active_time','is_blocked','created_by'];
 
 

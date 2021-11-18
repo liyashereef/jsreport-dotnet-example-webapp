@@ -79,6 +79,7 @@ class VisitorLogDeviceController extends Controller
                 $settings['scaner_camera_mode'] = $request->input('scaner_camera_mode');
                 $settings['template_id'] = $request->input('template_id');
                 $settings['visitor_log_device_id'] = $device->id;
+                $settings['pin'] = rand(10000,99999);
                 $this->visitorLogDeviceSettingsRepository->store($settings);
             }
             \DB::commit();

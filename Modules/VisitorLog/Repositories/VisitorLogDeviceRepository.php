@@ -52,7 +52,7 @@ class VisitorLogDeviceRepository
                 return $query->select('id','project_number','client_name');
             },
             'visitorLogDeviceSettings' => function ($query){
-                return $query->select('id','visitor_log_device_id','template_id','camera_mode','scaner_camera_mode');
+                return $query->select('id','visitor_log_device_id','template_id','pin','camera_mode','scaner_camera_mode');
             },
             'visitorLogDeviceSettings.visitorLogTemplates' => function ($query){
                 return $query->select('id','template_name');
