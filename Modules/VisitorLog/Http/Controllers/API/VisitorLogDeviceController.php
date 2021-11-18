@@ -49,14 +49,13 @@ class VisitorLogDeviceController extends Controller
                     $inputs = $request->all();
                     $inputs['activation_code'] = $request->input('code');
                     $inputs['device_id'] = $request->input('deviceId');
-                    // $inputs['is_activated'] = 1;
+                    // $inputs['is_activated'] = 1; //TODO::need to uncomment.
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
                     $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
-                    $configData->questions = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);
+                    $configData->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);
 
-                    // $r['customerId'] = $deviceDetails->customer_id;
-                    // $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($r);
-                    // dd($configData->screening->VisitorLogScreeningTemplate->VisitorLogScreeningTemplateQuestion);
+                    $filter['customerId'] = $deviceDetails->customer_id;
+                    $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
                     $msg = '';
                 } else {
                     $msg = 'Activation code not found/Already activated';
