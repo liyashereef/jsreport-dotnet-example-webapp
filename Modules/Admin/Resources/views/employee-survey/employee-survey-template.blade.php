@@ -106,19 +106,19 @@
                         var url = url.replace(':is_view', '/1');
                         if($.inArray( parseInt(o.id), entries_id )==-1){
                             @can('edit_masters')
-                            actions= '<a href="{{route("employee-survey-template.update", ["id" => ""])}}/'+ o.id +'" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                            actions= '<a href="{{route("employee-survey-template.update", ["id" => ""])}}/'+ o.id +'" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                             @endcan
                             @can('lookup-remove-entries')
-                                actions +='<a href="#"  style="padding-right:8%;" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                                actions +='<a href="#"  style="padding-right:8%;" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                             @endcan
                         }
                         else
                         {
                             @can('edit_masters')
-                            actions= '<a href="#" class="fa fa-pencil edit-disable"></a>';
+                            actions= '<a href="#" class="{{Config::get('globals.editFontIcon')}} edit-disable"></a>';
                             @endcan
                             @can('lookup-remove-entries')
-                            actions +='<a href="#"  style="padding-right:8%;" class="fa fa-trash-o edit-disable"></a>';
+                            actions +='<a href="#"  style="padding-right:8%;" class="{{Config::get('globals.deleteFontIcon')}} edit-disable"></a>';
                             @endcan 
                         }
                             

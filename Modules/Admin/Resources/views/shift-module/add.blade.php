@@ -17,10 +17,10 @@
         <section class="content">
             <div class="form-group row" id="dropdown_name">
                 <input type="hidden" name="drop_down_exists" value="{{$dropdown_exists or ''}}"/>
-                <input type="hidden" name="id"  value="{{$dropdown_arr['id'] or ''}}"/>
+                <input type="hidden" name="id"  value="{{@$dropdown_arr['id']}}"/>
                 <label class="col-form-label col-md-2" for="dropdown_name">Dropdown Name </label>
                 <div class=" col-md-4">
-                    <input type="text" class="form-control" placeholder="Name" name="dropdown_name" value="{{$dropdown_arr['dropdown_name'] or ''}}" >
+                    <input type="text" class="form-control" placeholder="Name" name="dropdown_name" value="{{@$dropdown_arr['dropdown_name']}}" >
                     <span class="help-block"></span>
                 </div>
             </div>
