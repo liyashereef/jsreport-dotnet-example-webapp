@@ -40,7 +40,7 @@ class VisitorLogDeviceController extends Controller
             if ($request->has('code')) {
                 $deviceDetails = $this->visitorLogDeviceRepository->getByActivateCode($request->input('code'));
 
-                // if ($deviceDetails) {
+                if ($deviceDetails) {
                     $inputs = $request->all();
                     $inputs['activation_code'] = $request->input('code');
                     $inputs['device_id'] = $request->input('deviceId');
@@ -51,10 +51,10 @@ class VisitorLogDeviceController extends Controller
                     $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($r);
                     // dd($configData->screening->VisitorLogScreeningTemplate->VisitorLogScreeningTemplateQuestion);
                     $msg = 'Done';
-                // } else {
-                //     $msg = 'Activation code not found/Already activated';
-                //     $status = false;
-                // }
+                } else {
+                    $msg = 'Activation code not found/Already activated';
+                    $status = false;
+                }
             } else {
                 $msg = 'Activation code not found';
                 $status = false;
