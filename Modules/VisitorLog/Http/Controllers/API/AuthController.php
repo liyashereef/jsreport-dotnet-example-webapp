@@ -40,6 +40,7 @@ class AuthController
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Something went wrong!',
+                'error_message' => $e->getMessage(),
             ], 500);
         }
     }
