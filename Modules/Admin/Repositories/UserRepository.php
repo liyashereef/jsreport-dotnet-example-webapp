@@ -1154,9 +1154,8 @@ class UserRepository
             Auth::user()->hasPermissionTo($permission)
         ) {
             return Auth::user();
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
