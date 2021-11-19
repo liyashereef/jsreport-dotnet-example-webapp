@@ -10,6 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::name('s3.multipart.')->namespace('Admin')
+    ->group(function () {
+    
+        Route::post('/s3/multipart', 'UppyS3MultipartController@createMultipartUpload');
+
+        Route::options('/s3/multipart', 'UppyS3MultipartController@createMultipartUploadOptions');
+
+        Route::get('/s3/multipart/{uploadId}', 'UppyS3MultipartController@getUploadedParts');
+
+        Route::get('/s3/multipart/{uploadId}/batch', 'UppyS3MultipartController@prepareUploadParts');
+
+        Route::post('/s3/multipart/{uploadId}/complete', 'UppyS3MultipartController@completeMultipartUpload');
+
+        Route::delete('/s3/multipart/{uploadId}', 'UppyS3MultipartController@abortMultipartUpload');
+    });
 
 
 Route::group(['middleware' => 'web', 'prefix' => 'contentmanager',], function () {
@@ -21,6 +36,8 @@ Route::group([
     'middleware' => ['web', 'auth'],
     'prefix' => 'admin', 'namespace' => 'Admin'
 ], function () {
+    Route::get('content-manager/s3view/{id?}', array('as' => 'content-manager.s3view', 'uses' => 'ManageContentController@s3index'));
+    Route::get('content-manager/s3uploader', array('as' => 'content-manager.s3uploader', 'uses' => 'ManageContentController@s3Uploader'));
     Route::get('content-manager/view', array('as' => 'content-manager.view', 'uses' => 'ManageContentController@index'));
     Route::get('content-manager/list/{id?}', array('as' => 'content-manager.list', 'uses' => 'ManageContentController@getList'));
     Route::post('content-manager/store', array('as' => 'content-manager.store', 'uses' => 'ManageContentController@store'));
