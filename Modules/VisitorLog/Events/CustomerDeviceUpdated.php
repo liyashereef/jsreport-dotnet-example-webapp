@@ -2,6 +2,7 @@
 
 namespace Modules\VisitorLog\Events;
 
+use BeyondCode\LaravelWebSockets\WebSockets\Channels\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -32,6 +33,6 @@ class CustomerDeviceUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('visitor-log.' . $this->id);
+        return new Channel('visitor-log.' . $this->id);
     }
 }
