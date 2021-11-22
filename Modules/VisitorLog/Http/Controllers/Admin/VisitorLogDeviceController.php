@@ -105,14 +105,7 @@ class VisitorLogDeviceController extends Controller
         $configData = $this->repository->setConfigData($id);
         $device =[
             "config" => ($configData)? $configData : [],
-            "error" => '',
-            'status'=>true
         ];
-        // $device = response()->json([
-        //     "config" => ($configData)? $configData : [],
-        //     "error" => $msg,
-        //     'status'=>$status
-        // ])
         CustomerDeviceUpdated::dispatch($device);
     }
 
