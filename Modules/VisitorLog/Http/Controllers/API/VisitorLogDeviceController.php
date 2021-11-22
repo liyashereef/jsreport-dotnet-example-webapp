@@ -7,28 +7,27 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use App\Services\HelperService;
-use Modules\VisitorLog\Transformers\VisitorLogDeviceResources;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
-use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
-use Modules\Admin\Repositories\VisitorLogTemplateRepository;
+// use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
+// use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 
 class VisitorLogDeviceController extends Controller
 {
     protected $helperService;
     protected $visitorLogDeviceRepository;
-    protected $visitorLogScreeningTemplateCustomerAllocationRepository;
-    protected $visitorLogTemplateRepository;
+    // protected $visitorLogScreeningTemplateCustomerAllocationRepository;
+    // protected $visitorLogTemplateRepository;
 
     public function __construct(
         HelperService $helperService,
-        VisitorLogDeviceRepository $visitorLogDeviceRepository,
-        VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository,
-        VisitorLogTemplateRepository $visitorLogTemplateRepository
+        VisitorLogDeviceRepository $visitorLogDeviceRepository
+        // VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository,
+        // VisitorLogTemplateRepository $visitorLogTemplateRepository
     ) {
         $this->helperService = $helperService;
         $this->visitorLogDeviceRepository = $visitorLogDeviceRepository;
-        $this->screeningtemplateCustomerAllocationRepository = $visitorLogScreeningTemplateCustomerAllocationRepository;
-        $this->visitorLogTemplateRepository = $visitorLogTemplateRepository;
+        // $this->screeningtemplateCustomerAllocationRepository = $visitorLogScreeningTemplateCustomerAllocationRepository;
+        // $this->visitorLogTemplateRepository = $visitorLogTemplateRepository;
 
     }
 
@@ -50,14 +49,14 @@ class VisitorLogDeviceController extends Controller
                     $inputs['activation_code'] = $request->input('code');
                     $inputs['device_id'] = $request->input('deviceId');
                     // $inputs['is_activated'] = 1; //TODO::need to uncomment.
-                    $inputs['activated_by'] = \Auth::user()->id;
+                    // $inputs['activated_by'] = \Auth::user()->id;
                     $inputs['activated_at'] = \Carbon::now();
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
-                    $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
-                    $configData->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);
-
-                    $filter['customerId'] = $deviceDetails->customer_id;
-                    $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
+                    $configData = $this->visitorLogDeviceRepository->setConfigData($deviceDetails->id);
+                    // $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
+                    // $configData->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);
+                    // $filter['customerId'] = $deviceDetails->customer_id;
+                    // $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
                     $msg = '';
                 } else {
                     $msg = 'Activation code not found/Already activated';
@@ -71,9 +70,8 @@ class VisitorLogDeviceController extends Controller
             $msg = $e->getMessage();
             $status = false;
         }
-// dd($configData);
         return response()->json([
-            "config" => ($configData)? new VisitorLogDeviceResources($configData) : [],
+            "config" => ($configData)? $configData : [],
             "error" => $msg,
             'status'=>$status
         ]);

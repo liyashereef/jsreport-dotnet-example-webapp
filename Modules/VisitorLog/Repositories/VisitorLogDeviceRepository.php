@@ -2,15 +2,26 @@
 
 namespace Modules\VisitorLog\Repositories;
 
+use Modules\VisitorLog\Transformers\VisitorLogDeviceResources;
 use Modules\VisitorLog\Models\VisitorLogDevices;
+use Modules\Admin\Repositories\VisitorLogTemplateRepository;
+use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
 
 class VisitorLogDeviceRepository
 {
 
     protected $model;
+    protected $visitorLogTemplateRepository;
+    protected $visitorLogScreeningTemplateCustomerAllocationRepository;
 
-    public function __construct(VisitorLogDevices $model){
+    public function __construct(
+        VisitorLogDevices $model,
+        VisitorLogTemplateRepository $visitorLogTemplateRepository,
+        VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository
+    ){
         $this->model = $model;
+        $this->visitorLogTemplateRepository = $visitorLogTemplateRepository;
+        $this->screeningtemplateCustomerAllocationRepository = $visitorLogScreeningTemplateCustomerAllocationRepository;
     }
 
      /**
@@ -98,6 +109,14 @@ class VisitorLogDeviceRepository
 
         ])
         ->find($id);
+    }
+
+    public function setConfigData($id){
+        $device = $this->getById($id);
+        $device->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($device->visitorLogDeviceSettings->template_id);
+        $filter['customerId'] = $device->customer_id;
+        $device->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
+        return new VisitorLogDeviceResources($device);
     }
 
 }

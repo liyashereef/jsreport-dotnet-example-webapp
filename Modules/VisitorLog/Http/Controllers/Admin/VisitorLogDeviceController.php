@@ -13,6 +13,7 @@ use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceSettingsRepository;
 use Modules\VisitorLog\Http\Requests\VisitorLogDeviceRequests;
+use Modules\VisitorLog\Events\CustomerDeviceUpdated;
 use Illuminate\Support\Str;
 
 class VisitorLogDeviceController extends Controller
@@ -98,6 +99,21 @@ class VisitorLogDeviceController extends Controller
      */
     public function update(Request $request)
     {
+    }
+
+    public function trigerBroadcasting($id){
+        $configData = $this->repository->setConfigData($id);
+        $device =[
+            "config" => ($configData)? $configData : [],
+            "error" => '',
+            'status'=>true
+        ];
+        // $device = response()->json([
+        //     "config" => ($configData)? $configData : [],
+        //     "error" => $msg,
+        //     'status'=>$status
+        // ])
+        CustomerDeviceUpdated::dispatch($device);
     }
 
     /**

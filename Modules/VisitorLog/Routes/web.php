@@ -26,5 +26,6 @@ Route::group(
         Route::get('device/list', array('as' => 'visitor-log.device.lists', 'uses' => 'VisitorLogDeviceController@getAll'));
         Route::get('allocated/template/{customerId}', array('as' => 'visitor-log.template-allocated', 'uses' => 'VisitorLogDeviceController@getAllocatedTemplates'));
         Route::post('devices/store', array('as' => 'visitor-log.device.store', 'uses' => 'VisitorLogDeviceController@store'));
+        Route::get('devices/view/{id}', array('as' => 'visitor-log.device.view', 'uses' => 'VisitorLogDeviceController@trigerBroadcasting'));
     }
 );
