@@ -28,7 +28,7 @@
                 <label for="mail_driver">@lang('Driver')</label>
                 <select id="mail_driver" name="mail_driver" class="form-control">
                     @foreach($drivers as $key => $value)
-                    <option value="{{ $key }}" {{ old('mail_driver') ? ($key === old('mail_driver') ? 'selected' : '') : $key === $actualDriver ? 'selected' : '' }}>{{ $value }}</option>
+                    <option value="{{ $key }}" {{ old('mail_driver') ? ($key === old('mail_driver') ? 'selected' : '') : ($key === $actualDriver ? 'selected' : '') }}>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>

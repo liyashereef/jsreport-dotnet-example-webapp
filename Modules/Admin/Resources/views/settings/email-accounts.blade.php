@@ -26,17 +26,17 @@
 
 <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Customers Shift</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'email-accounts-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
 
-                <div class="form-group" id="display_name" >
+                <div class="form-group row" id="display_name" >
                        <label for="display_name" class="col-sm-3">Display name<span class="mandatory">*</span></label>
                        <div class="col-sm-9">
                        <input type="text" class="form-control has-error" name="display_name"  placeholder="Display name" value="" />
@@ -44,42 +44,42 @@
                        </div>
                 </div>
 
-                <div class="form-group" id="email_address" >
+                <div class="form-group row" id="email_address" >
                        <label for="email_address" class="col-sm-3 control-label" style="text-align: left;">Email Address<span class="mandatory">*</span></label>
                        <div class="col-sm-9">
                        <input type="email" class="form-control has-error" name="email_address"  placeholder="Email Address" value="" />
                       <small class="help-block"></small>
                        </div>
                 </div>
-                <div class="form-group" id="user_name" >
+                <div class="form-group row" id="user_name" >
                        <label for="user_name" class="col-sm-3 control-label" style="text-align: left;">Username<span class="mandatory">*</span></label>
                        <div class="col-sm-9">
                        <input type="text" class="form-control has-error" name="user_name"  placeholder="Username" value="" />
                       <small class="help-block"></small>
                        </div>
                 </div>
-                <div class="form-group " id="password" >
+                <div class="form-group row" id="password" >
                        <label for="password" class="col-sm-3 control-label" style="text-align: left;">Password<span class="mandatory">*</span></label>
                        <div class="col-sm-9">
                        <input type="password" class="form-control has-error" name="password"  placeholder="Password" value="" />
                       <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="smtp_server" >
+                <div class="form-group row" id="smtp_server" >
                        <label for="smtp_server" class="col-sm-3 control-label" style="text-align: left;">SMTP Server<span class="mandatory">*</span></label>
                        <div class="col-sm-9">
                        <input type="text" class="form-control has-error" name="smtp_server"  placeholder="SMTP Server" value="" />
                       <small class="help-block"></small>
                        </div>
                 </div>
-                <div class="form-group" id="port" >
+                <div class="form-group row" id="port" >
                        <label for="port" class="col-sm-3 control-label" style="text-align: left;">Port<span class="mandatory">*</span></label>
                        <div class="col-sm-9">
                        <input type="text" class="form-control has-error" name="port"  placeholder="Port" value="" />
                       <small class="help-block"></small>
                        </div>
                 </div>
-                <div class="form-group" id="encryption" >
+                <div class="form-group row" id="encryption" >
                         <label for="encryption" class="col-sm-3 control-label" style="text-align: left;">Encryption<span class="mandatory">*</span></label>
                         <div class="col-sm-9">
                         <select name="encryption" id="encryption" class="select2 form-control">
@@ -91,7 +91,7 @@
                         <small class="help-block"></small>
                         </div>
                 </div>
-                <div class="form-group" id="default" style="display:none;">
+                <div class="form-group row" id="default" style="display:none;">
                        <label for="default" class="col-sm-3 control-label" style="text-align: left;">Default</label>
                        <div class="col-sm-9">
                        <input type="checkbox" name="default"  value="1">

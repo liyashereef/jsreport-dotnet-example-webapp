@@ -117,11 +117,12 @@
 
 <!-- User Master Modal - Start -->
 <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" style="overflow-y:auto;" aria-labelledby="myModalLabel" aria-hidden="true" data-focus-on="input:first">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                
                 <h4 class="modal-title" id="myModalLabel">User Master</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'user-form','class'=>'form-horizontal', 'method'=> 'POST', 'novalidate'=>TRUE)) }}
             {{ Form::hidden('id', "") }}
@@ -140,7 +141,7 @@
                 <!-- Tabs View - Start -->
                 <div role="tabpanel">
                     <!-- Nav tabs - Start -->
-                    <ul class="nav nav-tabs" role="tablist" id="userTabs">
+                    <ul class="nav nav-tabs" id="userTabs">
                         <li role="presentation" class="active show"><a href="#userTab" aria-controls="userTab" role="tab" data-toggle="tab">User</a></li>
                         <li role="presentation"><a href="#employeeTab" aria-controls="employeeTab" role="tab" data-toggle="tab">Profile</a></li>
                         <li role="presentation"><a href="#securityClearanceTab" aria-controls="securityClearanceTab" role="tab" data-toggle="tab">Security Clearance</a></li>
