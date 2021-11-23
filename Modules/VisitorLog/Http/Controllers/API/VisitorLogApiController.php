@@ -22,12 +22,19 @@ use Modules\Client\Repositories\VisitorLogScreeningSubmissionRepository;
 use Modules\Admin\Repositories\VisitorLogScreeningTemplateQuestionRepository;
 use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 use Modules\Client\Models\VisitorLogMeta;
+use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 
 class VisitorLogApiController
 {
-    protected $customerRepo, $directory_seperator, $visitorLogScreeningTemplateQuestionRepo;
-    protected $visitorRepo, $customerEmployeeAllocationRepo, $visitorLogRepo, $termsAndConditionRepository;
+    protected $customerRepo;
+    protected $directory_seperator;
+    protected $visitorLogScreeningTemplateQuestionRepo;
+    protected $visitorRepo;
+    protected $customerEmployeeAllocationRepo;
+    protected $visitorLogRepo;
+    protected $termsAndConditionRepository;
     protected $visitorLogTemplateRepo;
+    protected $visitorLogDeviceRepository;
 
     public function __construct(
         CustomerRepository $customerRepo,
@@ -38,7 +45,8 @@ class VisitorLogApiController
         CustomerTermsAndConditionRepository $termsAndConditionRepository,
         VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository,
         VisitorLogScreeningSubmissionRepository $visitorLogScreeningSubmissionRepository,
-        VisitorLogScreeningTemplateQuestionRepository $visitorLogScreeningTemplateQuestionRepo
+        VisitorLogScreeningTemplateQuestionRepository $visitorLogScreeningTemplateQuestionRepo,
+        VisitorLogDeviceRepository $visitorLogDeviceRepository,
     ) {
         $this->customerRepo = $customerRepo;
         $this->visitorRepo = $visitorRepo;
@@ -51,6 +59,7 @@ class VisitorLogApiController
         $this->visitorLogScreeningSubmissionRepository = $visitorLogScreeningSubmissionRepository;
         $this->visitorLogScreeningTemplateQuestionRepository = $visitorLogScreeningTemplateQuestionRepo;
         $this->visitorLogTemplateRepo = $visitorLogTemplateRepo;
+        $this->visitorLogDeviceRepository = $visitorLogDeviceRepository;
     }
 
     public function storeVisitors(Request $request)
@@ -122,12 +131,18 @@ class VisitorLogApiController
 
     public function storeVisitorLogs(Request $request)
     {
+        $request->validate([
+            'x-deviceUID' => 'required'
+        ]);
+        
         try {
-            //\Log::channel('customlog')->info(json_encode($request->all()));
+            \Log::channel('customlog')->info(json_encode($request->all()));
             // \Log::channel('customlog')->info('-------storeVisitorLogs -- '.'Customer --> '.$request->input('clientId').'screeningId --> '.$request->input('screeningId').' <-- Request '.json_encode($request->all()));
             $visitorLogs = [];
             $data = [];
             // checkInOption value will be 'Manual or Qr'.
+            $device = $this->visitorLogDeviceRepository->getByUID($request->input('x-deviceUID'))->first();
+
             if ($request->has('checkInOption')) {
 
                 if ($request->input('checkInOption') == 'Manual') {
@@ -153,8 +168,8 @@ class VisitorLogApiController
                     $visitorLogs['visitor_log_screening_submission_uid'] = $request->input('screeningId');
                     //Common inputs
                     $visitorLogs['check_in_option'] = $request->input('checkInOption');
-                    $visitorLogs['customer_id'] = $request->input('clientId');
-                    $visitorLogs['template_id'] = $request->input('templateId');
+                    $visitorLogs['customer_id'] = $device->customer_id;
+                    $visitorLogs['template_id'] = $device->visitorLogDeviceSettings->template_id;
                     $visitorLogs['uuid'] = $request->input('uuid');
                     $visitorLogs['force_checkout'] = $request->input('forceCheckout');
                     $visitorLogs['checkin'] = \Carbon\Carbon::parse($request->input('checkInAt'))->format('Y-m-d H:i:s');
