@@ -43,4 +43,10 @@ class NewMessage implements ShouldBroadcast
 
         return ["message" => $this->message];
     }
+
+    public function broadcastAs()
+    {
+           return 'NewMessage';
+    }
+
 }
