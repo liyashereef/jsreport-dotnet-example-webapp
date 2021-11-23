@@ -776,3 +776,8 @@ h6,
     margin-right: -15px;
     margin-left: -15px;
 }
+
+.nav-header
+{
+    background-color: #394950 !important;
+}
