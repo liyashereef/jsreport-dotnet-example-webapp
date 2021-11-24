@@ -30,7 +30,7 @@
             {{ Form::open(array('url'=>'#','id'=>'uniform-measurement-points-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
              {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-3 control-label">Name
                         <span class="mandatory">*</span>
                     </label>

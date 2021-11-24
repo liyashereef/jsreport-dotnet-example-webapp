@@ -30,7 +30,7 @@
             {{ Form::open(array('url'=>'#','id'=>'criteria-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="criteria">
+                <div class="form-group row" id="criteria">
                     <label for="criteria" class="col-sm-3 control-label">Criteria</label>
                     <div class="col-sm-9">
                         {{ Form::text('criteria',null,array('class'=>'form-control')) }}
