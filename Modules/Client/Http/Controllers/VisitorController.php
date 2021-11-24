@@ -17,6 +17,7 @@ use Modules\Admin\Models\VisitorStatusLookups;
 use Modules\Client\Repositories\VisitorRepository;
 use Modules\Admin\Repositories\CustomerEmployeeAllocationRepository;
 use Modules\Admin\Repositories\CustomerRepository;
+use Modules\VisitorLog\Events\VisitorNotify;
 
 class VisitorController extends Controller
 {
@@ -74,6 +75,7 @@ class VisitorController extends Controller
             \DB::beginTransaction();
              $this->repository->storeFromWeb($inputs);
             \DB::commit();
+            VisitorNotify::dispatch($inputs['customerId']);
             return response()->json($this->helperService->returnTrueResponse());
         } catch (\Exception $e) {
             \DB::rollBack();
