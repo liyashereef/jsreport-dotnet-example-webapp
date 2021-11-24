@@ -444,7 +444,7 @@ i.gj-icon {
 /*12-4-2018*/
 @media only screen and (min-width: 991px) {
     .modal-dialog {
-        width: 830px;
+        max-width: 830px;
     }
 
     .inner-modal .modal-dialog {
