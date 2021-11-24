@@ -329,8 +329,8 @@ class VisitorLogRepository
         $query = $this->visitorLogDetails;
         
         //Filter by customer Id
-        $query = $query->when(isset($inputs['customerId']), function ($query) use ($inputs) {
-            $query->where('customer_id', $inputs['customerId']);
+        $query = $query->when(isset($inputs['x-ci']), function ($query) use ($inputs) {
+            $query->where('customer_id', $inputs['x-ci']);
         });
 
         //Filter by updated timestamp

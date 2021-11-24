@@ -42,12 +42,12 @@ Route::group(
                 // Route::get('customers/{customer_id}/templates/{template_id}', 'VisitorLogApiController@getTemplate');
                 // Route::get('customers/visitor-types', 'VisitorLogApiController@getVisitorTypes');
                 Route::get('visitors', 'VisitorLogApiController@fetchVisitors');
-                Route::post('visitors/store', 'VisitorLogApiController@storeVisitors');
+                // Route::post('visitors/store', 'VisitorLogApiController@storeVisitors');
                 // Route::get('customers/{customer_id}/visitors', 'VisitorLogApiController@fetchVisitorsFallback'); //TODO:remove later
                 // Route::get('customers-allocated', 'VisitorLogApiController@getCustomers');
                 Route::get('logs', 'VisitorLogApiController@getPeerSyncVisitorLogs');
                 Route::post('logs/store', 'VisitorLogApiController@storeVisitorLogs');
-                Route::get('terms-and-conditions', 'VisitorLogApiController@getTermsAndCondition');
+                Route::get('tac', 'VisitorLogApiController@getTermsAndCondition');
 
                 // Visitor screening questions
                 // Route::get('customers/{customer_id}/screening-questions', 'VisitorLogApiController@fetchScreeningQuestions');

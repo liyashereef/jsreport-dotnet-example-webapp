@@ -80,7 +80,7 @@ class VisitorLogApiController
     public function fetchVisitors(Request $request)
     {
         $request->validate([
-            'customerId' => 'required|integer'
+            'x-ci' => 'required|integer'
         ]);
 
         $ts = Carbon::now()->toDateTimeString();
@@ -132,7 +132,7 @@ class VisitorLogApiController
     public function storeVisitorLogs(Request $request)
     {
         $request->validate([
-            'x-deviceUID' => 'required'
+            'x-dui' => 'required'
         ]);
         
         try {
@@ -141,7 +141,7 @@ class VisitorLogApiController
             $visitorLogs = [];
             $data = [];
             // checkInOption value will be 'Manual or Qr'.
-            $device = $this->visitorLogDeviceRepository->getByUID($request->input('x-deviceUID'))->first();
+            $device = $this->visitorLogDeviceRepository->getByUID($request->input('x-dui'))->first();
 
             if ($request->has('checkInOption')) {
 
@@ -193,7 +193,8 @@ class VisitorLogApiController
                     if (empty($log)) {
                         $result = $this->visitorLogRepo->storeFromApp($visitorLogs);
                         //Store meta info
-                        $customFields = $this->visitorLogTemplateRepo->getTemplateCustomFields($request->input('templateId'));
+                       
+                        $customFields = $this->visitorLogTemplateRepo->getTemplateCustomFields($device->visitorLogDeviceSettings->template_id);
                         foreach ($customFields as $cf) {
                             if (array_key_exists($cf->fieldname, $visitorLogs)) {
                                 VisitorLogMeta::create([
@@ -203,7 +204,6 @@ class VisitorLogApiController
                                 ]);
                             }
                         }
-
                         $request->request->add(['visitor_log_id' => $result->id]);
                         if ($request->hasFile('image')) {
                             $request->request->add(['imagetype' => 'picture']);
