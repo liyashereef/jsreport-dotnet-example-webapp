@@ -20,3 +20,4 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('visitor-log.{customerId}', function ($user, $customerId) {
     return true;
 });
+
