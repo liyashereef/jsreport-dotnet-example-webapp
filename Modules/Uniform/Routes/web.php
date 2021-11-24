@@ -53,7 +53,7 @@ Route::group([
     Route::get('uniform-products/list', array('as' => 'uniform-products.list', 'uses' => 'UniformProductController@getList'));
     Route::get('uniform-products/add', array('as' => 'uniform-products.add', 'uses' => 'UniformProductController@addUniformProductVariants'));
     Route::post('uniform-products/store', array('as' => 'uniform-products.store', 'uses' => 'UniformProductController@store'));
-    Route::get('uniform-products/update/{id}', array('as' => 'uniform-products.update', 'uses' => 'UniformProductController@addUniformProductVariants'));
+    Route::get('uniform-products/update/{id?}', array('as' => 'uniform-products.update', 'uses' => 'UniformProductController@addUniformProductVariants'));
     Route::get('uniform-products/filedownload', array('as' => 'uniform-products.filedownload', 'uses' => 'UniformProductController@getVideoUrl'));
     Route::get('uniform-products/destroy/{id}', array('as' => 'uniform-products.destroy', 'uses' => 'UniformProductController@destroy'));
     Route::get("uniform-products/destroy-attachment/{id}", array('as' => "uniform-products.destroy-attachment", "uses" => "UniformProductController@destroyAttachment"));

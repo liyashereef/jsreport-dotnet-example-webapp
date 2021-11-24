@@ -17,10 +17,10 @@
     <!-- Main content -->
     <section class="content">
         <div class="form-group row" id="template_name">
-            <input type="hidden" name="id" value="{{$template_arr['id'] or ''}}"/>
+            <input type="hidden" name="id" value="{{$template_arr['id'] ?? ''}}"/>
             <label class="col-form-label col-md-2" for="template_name">Template Name </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Name" name="template_name" value="{{$template_arr['survey_name'] or ''}}" required  @if(isset($is_view)) readonly @endif>
+                <input type="text" class="form-control" placeholder="Name" name="template_name" value="{{$template_arr['survey_name'] ?? ''}}" required  @if(isset($is_view)) readonly @endif>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -54,7 +54,7 @@
             <label class="col-form-label control-label col-xs-12 col-md-1 col-sm-6">From <span class="mandatory">*</span></label>
             <div class="col-md-3 col-xs-12 col-sm-6">
                 <div class="form-group input-group date" data-provide="datepicker" id="start_date">
-                    <input type="text"   name="start_date" value="{{$template_arr['start_date'] or ''}}" required class="form-control @if(!isset($is_view)) datepicker" @else " readonly @endif>
+                    <input type="text"   name="start_date" value="{{$template_arr['start_date'] ?? ''}}" required class="form-control @if(!isset($is_view)) datepicker" @else " readonly @endif>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <label class=" col-form-label control-label col-xs-12 col-md-1 col-sm-6">To <span class="mandatory">*</span></label>
             <div class="col-md-3 col-xs-12 col-sm-6">
                 <div class="form-group input-group date" data-provide="datepicker" id="end_date">
-                    <input type="text"  name="end_date" value="{{$template_arr['expiry_date'] or ''}}" required  class="form-control @if(!isset($is_view)) datepicker" @else " readonly @endif>
+                    <input type="text"  name="end_date" value="{{$template_arr['expiry_date'] ?? ''}}" required  class="form-control @if(!isset($is_view)) datepicker" @else " readonly @endif>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -119,7 +119,7 @@
            $('#roleid').select2();
         questionsObj = {
             childArray: [],
-            questionElementCount: {{$last_template_position or 1}},
+            questionElementCount: {{$last_template_position ?? 1}},
             questionRowHtml: "",
           
             startLoading: function(){

@@ -14,7 +14,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="form-group row" id="customer_id">
-            <input type="hidden" name="id" value="{{$mappingArr['id'] or ''}}"/>
+            <input type="hidden" name="id" value="{{$mappingArr['id'] ?? ''}}"/>
           <label class="col-form-label col-md-2">  Choose Customer <span class="mandatory">*</span></label>
             <div class="col-md-4">
                 <select  name="customer_id" id="customerid" class="form-control select2">
@@ -29,10 +29,10 @@
             </div>
         </div>
         <div class="form-group row" id="kit_name">
-            {{-- <input type="hidden" name="id"  value="{{$dropdown_arr['id'] or ''}}"/> --}}
+            {{-- <input type="hidden" name="id"  value="{{$dropdown_arr['id'] ?? ''}}"/> --}}
             <label class="col-form-label col-md-2" for="dropdown_name">Kit Name </label>
             <div class=" col-md-4">
-                <input type="text" class="form-control" placeholder="Name" name="kit_name" value="{{$mappingArr['kit_name'] or ''}}">
+                <input type="text" class="form-control" placeholder="Name" name="kit_name" value="{{$mappingArr['kit_name'] ?? ''}}">
                 <span class="help-block"></span>
             </div>
         </div>
