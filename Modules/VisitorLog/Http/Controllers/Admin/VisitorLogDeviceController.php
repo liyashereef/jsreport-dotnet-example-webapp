@@ -106,6 +106,7 @@ class VisitorLogDeviceController extends Controller
         $device =[
             "config" => ($configData)? $configData : [],
         ];
+       
         CustomerDeviceUpdated::dispatch($device);
     }
 

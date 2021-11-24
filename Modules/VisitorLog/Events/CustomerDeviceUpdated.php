@@ -2,9 +2,10 @@
 
 namespace Modules\VisitorLog\Events;
 
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\Channel;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -13,8 +14,8 @@ class CustomerDeviceUpdated implements ShouldBroadcast
 {
     use SerializesModels, Dispatchable, InteractsWithSockets;
 
-    protected $id;
-    protected $payload;
+    public $id;
+    public $payload;
     /**
      * Create a new event instance.
      *
