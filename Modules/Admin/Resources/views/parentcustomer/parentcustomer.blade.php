@@ -59,10 +59,9 @@
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
+            <div class="modal-header"> 
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
+                <h4 class="modal-title"></h4>
             </div>
             {{ Form::open(array('url'=>'customer/store','id'=>'customer-form', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}

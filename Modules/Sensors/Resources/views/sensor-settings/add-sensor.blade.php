@@ -29,18 +29,18 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                     <h4 class="modal-title" id="myModalLabel"></h4>
+                     
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                   
+                   <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 {{ Form::open(array('url'=>'#','id'=>'sensor_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 {{ Form::hidden('room_id', isset($roomId) ? old('room_id',$roomId) : null,array('id'=>'room_id')) }}
                 <div class="modal-body">
                     <!-- Active Toggle button - Start -->
-                    <div class="form-group col-sm-12" id="enabled">
+                    <div class="form-group col-sm-12 " id="enabled">
                         <label class="switch" style="float:right;">
                             {{ Form::checkbox('enabled',1,null, array('class'=>'form-control')) }}
                             <span class="slider round"></span>
@@ -48,7 +48,7 @@
                         <label style="float:right;padding-right: 5px;">Active</label>
                     </div>
                     <!-- Active Toggle button - End -->
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="name" class="col-sm-3 control-label"></label>
                         <div class="col-sm-9">
                             <small class="help-block"></small>
@@ -61,14 +61,14 @@
                         </div>
                         </div>
                     </div>
-                    <div class="form-group" id="name">
+                    <div class="form-group row" id="name">
                         <label for="name" class="col-sm-3 control-label">Name</label>
                         <div class="col-sm-9">
                             {{ Form::text('name',null,array('class' => 'form-control', 'Placeholder'=>'Sensor Name', 'required'=>TRUE)) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="nod_mac">
+                    <div class="form-group row" id="nod_mac">
                         <label for="nod_mac" class="col-sm-3 control-label">Node Mac</label>
                         <div class="col-sm-9">
                             {{ Form::text('nod_mac',null,array('class' => 'form-control', 'Placeholder'=>'Node Mac', 'required'=>TRUE)) }}
@@ -76,7 +76,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="pan_mac">
+                    <div class="form-group row" id="pan_mac">
                         <label for="pan_mac" class="col-sm-3 control-label">Pan Mac</label>
                         <div class="col-sm-9">
                             {{ Form::text('pan_mac',null,array('class' => 'form-control', 'Placeholder'=>'Node Mac')) }}
@@ -84,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="gateway_mac">
+                    <div class="form-group row" id="gateway_mac">
                         <label for="gateway_mac" class="col-sm-3 control-label">Gateway Mac</label>
                         <div class="col-sm-9">
                             {{ Form::text('gateway_mac',null,array('class' => 'form-control', 'Placeholder'=>'Gateway Mac')) }}

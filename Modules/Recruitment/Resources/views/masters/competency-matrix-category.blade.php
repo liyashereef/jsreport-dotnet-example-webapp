@@ -30,14 +30,14 @@
             {{ Form::open(array('url'=>'#','id'=>'competency-category-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group {{ $errors->has('category_name') ? 'has-error' : '' }}" id="category_name">
+                <div class="form-group {{ $errors->has('category_name') ? 'has-error' : '' }} row" id="category_name">
                     <label for="category_name" class="col-sm-3 control-label">Category</label>
                     <div class="col-sm-9">
                         {{ Form::text('category_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group {{ $errors->has('short_name') ? 'has-error' : '' }}" id="short_name">
+                 <div class="form-group {{ $errors->has('short_name') ? 'has-error' : '' }} row" id="short_name">
                     <label for="from" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control')) }}
