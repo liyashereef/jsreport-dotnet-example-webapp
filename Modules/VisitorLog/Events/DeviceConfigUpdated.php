@@ -4,13 +4,11 @@ namespace Modules\VisitorLog\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CustomerDeviceUpdated implements ShouldBroadcast
+class DeviceConfigUpdated implements ShouldBroadcast
 {
     use SerializesModels, Dispatchable, InteractsWithSockets;
 
@@ -21,10 +19,10 @@ class CustomerDeviceUpdated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($payload)
+    public function __construct($config)
     {
-        $this->id = $payload['config']->customer_id;
-        $this->payload = $payload;
+        $this->id = $config->uid;
+        $this->payload = $config;
     }
 
     /**
@@ -34,6 +32,6 @@ class CustomerDeviceUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('visitor-log.' . $this->id);
+        return new Channel('visitor-log-device.' . $this->id);
     }
 }
