@@ -45,7 +45,7 @@
             {{ Form::open(array('url'=>'#','id'=>'ids-service-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
 
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-3 control-label">Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder' => 'Service Name')) }}
@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <div id="rate" class="form-group">
+                <div id="rate" class="form-group row">
                     <label for="rate" class="col-sm-3 control-label">Rate</label>
                     <div class="col-sm-9">
                         {{ Form::number('rate',null,array('class'=>'form-control','placeholder' => 'Rate','step'=>"0.01", 'title'=>"Currency",'pattern'=>"^\d+(?:\.\d{1,2})?$")) }}
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,['class' => 'form-control','id'=>'note','rows'=>'3']) }}

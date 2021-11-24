@@ -32,7 +32,7 @@
             {{ Form::open(array('url'=>'#','id'=>'custom-question-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
               <!-- Active Toggle button - Start -->
-              <div class="form-group col-sm-12" id="active" style="display:block;">
+              <div class="form-group col-lg-12" id="active" style="display:block;">
                 <label class="switch" style="float:right;">
                   <input name="is_active" type="checkbox" value="1">
                   <span class="slider round"></span>
@@ -56,7 +56,7 @@
             </div>
           </div>
 
-        <div class="form-group" id="is_mandatory_display">
+        <div class="form-group row" id="is_mandatory_display">
             <div>
                 <label for="is_required" class="col-sm-3">Mandatory Question</label>
                 <div class="col-sm-1" style="margin-left: -7%;">

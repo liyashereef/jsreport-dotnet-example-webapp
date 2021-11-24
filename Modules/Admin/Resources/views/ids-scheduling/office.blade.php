@@ -62,7 +62,7 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'ids-office-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="name" class="col-sm-3 control-label">Name <span class="mandatory"> *</span></label>
                     <div  id="name" class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder' => 'Name')) }}
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="address" class="col-sm-3 control-label">Address<span class="mandatory"> *</span></label>
                     <div id="adress"  class="col-sm-9">
                     {{ Form::text('adress',null,array('class'=>'form-control','autocomplete'=>'false','placeholder' => 'Address', 'id' => 'office_address')) }}
@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-                <div  class="form-group">
+                <div  class="form-group row">
                     <label for="" class="col-sm-3 control-label">Lat & Lng<span class="mandatory"> *</span></label>
                     <div id="latitude" class="col-sm-4">
                     {{ Form::text('latitude',null,array('class'=>'form-control col-sm-5','placeholder' => 'Latitude', 'id' => 'lat')) }}
@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <div  class="form-group">
+                <div  class="form-group row">
                     <label for="phone_number" class="col-sm-3 control-label">Phone Number<span class="mandatory"> *</span></label>
                     <div id="phone_number" class="col-sm-9">
                         {{ Form::text('phone_number',null,array('class'=>'form-control phone','placeholder' => 'Phone Number [ format (XXX)XXX-XXXX ]')) }}
@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div  class="form-group">
+                <div  class="form-group row">
                     <label for="phone_number_ext" class="col-sm-3 control-label">Phone Ext</label>
                     <div id="phone_number_ext" class="col-sm-9">
                         {{ Form::text('phone_number_ext',null,array('class'=>'form-control','placeholder' => 'Phone Ext')) }}
@@ -106,7 +106,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="office_hours_start_time" class="col-sm-3 control-label">Office Start Time<span class="mandatory"> *</span></label>
                     <div id="office_hours_start_time"  class="col-sm-9">
                         {{ Form::text('office_hours_start_time',null,array('class'=>'form-control timepicker','placeholder' => 'Office hours start time')) }}
@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="office_hours_end_time" class="col-sm-3 control-label">Office End Time<span class="mandatory"> *</span></label>
                     <div id="office_hours_end_time"  class="col-sm-9">
                         {{ Form::text('office_hours_end_time',null,array('class'=>'form-control timepicker','placeholder' => 'Office hours end time')) }}
@@ -123,7 +123,7 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="special_instructions" class="col-sm-3 control-label">Special Instructions</label>
                     <div  id="special_instructions" class="col-sm-9">
                         {{ Form::textarea('special_instructions',null,['class' => 'form-control','id'=>'note','rows'=>'3']) }}
@@ -132,7 +132,7 @@
                 </div>
 
                 <!-- Active Toggle button - Start -->
-                <div class="form-group" id="is_photo_service">
+                <div class="form-group row" id="is_photo_service">
                     <label for="is_photo_service" class="col-sm-3 control-label">Enable Photo Service </label>
                     <div class="col-sm-9">
                         <label class="switch" style="">
@@ -150,7 +150,7 @@
                     <hr>
                 </div>
 
-                <div class="form-group edit-display">
+                <div class="form-group row edit-display">
                     <label for="start_time" class="col-sm-3 control-label">Start Time<span class="mandatory"> *</span></label>
                     <div id="start_time"  class="col-sm-9">
                         {{ Form::text('start_time',null,array('class'=>'form-control timepicker','placeholder' => 'Slot start time')) }}
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="form-group edit-display">
+                <div class="form-group row edit-display">
                     <label for="end_time" class="col-sm-3 control-label">End Time<span class="mandatory"> *</span></label>
                     <div id="end_time"  class="col-sm-9">
                         {{ Form::text('end_time',null,array('class'=>'form-control timepicker','placeholder' => 'Slot end time')) }}
@@ -166,14 +166,14 @@
                     </div>
                 </div>
 
-                <div  class="form-group edit-display">
+                <div  class="form-group row edit-display">
                     <label for="intervals" class="col-sm-3 control-label">Interval (In Minutes)<span class="mandatory"> *</span></label>
                     <div id="intervals" class="col-sm-9">
                         {{ Form::text('intervals',null,array('class'=>'form-control','placeholder' => 'Interval in minutes', 'id' => 'interval')) }}
                         <small class="help-block intervals_error_msg" id=""></small>
                     </div>
                 </div>
-                <div  class="form-group edit-display">
+                <div  class="form-group row edit-display">
                     <label for="start_date" class="col-sm-3 control-label">Start Date<span class="mandatory"> *</span></label>
                     <div id="start_date" class="col-sm-9">
                         {{ Form::date('start_date',null,array('class'=>'form-control','placeholder' => 'Start Date','id'=>'startDate_val')) }}
@@ -181,7 +181,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="office_ids">
+                <div class="form-group row" id="office_ids">
                     <label for="colorcode" class="col-sm-3 control-label">Color Code</label>
                     <div class="col-sm-9">
                         {{ Form::color('icon_color_code',null,array('class' => 'form-control form-control-color', 'id'=>'icon_color_code', 'Placeholder'=>'Icon Colour', 'required'=>TRUE)) }}
@@ -214,24 +214,24 @@
             {{ Form::open(array('url'=>'#','id'=>'office-timing-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('ids_office_id',null,array('id'=>'ids_office_id')) }}
                 <div class="row">
-                    <div class="form-group col-sm-12">
+                    <div class="form-group row col-sm-12">
                         <div class="form-group col-sm-3" style="margin-left: 17px;" id="start_time">
                             <label for="start_time">Start Time</label>
                             <input type="text" id="start_time_val"  name="start_time" class="form-control timepicker" placeholder="Start Time">
                             <small class="help-block"></small>
                         </div>
-                        <div class="form-group col-sm-3" id="end_time">
+                        <div class="form-group row col-sm-3" id="end_time">
                             <label for="end_time">End Time</label>
                             <input type="text" id="end_time_val"  name="end_time" class="form-control timepicker" placeholder="End Time">
                             <small class="help-block"></small>
                         </div>
-                        <div class="form-group col-sm-3" id="start_date">
+                        <div class="form-group row col-sm-3" id="start_date">
                             <label for="start_date">Start Date</label>
                             {{-- <input type="text" id="start_date_val"  name="start_date" class="form-control" placeholder="Start Date"> --}}
                             {{ Form::date('start_date',null,array('class'=>'form-control','placeholder' => 'Start Date','id'=>'start_date_val')) }}
                             <small class="help-block"></small>
                         </div>
-                        <div class="form-group col-sm-3" id="expiry_date">
+                        <div class="form-group row col-sm-3" id="expiry_date">
                             <label for="expiry_date">End Date</label>
                             {{-- <input type="text" id="end_date_val"  name="end_date"  class="form-control" placeholder="End Date"> --}}
                             {{ Form::date('expiry_date',null,array('class'=>'form-control','placeholder' => 'End Date','id'=>'expiry_date_val')) }}
@@ -241,24 +241,24 @@
                     </div>
                     <div class="form-group col-sm-12">
 
-                        <div class="form-group col-sm-2" id="intervals" style="margin-left: 17px;" >
+                        <div class="form-group row col-sm-2" id="intervals" style="margin-left: 17px;" >
                             <label for="intervals">Interval (In Minutes)</label>
                             <input type="text" id="intervals_val"  name="intervals" class="form-control" placeholder="Intervals">
                             <small class="help-block intervals_error_msg" id=""></small>
                         </div>
 
-                        <div class="form-group col-sm-2" id="lunch_start_time" >
+                        <div class="form-group row col-sm-2" id="lunch_start_time" >
                             <label for="lunch_start_time">Lunch Start Time</label>
                             <input type="text" id="lunch_start_time_val"  name="lunch_start_time" class="form-control timepicker" placeholder="Lunch Start Time">
                             <small class="help-block"></small>
                         </div>
-                        <div class="form-group col-sm-2" id="lunch_end_time">
+                        <div class="form-group row col-sm-2" id="lunch_end_time">
                             <label for="lunch_end_time">Lunch End Time</label>
                             <input type="text" id="lunch_end_time_val"  name="lunch_end_time" class="form-control timepicker" placeholder="Lunch End Time">
                             <small class="help-block"></small>
                         </div>
-                        <div class="form-group col-sm-3" > </div>
-                        <div class="form-group col-sm-3" >
+                        <div class="form-group row col-sm-3" > </div>
+                        <div class="form-group row col-sm-3" >
                             <button type="button" class="btn btn-primary blue pull-right resetForm" style="margin-top: 24px;"> Reset </button>
                             <button type="submit" class="btn btn-primary blue pull-right" id="timeFormSubmit" style="margin-top: 24px; margin-right: 2px;"> Submit </button>
                         </div>

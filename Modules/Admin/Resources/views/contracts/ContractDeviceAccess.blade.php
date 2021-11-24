@@ -29,7 +29,7 @@
             <input type="hidden" name="id" id="id" />
             <div class="modal-body">
                     <div id="form-errors"></div>
-                 <div class="form-group" id="devicetitle">
+                 <div class="form-group row" id="devicetitle">
 
                     <label for="paymentmethodtitle" class="col-sm-3 control-label">Device <span class="mandatory">*</span></label>
                     <div class="col-sm-9">

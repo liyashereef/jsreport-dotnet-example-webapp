@@ -30,7 +30,7 @@
             <input type="hidden" name="id" id="id" />
             <div class="modal-body">
                     <div id="form-errors"></div>
-                <div class="form-group" id="officeaddresstitle">
+                <div class="form-group row" id="officeaddresstitle">
 
                     <label for="officeaddresstitle" class="col-sm-3 control-label">Address Title <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
@@ -40,7 +40,7 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="officeaddress">
+                <div class="form-group row" id="officeaddress">
 
                     <label for="officeaddress" class="col-sm-3 control-label">Address <span class="mandatory">*</span></label>
                     <div class="col-sm-9">

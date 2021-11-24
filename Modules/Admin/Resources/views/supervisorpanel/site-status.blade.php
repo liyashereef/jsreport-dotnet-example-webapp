@@ -27,14 +27,14 @@
             {{ Form::open(array('url'=>'#','id'=>'status-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="status">
+                <div class="form-group row" id="status">
                     <label for="status" class="col-sm-3 control-label">Status</label>
                     <div class="col-sm-9">
                         {{ Form::text('status',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="order_sequence">
+                 <div class="form-group row" id="order_sequence">
                         <label for="order_sequence" class="col-sm-3 control-label">Order Sequence Number</label>
                         <div class="col-sm-9">
                             {{ Form::number('order_sequence',null,array('class'=>'form-control','min'=>1)) }}

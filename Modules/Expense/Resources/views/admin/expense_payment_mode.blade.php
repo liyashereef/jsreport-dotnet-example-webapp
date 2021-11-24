@@ -33,14 +33,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="mode_of_payment">
+                <div class="form-group row" id="mode_of_payment">
                     <label for="mode_of_payment" class="col-sm-3 control-label">Mode of Payment <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('mode_of_payment',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>       
-                <div class="form-group" id="reimbursement">
+                <div class="form-group row" id="reimbursement">
                     <label for="reimbursement" class="col-sm-3 control-label">Reimbursement </label>                    
                     <div class="col-sm-9">
                         <fieldset id="reimburse">

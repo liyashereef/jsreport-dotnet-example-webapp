@@ -40,7 +40,7 @@
                 {{ Form::hidden('room_id', isset($roomId) ? old('room_id',$roomId) : null,array('id'=>'room_id')) }}
                 <div class="modal-body">
                     <!-- Active Toggle button - Start -->
-                    <div class="form-group col-sm-12 " id="enabled">
+                    <div class="form-group col-lg-12 " id="enabled">
                         <label class="switch" style="float:right;">
                             {{ Form::checkbox('enabled',1,null, array('class'=>'form-control')) }}
                             <span class="slider round"></span>
@@ -48,7 +48,7 @@
                         <label style="float:right;padding-right: 5px;">Active</label>
                     </div>
                     <!-- Active Toggle button - End -->
-                    <div class="form-group ">
+                    <div class="form-group row">
                         <label for="name" class="col-sm-3 control-label"></label>
                         <div class="col-sm-9">
                             <small class="help-block"></small>

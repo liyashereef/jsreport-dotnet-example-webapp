@@ -39,7 +39,7 @@
              {{ Form::hidden('id', null) }}
             <div class="modal-body">
               
-                <div class="form-group" id="feedback">
+                <div class="form-group row" id="feedback">
                     <label for="feedback" class="col-sm-3 control-label">Status Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control')) }}
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 
-                <div class="form-group" id="active">
+                <div class="form-group row" id="active">
                     <label for="active" class="col-sm-3 control-label">Authorised</label>
                         <label class="switch" style="">
                             {{ Form::checkbox('is_authorised',1,null, array('class'=>'form-control')) }}

@@ -61,7 +61,7 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'office-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="name" class="col-sm-3 control-label">Name <span class="mandatory"> *</span></label>
                     <div  id="name" class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder' => 'Name')) }}
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="address" class="col-sm-3 control-label">Address<span class="mandatory"> *</span></label>
                     <div id="adress"  class="col-sm-9">
                     {{ Form::text('adress',null,array('class'=>'form-control','autocomplete'=>'false','placeholder' => 'Address', 'id' => 'office_address')) }}
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div  class="form-group">
+                <div  class="form-group row">
                     <label for="" class="col-sm-3 control-label">Lat & Lng<span class="mandatory"> *</span></label>
                     <div id="latitude" class="col-sm-4">
                     {{ Form::text('latitude',null,array('class'=>'form-control col-sm-5','placeholder' => 'Latitude', 'id' => 'lat')) }}
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div  class="form-group">
+                <div  class="form-group row">
                     <label for="phone_number" class="col-sm-3 control-label">Phone Number<span class="mandatory"> *</span></label>
                     <div id="phone_number" class="col-sm-9">
                         {{ Form::text('phone_number',null,array('class'=>'form-control phone','placeholder' => 'Phone Number [ format (XXX)XXX-XXXX ]')) }}
@@ -97,7 +97,7 @@
                     </div>
                 </div>
 
-                <div  class="form-group">
+                <div  class="form-group row">
                     <label for="phone_number_ext" class="col-sm-3 control-label">Phone Ext</label>
                     <div id="phone_number_ext" class="col-sm-9">
                         {{ Form::text('phone_number_ext',null,array('class'=>'form-control','placeholder' => 'Phone Ext')) }}
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="office_start_time" class="col-sm-3 control-label">Office Start Time<span class="mandatory"> *</span></label>
                     <div id="office_start_time"  class="col-sm-9">
                         {{ Form::text('office_start_time',null,array('class'=>'form-control timepicker','placeholder' => 'Office hours start time')) }}
@@ -113,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="office_end_time" class="col-sm-3 control-label">Office End Time<span class="mandatory"> *</span></label>
                     <div id="office_end_time"  class="col-sm-9">
                         {{ Form::text('office_end_time',null,array('class'=>'form-control timepicker','placeholder' => 'Office hours end time')) }}
@@ -122,7 +122,7 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="special_instructions" class="col-sm-3 control-label">Special Instructions</label>
                     <div  id="special_instructions" class="col-sm-9">
                         {{ Form::textarea('special_instructions',null,['class' => 'form-control','id'=>'note','rows'=>'3']) }}

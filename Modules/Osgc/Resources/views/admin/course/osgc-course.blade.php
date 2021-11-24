@@ -32,21 +32,21 @@
             {{Form::hidden('course_image_name',null, ['id' => 'course_image_name',])}}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="title">
+                <div class="form-group row" id="title">
                     <label for="title" class="col-sm-2 control-label">Course Title<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('title',null,array('class'=>'form-control', 'Placeholder'=>'Course Title', "maxlength"=>"255")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-2 control-label">Description<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class'=>'form-control', 'Placeholder'=>'Description','rows'=>"3")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="price">
+                <div class="form-group row" id="price">
                     <label for="price" class="col-sm-2 control-label">Course Price<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('price',null,array('class'=>'form-control', 'Placeholder'=>'Course Price')) }}
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 
-                <div class="form-group col-sm-12" id="course_headings">
+                <div class="form-group row col-sm-12" id="course_headings">
                         <div class=" table-responsive pop-in-table" id="course-heading">
                             <table class="table table-bordered course-heading-table">
                                 <thead>
