@@ -30,14 +30,14 @@
                 {{ Form::hidden('id', null) }}
 
                 <div class="modal-body">
-                    <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}" id="role_id">
+                    <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }} row" id="role_id">
                         <label for="role_id" class="col-sm-3 control-label">Role</label>
                         <div class="col-sm-9">
                             {{ Form::select('role_id',[''=>'Please select']+$roles,null,array('class'=>'form-control','id'=>'roleid','required'=>'required')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="permission_id">
+                    <div class="form-group row" id="permission_id">
                         <label for="permission_id" class="col-sm-3 control-label">Permission</label>
                         <div class="col-sm-9">
                             {{ Form::select('permission_id[]',$permissions,null,array('class'=>'form-control','id'=>'permissions','multiple'=>'multiple','style'=>'width: 591px;')) }}

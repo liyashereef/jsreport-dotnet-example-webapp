@@ -30,14 +30,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="reason">
+                <div class="form-group row" id="reason">
                     <label for="type" class="col-sm-3 control-label">Reason</label>
                     <div class="col-sm-9">
                         {{ Form::text('reason',null,array('class'=>'form-control','required'=>true)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="e">
+                <div class="form-group row" id="e">
                     <label for="type" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('shortname',null,array('class'=>'form-control')) }}

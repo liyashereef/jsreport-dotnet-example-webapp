@@ -75,7 +75,8 @@ class RfpResponseTypeLookupRepository
      */
     public function save($data)
     {
-        $data = $this->helperService->keySnakeCase($data);
+        //$data = $this->helperService->keySnakeCase($data);
+        $data['rfp_response_type']=$data['rfpResponseType'];
         return $this->model->updateOrCreate(array('id' => $data['id']), $data);
     }
 

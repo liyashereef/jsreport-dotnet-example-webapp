@@ -30,7 +30,7 @@ margin-left: 15px;
                     </div>
                     </div>
                     <div id="email_1_time">
-                    <label for="email_1_time" class="col-sm-2">Time for sending email reminder 1</label>
+                    <label for="email_1_time" class="col-sm-4">Time for sending email reminder 1</label>
                     <div class="col-sm-2">
                     {{ Form::text('email_1_time',$email_time['email_1_time'],array('class'=>'form-control timepicker','placeholder' => 'Email 1 Time')) }}
                     <small class="help-block"></small>

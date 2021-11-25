@@ -107,10 +107,8 @@ class ManageContentRepository
                 $fileprefix = "contentmanager/" . date("Y-m-d", strtotime($contentVideoAttachment->created_at)) . "/" . $contentVideoAttachment->content_id . "_";
                 if ($request->uploadedS3VideoFileName != "") {
                     try {
-                        S3HelperService::moveFile(
+                        S3HelperService::trashFile(
                             "awsS3Bucket",
-                            $fileprefix . $attachmentFile,
-                            "trash/",
                             $fileprefix . $attachmentFile
                         );
                     } catch (\Throwable $th) {
@@ -156,27 +154,38 @@ class ManageContentRepository
                     "sequence" => 1,
                 ]);
             }
-
+            $filePthlink=$request->uploadedS3VideoFileName;
+            if($filePthlink!=""){
+                $explodedFilPath=explode("temp/",$filePthlink);
+                S3HelperService::setPersistent("temp/".$explodedFilPath[1], $Id);  
+            }
             //$this->s3AttachmentRepository->moveFile("s3", "temp", "02_2021", $s3File);
             //S3Helper::moveFile("awsS3Bucket", null, null, $request->uploadedS3VideoFileName, $Id);
-            S3HelperService::setPersistent($request->uploadedS3VideoFileName, $Id);
+            S3HelperService::setPersistent(date("Y-m-d")."/".$request->uploadedS3VideoFileName, $Id);
         }
-        for ($i = 1; $i < $blockNo + 1; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             if ($request->get("uploadedS3AttachedFileName" . $i)) {
                 $Title = $request->get("title_off_attachment" . $i);
                 $uploadedFile = $request->get("uploadedS3AttachedFileName" . $i);
 
-                $fNameArray = explode("/", $request->get("uploadedS3AttachedFileName" . $i));
-                $length = count($fNameArray) - 1;
-                $attachFilename = $fNameArray[$length];
-                ContentAttachments::create([
-                    "content_id" => $Id,
-                    "attachment_title" => $Title,
-                    "attachment_file" =>  $attachFilename,
-                    "attachment_type" => 2,
-                    "sequence" => 1,
-                ]);
-                S3HelperService::setPersistent($request->get("uploadedS3AttachedFileName" . $i), $Id);
+                if($Title!=""){
+                    $fNameArray = explode("/", $request->get("uploadedS3AttachedFileName" . $i));
+                    $length = count($fNameArray) - 1;
+                    $attachFilename = $fNameArray[$length];
+                    ContentAttachments::create([
+                        "content_id" => $Id,
+                        "attachment_title" => $Title,
+                        "attachment_file" =>  $attachFilename,
+                        "attachment_type" => 2,
+                        "sequence" => 1,
+                    ]);
+                }
+                $filePthlink=$request->get("uploadedS3AttachedFileName" . $i);
+                if($filePthlink!=""){
+                    $explodedFilPath=explode("temp/",$filePthlink);
+                    S3HelperService::setPersistent("temp/".$explodedFilPath[1], $Id);  
+                }
+                
             }
         }
         return $uploadedFileIndex;

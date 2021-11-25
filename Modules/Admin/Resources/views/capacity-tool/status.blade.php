@@ -32,14 +32,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="value">
+                <div class="form-group row" id="value">
                     <label for="status" class="col-sm-3 control-label">Status</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('value',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control')) }}

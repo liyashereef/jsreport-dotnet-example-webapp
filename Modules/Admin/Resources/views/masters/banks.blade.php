@@ -32,14 +32,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="bank_name">
+                <div class="form-group row" id="bank_name">
                     <label for="type" class="col-sm-3 control-label">Bank Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('bank_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="bank_code">
+                <div class="form-group row" id="bank_code">
                     <label for="bank_code" class="col-sm-3 control-label">Bank Code</label>
                     <div class="col-sm-9">
                         {{ Form::text('bank_code',null,array('class'=>'form-control')) }}

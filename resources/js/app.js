@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('alpinejs');
 
 window.Vue = require('vue').default;
 import VueChatScroll from 'vue-chat-scroll'

@@ -30,21 +30,21 @@
             {{ Form::open(array('url'=>'#','id'=>'commissionaires-understanding-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="commissionaires_understandings">
+                <div class="form-group row" id="commissionaires_understandings">
                     <label for="commissionaires_understandings" class="col-sm-3 control-label">Comments</label>
                     <div class="col-sm-9">
                         {{ Form::text('commissionaires_understandings',null,array('class'=>'form-control', 'required')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="order_sequence">
+                <div class="form-group row" id="order_sequence">
                     <label for="order_sequence" class="col-sm-3 control-label">Order Sequence Number</label>
                     <div class="col-sm-2">
                         {{ Form::number('order_sequence',null,array('class'=>'form-control','min'=>1, 'required')) }}

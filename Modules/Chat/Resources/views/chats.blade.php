@@ -22,20 +22,24 @@
              @endforeach
          </select>
      </div>
-     <div class="col-md-2">
+     <div class="col-md-2" >
          <input class="button btn btn-primary blue" type="button" value="Chat">
          <input class="button btn btn-primary blue" type="button" id="textbtn" value="Text">
-     </div>
-     <div class="col-md-4">
+        
+        </div>
+     <div class="col-md-4" style="text-align: right;">
+     <a href="{{url('chat/view-history')}}" class="button btn btn-primary blue"  >View History</a>
      </div>
      </div>
 </div>
 <br>
 <div class="container">
 <chat-app :user="{{ auth()->user() }}" :newcontact="{{ auth()->user() }}"></chat-app>
+</div>
+</div>
 
-</div>
-</div>
+
+
 <div class="modal fade" id="textModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -92,6 +96,7 @@
 @section('scripts')
 <script>
 $(function() {
+
   //  $('#employee-name-filter').select2();
      $("#textbtn").on("click", function (e) {
           //  var id = $(this).data('id');

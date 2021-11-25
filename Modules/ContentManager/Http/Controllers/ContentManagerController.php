@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\ContentManager\Models\ManageContent;
 use Modules\ContentManager\Models\ContentAttachments;
 use Aws\S3\S3Client;
-use S3Helper;
+use App\Helpers\S3HelperService;
 
 
 class ContentManagerController extends Controller
@@ -62,7 +62,6 @@ class ContentManagerController extends Controller
             $content['message'] = 'Sorry no records has been found';
             $content['code'] = 401;
         }
-
         return response()->json($content);
     }
 
@@ -83,7 +82,7 @@ class ContentManagerController extends Controller
                 if ($ContentAttachment->attachment_type == 1) {
 
                     // Get the actual presigned-url
-                    $presignedUrl = S3Helper::getPresignedUrl($videoContent->id, $fileprefix . $ContentAttachment->attachment_file);
+                    $presignedUrl = S3HelperService::getPresignedUrl($videoContent->id, $fileprefix . $ContentAttachment->attachment_file);
 
 
 
@@ -97,7 +96,7 @@ class ContentManagerController extends Controller
                 } else {
                     $attachFiles = $ContentAttachment->attachment_file;
 
-                    $presignedUrlAttachment = S3Helper::getPresignedUrl($videoContent->id, $fileprefix . $ContentAttachment->attachment_file);
+                    $presignedUrlAttachment = S3HelperService::getPresignedUrl($videoContent->id, $fileprefix . $ContentAttachment->attachment_file);
 
                     // Get the actual presigned-url
                     $attachmentList[] = [
@@ -116,6 +115,7 @@ class ContentManagerController extends Controller
                 "videoList"
             ));
         } catch (\Throwable $th) {
+            \Log::info("S3 Content Listing".$th);
             return redirect('/content-manager');
         }
     }

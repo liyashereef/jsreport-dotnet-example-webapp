@@ -29,28 +29,28 @@
             {{ Form::hidden('id', null) }}
              {{ Form::hidden('shift_name', null) }}
             <div class="modal-body">
-                <div class="form-group {{ $errors->has('shift_name') ? 'has-error' : '' }}" id="shift_name">
+                <div class="form-group {{ $errors->has('shift_name') ? 'has-error' : '' }} row" id="shift_name">
                     <label for="shift_name" class="col-sm-3 control-label">Shift Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('shift_name',null,array('class'=>'form-control','readonly'=>true)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}" id="from">
+                 <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }} row" id="from">
                     <label for="from" class="col-sm-3 control-label">From</label>
                     <div class="col-sm-9">
                         {{ Form::time('from',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                  <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }}" id="to">
+                  <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }} row" id="to">
                     <label for="to" class="col-sm-3 control-label">To</label>
                     <div class="col-sm-9">
                          {{ Form::time('to',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                  <div class="form-group {{ $errors->has('displayable') ? 'has-error' : '' }}" id="displayable">
+                  <div class="form-group {{ $errors->has('displayable') ? 'has-error' : '' }} row" id="displayable">
                     <label for="displayable" class="col-sm-3 control-label">Displayable</label>
                     <div class="col-sm-9">
                          {{ Form::select('displayable',[null=>'Please Select',"1"=>"Yes","0"=>"No"],old('displayable'),array('class' => 'form-control')) }}

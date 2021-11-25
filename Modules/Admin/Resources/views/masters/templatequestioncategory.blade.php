@@ -38,7 +38,7 @@
                     @endforeach
                 </ul>
 
-                <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}" id="description">
+                <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }} row" id="description">
                     <label for="description" class="col-sm-3 control-label">Category Description <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="description">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="form-group {{ $errors->has('safety_type') ? 'has-error' : '' }}" id="safety_type">
+                <div class="form-group {{ $errors->has('safety_type') ? 'has-error' : '' }} row" id="safety_type">
                     <label for="safety_type" class="col-sm-3 control-label">Show under safety dashboard<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <select name="safety_type" class="form-control">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="form-group {{ $errors->has('average') ? 'has-error' : '' }}" id="average">
+                <div class="form-group {{ $errors->has('average') ? 'has-error' : '' }} row" id="average">
                     <label for="average" class="col-sm-3 control-label">Average <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <select name="average" class="form-control">

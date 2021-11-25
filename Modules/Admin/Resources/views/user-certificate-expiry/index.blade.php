@@ -47,7 +47,7 @@
 </div>
 
 <template id="more-content">
-    <div class="el_fields row" id="--name--_row_--position_num--" data-elid="--position_num--">
+    <div class="el_fields row form-group" id="--name--_row_--position_num--" data-elid="--position_num--">
         <label for="interval" class="col-md-5 interval_label" id="label_--position_num--">
             <span>
                 Number of days prior
@@ -56,7 +56,7 @@
             </span>
             <span class="mandatory">*</span>
         </label>
-        <div class="col-md-4">
+        <div class="col-md-4 ">
             {{ Form::number('email_reminder[]', null,
                     array(
                     'class'=>'form-control email-reminder-days',

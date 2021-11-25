@@ -41,7 +41,7 @@
                 {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label for="name" class="col-sm-3 control-label">Role</label>
                         <div class="col-sm-9">
                             <select name="role" id="push-role-select" required class="form-control">

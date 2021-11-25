@@ -30,14 +30,14 @@
             {{ Form::open(array('url'=>'#','id'=>'document_name_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="document_name" class="col-sm-3 control-label">Enter  Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class' => 'form-control', 'Placeholder'=>'Other Subcategory', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="document_type_id">
+                <div class="form-group row" id="document_type_id">
                     <label for="role_id" class="col-sm-3 control-label">Select Document Type</label>
                     <div class="col-sm-9">
                      {{Form::select('document_type_id',[''=>'Please Select']+$type_list,null, ['class' => 'form-control','id' => 'document_type_details','required'=>TRUE])}}
@@ -45,7 +45,7 @@
                  </div>
                 </div>
                 
-                <div class="form-group" id="document_category_id">
+                <div class="form-group row" id="document_category_id">
                     <label for="role_id" class="col-sm-3 control-label">Select Category</label>
                     <div class="col-sm-9">
                      {{Form::select('other_category_lookup_id',[''=>'Please Select'],null, ['class' => 'form-control','id'=>'document_category_details','required'=>TRUE])}}

@@ -92,8 +92,12 @@
                 <span class="singlelinespan">Chat</span>
             </a>
             <ul class="dropdown-menu menu-list" role="menu">
-                <li>
-                    <a href="{{ route('chat.viewchat') }}">Chat</a>
-                </li>
+                    <li class="dropdown-submenu">
+                            <a href="{{ route('chat.viewchat') }}"> Chat </a>
+                    </li>
+
+                    <li class="dropdown-submenu">
+                        <a href="{{ route('chat.view-history') }}"> Chat History </a>
+                    </li>
             </ul>
         </li>

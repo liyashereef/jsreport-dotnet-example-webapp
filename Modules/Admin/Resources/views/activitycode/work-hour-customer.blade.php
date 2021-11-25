@@ -34,35 +34,35 @@
             {{ Form::open(array('url'=>'#','id'=>'work-hour-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="work_hour_type_id">
+                <div class="form-group row" id="work_hour_type_id">
                     <label for="work_hour_type_id" class="col-sm-3 control-label">Activity Code</label>
                     <div class="col-sm-9">
                         {{ Form::select('work_hour_type_id',[''=>'Please select']+$workHourType,null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="customer_type_id">
+                <div class="form-group row" id="customer_type_id">
                     <label for="customer_type_id" class="col-sm-3 control-label">Customer Type</label>
                     <div class="col-sm-9">
                         {{ Form::select('customer_type_id',[''=>'Please select']+$customerType,null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="code">
+                <div class="form-group row" id="code">
                     <label for="code" class="col-sm-3 control-label">Code</label>
                     <div class="col-sm-9">
                         {{ Form::text('code',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="duplicate_code">
+                <div class="form-group row" id="duplicate_code">
                     <label for="duplicate_code" class="col-sm-3 control-label">Duplicate Code</label>
                     <div class="col-sm-9">
                         {{ Form::text('duplicate_code',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="description">
+                 <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textArea('description',null,array('class'=>'form-control')) }}

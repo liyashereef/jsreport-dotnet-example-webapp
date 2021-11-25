@@ -33,21 +33,21 @@
             {{ Form::open(array('url'=>'#','id'=>'work-hour-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="subject" class="col-sm-3 control-label">Activity Type</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textArea('description',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group sortorder" id="sort_order">
+                <div class="form-group sortorder row" id="sort_order">
                     <label for="sort_order" class="col-sm-3 control-label">Sort Order</label>
                     <div class="col-sm-3">
                         <select name="sort_order" id="sort_order" class="form-control">

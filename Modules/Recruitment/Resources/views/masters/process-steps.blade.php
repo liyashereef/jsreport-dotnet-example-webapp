@@ -21,30 +21,31 @@
 </table>
 
 <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header">   
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="myModalLabel">Process Step</h4>
+                
             </div>
             {{ Form::open(array('url'=>'#','id'=>'tracking-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                 <div class="form-group" id="step_order">
+                 <div class="form-group row" id="step_order">
                         <label for="step_order" class="col-sm-3 control-label">Step Order</label>
                         <div class="col-sm-2">
                             {{ Form::number('step_order',null,array('class'=>'form-control')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                <div class="form-group" id="display_name">
+                <div class="form-group row" id="display_name">
                     <label for="display_name" class="col-sm-3 control-label">Step Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('display_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="notes">
+                <div class="form-group row" id="notes">
                     <label for="notes" class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-9">
                     {{ Form::textarea('notes',null,array('class'=>'form-control','maxlength'=>'300','rows'=>"3",'placeholder'=>"Notes")) }}
@@ -204,5 +205,6 @@
         padding-left: 0px;
         margin-left: 0px;
     }
+   
 </style>
 @stop

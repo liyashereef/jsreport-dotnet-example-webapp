@@ -36,7 +36,7 @@
                 {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group" id="request-type-rate">
+                    <div class="form-group row" id="request-type-rate">
                         <label for="name" class="col-sm-3 control-label">Idle Time (Minutes)</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control"

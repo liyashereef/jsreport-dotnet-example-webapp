@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\ContentManager\Repositories\Admin\ManageContentRepository;
 use App\Services\HelperService;
 use Illuminate\Support\Facades\DB;
+use Modules\ContentManager\Models\ManageContent;
 use Modules\ContentManager\Http\Requests\Admin\ManageContentRequest;
 
 class ManageContentController extends Controller
@@ -76,6 +77,22 @@ class ManageContentController extends Controller
             'amz_credentials',
             'today'
         ));
+    }
+
+    public function s3index(Request $request){
+        $contentId=0;
+        $expiryDate=null;
+        if($request->id){
+           $scContent = ManageContent::find($request->id);
+           $contentId=$request->id;
+           $expiryDate=\Carbon::parse($scContent->expiry_date)->format("Y-m-d");
+        }
+        return view("contentmanager::admin.s3index",compact("contentId","expiryDate"));
+    }
+
+    public function s3uploader(Request $request){
+        $blockId=intval($request->id);
+        return view("contentmanager::admin.s3uploader",compact("blockId"));
     }
 
     public function getList($id = null)
