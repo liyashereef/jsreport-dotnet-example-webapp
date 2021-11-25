@@ -17,7 +17,6 @@ class ChatController extends Controller
 {
 
 
-    protected $customerQrcodeRepository;
     public function __construct(CustomerRepository $customerRepository, UserRepository $userRepository, EmployeeAllocationRepository $employeeAllocationRepository)
     {
 
