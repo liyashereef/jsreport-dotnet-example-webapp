@@ -2,10 +2,10 @@
 @section('content')
 <div id="outer-wrapper" class="row min-height-adjust" style="padding:50px 10px 50px 10px;margin:0px">
     
-    <div id="img-div" class="col-xs-12 col-sm-12 col-md-7 col-lg-6 col-xl-6" style="margin-top:12%;">
+    <div id="img-div" class="col-xs-12 col-sm-12 col-md-7 col-lg-6 col-xl-6" style="margin-top:13%;">
         <div class="container_fluid">
             <div class="row">
-                <div class="col-md-12" style="height: 140px">
+                <div class="col-md-12" style="height: 105px">
                     <img class="content-landing-img"   src="{{asset('images/CGL-LOGO-600px-152px.png')}}" />
                 </div>
             </div>
@@ -107,7 +107,7 @@ a.forgotpassword:hover
     overflow: hidden;
     margin-top: 0px;
     margin-bottom: 50px;
-    height: 152px;
+    /* height: 152px; */
     top: 0;
     left: 0;
     right: 0;
