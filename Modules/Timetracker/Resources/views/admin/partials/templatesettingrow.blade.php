@@ -21,7 +21,7 @@
             name="min_value[]" 
             pattern="^\d{1,3}(\.\d{2})?$" 
             placeholder="00.00" 
-            value="{{$each_rule['min'] or ''}}"/>
+            value="{{$each_rule['min'] ?? ''}}"/>
         <span class="help-block"></span>
         </div>
     </td>
@@ -31,7 +31,7 @@
             name="max_value[]" 
             pattern="^\d{1,3}(\.\d{2})?$"
             placeholder="00.00" 
-            value="{{$each_rule['max'] or ''}}"/>
+            value="{{$each_rule['max'] ?? ''}}"/>
         <span class="help-block"></span>
         </div>
     </td>

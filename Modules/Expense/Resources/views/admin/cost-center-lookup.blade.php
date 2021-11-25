@@ -31,35 +31,35 @@
             {{ Form::open(array('url'=>'#','id'=>'course_center_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="center_number">
+                <div class="form-group row" id="center_number">
                     <label for="center_number" class="col-sm-3 control-label">Center Number</label>
                     <div class="col-sm-9">
                         {{ Form::text('center_number',null,array('class' => 'form-control', 'Placeholder'=>'Center Number', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="center_owner_id">
+                <div class="form-group row" id="center_owner_id">
                     <label for="role_id" class="col-sm-3 control-label">Select Owner</label>
                     <div class="col-sm-9">
                      {{Form::select('center_owner_id',@$lookups['user_lookups'][0],null, ['class' => 'form-control select2','id' => 'center_owner_id', 'style'=>"width: 100%;",'required'=>TRUE])}}
                      <small class="help-block"></small>
                  </div>
                 </div>
-                <div class="form-group" id="center_senior_manager_id">
+                <div class="form-group row" id="center_senior_manager_id">
                     <label for="center_senior_manager_id" class="col-sm-3 control-label">Select Senior Manager</label>
                     <div class="col-sm-9">
                      {{Form::select('center_senior_manager_id',@$lookups['user_lookups'][0],null, ['class' => 'form-control select2','id' => 'center_senior_manager_id', 'style'=>"width: 100%;",'required'=>TRUE])}}
                      <small class="help-block"></small>
                  </div>
                 </div>
-                <div class="form-group" id="region_id">
+                <div class="form-group row" id="region_id">
                     <label for="region_id" class="col-sm-3 control-label">Region</label>
                     <div class="col-sm-9">
                      {{Form::select('region_id',@$lookups['regions'][0],null, ['class' => 'form-control','id' => 'region_id','required'=>TRUE])}}
                      <small class="help-block"></small>
                  </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class' => 'form-control', 'Placeholder'=>'Description')) }}

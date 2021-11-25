@@ -31,7 +31,7 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="salutation">
+                <div class="form-group row" id="salutation">
                     <label for="salutation" class="col-sm-3 control-label">Salutation</label>
                     <div class="col-sm-9">
                         {{ Form::text('salutation',null,array('class'=>'form-control')) }}

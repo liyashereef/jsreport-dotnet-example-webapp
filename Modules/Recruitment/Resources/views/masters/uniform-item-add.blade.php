@@ -14,10 +14,10 @@
     {{ Form::open(array('route'=> 'recruitment.uniform-items.store','id'=>'uniform-item-add-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
         <section>
             <div class="form-group row" id="item_name">
-                <input type="hidden" name="id" value="{{$itemName[0]->id or ''}}"/>
+                <input type="hidden" name="id" value="{{@$itemName[0]->id}}"/>
                 <label class="col-form-label col-md-2" for="item_name">Item Name <span class="mandatory">*</span></label>
                 <div class=" col-md-4">
-                    <input type="text" class="form-control" placeholder="Item Name" name="item_name" value="{{$itemName[0]->item_name or ''}}" >
+                    <input type="text" class="form-control" placeholder="Item Name" name="item_name" value="{{@$itemName[0]->item_name}}" >
                     <span class="help-block"></span>
                 </div>
             </div>

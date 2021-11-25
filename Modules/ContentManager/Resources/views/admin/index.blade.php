@@ -1,4 +1,20 @@
 @extends('adminlte::page')
+<style>
+    .add-newlink {
+        float: right;
+        width: 200px;
+        background-color: #f26222;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 0px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+</style>
 @section('title', 'Add Content')
 @section('content_header')
 
@@ -6,10 +22,13 @@
 @stop
 @section('content')
 
-<div class="add-new" data-title="Add New Content">Add
+{{-- <div class="add-new" data-title="Add New Content">Add
     <span class="add-new-label">New content</span>
     <input type="hidden" name="blockId" id="blockId" value="1">
 
+</div> --}}
+<div class="add-newlink" data-title="Add New Content">
+    <a href="{{route("content-manager.s3view")}}" style="text-decoration: none;color: #ffffff">Add New Content</a>
 </div>
 
 <table class="table table-bordered" id="type-table">
@@ -288,7 +307,11 @@
                         render: function(o) {
                             var actions = '';
                             @can('edit_masters')
-                            actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
+                            // actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
+                            var routeUrl = '{{ route("content-manager.s3view", ":id") }}';
+                            routeUrl = routeUrl.replace(':id', o.id);
+
+                            actions += '<a href="'+routeUrl+'" class="editbtn {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                             @endcan
                             @can('lookup-remove-entries')
                             actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
@@ -603,7 +626,8 @@ $(document).ready(function () {
             }
         });
         
-
+        
+        
     })
     $(document).on("click",".fa-copy",function(e){
         var self=this;
@@ -764,6 +788,11 @@ a{
 .edit {
     font-size:20px !important;
     color:#3c8dbc;
+}
+.editbtn {
+    font-size:20px !important;
+    color:#3c8dbc;
+    padding-right: 5px !important;
 }
 .delete{
     color:#3c8dbc

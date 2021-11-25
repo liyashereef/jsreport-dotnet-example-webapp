@@ -33,7 +33,7 @@
             {{ Form::open(array('url'=>'#','id'=>'subject-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="subject">
+                <div class="form-group row" id="subject">
                     <label for="subject" class="col-sm-3 control-label">Subject</label>
                     <div class="col-sm-6">
                         {{ Form::text('subject',null,array('class'=>'form-control')) }}
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="subject">
+                <div class="form-group row" id="subject">
                     <label for="subject" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-3">
                         {{ Form::text('subject_short_name',null,array('class'=>'form-control')) }}

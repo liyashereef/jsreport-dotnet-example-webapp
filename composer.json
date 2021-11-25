@@ -27,6 +27,7 @@
         "spatie/calendar-links": "^1.6",
         "spatie/laravel-permission": "^5.1",
         "stripe/stripe-php": "^7.97",
+        "tapp/laravel-uppy-s3-multipart-upload": "^0.4.0",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {

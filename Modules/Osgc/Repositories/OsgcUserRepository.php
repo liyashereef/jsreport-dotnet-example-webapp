@@ -268,7 +268,7 @@ class OsgcUserRepository
         $user = $this->model->where(['email' => $email])->first();
         if ($user) {
             if($user->active ==1){
-                $random_password = str_random(8);
+                $random_password = Str::random(8);
                 $user->password = bcrypt($random_password);
                 $user->save();
                 /* send email to user */

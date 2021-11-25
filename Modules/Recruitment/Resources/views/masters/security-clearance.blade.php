@@ -34,7 +34,7 @@
             {{ Form::open(array('url'=>'#','id'=>'security-clearance-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="security_clearance">
+                <div class="form-group row" id="security_clearance">
                     <label for="security_clearance" class="col-sm-3 control-label">Security Clearance
                         <span class="mandatory">*</span>
                     </label>
@@ -125,10 +125,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions = '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                        actions = '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         return actions;
                     },

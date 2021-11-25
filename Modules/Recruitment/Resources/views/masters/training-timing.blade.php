@@ -31,7 +31,7 @@
             {{ Form::open(array('url'=>'#','id'=>'timing-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group {{ $errors->has('timings') ? 'has-error' : '' }}" id="timings">
+                <div class="form-group {{ $errors->has('timings') ? 'has-error' : '' }} row" id="timings">
                     <label for="timings" class="col-sm-3 control-label">Timing</label>
                     <div class="col-sm-9">
                         {{ Form::text('timings',null,array('class'=>'form-control')) }}
@@ -120,10 +120,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         return actions;
                     },

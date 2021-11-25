@@ -20,12 +20,12 @@
 
 @section('content')
 <div id="myModal" class="modal fade" data-backdrop="static" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add/Edit Fence</h4>
+                  <h4 class="modal-title">Add/Edit Fence</h4>
             </div>
 
             <div class="modal-body">
@@ -204,10 +204,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         return actions;
                     },

@@ -332,7 +332,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:recruitment_masters']]
         Route::name('uniform-items')->get('uniform-items', 'RecUniformItemController@index');
         Route::get('uniform-items/list', array('as' => 'uniform-items.list', 'uses' => 'RecUniformItemController@getList'));
         Route::get('uniform-items/add', array('as' => 'uniform-items.add', 'uses' => 'RecUniformItemController@addUniformItemSizeMeasurement'));
-        Route::get('uniform-items/update/{id}', array('as' => 'uniform-items.update', 'uses' => 'RecUniformItemController@addUniformItemSizeMeasurement'));
+        Route::get('uniform-items/update/{id?}', array('as' => 'uniform-items.update', 'uses' => 'RecUniformItemController@addUniformItemSizeMeasurement'));
         //Route::get('uniform-items/single/{id}', array('as' => 'uniform-items.single', 'uses' => 'RecUniformItemController@getSingle'));
         Route::post('uniform-items/store', array('as' => 'uniform-items.store', 'uses' => 'RecUniformItemController@store'));
         Route::get('uniform-items/destroy/{id}', array('as' => 'uniform-items.destroy', 'uses' => 'RecUniformItemController@destroy'));
@@ -360,7 +360,7 @@ Route::group(['middleware' => ['web', 'auth', 'permission:recruitment_masters']]
         Route::get('customer-uniform-kits/list', array('as' => 'customer-uniform-kits.list', 'uses' => 'RecCustomerUniformKitController@getList'));
         Route::get('customer-uniform-kits/add', array('as' => 'customer-uniform-kits.add', 'uses' => 'RecCustomerUniformKitController@addUniformKit'));
         Route::post('customer-uniform-kits/add', array('as' => 'customer-uniform-kits.add', 'uses' => 'RecCustomerUniformKitController@store'));
-        Route::get('customer-uniform-kits/update/{id}', array('as' => 'customer-uniform-kits.update', 'uses' => 'RecCustomerUniformKitController@addUniformKit'));
+        Route::get('customer-uniform-kits/update/{id?}', array('as' => 'customer-uniform-kits.update', 'uses' => 'RecCustomerUniformKitController@addUniformKit'));
         Route::get('customer-uniform-kits/destroy/{id}', array('as' => 'customer-uniform-kits.destroy', 'uses' => 'RecCustomerUniformKitController@destroy'));
 
         /* Customer Uniform Kits - end */

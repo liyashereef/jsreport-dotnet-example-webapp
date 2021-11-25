@@ -35,14 +35,14 @@
                 {{ Form::hidden('id', null) }}
 
                 <div class="modal-body">
-                    <div class="form-group {{ $errors->has('answer') ? 'has-error' : '' }}" id="answer">
+                    <div class="form-group {{ $errors->has('answer') ? 'has-error' : '' }} row" id="answer">
                         <label for="name" class="col-sm-3 control-label">Security Awareness</label>
                         <div class="col-sm-9">
                             {{ Form::text('answer',null,array('class'=>'form-control','required'=>true)) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="order_sequence">
+                    <div class="form-group row" id="order_sequence">
                         <label for="order_sequence" class="col-sm-3 control-label">Order Sequence Number</label>
                         <div class="col-sm-9">
                             {{ Form::number('order_sequence',null,array('class'=>'form-control','min'=>1)) }}
@@ -125,10 +125,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>'
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
 
 

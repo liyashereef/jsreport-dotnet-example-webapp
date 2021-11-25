@@ -43,7 +43,7 @@ element.style {
             {{ Form::open(array('url'=>'#','id'=>'department_master_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-3 ">Department Name <span class="mandatory">*</span></label>
                     <div class="col-sm-8">
                         {{ Form::text('name',null,array('class' => 'form-control', 'Placeholder'=>'Department Name')) }}

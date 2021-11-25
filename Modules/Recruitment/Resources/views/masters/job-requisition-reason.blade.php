@@ -32,7 +32,7 @@
                 {{ Form::open(array('url'=>'#','id'=>'reason-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group" id="reason">
+                    <div class="form-group row" id="reason">
                         <label for="name" class="col-sm-3 control-label">Reasons for Job Requisition</label>
                         <div class="col-sm-9">
                             {{ Form::text('reason',null,array('class'=>'form-control')) }}
@@ -118,12 +118,12 @@
                         var actions = '';
                         if(o.id=={{ $terminate_id }} || o.id=={{ $resignate_id }}){
                             @can('edit_masters')
-                            actions += '<a class="fa fa-pencil edit-disable" title="Unable to edit" ></a>'
+                            actions += '<a class="edit-disable {{Config::get('globals.editFontIcon')}}" title="Unable to edit" ></a>'
                             @endcan
                         }
                         else{
                             @can('edit_masters')
-                            actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                            actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}} " data-id=' + o.id + '></a>';
                            @endcan
                         }
                         return actions;

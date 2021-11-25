@@ -10,9 +10,11 @@
 @stop
 
 @section('content')
+
+
 <div class="container-fluid container-wrap">
     {{ Form::open(array('url'=>'#','id'=>'uniform-products-add-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
-    <input type="hidden" name="id" value="{{$productName->id or ''}}"/>
+    <input type="hidden" name="id" value="{{@$productName->id  }}"/>
     <input type="hidden" name="blockId" id="blockId" value="1">
     <section>
             <div class="form-group row" id="measuring_points">
@@ -25,21 +27,21 @@
             <div class="form-group row" id="product_name">
                 <label class="col-form-label col-md-2" for="product_name">Name <span class="mandatory">*</span></label>
                 <div class=" col-md-4">
-                    <input type="text" class="form-control" placeholder="Product Name" name="name" value="{{$productName->name or ''}}" >
+                    <input type="text" class="form-control" placeholder="Product Name" name="name" value="{{@$productName->name}}" >
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group row" id="selling_price">
                 <label class="col-form-label col-md-2" for="selling_price">Selling Price <span class="mandatory">*</span></label>
                 <div class=" col-md-4">
-                    <input type="number" class="form-control" min="0.01" step="any" name="selling_price" placeholder="Selling Price" value="{{$productName->selling_price or ''}}">
+                    <input type="number" class="form-control" min="0.01" step="any" name="selling_price" placeholder="Selling Price" value="{{@$productName->selling_price}}">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group row" id="vendor_price">
                 <label class="col-form-label col-md-2" for="vendor_price">Vendor Price</label>
                 <div class=" col-md-4">
-                    <input type="number" class="form-control" min="0.01" step="any" name="vendor_price" placeholder="Vendor Price"  value="{{$productName->vendor_price or ''}}">
+                    <input type="number" class="form-control" min="0.01" step="any" name="vendor_price" placeholder="Vendor Price"  value="{{@$productName->vendor_price }}">
                     <span class="help-block"></span>
                 </div>
             </div>

@@ -45,28 +45,28 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-3 control-label">Course Section Name<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control', 'Placeholder'=>'Course Section Name','required', "maxlength"=>"27")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="price">
+                <div class="form-group row" id="price">
                     <label for="price" class="col-sm-3 control-label">Course Price<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('price',null,array('class'=>'form-control', 'Placeholder'=>'Course Price','required', "maxlength"=>"255")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="sort_order">
+                <div class="form-group row" id="sort_order">
                     <label for="sort_order" class="col-sm-3 control-label">Sort Order<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('sort_order',null,array('class'=>'form-control', 'Placeholder'=>'Sort Order','required', "maxlength"=>"255")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="content_type">
+                <div class="form-group row" id="content_type">
                     <label for="content_type" class="col-sm-3 control-label">Content Type<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                     <select  name="content_type_id"  id="content_type_id" class="form-control" required>
@@ -79,7 +79,7 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="course_content">
+                <div class="form-group row" id="course_content">
                     <label for="course_content" class="col-sm-3 control-label">course Content<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                     {{ Form::file('course_content',null,array('required')) }}

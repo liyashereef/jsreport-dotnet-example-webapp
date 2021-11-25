@@ -34,7 +34,7 @@ class PushNotificationRepository
             $sound = "cglmeet";
         }
         foreach ($user_devices as $device) {
-            $response = $firebase->sendNotification(
+            $response = $firebase->pushToUser(
                 $device->device_token,
                 [
                     "notification" => [

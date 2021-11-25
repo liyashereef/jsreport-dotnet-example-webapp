@@ -45,11 +45,11 @@
 
 <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Customers Shift</h4>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                 <h4 class="modal-title" id="myModalLabel">Customers Shift</h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'customerShift-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
@@ -61,21 +61,21 @@
                      <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="shiftname">
+                <div class="form-group row" id="shiftname">
                     <label for="shiftname" class="col-sm-3 control-label" style="text-align: left;">Shift Name</label>
                     <div class="col-sm-9">
                       {{ Form::text('shiftname',null,array('class'=>'form-control','placeholder' => 'Shift Name','maxlength'=>100)) }}
                       <small class="help-block"></small>
                   </div>
                 </div>
-                <div id="starttime" class="form-group">
+                <div id="starttime" class="form-group row">
                     <label for="starttime" class="col-sm-3 control-label" style="text-align: left;">Start Time</label>
                     <div class="col-sm-9">
                         {{ Form::text('starttime',null,array('class'=>'form-control timepicker','placeholder' => 'Start Time')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div id="endtime" class="form-group">
+                <div id="endtime" class="form-group row">
                     <label for="endtime" class="col-sm-3 control-label" style="text-align: left;">End Time</label>
                     <div class="col-sm-9">
                         {{ Form::text('endtime',null,array('class'=>'form-control timepicker','placeholder' => 'End Time')) }}
@@ -270,4 +270,5 @@
 <script src="{{ asset('js/timepicki.js') }}"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
  <link rel='stylesheet' type='text/css' href='{{ asset('css/timepicki.css') }}' />
+ 
 @stop

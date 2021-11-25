@@ -3,7 +3,6 @@
 namespace Modules\Admin\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\Input;
 
 class YearValidation implements Rule
 {
@@ -26,10 +25,10 @@ class YearValidation implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (Input::get('start_date')) {
-            return (date('Y', strtotime(Input::get('start_date'))) == $value);
+        if (request('start_date')) {
+            return (date('Y', strtotime(request('start_date'))) == $value);
         } else {
-            return (date('Y', strtotime(Input::get('holiday'))) == $value);
+            return (date('Y', strtotime(request('holiday'))) == $value);
         }
     }
 

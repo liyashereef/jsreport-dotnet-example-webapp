@@ -30,14 +30,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="category_name">
+                <div class="form-group row" id="category_name">
                     <label for="make" class="col-sm-3 control-label">Category Name<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('category_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div> 
-                 <div class="form-group" id="tax">
+                 <div class="form-group row" id="tax">
                     <label for="tax" class="col-sm-3 control-label">Tax Rate<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('tax',null,array('class'=>'form-control','placeholder'=>'Tax Percentage','min'=>'0','step'=>'0.01')) }}

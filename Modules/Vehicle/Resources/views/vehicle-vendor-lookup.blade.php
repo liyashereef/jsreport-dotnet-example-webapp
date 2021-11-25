@@ -29,7 +29,7 @@
             {{ Form::open(array('url'=>'#','id'=>'vehicle-vendor-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="vehicle_vendor">
+                <div class="form-group row" id="vehicle_vendor">
                     <label for="vehicle_vendor" class="col-sm-3 control-label">Vendor Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('vehicle_vendor',null,array('class'=>'form-control')) }}

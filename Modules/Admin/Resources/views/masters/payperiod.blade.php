@@ -41,7 +41,7 @@
                     <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-                <div class="form-group" id="year">
+                <div class="form-group row" id="year">
                     <label for="year" class="col-sm-3 control-label">Year <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="hidden" name="id" value="0">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="pay_period_name">
+                <div class="form-group row" id="pay_period_name">
                     <label for="pay_period_name" class="col-sm-3 control-label">Pay Period Name <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control"  name="pay_period_name" placeholder="Pay Period Name" value="">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                         <label for="short_name" class="col-sm-3 control-label">Short Name <span class="mandatory">*</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control"  name="short_name" placeholder="Short Name" value="">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                <div class="form-group" id="start_date">
+                <div class="form-group row" id="start_date">
                     <label for="start_date" class="col-sm-3 control-label">Start Date <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control datepicker" name="start_date" placeholder="Start Date" value="" max="2900-12-31">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="week_one_end_date">
+                <div class="form-group row" id="week_one_end_date">
                     <label for="start_date" class="col-sm-3 control-label">Week 1 End Date <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control datepicker" name="week_one_end_date" placeholder="Week 1 End Date" value="" max="2900-12-31">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="week_two_start_date">
+                <div class="form-group row" id="week_two_start_date">
                     <label for="start_date" class="col-sm-3 control-label">Week 2 Start Date <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control datepicker" name="week_two_start_date" placeholder="Week 2 Start Date" value="" max="2900-12-31">
@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="end_date">
+                <div class="form-group row" id="end_date">
                     <label for="inputDetail" class="col-sm-3 control-label">End Date <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control datepicker" name="end_date"  value="" placeholder="End Date" max="2900-12-31">

@@ -42,7 +42,7 @@
                     </ul>
 
 
-                    <div class="form-group" id="name">
+                    <div class="form-group row" id="name">
                         <label for="name" class="col-sm-3 control-label">Name <span class="mandatory">*</span></label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" placeholder="Name" value="">
@@ -50,14 +50,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="short_name">
+                    <div class="form-group row" id="short_name">
                         <label for="short_name" class="col-sm-3 control-label">Short Name </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="short_name" placeholder="Short Name" value="">
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="tax_percentage">
+                    <div class="form-group row" id="tax_percentage">
                         <label for="tax_percentage" class="col-sm-3 control-label">Tax percentage (in %) <span
                                     class="mandatory" >*</span></label>
                         <div class="col-sm-9">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="effective_from_date">
+                    <div class="form-group row" id="effective_from_date">
                         <label for="effective_from_date" class="col-sm-3 control-label">Effective Date <span
                                     class="mandatory">*</span></label>
                         <div class="col-sm-9">
@@ -147,11 +147,11 @@
                                 var actions = '';
                                 actions = '<a href="{{route("tax-master.single", ["id" => ""])}}/' + row.id + '" class="view fa fa-eye pr-10" data-id=' + row.id + '></a>';
                                 if(((row.tax_master_log) == null)){
-                                  actions += '<a href="#" class="edit fa fa-pencil" data-id=' + row.id + '></a>';
+                                  actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + row.id + '></a>';
                                 }
                                  else if (((row.tax_master_log.effective_from_date) >= "{{(\Illuminate\Support\Carbon::today())->toDateString()}}")	
                                  ||((row.tax_master_log.effective_from_date) < "{{(\Illuminate\Support\Carbon::today())->toDateString()}}")) {
-                                 actions += '<a href="#" class="delete fa fa-trash-o" TITLE="Archive" data-id=' + data.tax_master_log.id + '></a>';	
+                                 actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" TITLE="Archive" data-id=' + data.tax_master_log.id + '></a>';	
                                 }
                                 /*else{
 

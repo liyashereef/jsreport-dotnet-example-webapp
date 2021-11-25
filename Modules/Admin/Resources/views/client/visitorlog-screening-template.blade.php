@@ -43,7 +43,7 @@
              {{ Form::hidden('id', null) }}
             <div class="modal-body">
 
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-3 control-label">Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control','required'=>'required')) }}
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="customer_id">
+                <div class="form-group row" id="customer_id">
                     <label for="customer_id" class="col-sm-3 control-label">Customer</label>
                     <div class="col-sm-9">
                         {!!Form::select('customer_id[]',$customers,null, ['class' => 'form-control','id'=>'customerIds','multiple'=>"multiple",'style'=>'width: 591px;'])!!}
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class'=>'form-control')) }}
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="selectedOffices">
+                <div class="form-group row" id="selectedOffices">
                 </div>
 
             </div>

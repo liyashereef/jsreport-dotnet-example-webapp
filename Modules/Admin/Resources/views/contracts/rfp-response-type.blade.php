@@ -30,7 +30,7 @@
                 <input type="hidden" name="id" id="id"/>
                 <div class="modal-body">
                     <div id="form-errors"></div>
-                    <div class="form-group" id="rfpResponseType">
+                    <div class="form-group row" id="rfpResponseType">
                         <label for="rfpResponseType" class="col-sm-3 control-label">RFP Response Type<span
                                     class="mandatory">*</span></label>
                         <div class="col-sm-9">

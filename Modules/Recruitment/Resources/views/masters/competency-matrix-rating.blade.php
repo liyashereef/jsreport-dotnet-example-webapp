@@ -29,14 +29,14 @@
             {{ Form::open(array('url'=>'#','id'=>'competency-rating-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group {{ $errors->has('rating') ? 'has-error' : '' }}" id="rating">
+                <div class="form-group {{ $errors->has('rating') ? 'has-error' : '' }} row" id="rating">
                     <label for="rating" class="col-sm-3 control-label">Rating</label>
                     <div class="col-sm-9">
                         {{ Form::text('rating',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                  <div class="form-group" id="order_sequence">
+                  <div class="form-group row" id="order_sequence">
                         <label for="order_sequence" class="col-sm-3 control-label">Order Sequence Number</label>
                         <div class="col-sm-2">
                             {{ Form::number('order_sequence',null,array('class'=>'form-control','min'=>1)) }}
@@ -93,10 +93,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         @can('lookup-remove-entries')
-                            actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                            actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                     return actions;
                     },

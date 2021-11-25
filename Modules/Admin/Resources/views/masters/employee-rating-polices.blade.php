@@ -31,14 +31,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
            
-                <div class="form-group" id="policy">
+                <div class="form-group row" id="policy">
                     <label for="policy" class="col-sm-3 control-label">Policy</label>
                     <div class="col-sm-9">
                         {{ Form::text('policy',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                         <label for="description" class="col-sm-3 control-label">Description</label>
                         <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class'=>'form-control')) }}
@@ -46,7 +46,7 @@
                         </div>
                     </div>
            
-            <div class="form-group" id="ratings">
+            <div class="form-group row" id="ratings">
                         <label for="ratings" class="col-sm-3 control-label">Specify Rating</label>
                         <div class="col-sm-9">
                         {!! Form::checkbox('selectAll', "all",false,['class'=>'checkall']); !!}

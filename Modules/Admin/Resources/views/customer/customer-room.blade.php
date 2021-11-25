@@ -44,11 +44,11 @@
 
 <div class="modal fade" id="myModal" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Customers Room</h4>
+                 <h4 class="modal-title" id="myModalLabel">Customers Room</h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'room_name_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
@@ -60,7 +60,7 @@
                      <small class="help-block"></small>
                     </div>
                 </div>
-                <div id="name" class="form-group">
+                <div id="name" class="form-group row">
                     <label for="name" class="col-sm-3 control-label" style="text-align: left;">Room Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder' => 'Room Name')) }}
@@ -213,10 +213,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         @can('lookup-remove-entries')
-                        actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         actions += '<a href="{{route("sensors.view", ["id" => ""])}}/'+ o.id +'" class="view fa fa-eye sensor-action-icon-margin" title="View Sensors"></a>';
                         if(o.motion_sensor_enabled !== 0 && o.motion_sensor_incident_subject !== null) {

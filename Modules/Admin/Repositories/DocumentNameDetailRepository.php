@@ -55,7 +55,6 @@ class DocumentNameDetailRepository
     public function prepareDataForDocumentNames($document_name_details){
         $datatable_rows = array();
         foreach($document_name_details as $key => $each_list){
-
             $each_row["id"]              = $each_list->id;
             $each_row["document_name"]   = $each_list->name;
             $each_row["document_type"]   = $each_list->documentTypes['document_type'];
@@ -63,7 +62,7 @@ class DocumentNameDetailRepository
             if($each_list->document_type_id == OTHER){
                 $each_row["document_category"] = $each_list->answerable['category_name'];
             }else{
-                $each_row["document_category"] = $each_list->documentCategories['document_category'];
+                $each_row["document_category"] = $each_list->documentCategories?$each_list->documentCategories['document_category']:'';
             }
 
             array_push($datatable_rows, $each_row);

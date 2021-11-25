@@ -31,28 +31,28 @@
             {{ Form::open(array('url'=>'#','id'=>'competency-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group {{ $errors->has('competency') ? 'has-error' : '' }}" id="competency">
+                <div class="form-group {{ $errors->has('competency') ? 'has-error' : '' }} row" id="competency">
                     <label for="competency" class="col-sm-3 control-label">Competency</label>
                     <div class="col-sm-9">
                         {{ Form::text('competency',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group {{ $errors->has('competency_matrix_category_id') ? 'has-error' : '' }}" id="competency_matrix_category_id">
+                <div class="form-group {{ $errors->has('competency_matrix_category_id') ? 'has-error' : '' }} row" id="competency_matrix_category_id">
                     <label for="competency_matrix_category_id" class="col-sm-3 control-label">Competency Category</label>
                     <div class="col-sm-9">
                          {{ Form::select('competency_matrix_category_id',(['' => 'Please Select']+$category_lookup),old('competency_matrix_category_id'),array('class' => 'form-control','id'=>'competency_matrix_category_id')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group {{ $errors->has('definition') ? 'has-error' : '' }}" id="definition">
+                <div class="form-group {{ $errors->has('definition') ? 'has-error' : '' }} row" id="definition">
                     <label for="definition" class="col-sm-3 control-label">Definition</label>
                     <div class="col-sm-9">
                          {{ Form::textarea('definition',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group {{ $errors->has('behavior') ? 'has-error' : '' }}" id="behavior">
+                <div class="form-group {{ $errors->has('behavior') ? 'has-error' : '' }} row" id="behavior">
                     <label for="behavior" class="col-sm-3 control-label">Behavior</label>
                     <div class="col-sm-9">
                          {{ Form::textarea('behavior',null,array('class'=>'form-control')) }}
@@ -115,10 +115,10 @@
                     render: function (o) {
                         var actions = '';
                         @can('edit_masters')
-                        actions += '<a href="#" class="edit fa fa-pencil" data-id=' + o.id + '></a>';
+                        actions += '<a href="#" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         @can('lookup-remove-entries')
-                            actions += '<a href="#" class="delete fa fa-trash-o" data-id=' + o.id + '></a>';
+                            actions += '<a href="#" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                         @endcan
                         return actions;
                     },

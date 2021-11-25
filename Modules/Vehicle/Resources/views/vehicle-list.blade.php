@@ -38,7 +38,7 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                   <!-- Active Toggle button - Start -->
-                <div class="form-group col-sm-12" id="active" >
+                <div class="form-group  col-lg-12 row" id="active" >
                     <label class="switch" style="float:right;">
                       <input name="active" value="0" type="checkbox">
                       <span class="slider round"></span>
@@ -46,8 +46,8 @@
                     <label style="float:right;padding-right: 5px;">Active</label>
                 </div>
                 <!-- Active Toggle button - End -->
-                </ul>
-                <div class="form-group" id="make">
+                
+                <div class="form-group row" id="make">
                     <label for="make" class="col-sm-3 control-label">Vehicle Make<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('make',null,array('class'=>'form-control')) }}
@@ -55,7 +55,7 @@
                     </div>
                 </div> 
                 
-                <div class="form-group" id="number">
+                <div class="form-group row" id="number">
                     <label for="number" class="col-sm-3 control-label">Registration<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('number',null,array('class'=>'form-control')) }}
@@ -63,14 +63,14 @@
                     </div>
                 </div>  
 
-                <div class="form-group" id="model">
+                <div class="form-group row" id="model">
                     <label for="number" class="col-sm-3 control-label">Vehicle Model<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('model',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="vin">
+                 <div class="form-group row" id="vin">
                     <label for="text" class="col-sm-3 control-label">VIN<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('vin',null,array('class'=>'form-control')) }}
@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-                 <div class="form-group" id="year">
+                 <div class="form-group row" id="year">
                     <label for="year" class="col-sm-3 control-label">Manufacturing Year<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('year',null,array('class'=>'form-control')) }}
@@ -86,7 +86,7 @@
                     </div>
                 </div> 
 
-                 <div class="form-group" id="purchasing_date">
+                 <div class="form-group row" id="purchasing_date">
                     <label for="purchased_date" class="col-sm-3 control-label">Purchase Date<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('purchasing_date',null,array('class'=>'form-control datepicker')) }}
@@ -95,7 +95,7 @@
                 </div> 
  
 
-                 <div class="form-group" id="odometer_reading">
+                 <div class="form-group row" id="odometer_reading">
                     <label for="number" class="col-sm-3 control-label">Odometer Reading<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('odometer_reading',null,array('class'=>'form-control')) }}
@@ -103,14 +103,14 @@
                     </div>
                 </div> 
 
-                <div class="form-group" id="region">
+                <div class="form-group row" id="region">
                     <label for="region" class="col-sm-3 control-label">Region<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                           {{ Form::select('region',[null=>'Select']+$lookups['regionLookup'], old('region'),array('class' => 'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                           <textarea name="description" class="form-control"></textarea>
