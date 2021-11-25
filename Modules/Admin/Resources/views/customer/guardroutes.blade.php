@@ -286,7 +286,7 @@
                                             swal("Updated", "Successfully updated", "success");
                                             $("#myModal").modal("hide");
                                             
-                                            table.ajax.reload();
+                                            $('#route-table').DataTable().ajax.reload();
 
                                         }
                                     });
