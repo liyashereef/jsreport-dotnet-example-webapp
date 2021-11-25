@@ -1777,7 +1777,7 @@ $('.upload-image').on('click', function (ev) {
         // });
     })
 
-
+ 
 
 </script>
 
