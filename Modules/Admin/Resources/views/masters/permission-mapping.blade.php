@@ -193,13 +193,14 @@
                    success: function (data) {
                        if (data) {
                         $.each(data, function( index, value ) {
-                        $('#myModal select[name="role_id"]').val(value.role_id);
+                        $('#myModal select[name="role_id"]').val(value.role_id).change();
                         $('#myModal select[name="permission_id[]"] option[value="'+value.permission_id+'"]').prop('selected',true).change();
                         });
                         $("#myModal").modal();
                         $('#myModal .modal-title').text("Edit Mapping:")
                        } else {
                         alert(data);
+                         alert('data');
                     }
                     },
                    error: function (xhr, textStatus, thrownError) {
@@ -247,6 +248,7 @@
     {
     $("#myModal").modal();
     $("#permissions").val('').trigger('change') ;
+    $("#roleid").val('').trigger('change');
     }
 </script>
 @stop
