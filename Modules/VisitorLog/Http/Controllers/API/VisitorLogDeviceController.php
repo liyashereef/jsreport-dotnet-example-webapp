@@ -7,6 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use App\Services\HelperService;
+use Modules\VisitorLog\Events\DeviceConfigUpdated;
+use Modules\VisitorLog\Events\VisitorLogNotify;
+use Modules\VisitorLog\Events\VisitorNotify;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 // use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
 // use Modules\Admin\Repositories\VisitorLogTemplateRepository;
@@ -71,9 +74,32 @@ class VisitorLogDeviceController extends Controller
             $status = false;
         }
         return response()->json([
-            "config" => ($configData)? $configData : [],
+            "config" => ($configData) ? $configData : [],
             "error" => $msg,
-            'status'=>$status
+            'status' => $status
         ]);
+    }
+
+    public function devicePing(Request $request)
+    {
+        \Log::channel('customlog')->info(json_encode($request->all()));
+        //TODO:trigger by timestamp
+
+        $request->validate([
+            'x-ci' =>  'required|exists:customers,id',
+            'x-di' => 'required|string',
+            'x-dui' => 'required'
+        ]);
+
+        $customerId = $request->input('x-ci');
+        $deviceUID = $request->input('x-dui');
+        $device = $this->visitorLogDeviceRepository->getByUID($deviceUID);
+        if ($device != null) {
+            $configData = $this->visitorLogDeviceRepository->setConfigData($device->id);
+            DeviceConfigUpdated::dispatch($configData);
+        }
+
+        VisitorLogNotify::dispatch($customerId, 'unknown');
+        VisitorNotify::dispatch($customerId);
     }
 }

@@ -55,6 +55,7 @@ Route::group(
 
                 // Visitor log devices
                 Route::post('devices/activate', 'VisitorLogDeviceController@activateDevice');
+                Route::post('device-ping', 'VisitorLogDeviceController@devicePing');
             }
         );
     }

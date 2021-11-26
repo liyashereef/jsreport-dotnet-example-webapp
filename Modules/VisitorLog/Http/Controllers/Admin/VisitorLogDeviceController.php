@@ -15,6 +15,7 @@ use Modules\VisitorLog\Repositories\VisitorLogDeviceSettingsRepository;
 use Modules\VisitorLog\Http\Requests\VisitorLogDeviceRequests;
 use Illuminate\Support\Str;
 use Modules\VisitorLog\Events\DeviceConfigUpdated;
+use Modules\VisitorLog\Events\VisitorLogNotify;
 use Modules\VisitorLog\Events\VisitorNotify;
 
 class VisitorLogDeviceController extends Controller
@@ -105,8 +106,8 @@ class VisitorLogDeviceController extends Controller
     public function trigerBroadcasting($id){
         $configData = $this->repository->setConfigData($id);
        
-        // DeviceConfigUpdated::dispatch($configData);
-        VisitorNotify::dispatch(129);
+         DeviceConfigUpdated::dispatch($configData); //4862017f52a557c4
+        // VisitorLogNotify::dispatch(129,'x');
     }
 
     /**
