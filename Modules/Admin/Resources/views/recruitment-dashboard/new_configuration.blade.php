@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Tab Name -->
-            <div class="form-group">
+            <div class="form-group row col-lg-12">
                 <div class="col-md-1 col-sm-1 col-lg-1">
                     <label for="tabName">Tab Name</label>
                     <span class="mandatory" style="font-weight: bold;">*</span>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="row">
-            <div class="form-group" style="padding-top: 1%;">
+            <div class="form-group row col-lg-12" style="padding-top: 1%;">
                 <div class="col-md-1 col-sm-1 col-lg-1">
                     <label for="configuration">Configuration</label>
                 </div>
@@ -77,7 +77,7 @@
         </div>
 
          <div class="row second-section">
-            <div class="form-group" style="padding-top: 1%;">
+            <div class="form-group col-l" style="padding-top: 1%;">
                 <div class="col-md-1 col-sm-1 col-lg-1">&nbsp;</div>
                 <div class="col-md-11 col-sm-11 col-lg-11">
                     @if((isset($tabDetails) && !empty($tabDetails) && ($tabDetails['default_tab_structure'] === 1)))
@@ -91,7 +91,7 @@
         </div>
 
         <div class="row second-section"  style="padding-top: 1%;">
-            <div class="form-group" id="landing_page_configuration_form">
+            <div class="form-group col-lg-12" id="landing_page_configuration_form">
             </div>
         </div>
 
