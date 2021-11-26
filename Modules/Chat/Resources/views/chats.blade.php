@@ -23,7 +23,7 @@
          </select>
      </div>
      <div class="col-md-2" >
-         <input class="button btn btn-primary blue" type="button" value="Chat">
+         <input class="button btn btn-primary blue" type="button" id="chatbtn" value="Chat">
          <input class="button btn btn-primary blue" type="button" id="textbtn" value="Text">
         
         </div>
@@ -96,6 +96,45 @@
 @section('scripts')
 <script>
 $(function() {
+
+    $("#chatbtn").on("click", function (e) {
+        e.preventDefault();
+        var contact_id = $("#employee-name-filter option:selected").val();
+            var url = '{{ route("chat.contact.store") }}';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                 data:  {
+                  'contact_id':contact_id,
+                },
+                headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                success: function (data) {
+                    if (data) {
+                        console.log(data);
+                    
+                    } else {
+                        console.log(data);
+                        swal("Oops", "Edit was unsuccessful", "warning");
+                    }
+                },
+                error: function (xhr, textStatus, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    swal("Oops", "Something went wrong", "warning");
+                    if (xhr.status === 401) {
+                        window.location = "{{ route('login') }}";
+                    }
+                },
+                contentType: false,
+                processData: false,
+            });
+        });
+
+
+
+
 
   //  $('#employee-name-filter').select2();
      $("#textbtn").on("click", function (e) {

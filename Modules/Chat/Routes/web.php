@@ -19,5 +19,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'chat'], function () 
     Route::post('/conversation/send', 'ContactsController@send');
     Route::get('/view-history', array('as' => 'chat.view-history', 'uses' => 'ChatHistoryController@index'));
     Route::get('/view-history-list', array('as' => 'chat.view-history.list', 'uses' => 'ChatHistoryController@getChatHistoryList'));
-
+    Route::post('/contact/store', array('as' => 'chat.contact.store', 'uses' => 'ContactsController@store'));
+    
+    
 });

@@ -5,7 +5,7 @@ namespace App\Events;
 use Modules\Chat\Models\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
+//use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -34,7 +34,7 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('messages.' . $this->message->to);
+        return new Channel('messages.' . $this->message->to);
     }
 
     public function broadcastWith()
