@@ -30,7 +30,7 @@
         },
         mounted() {
             console.log(this.user.id);
-            Echo.channel(`private-messages.${this.user.id}`)
+            Echo.channel(`messages.${this.user.id}`)
                 .listen('.NewMessage', (e) => {
                     console.log("inssssssssssss");
                     console.log(e);

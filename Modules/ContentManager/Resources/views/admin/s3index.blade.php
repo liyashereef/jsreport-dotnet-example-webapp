@@ -5,6 +5,9 @@
         pointer-events: none;
 
     }
+    .add-new-label h4{
+        font-weight: bold
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -54,7 +57,10 @@
 
             $(document).on("click","#mdl_save_change",function(e){
                 e.preventDefault();
-                
+                $('body').loading({
+                    stoppable: false,
+                    message: 'Please wait...'
+                });
                 let valid = validateAttachment();
                 let editId=$("input[name=id]").val();
                 let message="";
@@ -67,7 +73,7 @@
                     submitForm();
                 }else{
                     swal("Warning","Please validate inputs/Click upload","warning")
-                    //$('body').loading('stop');
+                    $('body').loading('stop');
                 }
 
                 
@@ -120,7 +126,7 @@
                     },
                     success: function(data) {
                             // ... do something with the data...
-                           // $('body').loading('stop');
+                            $('body').loading('stop');
                             let routeUrl="{{route("content-manager.view")}}";
                             swal({
                                 title: "Uploaded",
@@ -298,7 +304,7 @@ id="video-results"><!-- server response here --></div>
 </form>
 @endsection
 
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/appuppy.js') }}" defer></script>
 @section('scripts')
    
 @endsection
