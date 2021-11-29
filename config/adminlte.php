@@ -1083,12 +1083,12 @@ return [
         ],
         [
             'text' => 'Visitor Log',
-            'icon' => 'database',
+            'icon' => 'fas fa-database',
             'submenu' => [
                 [
                     'text' => 'Devices',
                     'url' => 'admin/visitor-log/devices',
-                    'icon' => 'microchip',
+                    'icon' => 'fas fa-microchip',
                 ]
             ],
         ],

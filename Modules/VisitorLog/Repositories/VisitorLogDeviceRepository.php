@@ -63,6 +63,9 @@ class VisitorLogDeviceRepository
     {
         return $this->model
             ->with([
+                'activatedBy'=> function ($query) {
+                    return $query->select('id', 'first_name', 'last_name');
+                },
                 'customer' => function ($query) {
                     return $query->select('id', 'project_number', 'client_name');
                 },
@@ -79,7 +82,7 @@ class VisitorLogDeviceRepository
     public function getByActivateCode($activation_code)
     {
         return $this->model->where('activation_code', $activation_code)
-            ->where('is_activated', 0)
+            // ->where('is_activated', 0)
             ->with('visitorLogDeviceSettings')
             ->first();
     }
@@ -117,6 +120,11 @@ class VisitorLogDeviceRepository
 
             ])
             ->find($id);
+    }
+
+    public function fetchById($id)
+    {
+        return $this->model->with(['visitorLogDeviceSettings'])->find($id);
     }
 
     public function getByUID($uid)

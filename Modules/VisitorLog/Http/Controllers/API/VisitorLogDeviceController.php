@@ -8,27 +8,17 @@ use Illuminate\Routing\Controller;
 
 use App\Services\HelperService;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
-// use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
-// use Modules\Admin\Repositories\VisitorLogTemplateRepository;
-
 class VisitorLogDeviceController extends Controller
 {
     protected $helperService;
     protected $visitorLogDeviceRepository;
-    // protected $visitorLogScreeningTemplateCustomerAllocationRepository;
-    // protected $visitorLogTemplateRepository;
 
     public function __construct(
         HelperService $helperService,
         VisitorLogDeviceRepository $visitorLogDeviceRepository
-        // VisitorLogScreeningTemplateCustomerAllocationRepository $visitorLogScreeningTemplateCustomerAllocationRepository,
-        // VisitorLogTemplateRepository $visitorLogTemplateRepository
     ) {
         $this->helperService = $helperService;
         $this->visitorLogDeviceRepository = $visitorLogDeviceRepository;
-        // $this->screeningtemplateCustomerAllocationRepository = $visitorLogScreeningTemplateCustomerAllocationRepository;
-        // $this->visitorLogTemplateRepository = $visitorLogTemplateRepository;
-
     }
 
     /**
@@ -37,7 +27,6 @@ class VisitorLogDeviceController extends Controller
      */
     public function activateDevice(Request $request)
     {
-
         $status = true;
         $configData = '';
         try {
@@ -53,10 +42,6 @@ class VisitorLogDeviceController extends Controller
                     $inputs['activated_at'] = \Carbon::now();
                     $this->visitorLogDeviceRepository->activateDevice($inputs);
                     $configData = $this->visitorLogDeviceRepository->setConfigData($deviceDetails->id);
-                    // $configData = $this->visitorLogDeviceRepository->getById($deviceDetails->id);
-                    // $configData->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($deviceDetails->visitorLogDeviceSettings->template_id);
-                    // $filter['customerId'] = $deviceDetails->customer_id;
-                    // $configData->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
                     $msg = '';
                 } else {
                     $msg = 'Activation code not found/Already activated';
@@ -76,4 +61,5 @@ class VisitorLogDeviceController extends Controller
             'status'=>$status
         ]);
     }
+
 }

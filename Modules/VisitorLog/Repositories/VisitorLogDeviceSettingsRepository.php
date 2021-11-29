@@ -21,6 +21,10 @@ class VisitorLogDeviceSettingsRepository
         return $this->model->updateOrCreate(['id' => $inputs['id']], $inputs);
     }
 
+    public function updateByDeviceId($inputs){
+        return $this->model->updateOrCreate(['visitor_log_device_id' => $inputs['visitor_log_device_id']], $inputs);
+    }
+
     public function delete($id){
         return $this->model->where('id', $id)->delete();
     }

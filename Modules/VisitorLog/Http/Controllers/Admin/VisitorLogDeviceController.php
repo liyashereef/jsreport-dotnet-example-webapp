@@ -59,6 +59,10 @@ class VisitorLogDeviceController extends Controller
         return datatables()->of($this->repository->getAll())->addIndexColumn()->toJson();
     }
 
+    public function fetchById($id){
+        return $this->repository->fetchById($id);
+     }
+
     /**
      * Store a newly created resource in storage.
      * @param  VisitorLogDeviceRequests $request
@@ -68,22 +72,36 @@ class VisitorLogDeviceController extends Controller
     {
         try {
             \DB::beginTransaction();
+            $trigger = false;
             $inputs = $request->all();
-            $inputs['activation_code'] = uniqid();
-            $inputs['uid'] = (string)Str::uuid();
-            // unset($inputs['camera_mode']);
-            // unset($inputs['scaner_camera_mode']);
-            // unset($inputs['template_id']);
-            $inputs['created_by'] = \Auth::id();
-            $device = $this->repository->store($inputs);
-            if($device){
-                $settings['camera_mode'] = $request->input('camera_mode');
-                $settings['scaner_camera_mode'] = $request->input('scaner_camera_mode');
-                $settings['template_id'] = $request->input('template_id');
-                $settings['visitor_log_device_id'] = $device->id;
-                $settings['pin'] = rand(10000,99999);
-                $this->visitorLogDeviceSettingsRepository->store($settings);
+            $settings['camera_mode'] = $request->input('camera_mode');
+            $settings['scaner_camera_mode'] = $request->input('scaner_camera_mode');
+            $settings['template_id'] = $request->input('template_id');
+            $inputs['screening_enabled'] = isset($inputs['screening_enabled']) ? 1 : 0;
+
+            if($request->filled('id')){
+                $deviceId = $request->input('id');
+                $this->repository->updateEntry($inputs);
+                $settings['visitor_log_device_id'] = $request->input('id');
+                $this->visitorLogDeviceSettingsRepository->updateByDeviceId($settings);
+                $trigger = true;
+            }else{
+                $inputs['created_by'] = \Auth::id();
+                $inputs['activation_code'] = uniqid();
+                $inputs['uid'] = (string)Str::uuid();
+                $device = $this->repository->store($inputs);
+                if($device){
+                    $deviceId = $device->id;
+                    $settings['visitor_log_device_id'] = $device->id;
+                    $settings['pin'] = rand(10000,99999);
+                    $this->visitorLogDeviceSettingsRepository->store($settings);
+                    $trigger = true;
+                }
             }
+            if($trigger){
+                $this->trigerBroadcasting($deviceId);
+            }
+
             \DB::commit();
             return response()->json($this->helperService->returnTrueResponse());
         } catch (\Exception $e) {
@@ -98,22 +116,51 @@ class VisitorLogDeviceController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
+    public function changeStatus($id)
     {
+        try {
+            \DB::beginTransaction();
+            $data = $this->repository->fetchById($id);
+            $inputs['id'] = $data->id;
+            if($data->is_blocked == 1){
+                $inputs['is_blocked'] = 0;
+            }else{
+                $inputs['is_blocked'] = 1;
+            }
+
+            $this->repository->updateEntry($inputs);
+            $this->trigerBroadcasting($data->id);
+            \DB::commit();
+        return response()->json($this->helperService->returnTrueResponse());
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            return response()->json($this->helperService->returnFalseResponse($e));
+        }
     }
 
     public function trigerBroadcasting($id){
         $configData = $this->repository->setConfigData($id);
-       
-        // DeviceConfigUpdated::dispatch($configData);
-        VisitorNotify::dispatch(129);
+        DeviceConfigUpdated::dispatch($configData);
+        // VisitorNotify::dispatch(129);
     }
 
     /**
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+    public function destroy($id)
     {
+        try {
+            \DB::beginTransaction();
+            $this->visitorLogDeviceSettingsRepository->delete($id);
+            $this->repository->delete($id);
+            \DB::commit();
+            return response()->json($this->helperService->returnTrueResponse());
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            return response()->json($this->helperService->returnFalseResponse($e));
+        }
     }
+
+
 }
