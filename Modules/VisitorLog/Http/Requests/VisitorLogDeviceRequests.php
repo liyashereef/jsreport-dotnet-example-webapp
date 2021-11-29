@@ -15,6 +15,7 @@ class VisitorLogDeviceRequests extends FormRequest
     {
         return [
             'customer_id' => "required",
+            'template_id' => "required",
             'name' => "required",
             'camera_mode' => "required",
             'scaner_camera_mode' => "required"

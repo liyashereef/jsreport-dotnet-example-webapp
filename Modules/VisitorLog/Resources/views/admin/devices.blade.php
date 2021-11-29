@@ -243,38 +243,42 @@
         $("body").on("click", ".add-new", function(e) {
             $('#devices-form')[0].reset();
             $("#myModal #customerId").prop('disabled', false);
-            $("#myModal #customerId").val().trigger('change');
-            $("#myModal #templates").val();
+            $("#myModal #customerId").val('').trigger('change');
+            $("#myModal #templates").val('');
         });
 
         $("#devices-form").on("change", "#customerId", function(e) {
             let id = $(this).val();
-            var url = '{{ route("visitor-log.template-allocated",":customerId") }}';
-            var url = url.replace(':customerId', id);
-            $('#devices-form #templates').empty().append($("<option></option>").attr("value", '').text('Please Select'));
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function(data) {
-                    $.each(data, function(index, slot) {
-                        if(templateId && slot.id == templateId){
-                            $('#templates').append($("<option></option>")
-                            .attr("value", slot.id)
-                            .attr("selected", true)
-                            .text(slot.template_name));
-                        }else{
-                            $('#templates').append($("<option></option>")
-                            .attr("value", slot.id)
-                            .text(slot.template_name));
-                        }
-                    });
-                },
-                error: function(xhr, textStatus, thrownError) {
-                    swal("Oops", "Something went wrong", "warning");
-                },
-                contentType: false,
-                processData: false,
-            });
+            if(id != ''){
+                var url = '{{ route("visitor-log.template-allocated",":customerId") }}';
+                var url = url.replace(':customerId', id);
+                $('#devices-form #templates').empty().append($("<option></option>").attr("value", '').text('Please Select'));
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(data) {
+                        $.each(data, function(index, slot) {
+                            if(templateId && slot.id == templateId){
+                                $('#templates').append($("<option></option>")
+                                .attr("value", slot.id)
+                                .attr("selected", true)
+                                .text(slot.template_name));
+                            }else{
+                                $('#templates').append($("<option></option>")
+                                .attr("value", slot.id)
+                                .text(slot.template_name));
+                            }
+                        });
+                    },
+                    error: function(xhr, textStatus, thrownError) {
+                        swal("Oops", "Something went wrong", "warning");
+                    },
+                    contentType: false,
+                    processData: false,
+                });
+
+            }
+
             // alert(templateId+' template fetch');
             // $("#templates").val(templateId).change();
         });
@@ -357,9 +361,9 @@
             var e = e;
             // var formData = new FormData($form[0]);
             if(block == 0){
-                message = 'Do you wat to block the device. Proceed?'
+                message = 'Do you want to block the device. Proceed?'
             }else{
-                message = 'Do you wat to activate the device. Proceed?'
+                message = 'Do you want to activate the device. Proceed?'
             }
             swal({
                 title: "Are you sure?",
