@@ -59,7 +59,7 @@
     </td>
 
     <td class="sorting_disabled">
-            <input type="checkbox" class="custom-control-input cls-multiple-answers" name="multiple_answers[{{$template_form['position']  ?? "1"}}]" @if(isset($template_form['multi_answer']) && $template_form['multi_answer'] ==  1) checked="checked" @endif @if(!isset($template_form['show_if_yes'])) style="display: none;" @endif>
+            <input type="checkbox" class="cls-multiple-answers" name="multiple_answers[{{$template_form['position']  ?? "1"}}]" @if(isset($template_form['multi_answer']) && $template_form['multi_answer'] ==  1) checked="checked" @endif @if(!isset($template_form['show_if_yes'])) style="display: none;" @endif>
     </td>
 
     <td class="sorting_disabled">
@@ -67,7 +67,7 @@
         @if(!isset($template_form['show_if_yes'])) style="display: none;" @endif>
             <label class="custom-control custom-radio" >
                  <div class="form-group">
-                    <input name="show_if[{{$template_form['position']  ?? "1"}}]" type="radio" class="custom-control-input" value="1" @if(isset($template_form['show_if_yes']) && $template_form['show_if_yes'] == 1) checked="checked" @endif >
+                    <input name="show_if[{{$template_form['position']  ?? "1"}}]" type="radio" class="" value="1" @if(isset($template_form['show_if_yes']) && $template_form['show_if_yes'] == 1) checked="checked" @endif >
                     <span class="custom-control-description">Yes</span>
                     <span class="help-block"></span>
                    </div>
@@ -76,7 +76,7 @@
 
             <label class="custom-control custom-radio ">
                 <div class="form-group">
-                    <input name="show_if[{{$template_form['position']  ?? "1"}}]" type="radio" class="custom-control-input" value="0" @if(isset($template_form['show_if_yes']) && $template_form['show_if_yes'] != 1) checked="checked" @endif>
+                    <input name="show_if[{{$template_form['position']  ?? "1"}}]" type="radio" class="" value="0" @if(isset($template_form['show_if_yes']) && $template_form['show_if_yes'] != 1) checked="checked" @endif>
                     <span class="custom-control-description">No</span>
                      <span class="help-block"></span>
                 </div>
