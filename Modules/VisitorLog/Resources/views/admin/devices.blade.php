@@ -30,8 +30,8 @@
             <th>Pin</th>
             <th style="white-space: nowrap;">Activation Code</th>
             <th>Activated On</th>
-            <th>Activated By</th>
-            <th>Last Active Time</th>
+            <!-- <th>Activated By</th> -->
+            <th>Last Active</th>
             <th>Template</th>
             <th>Screening</th>
             <th>Actions</th>
@@ -56,6 +56,16 @@
                     <label for="customer_id" class="col-sm-3 control-label">Customer</label>
                     <div class="col-sm-9">
                         {{ Form::select('customer_id',[''=>'Select Customer']+$customers, old('customer_id'),array('class'=> 'form-control', 'id'=>'customerId')) }}
+                        <small class="help-block"></small>
+                    </div>
+                </div>
+
+                <div id="template_id" class="form-group">
+                    <label for="template_id" class="col-sm-3 control-label">Template</label>
+                    <div class="col-sm-9">
+                        <select name="template_id" id="templates" class="form-control">
+                            <option>Please Select</option>
+                        </select>
                         <small class="help-block"></small>
                     </div>
                 </div>
@@ -90,16 +100,6 @@
                     <div class="col-sm-9" style="margin-top: 8px;">
                         <input type="radio" id="front-scaner" name="scaner_camera_mode" value="1"> <label for="">Front Camere</label>
                         <input type="radio" id="rear-scaner" name="scaner_camera_mode" value="0"> <label for="">Rear Camera</label>
-                        <small class="help-block"></small>
-                    </div>
-                </div>
-
-                <div id="template_id" class="form-group">
-                    <label for="template_id" class="col-sm-3 control-label">Templates</label>
-                    <div class="col-sm-9">
-                        <select name="template_id" id="templates" class="form-control">
-                            <option>Please Select</option>
-                        </select>
                         <small class="help-block"></small>
                     </div>
                 </div>
@@ -178,19 +178,19 @@
                         name: 'activated_at'
                     },
 
-                    {
-                        data: null,
-                        orderable: false,
-                        render: function(o) {
-                            var actions = "";
-                            if(o.is_activated == 1){
-                                actions = o.activated_by.name_with_emp_no;
-                            }else{
-                                actions = ""
-                            }
-                            return actions;
-                        },
-                    },
+                    // {
+                    //     data: null,
+                    //     orderable: false,
+                    //     render: function(o) {
+                    //         var actions = "";
+                    //         if(o.is_activated == 1){
+                    //             actions = o.activated_by.name_with_emp_no;
+                    //         }else{
+                    //             actions = ""
+                    //         }
+                    //         return actions;
+                    //     },
+                    // },
                     {
                         data: 'last_active_time',
                         name: 'last_active_time'
@@ -225,9 +225,9 @@
                                     actions += '<a href="#" title="Delete" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' +o.id + '></a>';
                                 }else{
                                     if(o.is_blocked == 0){
-                                        actions += '<a href="#" title="Activate" class="block {{Config::get('globals.activateFontIcon')}}" data-id=' +o.id + '></a>';
+                                        actions += '<a href="#" title="Block" class="block {{Config::get('globals.blockFontIcon')}}" data-id=' +o.id +' data-block=' +o.is_blocked +'></a>';
                                     }else{
-                                        actions += '<a href="#" title="Block" class="block {{Config::get('globals.blockFontIcon')}}" data-id=' +o.id + '></a>';
+                                        actions += '<a href="#" title="Activate" class="block {{Config::get('globals.activateFontIcon')}}" data-id=' +o.id +' data-block=' +o.is_blocked +'></a>';
                                     }
                                 }
                             @endcan
@@ -242,6 +242,7 @@
 
         $("body").on("click", ".add-new", function(e) {
             $('#devices-form')[0].reset();
+            $("#myModal #customerId").prop('disabled', false);
             $("#myModal #customerId").val().trigger('change');
             $("#myModal #templates").val();
         });
@@ -319,6 +320,8 @@
                         }
                         templateId = data.visitor_log_device_settings.template_id;
                         $("#myModal #customerId").val(data.customer_id).trigger('change');
+                        $("#myModal #customerId").prop('disabled', true);
+
                         $("#myModal").modal();
                         $('#myModal .modal-title').text("Edit Payment Method: " + data.name)
                     } else {
@@ -348,18 +351,23 @@
         $('#data-table').on('click', '.block', function(e) {
             var $form = $('#devices-form');
             var id = $(this).data('id');
+            var block = $(this).data('block');
             var base_url = "{{ route('visitor-log.device.change-status',':id') }}";
             var url = base_url.replace(':id', id);
             var e = e;
             // var formData = new FormData($form[0]);
-
+            if(block == 0){
+                message = 'Do you wat to block the device. Proceed?'
+            }else{
+                message = 'Do you wat to activate the device. Proceed?'
+            }
             swal({
                 title: "Are you sure?",
-                text: "Proceed?",
+                text: message,
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes, change",
+                confirmButtonText: "Yes",
                 showLoaderOnConfirm: true,
                 closeOnConfirm: false
             },
