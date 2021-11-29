@@ -137,7 +137,7 @@ class VisitorLogApiController
     {
         $request->validate([
             'x-dui' => 'required',
-            'x-ci' => 'requried',
+            'x-ci' => 'required',
             'x-di' => 'required',
             'checkInOption' => 'required',
         ]);

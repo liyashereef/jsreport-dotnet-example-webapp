@@ -320,7 +320,7 @@
                         }
                         templateId = data.visitor_log_device_settings.template_id;
                         $("#myModal #customerId").val(data.customer_id).trigger('change');
-                        $("#myModal #customerId").prop('disabled', true);
+                        $("#myModal #customerId").prop('readonly', true);
 
                         $("#myModal").modal();
                         $('#myModal .modal-title').text("Edit Payment Method: " + data.name)
