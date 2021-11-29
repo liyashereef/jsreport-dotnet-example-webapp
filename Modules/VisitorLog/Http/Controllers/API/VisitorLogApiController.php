@@ -25,6 +25,7 @@ use Modules\Client\Repositories\VisitorLogScreeningSubmissionRepository;
 use Modules\Admin\Repositories\VisitorLogScreeningTemplateQuestionRepository;
 use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 use Modules\Client\Models\VisitorLogMeta;
+use Modules\VisitorLog\Events\VisitorLogNotify;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 
 class VisitorLogApiController
@@ -136,7 +137,9 @@ class VisitorLogApiController
     {
         $request->validate([
             'x-dui' => 'required',
-            'checkInOption' => 'required|string',
+            'x-ci' => 'requried',
+            'x-di' => 'required',
+            'checkInOption' => 'required',
         ]);
 
         $msg = 'Ok';
@@ -220,6 +223,13 @@ class VisitorLogApiController
                     $this->visitorLogRepo->update($log->id, $visitorLogs);
                 }
                 $status = 200;
+                $eor = $request->input('eor');
+                if ($eor == 1) {
+                    VisitorLogNotify::dispatch(
+                        $request->input('x-ci'),
+                        $request->input('x-di')
+                    );
+                }
             } else {
                 Log::channel('customlog')->info('VisitorLog: Missing check in user details -- Request ' . json_encode($request->all()));
                 $msg = 'Missing check in user details';
