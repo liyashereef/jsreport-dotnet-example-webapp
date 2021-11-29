@@ -15,6 +15,7 @@ use Modules\VisitorLog\Repositories\VisitorLogDeviceSettingsRepository;
 use Modules\VisitorLog\Http\Requests\VisitorLogDeviceRequests;
 use Illuminate\Support\Str;
 use Modules\VisitorLog\Events\DeviceConfigUpdated;
+use Modules\VisitorLog\Events\VisitorLogNotify;
 use Modules\VisitorLog\Events\VisitorNotify;
 
 class VisitorLogDeviceController extends Controller

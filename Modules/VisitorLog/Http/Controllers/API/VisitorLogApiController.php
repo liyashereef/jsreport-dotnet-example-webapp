@@ -3,7 +3,10 @@
 namespace  Modules\VisitorLog\Http\Controllers\API;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Modules\VisitorLog\Transformers\VisitorResource;
 use Modules\VisitorLog\Transformers\ScreeningQuestionsResource;
 //Models
@@ -22,6 +25,7 @@ use Modules\Client\Repositories\VisitorLogScreeningSubmissionRepository;
 use Modules\Admin\Repositories\VisitorLogScreeningTemplateQuestionRepository;
 use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 use Modules\Client\Models\VisitorLogMeta;
+use Modules\VisitorLog\Events\VisitorLogNotify;
 use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 
 class VisitorLogApiController
@@ -132,109 +136,107 @@ class VisitorLogApiController
     public function storeVisitorLogs(Request $request)
     {
         $request->validate([
-            'x-dui' => 'required'
+            'x-dui' => 'required',
+            'x-ci' => 'requried',
+            'x-di' => 'required',
+            'checkInOption' => 'required',
         ]);
-        
+
+        $msg = 'Ok';
         try {
-            \Log::channel('customlog')->info(json_encode($request->all()));
-            // \Log::channel('customlog')->info('-------storeVisitorLogs -- '.'Customer --> '.$request->input('clientId').'screeningId --> '.$request->input('screeningId').' <-- Request '.json_encode($request->all()));
+
             $visitorLogs = [];
             $data = [];
-            // checkInOption value will be 'Manual or Qr'.
+
+            Log::channel('customlog')->info(json_encode($request->all()));
+
             $device = $this->visitorLogDeviceRepository->getByUID($request->input('x-dui'))->first();
+            if ($device == null) {
+                throw new Exception("Invalid visitor device");
+            }
 
-            if ($request->has('checkInOption')) {
-
-                if ($request->input('checkInOption') == 'Manual') {
-                    if ($request->has('data')) {
-                        $visitorLogs = json_decode($request->input('data'), true);
-                    }
-                } elseif ($request->input('checkInOption') == 'Qr' || $request->input('checkInOption') == 'Authorized Entrant') {
-                    if ($request->has('visitorPayload')) {
-                        $data = json_decode($request->input('visitorPayload'), true);
-                        $visitorLogs['first_name'] = $data['firstName'] . ' ' . $data['lastName'];
-                        $visitorLogs['email'] = $data['email'];
-                        $visitorLogs['phone'] = $data['phone'];
-                        $visitorLogs['uid'] = $data['uid'];
-                    }
-                } else {
-                    \Log::channel('customlog')->info('----storeVisitorLogs -- checkInOption is ' . $request->input("checkInOption") . ' -- Request ' . json_encode($request->all()));
+            if ($request->input('checkInOption') === 'Manual') {
+                if ($request->has('data')) {
+                    $visitorLogs = json_decode($request->input('data'), true);
                 }
-
-                if (!empty($visitorLogs)) {
-
-                    // $visitorLogs = $data;
-                    //Fetching screening details
-                    $visitorLogs['visitor_log_screening_submission_uid'] = $request->input('screeningId');
-                    //Common inputs
-                    $visitorLogs['check_in_option'] = $request->input('checkInOption');
-                    $visitorLogs['customer_id'] = $device->customer_id;
-                    $visitorLogs['template_id'] = $device->visitorLogDeviceSettings->template_id;
-                    $visitorLogs['uuid'] = $request->input('uuid');
-                    $visitorLogs['force_checkout'] = $request->input('forceCheckout');
-                    $visitorLogs['checkin'] = \Carbon\Carbon::parse($request->input('checkInAt'))->format('Y-m-d H:i:s');
-                    $visitorLogs['checkout'] = null;
-                    if ($request->has('checkOutAt')) {
-                        $visitorLogs['checkout'] = \Carbon\Carbon::parse($request->input('checkOutAt'))->format('Y-m-d H:i:s');
-                    }
-
-                    $visitorLogs['created_by'] = \Auth::user()->id;
-
-                    $visitorLogs['visitor_type_id'] = $request->input('visitorTypeId');
-                    if ($request->input('visitorTypeId') == 0) {
-                        $typeId = VisitorLogTypeLookup::where('type', 'Employee')
-                            ->select('id')
-                            ->first();
-                        $visitorLogs['visitor_type_id'] = $typeId->id;
-                    }
-                    $log = $this->visitorLogRepo->getByuuid($visitorLogs['uuid']);
-                    $visitorLogs['payload'] = $this->visitorLogRepo->procesPayload($request->all());
-
-                    if (empty($log)) {
-                        $result = $this->visitorLogRepo->storeFromApp($visitorLogs);
-                        //Store meta info
-                       
-                        $customFields = $this->visitorLogTemplateRepo->getTemplateCustomFields($device->visitorLogDeviceSettings->template_id);
-                        foreach ($customFields as $cf) {
-                            if (array_key_exists($cf->fieldname, $visitorLogs)) {
-                                VisitorLogMeta::create([
-                                    'visitor_log_id' => $result->id,
-                                    'key' => $cf->fieldname,
-                                    'value' => $visitorLogs[$cf->fieldname]
-                                ]);
-                            }
-                        }
-                        $request->request->add(['visitor_log_id' => $result->id]);
-                        if ($request->hasFile('image')) {
-                            $request->request->add(['imagetype' => 'picture']);
-                            $this->uploadImage($request->all());
-                        }
-
-                        if ($request->hasFile('signature')) {
-                            $request->request->add(['imagetype' => 'signature']);
-                            $this->uploadImage($request->all());
-                        }
-                    } else {
-                        //Filter input array //TODO:check
-                        // $visitorLogs = array_intersect_key($log->getFillable(), $visitorLogs);
-                        $this->visitorLogRepo->update($log->id, $visitorLogs);
-                    }
-
-
-                    $msg = 'Done';
-                    $status = 200;
-                } else {
-                    \Log::channel('customlog')->info('----storeVisitorLogs -- Missing check in user details -- Request ' . json_encode($request->all()));
-                    $msg = 'Missing check in user details';
-                    $status = 402;
+            } elseif ($request->input('checkInOption') === 'Qr' || $request->input('checkInOption') === 'Authorized Entrant') {
+                if ($request->has('visitor')) {
+                    $data = json_decode($request->input('visitor'), true);
+                    $visitorLogs['first_name'] = $data['firstName'] . ' ' . $data['lastName'];
+                    $visitorLogs['email'] = $data['email'];
+                    $visitorLogs['phone'] = $data['phone'];
+                    $visitorLogs['uid'] = $data['uid'];
                 }
             } else {
-                \Log::channel('customlog')->info('----storeVisitorLogs -- checkInOption not found on request. -- Request ' . json_encode($request->all()));
-                $msg = 'Check in option not found';
+                Log::channel('customlog')->info('VisitorLog: checkInOption is ' . $request->input("checkInOption") . ' -- Request ' . json_encode($request->all()));
+            }
+
+            if (!empty($visitorLogs)) {
+                $visitorLogs['visitor_log_screening_submission_uid'] = $request->input('screeningId');
+                $visitorLogs['check_in_option'] = $request->input('checkInOption');
+                $visitorLogs['customer_id'] = $device->customer_id;
+                $visitorLogs['template_id'] = $device->visitorLogDeviceSettings->template_id;
+                $visitorLogs['uuid'] = $request->input('uuid');
+                $visitorLogs['force_checkout'] = $request->input('forceCheckout');
+                $visitorLogs['checkin'] = Carbon::parse($request->input('checkInAt'))->format('Y-m-d H:i:s');
+                $visitorLogs['checkout'] = null;
+                if ($request->has('checkOutAt')) {
+                    $visitorLogs['checkout'] = Carbon::parse($request->input('checkOutAt'))->format('Y-m-d H:i:s');
+                }
+
+                $visitorLogs['created_by'] = Auth::user()->id;
+
+                $visitorLogs['visitor_type_id'] = $request->input('visitorTypeId');
+                if ($request->input('visitorTypeId') == 0) {
+                    $typeId = VisitorLogTypeLookup::where('type', 'Employee')
+                        ->select('id')
+                        ->first();
+                    $visitorLogs['visitor_type_id'] = $typeId->id;
+                }
+                $log = $this->visitorLogRepo->getByuuid($visitorLogs['uuid']);
+                $visitorLogs['payload'] = $this->visitorLogRepo->procesPayload($request->all());
+
+                if (empty($log)) {
+                    $result = $this->visitorLogRepo->storeFromApp($visitorLogs);
+
+                    $customFields = $this->visitorLogTemplateRepo->getTemplateCustomFields($device->visitorLogDeviceSettings->template_id);
+                    foreach ($customFields as $cf) {
+                        if (array_key_exists($cf->fieldname, $visitorLogs)) {
+                            VisitorLogMeta::create([
+                                'visitor_log_id' => $result->id,
+                                'key' => $cf->fieldname,
+                                'value' => $visitorLogs[$cf->fieldname]
+                            ]);
+                        }
+                    }
+                    $request->request->add(['visitor_log_id' => $result->id]);
+                    if ($request->hasFile('image')) {
+                        $request->request->add(['imagetype' => 'picture']);
+                        $this->uploadImage($request->all());
+                    }
+
+                    if ($request->hasFile('signature')) {
+                        $request->request->add(['imagetype' => 'signature']);
+                        $this->uploadImage($request->all());
+                    }
+                } else {
+                    $this->visitorLogRepo->update($log->id, $visitorLogs);
+                }
+                $status = 200;
+                $eor = $request->input('eor');
+                if ($eor == 1) {
+                    VisitorLogNotify::dispatch(
+                        $request->input('x-ci'),
+                        $request->input('x-di')
+                    );
+                }
+            } else {
+                Log::channel('customlog')->info('VisitorLog: Missing check in user details -- Request ' . json_encode($request->all()));
+                $msg = 'Missing check in user details';
                 $status = 402;
             }
         } catch (\Exception $e) {
-            \Log::channel('customlog')->info('-- storeVisitorLogs store ERROR =>' . $e->getMessage());
+            Log::channel('customlog')->info('VisitorLog: Error =>' . $e->getMessage());
             $msg = $e->getMessage();
             $status = 400;
         }

@@ -129,11 +129,12 @@ class VisitorLogDeviceRepository
 
     public function getByUID($uid)
     {
-        return $this->model
+        $devices = $this->model
             ->with([
                 'visitorLogDeviceSettings'
             ])
             ->where('uid', $uid)->get();
+        return $devices->isEmpty() ? null : $devices->first();
     }
 
     public function setConfigData($id)
