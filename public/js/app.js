@@ -10760,7 +10760,7 @@ __webpack_require__.r(__webpack_exports__);
     startConversationWith: function startConversationWith(contact) {
       var _this3 = this;
 
-      this.updateUnreadCount(contact, true);
+      //   this.updateUnreadCount(contact, true);
       axios.get("/chat/conversation/".concat(contact.contact_id)).then(function (response) {
         _this3.messages = response.data;
         _this3.selectedContact = contact;
