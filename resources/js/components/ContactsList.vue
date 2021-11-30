@@ -1,13 +1,13 @@
 <template>
     <div class="contacts-list">
         <ul>
-            <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+            <li v-for="contact in sortedContacts" :key="contact.contact_id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
                 <div class="avatar">
-                <img name="image" :src="'../images/uploads/' + contact.employee.image"  class="profileImage">  
+                <img name="image" :src="'../images/uploads/' + contact.contact[0].employee.image"  class="profileImage">   
                 </div>
                 <div class="contact">
-                    <p class="name">{{ contact.first_name }} {{ contact.last_name }}</p>
-                    <p class="email">{{ contact.email }}</p>
+                    <p class="name">{{ contact.contact[0].full_name }}</p>
+                    <p class="email">{{ contact.contact[0].email }}</p>
                 </div>
                 <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
             </li>

@@ -31,23 +31,26 @@
         mounted() {
             console.log(this.user.id);
             Echo.channel(`messages.${this.user.id}`)
-                .listen('.NewMessage', (e) => {
+                .listen('client-NewMessage', (e) => {
                     console.log("inssssssssssss");
                     console.log(e);
                     this.hanleIncoming(e.message);
                 });
+            this.getContactList()
 
-            axios.get('/chat/contacts')
-                .then((response) => {
-                    console.log("ppppppp");
-                    this.contacts = response.data;
-                });
         },
         methods: {
+            getContactList(){
+              axios.get('/chat/contacts')
+                  .then((response) => {
+                      console.log("ppppppp");
+                      this.contacts = response.data;
+                  });
+            },
             startConversationWith(contact) {
                 this.updateUnreadCount(contact, true);
 
-                axios.get(`/chat/conversation/${contact.id}`)
+                axios.get(`/chat/conversation/${contact.contact_id}`)
                     .then((response) => {
                         this.messages = response.data;
                         this.selectedContact = contact;
@@ -58,7 +61,7 @@
             },
             hanleIncoming(message) {
                 console.log("ins handle");
-                if (this.selectedContact && message.from == this.selectedContact.id) {
+                if (this.selectedContact && message.from == this.selectedContact.contact_id) {
                     this.saveNewMessage(message);
                     return;
                 }
@@ -66,8 +69,9 @@
                 this.updateUnreadCount(message.from_contact, false);
             },
             updateUnreadCount(contact, reset) {
+                console.log(contact);
                 this.contacts = this.contacts.map((single) => {
-                    if (single.id !== contact.id) {
+                    if (single.contact_id !== contact.contact_id) {
                         return single;
                     }
 

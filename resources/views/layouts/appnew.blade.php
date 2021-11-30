@@ -29,14 +29,14 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/rg-1.0.2/rr-1.2.3/sc-1.4.3/datatables.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}?t=2" type="image/x-icon">
     <link rel="icon" href="{{asset('images/favicon.ico')}}?t=2" type="image/x-icon">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <!-- CDN of js for datepicker -->
-    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.9/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.9/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.ckeditor.com/4.8.0/basic/ckeditor.js"></script>
     @if(Auth::user())
            @if(Route::current()->getPrefix() == "learningandtraining" || Route::current()->getPrefix() == "learning")
@@ -167,6 +167,7 @@
 
 <script src="{{ asset('js/common.js') }}"></script>
 <script src="{{ asset('js/helper.js') }}"></script>
+<script src="{{ asset('js/modalcrud.js') }}"></script>
 <!-- <script src="{{ asset('js/dashboard-filter.js') }}" > </script> -->
 @yield('scripts')
 <style>
