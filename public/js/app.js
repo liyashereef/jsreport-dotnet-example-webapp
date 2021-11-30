@@ -10740,25 +10740,30 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     console.log(this.user.id);
-    Echo.channel("messages.".concat(this.user.id)).listen('.NewMessage', function (e) {
+    Echo.channel("messages.".concat(this.user.id)).listen('client-NewMessage', function (e) {
       console.log("inssssssssssss");
       console.log(e);
 
       _this.hanleIncoming(e.message);
     });
-    axios.get('/chat/contacts').then(function (response) {
-      console.log("ppppppp");
-      _this.contacts = response.data;
-    });
+    this.getContactList();
   },
   methods: {
-    startConversationWith: function startConversationWith(contact) {
+    getContactList: function getContactList() {
       var _this2 = this;
 
+      axios.get('/chat/contacts').then(function (response) {
+        console.log("ppppppp");
+        _this2.contacts = response.data;
+      });
+    },
+    startConversationWith: function startConversationWith(contact) {
+      var _this3 = this;
+
       this.updateUnreadCount(contact, true);
-      axios.get("/chat/conversation/".concat(contact.id)).then(function (response) {
-        _this2.messages = response.data;
-        _this2.selectedContact = contact;
+      axios.get("/chat/conversation/".concat(contact.contact_id)).then(function (response) {
+        _this3.messages = response.data;
+        _this3.selectedContact = contact;
       });
     },
     saveNewMessage: function saveNewMessage(message) {
@@ -10767,7 +10772,7 @@ __webpack_require__.r(__webpack_exports__);
     hanleIncoming: function hanleIncoming(message) {
       console.log("ins handle");
 
-      if (this.selectedContact && message.from == this.selectedContact.id) {
+      if (this.selectedContact && message.from == this.selectedContact.contact_id) {
         this.saveNewMessage(message);
         return;
       }
@@ -10775,8 +10780,9 @@ __webpack_require__.r(__webpack_exports__);
       this.updateUnreadCount(message.from_contact, false);
     },
     updateUnreadCount: function updateUnreadCount(contact, reset) {
+      console.log(contact);
       this.contacts = this.contacts.map(function (single) {
-        if (single.id !== contact.id) {
+        if (single.contact_id !== contact.contact_id) {
           return single;
         }
 
@@ -10899,7 +10905,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.post('/chat/conversation/send', {
-        contact_id: this.contact.id,
+        contact_id: this.contact.contact_id,
         text: text
       }).then(function (response) {
         _this.$emit('new', response.data);
@@ -59129,7 +59135,7 @@ var render = function () {
         return _c(
           "li",
           {
-            key: contact.id,
+            key: contact.contact_id,
             class: { selected: contact == _vm.selected },
             on: {
               click: function ($event) {
@@ -59143,20 +59149,18 @@ var render = function () {
                 staticClass: "profileImage",
                 attrs: {
                   name: "image",
-                  src: "../images/uploads/" + contact.employee.image,
+                  src: "../images/uploads/" + contact.contact[0].employee.image,
                 },
               }),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "contact" }, [
               _c("p", { staticClass: "name" }, [
-                _vm._v(
-                  _vm._s(contact.first_name) + " " + _vm._s(contact.last_name)
-                ),
+                _vm._v(_vm._s(contact.contact[0].full_name)),
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "email" }, [
-                _vm._v(_vm._s(contact.email)),
+                _vm._v(_vm._s(contact.contact[0].email)),
               ]),
             ]),
             _vm._v(" "),
@@ -59202,9 +59206,7 @@ var render = function () {
       _c("h1", [
         _vm._v(
           _vm._s(
-            _vm.contact
-              ? _vm.contact.first_name + " " + _vm.contact.last_name
-              : "Select a Contact"
+            _vm.contact ? _vm.contact.contact[0].full_name : "Select a Contact"
           )
         ),
       ]),
@@ -59307,7 +59309,9 @@ var render = function () {
                 key: message.id,
                 class:
                   "message" +
-                  (message.to == _vm.contact.id ? " sent" : " received"),
+                  (message.to == _vm.contact.contact_id
+                    ? " sent"
+                    : " received"),
               },
               [
                 _c("div", { staticClass: "text" }, [
