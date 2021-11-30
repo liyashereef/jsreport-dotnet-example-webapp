@@ -66,9 +66,9 @@
                     return;
                 }
 
-                this.updateUnreadCount(message.from_contact, false);
+               // this.updateUnreadCount(message.from_contact, false);
             },
-            updateUnreadCount(contact, reset) {
+          /*  updateUnreadCount(contact, reset) {
                 console.log(contact);
                 this.contacts = this.contacts.map((single) => {
                     if (single.contact_id !== contact.contact_id) {
@@ -82,7 +82,7 @@
 
                     return single;
                 })
-            }
+            }*/
         },
         components: {Conversation, ContactsList}
     }
