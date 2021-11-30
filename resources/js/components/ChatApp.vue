@@ -48,7 +48,7 @@
                   });
             },
             startConversationWith(contact) {
-                this.updateUnreadCount(contact, true);
+             //   this.updateUnreadCount(contact, true);
 
                 axios.get(`/chat/conversation/${contact.contact_id}`)
                     .then((response) => {
