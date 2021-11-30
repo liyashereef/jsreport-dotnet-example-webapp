@@ -13,13 +13,21 @@ class VisitorLogDeviceRequests extends FormRequest
      */
     public function rules()
     {
-        return [
-            'customer_id' => "required",
+        $rules = [
+            // 'customer_id' => "required",
             'template_id' => "required",
             'name' => "required",
             'camera_mode' => "required",
             'scaner_camera_mode' => "required"
         ];
+        $id = request('id');
+        if($id == ''){
+            $customerRules = [
+                'customer_id'=>"required",
+            ];
+        }
+        $rules = array_merge($rules,$customerRules);
+        return $rules;
     }
 
     /**
