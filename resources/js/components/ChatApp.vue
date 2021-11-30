@@ -31,7 +31,7 @@
         mounted() {
             console.log(this.user.id);
             Echo.channel(`messages.${this.user.id}`)
-                .listen('client-NewMessage', (e) => {
+                .listen('.client-NewMessage', (e) => {
                     console.log("inssssssssssss");
                     console.log(e);
                     this.hanleIncoming(e.message);
