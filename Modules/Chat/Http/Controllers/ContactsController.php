@@ -73,6 +73,16 @@ class ContactsController extends Controller
         return response()->json($message);
     }
 
+    public function saveForApp(Request $request)
+    {
+        $message = Message::create([
+            'from' => $request->from,
+            'to' => $request->to,
+            'text' => $request->text
+        ]);
+        return response()->json($message);
+    }
+
     public function store(Request $request)
     {
       //  dd($request->all());
