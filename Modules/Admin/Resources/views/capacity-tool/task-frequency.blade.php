@@ -32,7 +32,7 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="value">
+                <div class="form-group row" id="value">
                     <label for="value" class="col-sm-3 control-label">Task Frequency</label>
                     <div class="col-sm-9">
                         {{ Form::text('value',null,array('class'=>'form-control')) }}
@@ -42,7 +42,7 @@
             </div>
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="sequence_number">
+                <div class="form-group row" id="sequence_number">
                     <label for="value" class="col-sm-3 control-label">Order</label>
                     <div class="col-sm-9">
                         {{ Form::text('sequence_number',null,array('class'=>'form-control')) }}

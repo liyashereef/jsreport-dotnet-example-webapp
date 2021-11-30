@@ -17,9 +17,9 @@ class TimeOffCategoryRequest extends Request
             'type' => "bail|required|max:150|unique:timeoff_category_lookup,type,{$id},id,deleted_at,NULL",
             'description' => "bail|required|max:1000",
             'reference' => "bail|required|max:150",
-            'allowed_days' => "bail|required|numeric|digits_between:min:1,5",
-            'allowed_hours' => "bail|required|numeric|digits_between:min:1,8",
-            'allowed_weeks' => "bail|required|numeric|digits_between:min:1,5",
+            'allowed_days' => "bail|required|numeric|digits_between:1,5",
+            'allowed_hours' => "bail|required|numeric|digits_between:1,8",
+            'allowed_weeks' => "bail|required|numeric|digits_between:1,5",
         ];
     }
 

@@ -35,7 +35,7 @@
                 {{ Form::hidden('id', null) }}
 
                 <div class="modal-body">
-                    <div class="form-group" id="request_type">
+                    <div class="form-group row" id="request_type">
                         <label for="name" class="col-sm-3 control-label">Request Type</label>
                         <div class="col-sm-9">
                             {{ Form::text('request_type',null,array('class'=>'form-control')) }}

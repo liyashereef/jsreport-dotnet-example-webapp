@@ -42,13 +42,13 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container-fluid" style="padding-left: 6px;">
                 <div class="row align-items-center">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <a href="{{ url('/') }}"><img src="{{asset('images/logo.png') }}"></a>
                     </div>
 
 
-                <div class="col-md-9">
-                    <p class="logo-head m-0">Integrated Security Management System</p>
+                <div class="col-md-8">
+                    <p class="logo-head m-0">Integrated Security Management Systems</p>
                     <!--<p class="logo-para m-0 mt-1">Our relentless pursuit of innovation, efficiency and
                             transperancy for security services</p>-->
                 </div>

@@ -65,14 +65,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-8">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder'=>'Name')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="status">
+                 <div class="form-group row" id="status">
                     <label for="status" class="col-sm-2 control-label">Status</label>
                     <div class="col-sm-8">
                         <select name="status" class="form-control">

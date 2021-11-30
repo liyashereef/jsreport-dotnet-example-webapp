@@ -13,7 +13,7 @@
     <div class="col-md-8">
 
     <div class="row" style="padding-bottom: 5px">
-        <div class="form-group"  >
+        <div class="form-group row col-lg-12"  >
             <label for="module" class=" col-md-3" style="padding-left: 0px">Dashboard Employee Survey<span class="mandatory"></span></label>
             <div class="col-md-4" style="padding-left: 5px">
                 <select id="default_employeesurvey" name="default_employeesurvey" class="form-control" >
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="summary-dashboard-from col-md-8">
             <div class="row">
-                <div class="form-group"  id="module">
+                <div class="form-group row col-lg-12"  id="module">
                     <label for="module" class="col-form-label col-md-3">Module<span class="mandatory">*</span></label>
                     <div class="col-md-4">
                         <select id="type" name="type" class="form-control" required>

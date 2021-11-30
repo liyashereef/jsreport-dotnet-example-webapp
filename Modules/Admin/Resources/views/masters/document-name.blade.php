@@ -30,21 +30,21 @@
             {{ Form::open(array('url'=>'#','id'=>'document_name_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="document_name" class="col-sm-3 control-label">Enter Document Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class' => 'form-control', 'Placeholder'=>'Document Name', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="document_type_id">
+                <div class="form-group row" id="document_type_id">
                     <label for="role_id" class="col-sm-3 control-label">Select Document Type</label>
                     <div class="col-sm-9">
                      {{Form::select('document_type_id',[''=>'Please Select']+$type_list,null, ['class' => 'form-control','id' => 'document_type_details','required'=>TRUE])}}
                      <small class="help-block"></small>
                  </div>
                 </div>
-                <div class="form-group" id="document_category_id">
+                <div class="form-group row" id="document_category_id">
                     <label for="role_id" class="col-sm-3 control-label">Document Category</label>
                     <div class="col-sm-9">
                      {{Form::select('document_category_id',[''=>'Please Select'],null, ['class' => 'form-control','id'=>'document_category_details','required'=>TRUE])}}
@@ -52,14 +52,14 @@
                  </div>
                 </div>
 
-                <div class="form-group" id="is_auto_archive">
+                <div class="form-group row" id="is_auto_archive">
                     <label for="auto_archive" class="col-sm-3 control-label">Auto-Archive Old Document</label>
                     <div class="col-sm-9">
                         <input type="checkbox" id="is_auto_archive" class="chk" name="is_auto_archive" value="1"  checked="checked">
                      <small class="help-block"></small>
                  </div>
                 </div>
-                <div class="form-group" id="permissions">
+                <div class="form-group row" id="permissions">
                     <label for="permissions" class="col-sm-3 control-label">Authorized Access</label>
                     <div class="col-sm-9">
 
@@ -71,14 +71,14 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="other_category_name_id">
+                <div class="form-group row" id="other_category_name_id">
                     <label for="role_id" class="col-sm-3 control-label">Document Subcategory</label>
                     <div class="col-sm-9">
                      {{Form::select('other_category_name_id',[''=>'Please Select'],null, ['class' => 'form-control','id'=>'other_category_name_details'])}}
                      <small class="help-block"></small>
                  </div>
                 </div>
-                <div class="form-group" id="is_valid">
+                <div class="form-group row" id="is_valid">
                     <label for="role_id" class="col-sm-3 control-label">Is valid</label>
                     <div class="col-sm-9">
                         <input type="checkbox" id="is_valid" class="chk" name="is_valid" value="1"  checked="checked">

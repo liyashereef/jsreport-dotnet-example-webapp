@@ -37,14 +37,14 @@
             {{ Form::hidden('id', null) }}
             {{ Form::hidden('reference_code',null) }}
             <div class="modal-body">
-                <div class="form-group" id="policy_name">
+                <div class="form-group row" id="policy_name">
                     <label for="policy_name" class="col-sm-3 control-label">Policy Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('policy_name',null,array('class' => 'form-control','required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="compliance_policy_category_id">
+                <div class="form-group row" id="compliance_policy_category_id">
                     <label for="compliance_policy_category_id" class="col-sm-3 control-label">Category</label>
                     <div class="col-sm-9">
                         {{ Form::select('compliance_policy_category_id', [null=>'Please Select'] + $categoryList, null,
@@ -52,7 +52,7 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="policy_description">
+                <div class="form-group row" id="policy_description">
                     <label for="policy_description" class="col-sm-3 control-label">Policy Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('policy_description',null,array('class' => 'form-control','required'=>TRUE))
@@ -60,7 +60,7 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="policy_objectives">
+                <div class="form-group row" id="policy_objectives">
                     <label for="policy_objectives" class="col-sm-3 control-label">Policy Objective</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('policy_objectives',null,array('class' => 'form-control','required'=>TRUE))
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="policy_file">
+                <div class="form-group row" id="policy_file">
                     <label for="policy_file" class="col-sm-3 control-label">Upload PDF</label>
                     <div class="col-sm-9">
                         {{ Form::file('policy_file') }}
@@ -106,7 +106,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="compliance_policy_roles">
+                <div class="form-group row" id="compliance_policy_roles">
                     <label for="compliance_policy_roles" class="col-sm-3 control-label">Roles</label>
                     <div class="col-sm-9">
 
@@ -121,7 +121,7 @@
                 </div>
 
 
-                <div class="form-group" id="enable_agree_or_disagree">
+                <div class="form-group row" id="enable_agree_or_disagree">
                     <label for="enable_agree_or_disagree" class="col-sm-3 control-label">Enable Agree/Disagree</label>
                     <div class="col-sm-9">
                         {{ Form::checkbox('enable_agree_or_disagree', 1) }}
@@ -131,28 +131,28 @@
 
 
                 <div id="agree_disagree_div" style="display:none;">
-                    <div class="form-group" id="agree_reasons">
+                    <div class="form-group row" id="agree_reasons">
                         <label for="agree_reasons" class="col-sm-3 control-label">If Agree</label>
                         <div class="col-sm-9">
                             {{ Form::text('agree_reasons', null,['class' =>"tagsinput"]) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="enable_agree_or_disagree">
+                    <div class="form-group row" id="enable_agree_or_disagree">
                         <label for="enable_agree_or_disagree" class="col-sm-3 control-label">Enable Agree Textbox</label>
                         <div class="col-sm-9">
                             {{ Form::checkbox('enable_agree_textbox', 1) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="disagree_reasons">
+                    <div class="form-group row" id="disagree_reasons">
                         <label for="disagree_reasons" class="col-sm-3 control-label">If Disagree</label>
                         <div class="col-sm-9">
                             {{ Form::text('disagree_reasons',null, [ 'class' =>"tagsinput"]) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="enable_disagree_textbox">
+                    <div class="form-group row" id="enable_disagree_textbox">
                         <label for="enable_disagree_textbox" class="col-sm-3 control-label">Enable Disagree Textbox</label>
                         <div class="col-sm-9">
                             {{ Form::checkbox('enable_disagree_textbox', 1) }}
@@ -162,7 +162,7 @@
 
                 </div>
 
-                <div class="form-group" id="status">
+                <div class="form-group row" id="status">
                     <label for="status" class="col-sm-3 control-label">Active</label>
                     <div class="col-sm-9">
                         {{ Form::checkbox('status', 1) }}

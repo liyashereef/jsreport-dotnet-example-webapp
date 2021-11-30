@@ -29,14 +29,14 @@
             {{ Form::open(array('url'=>'#','id'=>'rating-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="rating">
+                <div class="form-group row" id="rating">
                     <label for="rating" class="col-sm-3 control-label">Rating</label>
                     <div class="col-sm-9">
                         {{ Form::text('rating',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="score">
+                <div class="form-group row" id="score">
                     <label for="score" class="col-sm-3 control-label">Rating Score</label>
                     <div class="col-sm-9">
                         {{ Form::number('score',null,array('class'=>'form-control','step'=>1)) }}

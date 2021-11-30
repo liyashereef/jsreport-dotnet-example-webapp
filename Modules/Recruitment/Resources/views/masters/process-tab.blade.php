@@ -23,11 +23,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Question</h4>
+               
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                
+                 <h4 class="modal-title" id="myModalLabel">Question</h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'process-tab-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">

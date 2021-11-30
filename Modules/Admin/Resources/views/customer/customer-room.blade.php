@@ -47,9 +47,8 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Customers Room</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                
+                 <h4 class="modal-title" id="myModalLabel">Customers Room</h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'room_name_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}

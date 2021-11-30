@@ -31,7 +31,7 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="certificate_name">
+                <div class="form-group row" id="certificate_name">
                     <label for="certificate_name" class="col-sm-3 control-label">Certificate </label>
                     <div class="col-sm-9">
                         {{ Form::text('certificate_name',null,array('class'=>'form-control')) }}

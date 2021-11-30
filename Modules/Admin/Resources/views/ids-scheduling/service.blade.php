@@ -51,7 +51,7 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'ids-service-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-4 control-label">Name</label>
                     <div class="col-sm-8">
                         {{ Form::text('name',null,array('class'=>'form-control','placeholder' => 'Service Name')) }}
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-4 control-label">Short Name</label>
                     <div class="col-sm-8">
                         {{ Form::text('short_name',null,array('class'=>'form-control','placeholder' => 'Short Service Name')) }}
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div id="rate" class="form-group">
+                <div id="rate" class="form-group row">
                     <label for="rate" class="col-sm-4 control-label">Rate</label>
                     <div class="col-sm-8">
                         {{ Form::number('rate',null,array('class'=>'form-control','placeholder' => 'Rate','step'=>"0.01", 'title'=>"Currency",'pattern'=>"^\d+(?:\.\d{1,2})?$")) }}
@@ -76,7 +76,7 @@
                 </div>
 
 
-                <div class="form-group" id="office_ids">
+                <div class="form-group row" id="office_ids">
                     <label for="office_ids" class="col-sm-4 control-label">Select Office </label>
                     <div class="col-sm-8">
                         {!!Form::select('office_ids[]',$office,null, ['class' => 'form-control','id'=>'office-ids','multiple'=>"multiple",'style'=>'width: 524px;'])!!}
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="tax_master_id">
+                <div class="form-group row" id="tax_master_id">
                     <label for="tax_master_id" class="col-sm-4 control-label">Select Tax Master </label>
                     <div class="col-sm-8">
                         {!!Form::select('tax_master_id',['Please Select']+$taxes,null, ['class' => 'form-control','id'=>'taxMasterId','style'=>'width: 524px;'])!!}
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-4 control-label">Description</label>
                     <div class="col-sm-8">
                         {{ Form::textarea('description',null,['class' => 'form-control','id'=>'note','rows'=>'3']) }}
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <!-- Photo Service - Start -->
-                <div class="form-group" id="is_photo_service">
+                <div class="form-group row" id="is_photo_service">
                     <label for="is_photo_service" class="col-sm-4 control-label">Enable Photo Service </label>
                     <div class="col-sm-8">
                         <label class="switch" style="">
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="form-group display-hide" id="is_photo_service_required">
+                <div class="form-group row display-hide" id="is_photo_service_required">
                     <label for="is_photo_service_required" class="col-sm-4 control-label">Enable Photo Service Required</label>
                     <div class="col-sm-8">
                         <label class="switch" style="">

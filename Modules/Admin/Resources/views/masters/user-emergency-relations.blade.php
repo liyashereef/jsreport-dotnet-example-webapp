@@ -31,14 +31,14 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="relations">
+                <div class="form-group row" id="relations">
                     <label for="relations" class="col-sm-3 control-label">Relation</label>
                     <div class="col-sm-9">
                         {{ Form::text('relations',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="apogee_code">
+                 <div class="form-group row" id="apogee_code">
                     <label for="apogee_code" class="col-sm-3 control-label">Apogee Code</label>
                     <div class="col-sm-9">
                          {{ Form::text('apogee_code',null,array('class'=>'form-control','placeholder' => 'Apogee Code')) }}

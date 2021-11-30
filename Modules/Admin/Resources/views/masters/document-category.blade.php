@@ -29,14 +29,14 @@
             {{ Form::open(array('url'=>'#','id'=>'document_category_form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="document_category">
+                <div class="form-group row" id="document_category">
                     <label for="document_category" class="col-sm-3 control-label">Enter Category</label>
                     <div class="col-sm-9">
                         {{ Form::text('document_category',null,array('class' => 'form-control', 'Placeholder'=>'Document Category', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="document_type_id">
+                <div class="form-group row" id="document_type_id">
                     <label for="role_id" class="col-sm-3 control-label">Select Document Type</label>
                     <div class="col-sm-9">
                      {{Form::select('document_type_id',[''=>'Please Select']+$type_list,null, ['class' => 'form-control','id' => 'document_type_details','required'=>TRUE])}}

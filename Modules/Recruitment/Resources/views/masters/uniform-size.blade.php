@@ -31,7 +31,7 @@
             {{ Form::open(array('url'=>'#','id'=>'size-name-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
              {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="size_name">
+                <div class="form-group row" id="size_name">
                     <label for="size_name" class="col-sm-3 control-label">Size Name
                         <span class="mandatory">*</span>
                     </label>

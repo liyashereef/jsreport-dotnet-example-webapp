@@ -31,42 +31,42 @@
             {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="gl_code">
+                <div class="form-group row" id="gl_code">
                     <label for="gl_code" class="col-sm-3 control-label">GL Code</label>
                     <div class="col-sm-9">
                         {{ Form::text('gl_code',null,array('class' => 'form-control', 'Placeholder'=>'GL Code', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class' => 'form-control', 'Placeholder'=>'Short Name')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="course_description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class' => 'form-control', 'Placeholder'=>'Description', 'rows' => 5, 'cols' => 40, 'required'=>FALSE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="grouping">
+                <div class="form-group row" id="grouping">
                     <label for="grouping" class="col-sm-3 control-label">Grouping</label>
                     <div class="col-sm-9">
                         {{ Form::text('grouping',null,array('class' => 'form-control', 'Placeholder'=>'Grouping', 'required'=>FALSE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="pnl_subcode">
+                 <div class="form-group row" id="pnl_subcode">
                     <label for="pnl_subcode" class="col-sm-3 control-label">PNL Subcode</label>
                     <div class="col-sm-9">
                         {{ Form::text('pnl_subcode',null,array('class' => 'form-control', 'Placeholder'=>'PNL Subcode', 'required'=>FALSE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="pnl_item">
+                <div class="form-group row" id="pnl_item">
                     <label for="pnl_item" class="col-sm-3 control-label">PNL Item</label>
                     <div class="col-sm-9">
                         {{ Form::text('pnl_item',null,array('class' => 'form-control', 'Placeholder'=>'PNL Item', 'required'=>FALSE)) }}

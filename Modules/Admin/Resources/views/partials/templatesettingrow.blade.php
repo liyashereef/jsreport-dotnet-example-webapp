@@ -12,13 +12,13 @@
         </div>
     </td>
     <td><div class="form-group min" id="min_value_{{isset($key)?($key):"0"}}">
-        <input type="text" class="min-item form-control  table-option-adjust" name="min_value[]" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" value="{{$each_rule['min_value'] ?? ''}}"/>
+        <input type="text" class="min-item form-control  table-option-adjust" name="min_value[]" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" value="{{@$each_rule['min_value'] }}"/>
         <span class="help-block"></span>
         </div>
         </div>
     </td>
     <td><div class="form-group max" id="max_value_{{isset($key)?($key):"0"}}">
-        <input type="text" class="max-item form-control  table-option-adjust" name="max_value[]" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" value="{{$each_rule['max_value'] ?? ''}}"/>
+        <input type="text" class="max-item form-control  table-option-adjust" name="max_value[]" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" value="{{@$each_rule['max_value'] }}"/>
         <span class="help-block"></span>
         </div>
         </div>

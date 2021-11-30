@@ -32,35 +32,35 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="category_id">
+                <div class="form-group row" id="category_id">
                     <label for="make" class="col-sm-3 control-label">Category<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::select('category_id',[null=>'Please Select']+$category_list, old('category_id'),array('class' => 'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div> 
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="make" class="col-sm-3 control-label">Type Name<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div> 
-                 <div class="form-group" id="type">
+                 <div class="form-group row" id="type">
                     <label for="type" class="col-sm-3 control-label">Value Type<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::select('type',[null=>'Please Select']+$datavalues, old('type'),array('class' => 'form-control','id'=>'choose_type')) }}
                         <small class="help-block"></small>
                     </div>
                 </div> 
-                <div class="form-group hide-this-block" id="critical_after_km">
+                <div class="form-group row hide-this-block" id="critical_after_km">
                     <label for="critical_after_km" class="col-sm-3 control-label">Critical after km<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('critical_after_km',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div> 
-                <div class="form-group hide-this-block" id="critical_after_days">
+                <div class="form-group row hide-this-block" id="critical_after_days">
                     <label for="critical_after_days" class="col-sm-3 control-label">Critical after days<span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('critical_after_days',null,array('class'=>'form-control')) }}

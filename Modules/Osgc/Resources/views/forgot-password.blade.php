@@ -41,7 +41,7 @@
             overflow: hidden;
             margin-top: 0px;
             margin-bottom: 50px;
-            height: 152px;
+            /* height: 152px; */
             top: 0;
             left: 0;
             right: 0;

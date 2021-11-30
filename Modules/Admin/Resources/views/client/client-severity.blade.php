@@ -28,21 +28,21 @@
             {{ Form::open(array('url'=>'#','id'=>'severity-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
              {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="severity">
+                <div class="form-group row" id="severity">
                     <label for="severity" class="col-sm-3 control-label">Severity</label>
                     <div class="col-sm-9">
                         {{ Form::text('severity',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                 <div class="form-group" id="value">
+                 <div class="form-group row" id="value">
                     <label for="value" class="col-sm-3 control-label">Order Sequence</label>
                     <div class="col-sm-9">
                         {{ Form::number('value',null,array('class'=>'form-control','min'=>1)) }}

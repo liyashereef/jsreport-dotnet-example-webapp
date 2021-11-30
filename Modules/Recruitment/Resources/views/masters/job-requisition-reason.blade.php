@@ -32,7 +32,7 @@
                 {{ Form::open(array('url'=>'#','id'=>'reason-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group" id="reason">
+                    <div class="form-group row" id="reason">
                         <label for="name" class="col-sm-3 control-label">Reasons for Job Requisition</label>
                         <div class="col-sm-9">
                             {{ Form::text('reason',null,array('class'=>'form-control')) }}

@@ -26,7 +26,7 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id', null)}}
             <div class="modal-body">
-                <div class="form-group" id="topic">
+                <div class="form-group row" id="topic">
                     <label for="topic" class="col-sm-3 control-label">Topic</label>
                     <div class="col-sm-9">
                         {{ Form::text('topic', null,array('class' => 'form-control','required'=>TRUE)) }}
