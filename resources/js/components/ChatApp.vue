@@ -57,10 +57,15 @@
                     })
             },
             saveNewMessage(message) {
+                      console.log("save message");
+                
                 this.messages.push(message);
             },
             hanleIncoming(message) {
                 console.log("ins handle");
+                console.log("msg from"+message.from);
+                console.log("selected cont"+this.selectedContact.contact_id);
+
                 if (this.selectedContact && message.from == this.selectedContact.contact_id) {
                     this.saveNewMessage(message);
                     return;
