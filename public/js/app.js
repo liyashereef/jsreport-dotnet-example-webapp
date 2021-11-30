@@ -10775,21 +10775,23 @@ __webpack_require__.r(__webpack_exports__);
       if (this.selectedContact && message.from == this.selectedContact.contact_id) {
         this.saveNewMessage(message);
         return;
-      }
+      } // this.updateUnreadCount(message.from_contact, false);
 
-      this.updateUnreadCount(message.from_contact, false);
-    },
-    updateUnreadCount: function updateUnreadCount(contact, reset) {
-      console.log(contact);
-      this.contacts = this.contacts.map(function (single) {
-        if (single.contact_id !== contact.contact_id) {
-          return single;
-        }
-
-        if (reset) single.unread = 0;else single.unread += 1;
-        return single;
-      });
     }
+    /*  updateUnreadCount(contact, reset) {
+          console.log(contact);
+          this.contacts = this.contacts.map((single) => {
+              if (single.contact_id !== contact.contact_id) {
+                  return single;
+              }
+               if (reset)
+                  single.unread = 0;
+              else
+                  single.unread += 1;
+               return single;
+          })
+      }*/
+
   },
   components: {
     Conversation: _Conversation__WEBPACK_IMPORTED_MODULE_0__["default"],
