@@ -28,6 +28,7 @@ class VisitorLogDeviceResources extends JsonResource
                 'deviceName' => $this->name,
                 'pin'=>$this->visitorLogDeviceSettings->pin,
                 'lastUpdated' => $this->updated_at,
+                'activatedAt' => $this->activated_at,
                 'visitorTypes' => VisitorLogTypeLookup::orderBy('type')->select('id', 'type as name')->get(),
                 'template' => ($this->template)? $this->template : '',
             ];
