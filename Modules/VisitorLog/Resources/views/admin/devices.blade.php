@@ -241,9 +241,14 @@
         }
 
         $("body").on("click", ".add-new", function(e) {
+            templateId = '';
             $('#devices-form')[0].reset();
             $("#myModal #customerId").prop('disabled', false);
             $("#myModal #customerId").val('').trigger('change');
+             $('#devices-form #templates').empty()
+            .append($("<option></option>")
+            .attr("value", '')
+            .text('Please Select'));
             $("#myModal #templates").val('');
         });
 
@@ -324,7 +329,7 @@
                         }
                         templateId = data.visitor_log_device_settings.template_id;
                         $("#myModal #customerId").val(data.customer_id).trigger('change');
-                        $("#myModal #customerId").prop('readonly', true);
+                        $("#myModal #customerId").prop('disabled', true);
 
                         $("#myModal").modal();
                         $('#myModal .modal-title').text("Edit Payment Method: " + data.name)

@@ -19,7 +19,7 @@ class VisitorLogDeviceResources extends JsonResource
         $result = [
                 'id'=>$this->id,
                 'isBlocked'=> ($this->is_blocked == 1)? true : false,
-                'isScreeningEnabled'=> ($this->is_blocked == 1)? true : false,
+                'isScreeningEnabled'=> ($this->screening_enabled == 1)? true : false,
                 'scannerCameraMode'=> $this->visitorLogDeviceSettings->scaner_camera_mode,
                 'cameraMode' => $this->visitorLogDeviceSettings->camera_mode,
                 'customerId'=> $this->customer_id,
