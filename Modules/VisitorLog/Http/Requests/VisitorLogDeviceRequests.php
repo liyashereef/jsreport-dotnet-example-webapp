@@ -20,13 +20,16 @@ class VisitorLogDeviceRequests extends FormRequest
             'camera_mode' => "required",
             'scaner_camera_mode' => "required"
         ];
+
+        //On edit mode
+        $customerRules = [];
         $id = request('id');
-        if($id == ''){
+        if (empty($id)) {
             $customerRules = [
-                'customer_id'=>"required",
+                'customer_id' => "required",
             ];
         }
-        $rules = array_merge($rules,$customerRules);
+        $rules = array_merge($rules, $customerRules);
         return $rules;
     }
 
