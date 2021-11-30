@@ -228,7 +228,7 @@
                             $.each(data.visitor_log_screening_template_customer_allocation, function(key,value){
                                 selectedOffices += `<tr id="`+value.id+`">`;
                                 selectedOffices += `<td>`+value.customer.client_name_and_number+`</td>`;
-                                selectedOffices += `<td> <a href="#" class="deleteOffice fa fa-trash-o" ' onClick=deleteOfficeAllocation(`+value.id+`);></a> </td>`;
+                                selectedOffices += `<td> <a href="#" class="deleteOffice fas fa-trash" ' onClick=deleteOfficeAllocation(`+value.id+`);></a> </td>`;
                                 selectedOffices += `</tr>`;
                             });
                             selectedOffices += `</table>`;
