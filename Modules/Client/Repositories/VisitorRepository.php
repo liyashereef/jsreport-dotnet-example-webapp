@@ -167,4 +167,13 @@ class VisitorRepository
     {
         return $this->model->find($id);
     }
+
+    public function updateCount($inputs)
+    {
+        return Visitor::where('customerId', $inputs['x-ci'])
+        ->when(isset($inputs) && !empty($inputs['visitor']), function ($q) use ($inputs) {
+            return $q->where('updated_at','>=', $inputs['visitor'])
+            ->OrWhere('deleted_at','>=', $inputs['visitor'])->withTrashed();
+        })->count();
+    }
 }

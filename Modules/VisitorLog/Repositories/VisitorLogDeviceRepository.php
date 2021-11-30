@@ -117,7 +117,6 @@ class VisitorLogDeviceRepository
                 'visitorLogDeviceSettings.visitorLogTemplates.VisitorLogScreeningTemplateQuestion' => function ($query) {
                     return $query->select('id', 'visitor_log_screening_template_id', 'question', 'answer');
                 }
-
             ])
             ->find($id);
     }
@@ -137,12 +136,37 @@ class VisitorLogDeviceRepository
         return $devices->isEmpty() ? null : $devices->first();
     }
 
-    public function setConfigData($id)
+    public function getConfigData($inputs){
+        return $this->model
+        ->with([
+            'customer' => function ($query) {
+                return $query->select('id', 'project_number', 'client_name');
+            },
+            'visitorLogDeviceSettings' => function ($query) {
+                // return $query->select('id','visitor_log_device_id','template_id','camera_mode','scaner_camera_mode');
+            },
+            'visitorLogDeviceSettings.visitorLogTemplates' => function ($query) {
+                return $query->select('id', 'template_name');
+            },
+            'visitorLogDeviceSettings.visitorLogTemplates.VisitorLogScreeningTemplateQuestion' => function ($query) {
+                return $query->select('id', 'visitor_log_screening_template_id', 'question', 'answer');
+            }
+        ])
+        ->when(isset($inputs) && !empty($inputs['config']), function ($q) use ($inputs) {
+            return $q->where('updated_at','>=', $inputs['config']);
+        })
+        ->find($inputs['id']);
+    }
+
+    public function setConfigData($inputs)
     {
-        $device = $this->getById($id);
-        $device->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($device->visitorLogDeviceSettings->template_id);
-        $filter['customerId'] = $device->customer_id;
-        $device->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
-        return new VisitorLogDeviceResources($device);
+        $device = $this->getConfigData($inputs);
+        if($device){
+            $device->template = $this->visitorLogTemplateRepository->fetchTemplateDetails($device->visitorLogDeviceSettings->template_id);
+            $filter['customerId'] = $device->customer_id;
+            $device->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
+            return new VisitorLogDeviceResources($device);
+        }
+
     }
 }

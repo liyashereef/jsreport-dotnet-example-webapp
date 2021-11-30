@@ -140,9 +140,9 @@ class VisitorLogDeviceController extends Controller
     }
 
     public function trigerBroadcasting($id){
-        $configData = $this->repository->setConfigData($id);
+        $configRequest['id'] = $id;
+        $configData = $this->repository->setConfigData($configRequest);
         DeviceConfigUpdated::dispatch($configData);
-        // VisitorNotify::dispatch(129);
     }
 
     /**
