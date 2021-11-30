@@ -332,7 +332,7 @@
                         $("#myModal #customerId").prop('disabled', true);
 
                         $("#myModal").modal();
-                        $('#myModal .modal-title').text("Edit Payment Method: " + data.name)
+                        $('#myModal .modal-title').text("Edit Device: " + data.name)
                     } else {
                         swal("Oops", "Edit was unsuccessful", "warning");
                     }
