@@ -225,6 +225,11 @@ return [
     */
 
     'menu' => [
+        
+        [
+            'type' => 'sidebar-menu-search',
+            'text' => 'search',
+        ],
         ['header' => 'USER'],
         [
             'text' => 'User Management',
