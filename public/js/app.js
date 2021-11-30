@@ -10740,7 +10740,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     console.log(this.user.id);
-    Echo.channel("messages.".concat(this.user.id)).listen('client-NewMessage', function (e) {
+    Echo.channel("messages.".concat(this.user.id)).listen('.client-NewMessage', function (e) {
       console.log("inssssssssssss");
       console.log(e);
 
