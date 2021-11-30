@@ -27,21 +27,22 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                
+                 <h4 class="modal-title" id="myModalLabel"></h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="lineofbusinesstitle">
+                <div class="form-group row" id="lineofbusinesstitle">
                     <label for="Title" class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-9">
                         {{ Form::text('Title',null,array('class' => 'form-control', 'Placeholder'=>'Title', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
+                    </div>
+                    <div class="form-group row">
                     <label for="Group" class="col-sm-3 control-label">Group</label>
                     <div class="col-sm-9">
                         <select class="form-control" id="Group" name="Group" required>
@@ -51,16 +52,22 @@
                         </select>
                         <small class="help-block"></small>
                     </div>
+                </div>
+                <div class="form-group row">
                     <label for="colorcode" class="col-sm-3 control-label">Color Code</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 ">
                         {{ Form::text('colorcode',null,array('class' => 'form-control', 'Placeholder'=>'Color Code', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
+                </div>
+                <div class="form-group row">
                     <label for="rangefrom" class="col-sm-3 control-label">Range From</label>
                     <div class="col-sm-9">
                         {{ Form::text('rangefrom',null,array('class' => 'form-control num', 'Placeholder'=>'Range From', 'required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
+                </div>
+                <div class="form-group row">
                     <label for="rangetill" class="col-sm-3 control-label">Range Till</label>
                     <div class="col-sm-9">
                         {{ Form::text('rangetill',null,array('class' => 'form-control num', 'Placeholder'=>'Range Till', 'required'=>TRUE)) }}

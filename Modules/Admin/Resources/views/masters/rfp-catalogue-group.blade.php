@@ -29,7 +29,7 @@
             {{ Form::open(array('url'=>'#','id'=>'rfp-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="group">
+                <div class="form-group row" id="group">
                     <label for="group" class="col-sm-3 control-label">Group</label><span class="mandatory"></span>
                     <div class="col-sm-9">
                         {{ Form::text('group',null,array('class'=>'form-control')) }}

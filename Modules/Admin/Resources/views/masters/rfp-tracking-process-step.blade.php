@@ -29,14 +29,14 @@
             {{ Form::open(array('url'=>'#','id'=>'tracking-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="process_steps">
+                <div class="form-group row" id="process_steps">
                     <label for="process_steps" class="col-sm-3 control-label">Process Step</label>
                     <div class="col-sm-9">
                         {{ Form::text('process_steps',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="step_number">
+                <div class="form-group row" id="step_number">
                         <label for="process_steps" class="col-sm-3 control-label">Step Number</label>
                         <div class="col-sm-9">
                             {{ Form::number('step_number',null,array('class'=>'form-control')) }}

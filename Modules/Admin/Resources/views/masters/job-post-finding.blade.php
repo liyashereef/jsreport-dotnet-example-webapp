@@ -36,8 +36,8 @@
                 {{ Form::open(array('url'=>'#','id'=>'job-post-finding-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group" id="job_post_form">
-                        <div class="row">
+                    <div class="form-group " id="job_post_form">
+                        <div class="row form-group">
                             <label for="job_post_finding" class="col-sm-3 control-label">Job Post Finding
                                 <span class="mandatory">*</span>
                             </label>
@@ -46,7 +46,7 @@
                                 <small class="help-block"></small>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row form-group">
                             <label for="order_sequence" class="col-sm-3 control-label">Order
                                 <span class="mandatory">*</span>
                             </label>

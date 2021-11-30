@@ -43,7 +43,7 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'ids-office-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control','placeholder' => 'Short Name')) }}
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div id="full_name" class="form-group">
+                <div id="full_name" class="form-group row">
                     <label for="full_name" class="col-sm-3 control-label">Full Name</label>
                     <div class="col-sm-9">
                        {{ Form::text('full_name',null,array('class'=>'form-control','placeholder' => 'Full Name')) }}

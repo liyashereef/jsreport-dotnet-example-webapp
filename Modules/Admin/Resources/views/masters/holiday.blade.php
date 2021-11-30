@@ -118,7 +118,7 @@
             <div class="modal-body">
                 
 
-                <div id="holiday" class="form-group">
+                <div id="holiday" class="form-group row">
                     <label for="holiday" class="col-sm-3 control-label">Holiday</label>
                     <div class="col-sm-9">
                         {{ Form::text('statholiday',null,array('class'=>'form-control','placeholder' => 'Holiday','max'=>'2900-12-31')) }}
@@ -148,7 +148,7 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'holiday-form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id',null) }}
             <div class="modal-body">
-                <div class="form-group" id="year">
+                <div class="form-group row" id="year">
                     <label for="year" class="col-sm-3 control-label">Year</label>
                     <div class="col-sm-9">
                         <select class="form-control has-error" name="year"></select>
@@ -156,7 +156,7 @@
                     </div>
                 </div>
 
-                <div id="holiday" class="form-group">
+                <div id="holiday" class="form-group row">
                     <label for="holiday" class="col-sm-3 control-label">Holiday</label>
                     <div class="col-sm-9">
                         {{ Form::text('holiday',null,array('class'=>'form-control datepicker','placeholder' => 'Holiday','max'=>'2900-12-31')) }}
@@ -164,7 +164,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::text('description',null,array('class'=>'form-control','placeholder' => 'Holiday Description')) }}

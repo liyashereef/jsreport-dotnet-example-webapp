@@ -30,21 +30,21 @@
             {{ Form::open(array('url'=>'#','id'=>'english-rating-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group {{ $errors->has('english_ratings') ? 'has-error' : '' }}" id="english_ratings">
+                <div class="form-group {{ $errors->has('english_ratings') ? 'has-error' : '' }} row" id="english_ratings">
                     <label for="rating" class="col-sm-3 control-label">Rating</label>
                     <div class="col-sm-9">
                         {{ Form::text('english_ratings',null,array('class'=>'form-control','required'=>true)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                  <div class="form-group" id="order_sequence">
+                  <div class="form-group row" id="order_sequence">
                         <label for="order_sequence" class="col-sm-3 control-label">Order Sequence Number</label>
                         <div class="col-sm-9">
                             {{ Form::number('order_sequence',null,array('class'=>'form-control','min'=>1)) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group {{ $errors->has('score') ? 'has-error' : '' }}" id="score">
+                    <div class="form-group {{ $errors->has('score') ? 'has-error' : '' }} row" id="score">
                         <label for="score" class="col-sm-3 control-label">Score</label>
                         <div class="col-sm-9">
                             {{ Form::number('score',null,array('class'=>'form-control','min'=>1,'required'=>true)) }}

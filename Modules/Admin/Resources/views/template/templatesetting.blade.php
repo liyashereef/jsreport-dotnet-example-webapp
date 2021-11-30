@@ -23,12 +23,12 @@
             <div class="col-md-5 col-sm-6 col-xs-12">1.Question Color Rule</div>
             <div class="form-group col-md-3 col-sm-12 col-xs-12 text-align-right" id="template_min_value">
                 <label class="padding-right-5">Min Value <span class="mandatory">*</span></label>
-                <input type="text" name="template_min_value" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" class="form-control option-adjust template-min-value" id="template-min-value" value="{{$existing_template['min_value'] or ''}}"/>
+                <input type="text" name="template_min_value" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" class="form-control option-adjust template-min-value" id="template-min-value" value="{{@$existing_template['min_value']}}"/>
                 <span class="help-block"></span>
             </div>
             <div class="form-group col-md-3 col-sm-12 col-xs-12 text-align-right" id="template_max_value">
                 <label class="padding-right-5">Max Value <span class="mandatory">*</span></label>
-                <input type="text" name="template_max_value" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" class="form-control option-adjust template-max-value" id="template-max-value" value="{{$existing_template['max_value'] or ''}}"/>
+                <input type="text" name="template_max_value" pattern="^\d{1,4}(\.\d{4})?$" placeholder="00.0000" class="form-control option-adjust template-max-value" id="template-max-value" value="{{@$existing_template['max_value'] }}"/>
                 <span class="help-block"></span>
             </div>
         </div>

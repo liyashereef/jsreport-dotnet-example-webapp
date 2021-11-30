@@ -39,91 +39,91 @@
 
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="cpid">
+                <div class="form-group row" id="cpid">
                     <label for="cpid" class="col-sm-3 control-label">CPID <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('cpid',null,array('class'=>'form-control', 'Placeholder'=>'CPID', "maxlength"=>"15")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control', 'Placeholder'=>'Short Name')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="cpid_function_id">
+                <div class="form-group row" id="cpid_function_id">
                     <label for="cpid_function_id" class="col-sm-3 control-label">CPID Function</label>
                     <div class="col-sm-9">
                         {{Form::select('cpid_function_id',$cpidFunctions,null,['class' => 'form-control','placeholder' => 'Choose CPID function','id'=>'cpid_function','style'=>"width: 100%;"])}}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="position_id">
+                <div class="form-group row" id="position_id">
                     <label for="position_id" class="col-sm-3 control-label">Position <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{Form::select('position_id',$positions,null,['class' => 'form-control positions','placeholder' => 'Choose Position','id'=>'position_id','style'=>"width: 100%;"])}}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Position Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class' => 'form-control', 'Placeholder'=>'Description','rows' => 3, 'cols' => 40)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="noc">
+                <div class="form-group row" id="noc">
                     <label for="noc" class="col-sm-3 control-label">NOC</label>
                     <div class="col-sm-9">
                         {{ Form::number('noc',null,array('class'=>'form-control', 'Placeholder'=>'NOC',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="effective_from">
+                <div class="form-group row" id="effective_from">
                     <label for="effective_from" class="col-sm-3 control-label">Effective From <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('effective_from',null,array('class'=>'form-control datepicker', 'Placeholder'=>'Effective Date From (Y-m-d)',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="p_standard">
+                <div class="form-group row" id="p_standard">
                     <label for="p_standard" class="col-sm-3 control-label">Pay Standard <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('p_standard',null,array('class'=>'form-control', 'Placeholder'=>'$ 0.00',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="p_overtime">
+                <div class="form-group row" id="p_overtime">
                     <label for="p_overtime" class="col-sm-3 control-label">Pay Overtime <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('p_overtime',null,array('class'=>'form-control', 'Placeholder'=>'$ 0.00',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="p_holiday">
+                <div class="form-group row" id="p_holiday">
                     <label for="p_holiday" class="col-sm-3 control-label">Pay Stat <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('p_holiday',null,array('class'=>'form-control', 'Placeholder'=>'$ 0.00',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="b_standard">
+                <div class="form-group row" id="b_standard">
                     <label for="b_standard" class="col-sm-3 control-label">Bill Standard <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('b_standard',null,array('class'=>'form-control', 'Placeholder'=>'$ 0.00',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="b_overtime">
+                <div class="form-group row" id="b_overtime">
                     <label for="b_overtime" class="col-sm-3 control-label">Bill Overtime <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('b_overtime',null,array('class'=>'form-control', 'Placeholder'=>'$ 0.00',"step"=>"any")) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="b_holiday">
+                <div class="form-group row" id="b_holiday">
                     <label for="b_holiday" class="col-sm-3 control-label">Bill Stat <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::number('b_holiday',null,array('class'=>'form-control', 'Placeholder'=>'$ 0.00',"step"=>"any")) }}

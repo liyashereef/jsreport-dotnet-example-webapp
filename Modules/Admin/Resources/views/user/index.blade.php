@@ -120,9 +120,8 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                
-                <h4 class="modal-title" id="myModalLabel">User Master</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title" id="myModalLabel">User Master</h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'user-form','class'=>'form-horizontal', 'method'=> 'POST', 'novalidate'=>TRUE)) }}
             {{ Form::hidden('id', "") }}
@@ -162,63 +161,63 @@
                     <!-- Tab panes - Start -->
                     <div class="tab-content tab-alignment">
                         <div role="tabpanel" class="tab-pane active" id="userTab">
-                            <div class="form-group" id="salutation_id">
+                            <div class="form-group row" id="salutation_id">
                                 <label for="salutation_id" class="col-sm-3 control-label"> Salutation <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::select('salutation_id',['' => 'Please Select']+$salutation,null,['class' => 'form-control'])}}
                                      <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="first_name">
+                            <div class="form-group row" id="first_name">
                                 <label for="name" class="col-sm-3 control-label">First Name <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('first_name',"",['class' => 'form-control has-error','placeholder' => 'First Name'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="last_name">
+                            <div class="form-group row" id="last_name">
                                 <label for="last_name" class="col-sm-3 control-label">Last Name</label>
                                 <div class="col-sm-8">
                                     {{Form::text('last_name',"",['class' => 'form-control has-error','placeholder' => 'Last Name'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group active" id="email">
+                            <div class="form-group active row" id="email">
                                 <label for="email" class="col-sm-3 control-label">Commgl Email <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::email('email',"",['class' => 'form-control','placeholder' => 'Commgl Email'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="alternate_email">
+                            <div class="form-group row" id="alternate_email">
                                 <label for="alternate_email" class="col-sm-3 control-label">Alternate Email</label>
                                 <div class="col-sm-8">
                                     {{Form::email('alternate_email',"",['class' => 'form-control','placeholder' => 'Alternate Email'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="username">
+                            <div class="form-group row" id="username">
                                 <label for="username" class="col-sm-3 control-label">Username <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('username',"",['class' => 'form-control has-error','placeholder' => 'Username'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="password">
+                            <div class="form-group row" id="password">
                                 <label for="password" class="col-sm-3 control-label">Password <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::password('password',['class' => 'form-control','placeholder' => '********'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="role_id">
+                            <div class="form-group row" id="role_id">
                                 <label for="role_id" class="col-sm-3 control-label">Role <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::select('role_id',$roles,null,['class' => 'form-control role select2','placeholder' => 'Choose the role','id'=>'role_id','style'=>"width: 100%;"])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="gender">
+                            <div class="form-group row" id="gender">
                                 <label for="role_id" class="col-sm-3 control-label">Gender <span class="mandatory">*</span></label>
                                 <div class="col-sm-8" style="padding-top:6px;">
                                       <span> <input type="radio" name="gender" value="0" id="0"> Male </span>
@@ -226,7 +225,7 @@
                                  <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group disable_client" id="marital_status_id">
+                            <div class="form-group disable_client row" id="marital_status_id">
                                 <label for="role_id" class="col-sm-3 control-label">Marital Status</label>
                                 <div class="col-sm-8">
                                      {{Form::select('marital_status_id',$marital_status,null,['class' => 'form-control','placeholder' => 'Choose marital status','id'=>'marital_status'])}}
@@ -236,28 +235,28 @@
 
                         </div>
                         <div role="tabpanel" class="tab-pane" id="employeeTab">
-                            <div class="form-group disable_client" id="employee_no">
+                            <div class="form-group disable_client row" id="employee_no">
                                 <label for="employee_no" class="col-sm-3 control-label">Employee No <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_no',"",['class' => 'form-control','placeholder' => 'Employee No','maxlength' => '6'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="phone">
+                            <div class="form-group row" id="phone">
                                 <label for="phone" class="col-sm-3 control-label">Phone <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('phone',"",['class' => 'form-control phone','placeholder' => 'Phone [ format (XXX)XXX-XXXX ]'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="phone_ext">
+                            <div class="form-group row" id="phone_ext">
                                 <label for="phone_ext" class="col-sm-3 control-label">Ext. </label>
                                 <div class="col-sm-8">
                                     {{Form::text('phone_ext',"",['class' => 'form-control','placeholder' => 'Ext.'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="cell_no">
+                            <div class="form-group row" id="cell_no">
                                 <label for="cell_no" class="col-sm-3 control-label">Cell</label>
                                 <div class="col-sm-8">
                                     {{Form::text('cell_no',"",['class' => 'form-control phone','placeholder' => 'Cell No [ format (XXX)XXX-XXXX ]','pattern' => '[\(]\d{3}[\)]\d{3}[\-]\d{4}'])}}
@@ -265,7 +264,7 @@
                                 </div>
                             </div>
                             <div class="disable_client">
-                            <div class="form-group" id="work_type_id">
+                            <div class="form-group row" id="work_type_id">
                                 <label for="work_type_id" class="col-sm-3 control-label">Work Type <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                     {{Form::select('work_type_id',$work_types,null,['class' => 'form-control','placeholder' => 'Choose the work type'])}}
@@ -273,7 +272,7 @@
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="employee_address">
+                            <div class="form-group row" id="employee_address">
                                 <label for="employee_address" class="col-sm-3 control-label">Address</label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_address',"",['class' => 'form-control','placeholder' => 'Address'])}}
@@ -287,56 +286,56 @@
                                     <small class="help-block"></small>
                                 </div>
                             </div>--}}
-                            <div class="form-group" id="employee_city">
+                            <div class="form-group row" id="employee_city">
                                 <label for="employee_city" class="col-sm-3 control-label">City</label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_city',"",['class' => 'form-control','placeholder' => 'City'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="employee_postal_code">
+                            <div class="form-group row" id="employee_postal_code">
                                 <label for="employee_postal_code" class="col-sm-3 control-label">Postal Code <span class="mandatory"></span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_postal_code',"",['class' => 'form-control postal-code','placeholder' => 'Postal Code','required'=>true])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="employee_work_email">
+                            <div class="form-group row" id="employee_work_email">
                                 <label for="employee_work_email" class="col-sm-3 control-label">Work Email</label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_work_email',"",['class' => 'form-control','placeholder' => 'Work Email'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="employee_doj">
+                            <div class="form-group row" id="employee_doj">
                                 <label for="employee_doj" class="col-sm-3 control-label">DOJ</label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_doj',"",['class' => 'form-control datepicker','placeholder' => 'Date of Joining (Y-m-d)'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="employee_dob">
+                            <div class="form-group row" id="employee_dob">
                                 <label for="employee_dob" class="col-sm-3 control-label">DOB</label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_dob',"",['class' => 'form-control datepicker' ,'placeholder' => 'Date of Birth (Y-m-d)'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="current_project_wage">
+                            <div class="form-group row" id="current_project_wage">
                                 <label for="current_project_wage" class="col-sm-3 control-label">Current Project Wage</label>
                                 <div class="col-sm-8">
                                     {{Form::text('current_project_wage',"",['class' => 'form-control','placeholder' => 'Current Project Wage'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="position_id">
+                            <div class="form-group row" id="position_id">
                                 <label for="position_id" class="col-sm-3 control-label">Position</label>
                                 <div class="col-sm-8">
                                     {{Form::select('position_id',$positions,null,['class' => 'form-control','placeholder' => 'Choose the Position'])}}
                                     {!! $errors->first('position_id', '<small class="help-block">:message</small>') !!}
                                 </div>
                             </div>
-                            <div class="form-group" id="years_of_security">
+                            <div class="form-group row" id="years_of_security">
                                 <label for="years_of_security"
                                 class="col-sm-3 control-label">Years of Security</label>
                                 <div class="col-sm-8">
@@ -344,28 +343,28 @@
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="being_canada_since">
+                            <div class="form-group row" id="being_canada_since">
                                 <label for="being_canada_since" class="col-sm-3 control-label">Arrival In Canada</label>
                                 <div class="col-sm-8">
                                     {{Form::text('being_canada_since',"",['id' => 'being_canada_since','class' => 'form-control datepicker' ,'placeholder' => ''])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="wage_expectations_from">
+                            <div class="form-group row" id="wage_expectations_from">
                                 <label for="wage_expectations_from" class="col-sm-3 control-label">Wage Expectation From</label>
                                 <div class="col-sm-8">
                                     {{Form::text('wage_expectations_from',"",['class' => 'form-control','placeholder' => 'Wage Expectation From'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="wage_expectations_to">
+                            <div class="form-group row" id="wage_expectations_to">
                                 <label for="wage_expectations_to" class="col-sm-3 control-label">Wage Expectation To</label>
                                 <div class="col-sm-8">
                                     {{Form::text('wage_expectations_to',"",['class' => 'form-control','placeholder' => 'Wage Expectation To'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="termination_date">
+                            <div class="form-group row" id="termination_date">
                                 <label for="termination_date" class="col-sm-3 control-label"> Termination Date </label>
                                 <div class="col-sm-8">
                                     {{Form::text('termination_date',"",['class' => 'form-control datepicker' ,'placeholder' => 'Termination Date (Y-m-d)'])}}
@@ -382,7 +381,7 @@
                             </div> --}}
                         </div>
 
-                        <div class="form-group" id="image">
+                        <div class="form-group row" id="image">
                                 <label for="image" class="col-sm-3 control-label">Image</label>
                                 <div class="col-sm-8">
                                     {{Form::file('profile_image', ['id' => 'image_input', 'style' => 'display: none;'])}}
@@ -405,28 +404,28 @@
                                 </tbody>
                             </table>
                             </div>
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-12 row">
                                 <label for="add-security-clearance" id="add-security-clearance" class="col-sm-1 btn btn-primary" style="margin-right:1%;">+</label>
                                 <label for="remove-security-clearance" id="remove-security-clearance" class="col-sm-1 btn btn-primary">-</label>
                             </div>
                         </div>
 
                           <div role="tabpanel" class="tab-pane" id="candidateTransitionTab">
-                            <div class="form-group" id="updated_by">
+                            <div class="form-group row" id="updated_by">
                                 <label for="updated_by" class="col-sm-3 control-label">Updated By</label>
                                 <div class="col-sm-8">
                                     {{Form::text('updated_by',"",['class' => 'form-control','placeholder' => 'Updated By'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                             <div class="form-group" id="employee_num">
+                             <div class="form-group row" id="employee_num">
                                 <label for="employee_num" class="col-sm-3 control-label">Employee No</label>
                                 <div class="col-sm-8">
                                     {{Form::text('employee_num',"",['class' => 'form-control','placeholder' => 'Employee Number'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="updated_time">
+                            <div class="form-group row" id="updated_time">
                                 <label for="updated_time" class="col-sm-3 control-label">Date of Conversion</label>
                                 <div class="col-sm-8">
                                     {{Form::text('updated_time','',['class' => 'form-control','placeholder' => 'Updated Time'])}}
@@ -436,7 +435,7 @@
                         </div>
 
                          <div role="tabpanel" class="tab-pane" id="certificateTab">
-                           <div class="form-group" id="employee_vet_status">
+                           <div class="form-group row" id="employee_vet_status">
                                 <label for="employee_vet_status" class="col-sm-3 control-label">@lang('Is Employee Veteran')</label>
                                 <div class="col-sm-8">
                                     {{Form::select('employee_vet_status',[0=>"No",1=>"Yes"],null,['class' => 'form-control','id'=>'veteran_status'])}}
@@ -445,21 +444,21 @@
                             </div>
 
                             <div class=" veteran_status_qstn hide-this-block">
-                            <div class="form-group" id="vet_service_number">
+                            <div class="form-group row" id="vet_service_number">
                                 <label for="vet_service_number" class="col-sm-3 control-label">@lang('Service Number?')<span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('vet_service_number','',['class' => 'form-control','placeholder' => 'Service Number'])}}
                                      <small class="help-block"></small>
                                 </div>
                             </div>
-                                <div class="form-group" id="vet_enrollment_date">
+                                <div class="form-group row" id="vet_enrollment_date">
                                 <label for="vet_enrollment_date" class="col-sm-3 control-label">@lang('Enrollment Date?')<span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('vet_enrollment_date','',['class' => 'form-control datepicker','placeholder' => 'Enrollment Date'])}}
                                    <small class="help-block"></small>
                                 </div>
                             </div>
-                             <div class="form-group" id="vet_release_date">
+                             <div class="form-group row" id="vet_release_date">
                                 <label for="vet_release_date" class="col-sm-3 control-label">@lang('Release Date?')<span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                     {{Form::text('vet_release_date','',['class' => 'form-control datepicker','placeholder' => 'Release Date'])}}
@@ -480,7 +479,7 @@
                             </table>
 
                         </div>
-                          <div class="form-group col-sm-12">
+                          <div class="form-group col-sm-12 row">
                                 <label for="add-certificate" id="add-certificate" class="col-sm-1 btn btn-primary" style="margin-right:1%;">+</label>
                                 <label for="remove-certificate" id="remove-certificate" class="col-sm-1 btn btn-primary">-</label>
                             </div>
@@ -489,7 +488,7 @@
                     <!---Expense tab start--->
                         <div role="tabpanel" class="tab-pane" id="expenseTab">
 
-                            <div class="form-group" id="reporting_to_id">
+                            <div class="form-group row" id="reporting_to_id">
                                 <label for="reporting_to_id" class="col-sm-3 control-label">Reporting To (Approver)</label>
                                 <div class="col-sm-8">
                         <select class="form-control reporting_to_approver" name="reporting_to_id" placeholder="Choose the Approver">
@@ -502,7 +501,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" id="max_allowable_expense">
+                            <div class="form-group row" id="max_allowable_expense">
                                 <label for="max_allowable_expense" class="col-sm-3 control-label">
                                     @lang('Max: Allowable Expense')</label>
                                 <div class="col-sm-8">
@@ -516,7 +515,7 @@
                     <!---Dashboard tab start--->
                     <div role="tabpanel" class="tab-pane" id="dashboardTab">
                         @foreach ($employeecompliancereports as $compliancereport)
-                            <div class="form-group" >
+                            <div class="form-group row" >
                                 <label for="dashboardreport_{{$compliancereport->id}}"
                                 class="col-sm-3 control-label">
                                     {{$compliancereport->display_name}}
@@ -533,42 +532,42 @@
                     <!---Dashboard tab End--->
                     <!---Banking tab start--->
                     <div role="tabpanel" class="tab-pane" id="bankingTab">
-                        <div class="form-group" id="bankid">
+                        <div class="form-group row" id="bankid">
                                 <label for="bankname" class="col-sm-3 control-label">Bank Name <span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                      {{Form::select('bankid', ['' => 'Please Select']+ $banks,null,['class' => 'form-control','id'=>'bankname'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="bankcode">
+                            <div class="form-group row" id="bankcode">
                                 <label for="bankcode" class="col-sm-3 control-label">Bank Code <span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                      {{Form::text('bankcode','',['class' => 'form-control','placeholder' => 'Bank Code','id'=>'bankcodes','readonly'=>true])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="transit">
+                            <div class="form-group row" id="transit">
                                 <label for="transit" class="col-sm-3 control-label">Transit<span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                      {{Form::text('transit','',['class' => 'form-control','placeholder' => 'Transit'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="account_no">
+                            <div class="form-group row" id="account_no">
                                 <label for="account_no" class="col-sm-3 control-label">Account Number<span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                      {{Form::text('account_no','',['class' => 'form-control','placeholder' => 'Account Number'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                             <div class="form-group" id="payment_method_id">
+                             <div class="form-group row" id="payment_method_id">
                                 <label for="payment_method_id" class="col-sm-3 control-label">Payment Method <span class="mandatory"> *</span></label>
                                 <div class="col-sm-8">
                                      {{Form::select('payment_method_id',['' => 'Please Select']+$payment_methods,null,['class' => 'form-control'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                         <div class="form-group" id="sin">
+                         <div class="form-group row" id="sin">
                                 <label for="sin" class="col-sm-3 control-label">SIN<span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                      {{Form::text('sin','',['class' => 'form-control','placeholder' => 'SIN'])}}
@@ -582,49 +581,49 @@
 
                      <!---Tax tab start--->
                     <div role="tabpanel" class="tab-pane" id="taxTab">
-                        <div class="form-group" id="federal_td1_claim">
+                        <div class="form-group row" id="federal_td1_claim">
                                 <label for="federal_td1_claim" class="col-sm-3 control-label">Federal TD1 Claim </label>
                                 <div class="col-sm-8">
                                      {{Form::text('federal_td1_claim','',['class' => 'form-control','placeholder' => 'Federal TD1 Claim'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="provincial_td1_claim">
+                            <div class="form-group row" id="provincial_td1_claim">
                                 <label for="provincial_td1_claim" class="col-sm-3 control-label">Provincial TD1 Claim </label>
                                 <div class="col-sm-8">
                                      {{Form::text('provincial_td1_claim','',['class' => 'form-control','placeholder' => 'Provincial TD1 Claim'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="is_cpp_exempt">
+                            <div class="form-group row" id="is_cpp_exempt">
                                 <label for="is_cpp_exempt" class="col-sm-3 control-label">CPP Exempt</label>
                                 <div class="col-sm-8">
                                       {{Form::select('is_cpp_exempt',[''=>"Please select",0=>"No",1=>"Yes"],null,['class' => 'form-control'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                              <div class="form-group" id="is_uic_exempt">
+                              <div class="form-group row" id="is_uic_exempt">
                                 <label for="is_uic_exempt" class="col-sm-3 control-label">UIC Exempt</label>
                                 <div class="col-sm-8">
                                       {{Form::select('is_uic_exempt',[''=>"Please select",0=>"No",1=>"Yes"],null,['class' => 'form-control'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="tax_province">
+                            <div class="form-group row" id="tax_province">
                                 <label for="tax_province" class="col-sm-3 control-label">Tax Province </label>
                                 <div class="col-sm-8">
                                      {{Form::text('tax_province','',['class' => 'form-control','placeholder' => 'Tax Province '])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                             <div class="form-group" id="epaystub_email">
+                             <div class="form-group row" id="epaystub_email">
                                 <label for="epaystub_email" class="col-sm-3 control-label">EPayStub Email </label>
                                 <div class="col-sm-8">
                                       {{Form::text('epaystub_email','',['class' => 'form-control','placeholder' => 'EPayStub Email'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="is_epaystub_exempt">
+                            <div class="form-group row" id="is_epaystub_exempt">
                                 <label for="is_epaystub_exempt" class="col-sm-3 control-label">EPayStub Exempt</label>
                                 <div class="col-sm-8">
                                        {{Form::select('is_epaystub_exempt',[''=>"Please select",0=>"No",1=>"Yes"],null,['class' => 'form-control'])}}
@@ -639,28 +638,28 @@
 
                      <!---Benefits tab start--->
                     <div role="tabpanel" class="tab-pane" id="benefitsTab">
-                        <div class="form-group" id="payroll_group_id">
+                        <div class="form-group row" id="payroll_group_id">
                                 <label for="payroll_group_id" class="col-sm-3 control-label">Payroll Group <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                      {{Form::select('payroll_group_id',['' => 'Please Select']+ $payroll_group,null,['class' => 'form-control'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="vacation_level">
+                            <div class="form-group row" id="vacation_level">
                                 <label for="vacation_level" class="col-sm-3 control-label">Vacation Level (%) <span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                      {{Form::number('vacation_level','',['class' => 'form-control','placeholder' => 'Vacation Level In percentage','min'=>0,'max'=>100])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="green_sheild_no">
+                            <div class="form-group row" id="green_sheild_no">
                                 <label for="green_sheild_no" class="col-sm-3 control-label">Green shield No</label>
                                 <div class="col-sm-8">
                                         {{Form::text('green_sheild_no','',['class' => 'form-control','placeholder' => 'Green shield No'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="is_lacapitale_life_insurance_enrolled">
+                            <div class="form-group row" id="is_lacapitale_life_insurance_enrolled">
                                 <label for="is_lacapitale_life_insurance_enrolled" class="col-sm-3 control-label">LaCapitale Life Insurance enrolled </label>
                                 <div class="col-sm-8">
                                     {{Form::select('is_lacapitale_life_insurance_enrolled',['' => 'Please Select',0=>"No",1=>"Yes"],null,['class' => 'form-control'])}}
@@ -675,14 +674,14 @@
 
                     <div role="tabpanel" class="tab-pane" id="employmentTab">
 
-                            <div class="form-group" id="continuous_seniority">
+                            <div class="form-group row" id="continuous_seniority">
                                 <label for="continuous_seniority" class="col-sm-3 control-label">Continuous Seniority </label>
                                 <div class="col-sm-8">
                                      {{Form::text('continuous_seniority','',['class' => 'form-control datepicker','placeholder' => 'Continuous Seniority'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="pay_detach_customer_id">
+                            <div class="form-group row" id="pay_detach_customer_id">
                                 <label for="pay_detach_customer_id" class="col-sm-3 control-label">Pay Detach<span class="mandatory">*</span></label>
                                 <div class="col-sm-8">
                                        {{Form::select('pay_detach_customer_id',['' => 'Please Select']+$customers,null,['class' => 'form-control select2','id'=>'detach','style'=>"width: 100%;"])}}
@@ -698,21 +697,21 @@
 
                     <div role="tabpanel" class="tab-pane" id="emergencyContactTab">
 
-                            <div class="form-group" id="name">
+                            <div class="form-group row" id="name">
                                 <label for="name" class="col-sm-3 control-label">Name</label>
                                 <div class="col-sm-8">
                                      {{Form::text('name','',['class' => 'form-control','placeholder' => 'Name'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="relation_id">
+                            <div class="form-group row" id="relation_id">
                                 <label for="relation_id" class="col-sm-3 control-label"> Relation</label>
                                 <div class="col-sm-8">
                                        {{Form::select('relation_id',['' => 'Please Select']+$relation,null,['class' => 'form-control'])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="full_address">
+                            <div class="form-group row" id="full_address">
                                 <label for="full_address" class="col-sm-3 control-label">Full Address</label>
                                 <div class="col-sm-8">
                                      {{Form::text('full_address','',['class' => 'form-control','placeholder' => 'Full Address'])}}
@@ -720,7 +719,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" id="primary_phoneno">
+                            <div class="form-group row" id="primary_phoneno">
                                 <label for="primary_phoneno" class="col-sm-3 control-label">Primary Phone No</label>
                                 <div class="col-sm-8">
                                      {{Form::text('primary_phoneno','',['class' => 'form-control phone','placeholder' => 'Primary Phone No [ format (XXX)XXX-XXXX ]'])}}
@@ -728,7 +727,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" id="alternate_phoneno">
+                            <div class="form-group row" id="alternate_phoneno">
                                 <label for="alternate_phoneno" class="col-sm-3 control-label">Alternate Phone No</label>
                                 <div class="col-sm-8">
                                      {{Form::text('alternate_phoneno','',['class' => 'form-control phone','placeholder' => 'Alternate Phone [ format (XXX)XXX-XXXX ]'])}}
@@ -746,14 +745,14 @@
                     <div role="tabpanel" class="tab-pane" id="uniformTab">
                         <div class="row">
                             <div class="col-sm-6" >
-                            <div class="form-group" id="ura_balance">
+                            <div class="form-group row" id="ura_balance">
                                 <label for="ura_balance" class="col-sm-5 control-label">URA Balance</label>
                                 <div class="col-sm-7">
                                      {{Form::text('ura_balance','',['class' => 'form-control','placeholder' => 'URA Balance', 'readonly'=>true,'disabled'=>true])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="hours_worked_to_date">
+                            <div class="form-group row" id="hours_worked_to_date">
                                 <label for="hours_worked_to_date" class="col-sm-5 control-label">Hours worked to date</label>
                                 <div class="col-sm-7">
                                      {{Form::text('hours_worked_to_date','',['class' => 'form-control','placeholder' => 'Hours worked to date','readonly'=>true,'disabled'=>true])}}
@@ -762,14 +761,14 @@
                             </div>
                             </div>
                             <div class="col-sm-6" >
-                            <div class="form-group" id="ura_earned">
+                            <div class="form-group row" id="ura_earned">
                                 <label for="ura_earned" class="col-sm-4 control-label">URA Earned</label>
                                 <div class="col-sm-7">
                                      {{Form::text('ura_earned','',['class' => 'form-control','placeholder' => 'URA Earned','readonly'=>true,'disabled'=>true])}}
                                     <small class="help-block"></small>
                                 </div>
                             </div>
-                            <div class="form-group" id="rate_applied">
+                            <div class="form-group row" id="rate_applied">
                                 <label for="rate_applied" class="col-sm-4 control-label">Rate applied</label>
                                 <div class="col-sm-7">
                                      {{Form::text('rate_applied','',['class' => 'form-control','placeholder' => 'Rate applied','readonly'=>true,'disabled'=>true])}}
@@ -1778,7 +1777,7 @@ $('.upload-image').on('click', function (ev) {
         // });
     })
 
-
+ 
 
 </script>
 

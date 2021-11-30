@@ -31,7 +31,7 @@
             {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="compliance_policy_category">
+                <div class="form-group row" id="compliance_policy_category">
                     <label for="compliance_policy_category" class="col-sm-3 control-label">Compliance Category</label>
                     <div class="col-sm-9">
                         {{ Form::text('compliance_policy_category',null,array('class' => 'form-control','required'=>TRUE)) }}

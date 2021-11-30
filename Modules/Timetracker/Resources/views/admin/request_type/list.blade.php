@@ -41,7 +41,7 @@
                 {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group" id="request-type-name">
+                    <div class="form-group row" id="request-type-name">
                         <label for="name" class="col-sm-3 control-label">Name</label>
                         <div class="col-sm-9">
                             {{ Form::text('name',
@@ -52,7 +52,7 @@
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="request-type-rate">
+                    <div class="form-group row" id="request-type-rate">
                         <label for="name" class="col-sm-3 control-label">Rate</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control"
@@ -64,7 +64,7 @@
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="request-type-description">
+                    <div class="form-group row" id="request-type-description">
                         <label for="description" class="col-sm-3 control-label">Description</label>
                         <div class="col-sm-9">
                             {{ Form::textarea('description',null,

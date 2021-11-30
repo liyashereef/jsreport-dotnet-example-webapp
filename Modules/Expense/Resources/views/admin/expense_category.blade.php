@@ -32,21 +32,21 @@
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
                 </ul>
-                <div class="form-group" id="name">
+                <div class="form-group row" id="name">
                     <label for="name" class="col-sm-3 control-label">Category Name <span class="mandatory">*</span></label>
                     <div class="col-sm-9">
                         {{ Form::text('name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="short_name">
+                <div class="form-group row" id="short_name">
                     <label for="short_name" class="col-sm-3 control-label">Short Name</label>
                     <div class="col-sm-9">
                         {{ Form::text('short_name',null,array('class'=>'form-control')) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="is_taxable">
+                <div class="form-group row" id="is_taxable">
                     <label for="is_category_taxable " class="col-sm-3 control-label">Does this Category have Tax ?</label>
                     <div class="col-sm-9 radiobuttons">
                         <label><input type="radio" id="cat1" class="taxable_cls"  name="is_category_taxable" value="1"> Yes</label>&nbsp;&nbsp;
@@ -54,21 +54,21 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group taxable hide-this-block">
+                <div class="form-group  row taxable hide-this-block">
                     <label for="tax_id" class="col-sm-3 control-label">Tax</label>
                     <div class="col-sm-9">
                         {{Form::select('tax_id',$taxes,null,['class' => 'form-control select2 tax','placeholder' => 'Choose Tax', 'style'=>"width: 100%;"])}}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="description">
+                <div class="form-group row" id="description">
                     <label for="description" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('description',null,array('class' => 'form-control', 'Placeholder'=>'Description','rows' => 3, 'cols' => 40)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="is_tip_enabled">
+                <div class="form-group row" id="is_tip_enabled">
                     <label for="description" class="col-sm-3 control-label">Tip Enabled</label>
                     <div class="col-sm-9 radiobuttons">
                        <label><input type="radio" id="tipenabled" name="is_tip_enabled" value="1"> Yes</label>&nbsp;&nbsp;

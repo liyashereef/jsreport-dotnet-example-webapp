@@ -84,3 +84,20 @@
                 </li>
             </ul>
         </li>
+
+        <li class="block2 accordclass">
+            <a href="homeSubmenu2" data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle">
+                <!--<img src="images/nav3.png">-->
+                <i title="Chat" class="iconclass fa fa-comment-alt fa-fw" aria-hidden="true"></i>
+                <span class="singlelinespan">Chat</span>
+            </a>
+            <ul class="dropdown-menu menu-list" role="menu">
+                    <li class="dropdown-submenu">
+                            <a href="{{ route('chat.viewchat') }}"> Chat </a>
+                    </li>
+
+                    <li class="dropdown-submenu">
+                        <a href="{{ route('chat.view-history') }}"> Chat History </a>
+                    </li>
+            </ul>
+        </li>

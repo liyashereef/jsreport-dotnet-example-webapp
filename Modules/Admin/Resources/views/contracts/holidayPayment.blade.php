@@ -33,7 +33,7 @@
             <div class="modal-body">
                              
 
-                <div class="form-group" id="paymentstatus">
+                <div class="form-group row" id="paymentstatus">
                     <label for="paymentstatus" class="col-sm-3 control-label">Payment Status</label>
                     <div class="col-sm-9">
                         {{ Form::text('paymentstatus',null,array('class' => 'form-control', 'Placeholder'=>'Payment Status', 'required'=>TRUE)) }}

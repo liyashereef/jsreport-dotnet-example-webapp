@@ -27,8 +27,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add/Edit Fence</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 <h4 class="modal-title">Add/Edit Fence</h4>
             </div>
 
             <div class="modal-body">

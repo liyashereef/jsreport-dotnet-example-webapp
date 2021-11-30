@@ -29,7 +29,7 @@
             {{ Form::open(array('url'=>'#','id'=>'training-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="training">
+                <div class="form-group row" id="training">
                     <label for="training" class="col-sm-3 control-label">Training</label>
                     <div class="col-sm-9">
                         {{ Form::text('training',null,array('class'=>'form-control')) }}

@@ -31,7 +31,7 @@
             <input type="hidden" name="reason-sequence" id="reason-sequence" />
             <div class="modal-body">
                     <div id="form-errors"></div>
-                 <div class="form-group" id="submissionreason">
+                 <div class="form-group row" id="submissionreason">
 
                     <label for="submissionreason" class="col-sm-3 control-label">Reason <span class="mandatory">*</span></label>
                     <div class="col-sm-9">

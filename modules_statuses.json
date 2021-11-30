@@ -33,5 +33,6 @@
     "UniformScheduling": true,
     "Vehicle": true,
     "VideoPost": true,
-    "VisitorLog": true
+    "VisitorLog": true,
+    "Chat": true
 }

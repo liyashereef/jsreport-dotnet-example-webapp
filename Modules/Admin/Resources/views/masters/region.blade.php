@@ -28,14 +28,14 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }} {{ Form::hidden('id', null)}}
             <div class="modal-body">
-                <div class="form-group" id="region_name">
+                <div class="form-group row" id="region_name">
                     <label for="region" class="col-sm-3 control-label">Region</label>
                     <div class="col-sm-9">
                         {{ Form::text('region_name', null,array('class' => 'form-control','required'=>TRUE)) }}
                         <small class="help-block"></small>
                     </div>
                 </div>
-                <div class="form-group" id="region_description">
+                <div class="form-group row" id="region_description">
                     <label for="region" class="col-sm-3 control-label">Description</label>
                     <div class="col-sm-9">
                         {{ Form::textarea('region_description', null,array('class' => 'form-control','required'=>TRUE , 'rows'=>5)) }}

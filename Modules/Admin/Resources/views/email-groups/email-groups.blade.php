@@ -29,8 +29,9 @@ element.style {
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Email Group</h4>
+               
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                   <h4 class="modal-title" id="myModalLabel">Email Group</h4>
             </div>
             {{ Form::open(array('url'=>'#','id'=>'email-group-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}

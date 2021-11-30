@@ -39,42 +39,42 @@
                 {{ Form::open(array('url'=>'#','id'=>'category-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
                 {{ Form::hidden('id', null) }}
                 <div class="modal-body">
-                    <div class="form-group" id="type">
+                    <div class="form-group row" id="type">
                         <label for="name" class="col-sm-3 control-label">Category Type</label>
                         <div class="col-sm-9">
                             {{ Form::text('type',null,array('class'=>'form-control')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="description">
+                    <div class="form-group row" id="description">
                         <label for="name" class="col-sm-3 control-label">ESA Guidance</label>
                         <div class="col-sm-9">
                             {{ Form::textarea('description',null,array('class'=>'form-control')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="reference">
+                    <div class="form-group row" id="reference">
                         <label for="name" class="col-sm-3 control-label">ESA Reference</label>
                         <div class="col-sm-9">
                             {{ Form::text('reference',null,array('class'=>'form-control')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="allowed_days">
+                    <div class="form-group row" id="allowed_days">
                         <label for="name" class="col-sm-3 control-label">Allowed Days</label>
                         <div class="col-sm-9">
                             {{ Form::text('allowed_days',null,array('class'=>'form-control')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="allowed_weeks">
+                    <div class="form-group row" id="allowed_weeks">
                         <label for="name" class="col-sm-3 control-label">Allowed Weeks</label>
                         <div class="col-sm-9">
                             {{ Form::text('allowed_weeks',null,array('class'=>'form-control')) }}
                             <small class="help-block"></small>
                         </div>
                     </div>
-                    <div class="form-group" id="allowed_hours">
+                    <div class="form-group row" id="allowed_hours">
                         <label for="name" class="col-sm-3 control-label">Allowed Hours</label>
                         <div class="col-sm-9">
                             {{ Form::text('allowed_hours',null,array('class'=>'form-control')) }}

@@ -31,7 +31,7 @@
             {{ Form::open(array('url'=>'#','id'=>'form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('id', null) }}
             <div class="modal-body">
-                <div class="form-group" id="industry_sector_name">
+                <div class="form-group row" id="industry_sector_name">
                     <label for="industry_sector_name" class="col-sm-3 control-label">Industry Sector</label>
                     <div class="col-sm-9">
                         {{ Form::text('industry_sector_name',null,array('class' => 'form-control','required'=>TRUE)) }}

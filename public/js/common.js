@@ -333,3 +333,8 @@ function convertDate(inputFormat) {
     var d = new Date(inputFormat);
     return [pad(d.getFullYear()), pad(d.getMonth() + 1), d.getDate()].join('/');
 }
+
+$(".nav-tabs li a").click(function(){
+      $(".nav-tabs li").removeClass("active");
+      $(this).parent().addClass("active");
+ });
