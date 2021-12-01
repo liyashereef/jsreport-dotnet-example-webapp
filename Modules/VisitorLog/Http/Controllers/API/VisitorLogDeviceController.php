@@ -66,12 +66,11 @@ class VisitorLogDeviceController extends Controller
                     $configData = $this->visitorLogDeviceRepository->setConfigData($configRequest);
                     $msg = '';
                 } else {
-                     if($device && $device->device_id != $inputs['device_id']){
+                    if ($device && $device->device_id != $inputs['device_id']) {
                         $msg = 'Already activated with another device.';
-                    }else{
+                    } else {
                         $msg = 'Device not found.';
                     }
-
                     $status = false;
                 }
             } else {
