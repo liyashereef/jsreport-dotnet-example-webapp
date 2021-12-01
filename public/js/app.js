@@ -10744,7 +10744,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log("inssssssssssss");
       console.log(e);
 
-      _this.hanleIncoming(e.message);
+      _this.hanleIncomingAppMessage(e.message);
     });
     this.getContactList();
   },
@@ -10774,6 +10774,21 @@ __webpack_require__.r(__webpack_exports__);
       console.log("ins handle");
       console.log("msg from" + message.from);
       console.log("selected cont" + this.selectedContact.contact_id);
+
+      if (this.selectedContact && message.from == this.selectedContact.contact_id) {
+        this.saveNewMessage(message);
+        return;
+      } // this.updateUnreadCount(message.from_contact, false);
+
+    },
+    hanleIncomingAppMessage: function hanleIncomingAppMessage(message) {
+      axios.post('/chat/conversation/save', {
+        from: message.from,
+        to: message.to,
+        text: message.text
+      }).then(function (response) {
+        console.log(response);
+      });
 
       if (this.selectedContact && message.from == this.selectedContact.contact_id) {
         this.saveNewMessage(message);

@@ -34,7 +34,7 @@
                 .listen('.client-NewMessage', (e) => {
                     console.log("inssssssssssss");
                     console.log(e);
-                    this.hanleIncoming(e.message);
+                    this.hanleIncomingAppMessage(e.message);
                 });
             this.getContactList()
 
@@ -65,6 +65,23 @@
                 console.log("ins handle");
                 console.log("msg from"+message.from);
                 console.log("selected cont"+this.selectedContact.contact_id);
+
+                if (this.selectedContact && message.from == this.selectedContact.contact_id) {
+                    this.saveNewMessage(message);
+                    return;
+                }
+
+               // this.updateUnreadCount(message.from_contact, false);
+            },
+             hanleIncomingAppMessage(message) {
+
+                axios.post('/chat/conversation/save', {
+                    from: message.from,
+                    to: message.to,
+                    text: message.text
+                }).then((response) => {
+                   console.log(response);
+                })
 
                 if (this.selectedContact && message.from == this.selectedContact.contact_id) {
                     this.saveNewMessage(message);
