@@ -78,6 +78,7 @@ class VisitorLogDeviceController extends Controller
             $settings['camera_mode'] = $request->input('camera_mode');
             $settings['scaner_camera_mode'] = $request->input('scaner_camera_mode');
             $settings['template_id'] = $request->input('template_id');
+            $settings['pin'] = $request->input('pin');
             $inputs['screening_enabled'] = isset($inputs['screening_enabled']) ? 1 : 0;
 
             if($request->filled('id')){
@@ -88,15 +89,15 @@ class VisitorLogDeviceController extends Controller
                 $trigger = true;
             }else{
                 $inputs['created_by'] = \Auth::id();
-                $inputs['activation_code'] = uniqid();
+                $inputs['activation_code'] = strtoupper(uniqid());
                 $inputs['uid'] = (string)Str::uuid();
                 $device = $this->repository->store($inputs);
                 if($device){
                     $deviceId = $device->id;
                     $settings['visitor_log_device_id'] = $device->id;
-                    $settings['pin'] = rand(10000,99999);
+                    // $settings['pin'] = rand(10000,99999);
                     $this->visitorLogDeviceSettingsRepository->store($settings);
-                    $trigger = true;
+                    // $trigger = true;
                 }
             }
             if($trigger){

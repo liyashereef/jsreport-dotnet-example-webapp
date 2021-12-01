@@ -14,7 +14,7 @@ class VisitorLogDeviceRequests extends FormRequest
     public function rules()
     {
         $rules = [
-            // 'customer_id' => "required",
+            'pin' => "required|numeric|digits:5",
             'template_id' => "required",
             'name' => "required",
             'camera_mode' => "required",

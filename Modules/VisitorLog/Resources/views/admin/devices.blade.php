@@ -85,7 +85,13 @@
                         <small class="help-block"></small>
                     </div>
                 </div>
-
+                <div class="form-group" id="pin">
+                    <label for="pin" class="col-sm-3 control-label">Pin</label>
+                    <div class="col-sm-9">
+                        {{ Form::text('pin',null,array('class'=>'form-control','placeholder' => 'Device Pin')) }}
+                        <small class="help-block"></small>
+                    </div>
+                </div>
                 <div class="form-group" id="camera_mode">
                     <label for="camera_mode" class="col-sm-4 control-label">Camera Mode </label>
                     <div class="col-sm-9" style="margin-top: 8px;">
@@ -250,6 +256,8 @@
             .attr("value", '')
             .text('Please Select'));
             $("#myModal #templates").val('');
+            $('#myModal input[name="pin"]').val(Math.floor(Math.random()*100000))
+
         });
 
         $("#devices-form").on("change", "#customerId", function(e) {
@@ -314,6 +322,7 @@
                         $('#devices-form')[0].reset();
                         $('#myModal input[name="id"]').val(data.id)
                         $('#myModal input[name="name"]').val(data.name)
+                        $('#myModal input[name="pin"]').val(data.visitor_log_device_settings.pin)
                         $('#myModal textarea[name="description"]').val('');
                         $('#myModal textarea[name="description"]').val(data.description);
                         $('#myModal input[name="screening_enabled"]').prop('checked', data.screening_enabled);
