@@ -177,7 +177,7 @@
          afterRenderExpansionTable(d) {
             let url = '{{ route("chat.show-message",":id") }}';
             url = url.replace(':id', d.from_id);
-            this.ref.chatExpandTable[d.id] = $('#pm-chat-expansion-table-' + d.id).DataTable({
+           $('#pm-chat-expansion-table-' + d.id).DataTable({
                 "drawCallback": this.drawCallback,
                 paging: false,
                 bFilter: false,

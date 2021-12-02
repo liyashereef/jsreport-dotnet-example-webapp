@@ -52,9 +52,20 @@ class ChatHistoryController extends Controller
     }
 
     public function getChatHistoryList(){
-
-        $chats = Message::with('fromContact')->where('to', \auth()->id())->get();
-        return datatables()->of($this->prepareHistoryList($chats))->addIndexColumn()->toJson();
+            $chats = Message::select(\DB::raw('*'))
+            ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
+            ->with('fromContact')
+            ->where('to',\Auth::id())
+            //->orWhere('from',\Auth::id())
+            ->get()
+            ->groupBy('from');
+            foreach($chats as $eachChat)
+        {
+            $latestRecord[]=$eachChat[0];
+        }
+                 // Message::select('*')
+                 // ->groupBy('from')->with('fromContact')->where('to', \auth()->id())->orderby('created_at','DESC')->get();
+        return datatables()->of($this->prepareHistoryList($latestRecord))->addIndexColumn()->toJson();
     }
 
     public function prepareHistoryList($chats)
@@ -74,12 +85,17 @@ class ChatHistoryController extends Controller
 
     public function getChatList($id)
     {
-         $chats = Message::with('fromContact')->where('to', \auth()->id())->where('from',$id)->get();
+         $chats = Message::with('fromContact')->where('to', \auth()->id())->where('from',$id)->orWhere('to',$id)->get();
          $datatable_rows = array();
          foreach ($chats as $key => $each_chat) {
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
             $each_row["time"] = $each_chat->created_at->format('h:i A');
-            $each_row["text"] = $each_chat->text;
+            $text='Sent'; 
+            if($id==$each_chat->from)
+            {
+              $text='Recieved';  
+            }
+            $each_row["text"] = $each_chat->text.' : '.$text;
             $each_row["type"] = $each_chat->type==0?'Chat':'Text';
             array_push($datatable_rows, $each_row);
         }
