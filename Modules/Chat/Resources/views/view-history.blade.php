@@ -191,8 +191,8 @@
                 <table class="pm-sub-table pmt-lv1 table table-bordered"  id="pm-chat-expansion-table-${d.id}">
                     <thead>
                         <tr>
-                            <th>Type</th>
                             <th>Message</th>
+                            <th>Type</th>
                             <th>Date</th>
                             <th>Time</th>
                         </tr>
@@ -217,26 +217,30 @@
                     }
                 },
                 "columnDefs": [{
-                        "width": "20%",
+                        "width": "50%",
                         "targets": 0
                     },
                     {
-                        "width": "40%",
+                        "width": "15%",
                         "targets": 1
                     },
                     {
-                        "width": "25%",
+                        "width": "10%",
                         "targets": 2
+                    },
+                    {
+                        "width": "10%",
+                        "targets": 3
                     },
                 ],
                 columns: [
-                   {
-                        data: 'type',
-                        name: 'type',
-                    },
                     {
                         data: 'text',
                         name: 'text',
+                    },
+                   {
+                        data: 'type',
+                        name: 'type',
                     },
 
                     {
