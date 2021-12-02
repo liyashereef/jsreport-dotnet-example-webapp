@@ -13,7 +13,7 @@
                 console.log('e.message');
             })
 
-            Echo.channel('visitor-log-device.08cd85ba-935a-4d14-9fde-4ecf29f160a5')
+            Echo.channel('private-visitor-log-device.08cd85ba-935a-4d14-9fde-4ecf29f160a5')
             .listen('CustomerDeviceUpdated',(e)=>{
                 console.log('e.message');
             })

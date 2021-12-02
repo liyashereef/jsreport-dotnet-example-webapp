@@ -4,6 +4,7 @@ namespace Modules\VisitorLog\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -28,10 +29,10 @@ class DeviceConfigUpdated implements ShouldBroadcast
     /**
      * Get the channels the event should be broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return \Illuminate\Broadcasting\PrivateChannel
      */
     public function broadcastOn()
     {
-        return new Channel('visitor-log-device.' . $this->id);
+        return new PrivateChannel('visitor-log-device.' . $this->id);
     }
 }
