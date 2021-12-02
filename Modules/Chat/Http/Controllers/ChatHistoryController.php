@@ -51,7 +51,8 @@ class ChatHistoryController extends Controller
      return view('chat::view-history', compact('user_list', 'project_list'));
     }
 
-    public function getChatHistoryList(){
+    public function getChatHistoryList()
+    {
             $chats = Message::select(\DB::raw('*'))
             ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
             ->with('fromContact')
@@ -86,7 +87,7 @@ class ChatHistoryController extends Controller
 
     public function getChatList($id)
     {
-         $chats = Message::with('fromContact')->where('to', \auth()->id())->where('from',$id)->orWhere('to',$id)->get();
+         $chats = Message::with('fromContact')->where('to', \auth()->id())->where('from',$id)->orWhere('to',$id)->orderBy('created_at','DESC')->get();
          $datatable_rows = array();
          foreach ($chats as $key => $each_chat) {
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
