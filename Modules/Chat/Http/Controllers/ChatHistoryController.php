@@ -78,6 +78,7 @@ class ChatHistoryController extends Controller
             $each_row["time"] = $each_chat->created_at->format('h:i A');
             $each_row["text"] = $each_chat->text;
             $each_row["from"] = $each_chat->fromContact->full_name;
+            $each_row["id"] = $each_chat->id;
             array_push($datatable_rows, $each_row);
         }
         return $datatable_rows;
@@ -89,13 +90,14 @@ class ChatHistoryController extends Controller
          $datatable_rows = array();
          foreach ($chats as $key => $each_chat) {
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
+             $each_row["id"] = $each_chat->id;
             $each_row["time"] = $each_chat->created_at->format('h:i A');
             $text='Sent'; 
             if($id==$each_chat->from)
             {
               $text='Recieved';  
             }
-            $each_row["text"] = $each_chat->text.' : '.$text;
+            $each_row["text"] = $text .' : '.$each_chat->text;
             $each_row["type"] = $each_chat->type==0?'Chat':'Text';
             array_push($datatable_rows, $each_row);
         }

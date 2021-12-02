@@ -7,6 +7,14 @@
     #table-id .fa {
         margin-left: 11px;
     }
+     /*.pmt-lv1 tbody tr {
+        background-color: white !important;
+    }*/
+
+    .zero-padding {
+        padding: 0px !important;
+    }
+   
 </style>
 @stop
 @section('content')
@@ -92,6 +100,7 @@
             processing: false,
             serverSide: true,
             responsive: true,
+            bDestroy: true,
             ajax: "{{ route('chat.view-history.list') }}",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -141,10 +150,10 @@
             table.ajax.reload(null, false);
         },
         drawCallback(settings) {
-            if (settings.sTableId === 'pm-project-table') {
+            if (settings.sTableId === 'chat-table') {
                 pm.triggerExpand('pro');
             }
-            if (settings.sTableId.startsWith('pm-group-table')) {
+            if (settings.sTableId.startsWith('pm-chat-expansion-table')) {
                 pm.triggerExpand('gro');
             }
         },
