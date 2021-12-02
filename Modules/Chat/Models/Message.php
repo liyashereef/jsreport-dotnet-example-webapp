@@ -11,7 +11,7 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['from','to','read','text'];
+    protected $fillable = ['from','to','read','text','type'];
 
     public function user()
     {

@@ -77,11 +77,10 @@ class ChatHistoryController extends Controller
          $chats = Message::with('fromContact')->where('to', \auth()->id())->where('from',$id)->get();
          $datatable_rows = array();
          foreach ($chats as $key => $each_chat) {
-
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
             $each_row["time"] = $each_chat->created_at->format('h:i A');
             $each_row["text"] = $each_chat->text;
-        //    $each_row["from"] = $each_chat->fromContact->full_name;
+            $each_row["type"] = $each_chat->type==0?'Chat':'Text';
             array_push($datatable_rows, $each_row);
         }
          return datatables()->of($datatable_rows)->addIndexColumn()->toJson();

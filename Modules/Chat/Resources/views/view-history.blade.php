@@ -13,7 +13,7 @@
 <div class="table_title">
     <h4>Chat History </h4>
 </div>
-<div class="col-md-6 customer_filter_main">
+{{-- <div class="col-md-6 customer_filter_main">
     <div class="row">
         <div class="col-md-3"><label class="filter-text customer-filter-text">Customer </label></div>
         <div class="col-md-6 filter customer-filter">
@@ -21,7 +21,7 @@
         <span class="help-block"></span>
         </div>
     </div>
-</div>
+</div> --}}
 <br>
 
 <table class="table table-bordered" id="chat-table">
@@ -166,6 +166,7 @@
                         <tr>
                            <th></th>
                             <th>Message</th>
+                            <th>Type</th>
                             <th>Date</th>
                             <th>Time</th>
                         </tr>
@@ -210,6 +211,10 @@
                     {
                         data: 'text',
                         name: 'text',
+                    },
+                    {
+                        data: 'type',
+                        name: 'type',
                     },
                     {
                         data: 'date',
