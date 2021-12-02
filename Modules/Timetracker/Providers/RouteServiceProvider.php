@@ -13,7 +13,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $moduleNamespace = 'Modules\Timetracker\Http\Controllers';
-
+    protected $moduleNameLower = 'timetracker';
     /**
      * Called before routes are registered.
      *
@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::prefix($this->moduleNameLower.'/api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Timetracker', '/Routes/api.php'));
