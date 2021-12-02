@@ -22,10 +22,15 @@ class ChatMessageController extends Controller
             ->where('to',\Auth::id())
             ->get()
             ->groupBy('from');
+        foreach($chatData as $eachChat)
+        {
+            $latestRecord[]=$eachChat[0];
+        }
+
         if (count($chatData)) {
             $successcontent['success'] = true;
             $successcontent['message'] = 'Retrieved successfully';
-            $successcontent['data'] = $chatData;
+            $successcontent['data'] = $latestRecord;
             $successcontent['code'] = 200;
         } else {
             $successcontent['success'] = false;
@@ -33,7 +38,7 @@ class ChatMessageController extends Controller
             $successcontent['code'] = 406;
         }
 
-        return response()->json($chatData);
+        return response()->json($successcontent);
     }
 
     public function getPersonalChat(Request $request)
@@ -51,6 +56,6 @@ class ChatMessageController extends Controller
             $successcontent['code'] = 406;
         }
 
-        return response()->json($chatData);
+        return response()->json($successcontent);
     }
 }

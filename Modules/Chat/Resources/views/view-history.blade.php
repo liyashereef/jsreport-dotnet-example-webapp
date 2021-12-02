@@ -164,7 +164,7 @@
                 <table class="pm-sub-table pmt-lv1 table table-bordered"  id="pm-chat-expansion-table-${d.id}">
                     <thead>
                         <tr>
-                           
+                           <th></th>
                             <th>Message</th>
                             <th>Date</th>
                             <th>Time</th>
@@ -190,19 +190,26 @@
                     }
                 },
                 "columnDefs": [{
-                        "width": "20%",
+                        "width": "10%",
                         "targets": 0
                     },
                     {
-                        "width": "10%",
+                        "width": "20%",
                         "targets": 1
                     },
+                    {
+                        "width": "25%",
+                        "targets": 2
+                    },
                 ],
-                columns: [
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: '',
+                    sortable:false
+                },
                     {
                         data: 'text',
                         name: 'text',
-                        orderable: false,
                     },
                     {
                         data: 'date',
