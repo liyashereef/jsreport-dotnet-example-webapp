@@ -159,11 +159,60 @@
 
 
          /* Posting data to AssignmentTypeLookup Controller - Start*/
-         $('#text-chat-form').submit(function (e) {
+      /*   $('#text-chat-form').submit(function (e) {
             e.preventDefault();
 
             formSubmit($('#text-chat-form'), "{{ route('chat.conversation-send') }}");
+        });*/
+
+
+        $('#text-chat-form').submit(function (e) {
+            e.preventDefault();
+            var $form = $(this);
+            var url = "{{ route('chat.conversation-send') }}";
+            var formData = new FormData($('#text-chat-form')[0]);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url,
+                type: 'POST',
+                data: formData,
+                success: function (data) {
+                    if (data.success) {
+
+                        swal({
+                                title: "Success",
+                                text: "Message has been sent",
+                                type: "info",
+                                showCancelButton: false,
+                                showLoaderOnConfirm: true,
+                                closeOnConfirm: true
+                            },
+                            function () {
+                                $("#textModal").modal('hide');
+                            });
+
+
+
+                    } else {
+                        alert(data);
+                    }
+                },
+                fail: function (response) {
+                    alert('here');
+                },
+                error: function (xhr, textStatus, thrownError) {
+                    associate_errors(xhr.responseJSON.errors, $form);
+                },
+                contentType: false,
+                processData: false,
+            });
+
         });
+
+
+
 
     });
 </script>

@@ -94,10 +94,10 @@ class ChatHistoryController extends Controller
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
              $each_row["id"] = $each_chat->id;
             $each_row["time"] = $each_chat->created_at->format('h:i A');
-            $icon='<i class="fas fa-arrow-circle-left  fa fa-lg"></i>'; 
+            $icon='<i class="fas fa-arrow-circle-left fa-lg" style="vertical-align: middle;color: #2b8511;" ></i>'; 
             if($id==$each_chat->from)
             {
-              $icon='<i class="fas fa-arrow-circle-right fa fa-lg"></i>';  
+              $icon='<i class="fas fa-arrow-circle-right fa-lg" style="vertical-align: middle;color: #c93812;"></i>';  
             }
             $each_row["text"] = $icon . '  ' .$each_chat->text;
             $each_row["type"] = $each_chat->type==0?'Chat':'Text';
