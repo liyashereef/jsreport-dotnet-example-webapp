@@ -7,13 +7,21 @@
     #table-id .fa {
         margin-left: 11px;
     }
+     /*.pmt-lv1 tbody tr {
+        background-color: white !important;
+    }*/
+
+    .zero-padding {
+        padding: 0px !important;
+    }
+   
 </style>
 @stop
 @section('content')
 <div class="table_title">
     <h4>Chat History </h4>
 </div>
-<div class="col-md-6 customer_filter_main">
+{{-- <div class="col-md-6 customer_filter_main">
     <div class="row">
         <div class="col-md-3"><label class="filter-text customer-filter-text">Customer </label></div>
         <div class="col-md-6 filter customer-filter">
@@ -21,7 +29,7 @@
         <span class="help-block"></span>
         </div>
     </div>
-</div>
+</div> --}}
 <br>
 
 <table class="table table-bordered" id="chat-table">
@@ -92,6 +100,7 @@
             processing: false,
             serverSide: true,
             responsive: true,
+            bDestroy: true,
             ajax: "{{ route('chat.view-history.list') }}",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -141,10 +150,10 @@
             table.ajax.reload(null, false);
         },
         drawCallback(settings) {
-            if (settings.sTableId === 'pm-project-table') {
+            if (settings.sTableId === 'chat-table') {
                 pm.triggerExpand('pro');
             }
-            if (settings.sTableId.startsWith('pm-group-table')) {
+            if (settings.sTableId.startsWith('pm-chat-expansion-table')) {
                 pm.triggerExpand('gro');
             }
         },
@@ -164,8 +173,9 @@
                 <table class="pm-sub-table pmt-lv1 table table-bordered"  id="pm-chat-expansion-table-${d.id}">
                     <thead>
                         <tr>
-                           
+                           <th></th>
                             <th>Message</th>
+                            <th>Type</th>
                             <th>Date</th>
                             <th>Time</th>
                         </tr>
@@ -176,7 +186,7 @@
          afterRenderExpansionTable(d) {
             let url = '{{ route("chat.show-message",":id") }}';
             url = url.replace(':id', d.from_id);
-            this.ref.chatExpandTable[d.id] = $('#pm-chat-expansion-table-' + d.id).DataTable({
+           $('#pm-chat-expansion-table-' + d.id).DataTable({
                 "drawCallback": this.drawCallback,
                 paging: false,
                 bFilter: false,
@@ -190,19 +200,30 @@
                     }
                 },
                 "columnDefs": [{
-                        "width": "20%",
+                        "width": "10%",
                         "targets": 0
                     },
                     {
-                        "width": "10%",
+                        "width": "20%",
                         "targets": 1
                     },
+                    {
+                        "width": "25%",
+                        "targets": 2
+                    },
                 ],
-                columns: [
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: '',
+                    sortable:false
+                },
                     {
                         data: 'text',
                         name: 'text',
-                        orderable: false,
+                    },
+                    {
+                        data: 'type',
+                        name: 'type',
                     },
                     {
                         data: 'date',
