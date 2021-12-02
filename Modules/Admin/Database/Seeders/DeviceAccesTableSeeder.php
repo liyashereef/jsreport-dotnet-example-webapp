@@ -20,7 +20,7 @@ class DeviceAccesTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'DeviceType' => 'CGL Provided PC & Internet',
+                'DeviceType' => 'Company Provided PC & Internet',
                 'status' => 1,
                 'createdby' => 1,
                 'created_at' => '2019-05-21 06:04:47',

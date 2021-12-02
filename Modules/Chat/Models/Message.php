@@ -11,7 +11,7 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['from','to','read','text'];
+    protected $fillable = ['from','to','read','text','type'];
 
     public function user()
     {
@@ -21,4 +21,5 @@ class Message extends Model
     {
         return $this->hasOne('Modules\Admin\Models\User', 'id', 'from');
     }
+   
 }

@@ -51,10 +51,22 @@ class ChatHistoryController extends Controller
      return view('chat::view-history', compact('user_list', 'project_list'));
     }
 
-    public function getChatHistoryList(){
-
-        $chats = Message::with('fromContact')->where('to', \auth()->id())->get();
-        return datatables()->of($this->prepareHistoryList($chats))->addIndexColumn()->toJson();
+    public function getChatHistoryList()
+    {
+            $chats = Message::select(\DB::raw('*'))
+            ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
+            ->with('fromContact')
+            ->where('to',\Auth::id())
+            //->orWhere('from',\Auth::id())
+            ->get()
+            ->groupBy('from');
+            foreach($chats as $eachChat)
+        {
+            $latestRecord[]=$eachChat[0];
+        }
+                 // Message::select('*')
+                 // ->groupBy('from')->with('fromContact')->where('to', \auth()->id())->orderby('created_at','DESC')->get();
+        return datatables()->of($this->prepareHistoryList($latestRecord))->addIndexColumn()->toJson();
     }
 
     public function prepareHistoryList($chats)
@@ -62,13 +74,35 @@ class ChatHistoryController extends Controller
 
         $datatable_rows = array();
         foreach ($chats as $key => $each_chat) {
-
+            $each_row["from_id"] = $each_chat->from;
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
             $each_row["time"] = $each_chat->created_at->format('h:i A');
             $each_row["text"] = $each_chat->text;
             $each_row["from"] = $each_chat->fromContact->full_name;
+            $each_row["employee_no"] = $each_chat->fromContact->employee->employee_no;
+            $each_row["id"] = $each_chat->id;
             array_push($datatable_rows, $each_row);
         }
         return $datatable_rows;
+    }
+
+    public function getChatList($id)
+    {
+         $chats = Message::with('fromContact')->where('to', \auth()->id())->where('from',$id)->orWhere('to',$id)->orderBy('created_at','DESC')->get();
+         $datatable_rows = array();
+         foreach ($chats as $key => $each_chat) {
+            $each_row["date"] = $each_chat->created_at->format('Y-m-d');
+             $each_row["id"] = $each_chat->id;
+            $each_row["time"] = $each_chat->created_at->format('h:i A');
+            $icon='<i class="fas fa-arrow-circle-left  fa fa-lg"></i>'; 
+            if($id==$each_chat->from)
+            {
+              $icon='<i class="fas fa-arrow-circle-right fa fa-lg"></i>';  
+            }
+            $each_row["text"] = $icon . '  ' .$each_chat->text;
+            $each_row["type"] = $each_chat->type==0?'Chat':'Text';
+            array_push($datatable_rows, $each_row);
+        }
+         return datatables()->of($datatable_rows)->addIndexColumn()->escapeColumns('text')->toJson();
     }
 }

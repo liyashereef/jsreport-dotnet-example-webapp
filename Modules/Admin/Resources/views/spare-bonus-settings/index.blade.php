@@ -23,7 +23,7 @@
     <div class="col-md-2"><label >Font Color</label></div>
 </div>
 <div class="row mb2">
-    <div class="form-group" id="reliability_safe_score">
+    <div class="form-group row col-lg-12" id="reliability_safe_score">
         <label for="reliability_safe_score" class="col-sm-3" style="margin-left: 1em;">Reliability Safe Score<span class="mandatory">*</span></label>
         <div class="col-sm-2" style="margin-left: -0.3em;">
         {{ Form::number('reliability_safe_score', isset($spareBonusModelSettings->reliability_safe_score)?$spareBonusModelSettings->reliability_safe_score:"",
@@ -48,7 +48,7 @@
     </div>
 </div>
 <div class="row mb2" style="margin-top: -1.5em;">
-    <div class="form-group" id="reliability_grace_period_in_days">
+    <div class="form-group row col-lg-12" id="reliability_grace_period_in_days">
         <label for="reliability_grace_period_in_days" class="col-sm-3" style="margin-left: 1em;">Reliability Grace Score<span class="mandatory">*</span></label>
         <div class="col-sm-2" style="margin-left: -0.3em;">
         {{ Form::number('reliability_grace_period_in_days', isset($spareBonusModelSettings->reliability_grace_period_in_days)?$spareBonusModelSettings->reliability_grace_period_in_days:"",
@@ -76,7 +76,7 @@
 <br>
 
 <div class="row mb2" style="margin-top: -1.5em;">
-    <div class="form-group" id="reliability_rank_top_level">
+    <div class="form-group row col-lg-12" id="reliability_rank_top_level">
         <label for="reliability_rank_top_level" class="col-sm-3" style="margin-left: 1em;">Rank Top Level<span class="mandatory">*</span></label>
         <div class="col-sm-2" style="margin-left: -0.3em;">
         {{ Form::number('reliability_rank_top_level', isset($spareBonusModelSettings->reliability_rank_top_level)?$spareBonusModelSettings->reliability_rank_top_level:"",
@@ -102,7 +102,7 @@
 </div>
 
 <div class="row mb2" style="margin-top: -1.5em;">
-    <div class="form-group" id="reliability_rank_average_level">
+    <div class="form-group row col-lg-12" id="reliability_rank_average_level">
         <label for="reliability_rank_average_level" class="col-sm-3" style="margin-left: 1em;">Rank Average Level<span class="mandatory">*</span></label>
         <div class="col-sm-2" style="margin-left: -0.3em;">
         {{ Form::number('reliability_rank_average_level', isset($spareBonusModelSettings->reliability_rank_average_level)?$spareBonusModelSettings->reliability_rank_average_level:"",
@@ -129,7 +129,7 @@
 
 <br><br>
 <div class="row mb2">
-    <div class="form-group" id="schedule_top_rank_message">
+    <div class="form-group col-lg-12" id="schedule_top_rank_message">
         <label for="schedule_top_rank_message" class="col-sm-3" style="margin-left: 1em;">Top Rank Message <span class="mandatory">*</span></label>
         <div class="col-sm-6" style="margin-left: -0.7em;">
             {{ Form::textarea('schedule_top_rank_message',isset($spareBonusModelSettings->schedule_top_rank_message)?$spareBonusModelSettings->schedule_top_rank_message:"",array('class' => 'form-control', 'Placeholder'=>'Top Rank Message', 'rows' => 3, 'cols' => 40)) }}
@@ -138,7 +138,7 @@
     </div>
 </div>
 <div class="row mb2" style="margin-top: -1.7em;">
-    <div class="form-group" id="schedule_average_rank_message">
+    <div class="form-group col-lg-12" id="schedule_average_rank_message">
         <label for="schedule_average_rank_message" class="col-sm-3" style="margin-left: 1em;">Average Rank Message <span class="mandatory">*</span></label>
         <div class="col-sm-6" style="margin-left: -0.7em;">
             {{ Form::textarea('schedule_average_rank_message',isset($spareBonusModelSettings->schedule_average_rank_message)?$spareBonusModelSettings->schedule_average_rank_message:"",array('class' => 'form-control', 'Placeholder'=>'Average Rank Message', 'rows' => 3, 'cols' => 40)) }}
@@ -147,7 +147,7 @@
     </div>
 </div>
 <div class="row mb2" style="margin-top: -1.7em;">
-    <div class="form-group" id="schedule_below_average_rank_message">
+    <div class="form-group row col-lg-12" id="schedule_below_average_rank_message">
         <label for="schedule_below_average_rank_message" class="col-sm-3" style="margin-left: 1em;">Below Average Rank Message <span class="mandatory">*</span></label>
         <div class="col-sm-6" style="margin-left: -0.7em;">
             {{ Form::textarea('schedule_below_average_rank_message',isset($spareBonusModelSettings->schedule_below_average_rank_message)?$spareBonusModelSettings->schedule_below_average_rank_message:"",array('class' => 'form-control', 'Placeholder'=>'Below Average Rank Message', 'rows' => 3, 'cols' => 40)) }}

@@ -15,12 +15,12 @@
                 {{ csrf_field() }}
                <div class="box-body" style="margin-left: 0px !important;">
                    <div class="col-md-10" style="padding-left: 0px !important;">
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-md-8"></div>
                             <div class="col-md-2 text-center"><b>Background Color</b></div>
                             <div class="col-md-2 text-center"><b>Font Color</b></div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-md-12">
                                 <label class="form-control-label">Level 1(Number of days below or equal to this value will be indicated by the respective color)</label>
                             </div>
@@ -38,7 +38,7 @@
                                 </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-md-12">
                                 <label class="form-control-label">Level 2(Number of days below or equal to this value will be indicated by the respective color)</label>
                             </div>
@@ -56,7 +56,7 @@
                                 </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-md-12">
                                 <label class="form-control-label">Level 3(Number of days above to this value will be indicated by the respective color)</label>
                             </div>
@@ -74,7 +74,7 @@
                                 </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-md-4" id="stc_threshold_hours">
                             <label class="form-control-label">Minimum hours b/w shifts</label>
                                     {{ Form::number('stc_threshold_hours',($stcThresholdSettings? $stcThresholdSettings->stc_threshold_hours: null),array('class'=>'form-control stc_threshold_hours','required'=>true, 'min' => 1))}}

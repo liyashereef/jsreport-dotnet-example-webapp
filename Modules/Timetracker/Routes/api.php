@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['namespace' => 'Modules\Timetracker\Http\Controllers'], function () {
+Route::group([], function () {
     Route::post('login', 'API\v1\ApiController@login');
     Route::post('forgotPassword', 'API\v1\ApiController@forgotPassword');
 
@@ -182,6 +182,12 @@ Route::group(['namespace' => 'Modules\Timetracker\Http\Controllers'], function (
 
 
         Route::post('getTimesheetSummary', 'API\v1\ApiController@getTimesheetSummary');
+
+        //Chat Module
+        Route::post('getAllChat', 'API\v1\ChatMessageController@getAllChat');
+        Route::post('getPersonalChat', 'API\v1\ChatMessageController@getPersonalChat');
+        
+       
     });
 });
 
