@@ -14,7 +14,7 @@
     .zero-padding {
         padding: 0px !important;
     }
-   
+
 </style>
 @stop
 @section('content')
@@ -37,6 +37,7 @@
          <tr>
              <th width="5%"></th>
              <th class="sorting" width="10%">Employee Name</th>
+             <th class="sorting" width="10%">Employee Number</th>
              <th class="sorting" width="15%">Date</th>
              <th class="sorting" width="15%">Time</th>
 
@@ -109,6 +110,19 @@
                 [10, 25, 50, 100, 500, -1],
                 [10, 25, 50, 100, 500, "All"]
             ],
+            "columnDefs": [{
+                        "width": "10%",
+                        "targets": 0
+                    },
+                    {
+                        "width": "20%",
+                        "targets": 1
+                    },
+                    {
+                        "width": "25%",
+                        "targets": 2
+                    },
+                ],
             columns: [{
                         data: null,
                         render: function(o) {
@@ -120,6 +134,10 @@
                 {
                     data: 'from',
                     name: 'from'
+                },
+                {
+                    data: 'employee_no',
+                    name: 'employee_no'
                 },
                 {data: 'date', name: 'date'},
                 {data: 'time', name: 'time'}
@@ -173,9 +191,8 @@
                 <table class="pm-sub-table pmt-lv1 table table-bordered"  id="pm-chat-expansion-table-${d.id}">
                     <thead>
                         <tr>
-                           <th></th>
-                            <th>Message</th>
                             <th>Type</th>
+                            <th>Message</th>
                             <th>Date</th>
                             <th>Time</th>
                         </tr>
@@ -200,11 +217,11 @@
                     }
                 },
                 "columnDefs": [{
-                        "width": "10%",
+                        "width": "20%",
                         "targets": 0
                     },
                     {
-                        "width": "20%",
+                        "width": "40%",
                         "targets": 1
                     },
                     {
@@ -212,24 +229,21 @@
                         "targets": 2
                     },
                 ],
-                columns: [{
-                    data: 'DT_RowIndex',
-                    name: '',
-                    sortable:false
-                },
-                    {
-                        data: 'text',
-                        name: 'text',
-                    },
-                    {
+                columns: [
+                   {
                         data: 'type',
                         name: 'type',
                     },
                     {
-                        data: 'date',
-                        name: 'date',
-                        
+                        data: 'text',
+                        name: 'text',
                     },
+
+                    {
+                        data: 'date',
+                        name: 'date',        
+                    },
+
                     {
                         data: 'time',
                         name: 'time',
