@@ -233,7 +233,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="row form-group" style="margin:0px;" id="incident_report_logo">
+                        <div class="row form-group  col-lg-12" style="margin:0px;" id="incident_report_logo">
                             <div class="col-md-2">
                                 <label for="guard_tour_duration" class="control-label">@lang('Incident Report Logo')</label>
                             </div>
@@ -567,10 +567,9 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="fenceTab">
-                    <!-- <div class="row">
+                    {{-- <div class="row">
                             <div class="col-sm-12 table-responsive "></div>
-                        </div> -->
-
+                    </div> --}}
                     <div class="form-group" id="fence_interval">
                         <div class="col-md-2">
                             <label for="fence_interval"> Fence Interval (Minutes)</label>
@@ -596,6 +595,7 @@
                             <small class="help-block"></small>
                         </div>
                     </div>
+
 
 
 
