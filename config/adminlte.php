@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>Admin</b>LTE',
-    'logo_img' => env('APP_URL') . '/images/logo.png',
+    'logo_img' =>  '/images/logo.png',
     'logo_img_class' => 'brand-image ',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
