@@ -1054,6 +1054,19 @@ return [
                     'icon' => 'fas fa-hourglass',
                 ],
                 [
+                    'text' => 'Terms And Conditions',
+                    'url' => 'admin/customer-terms-and-conditions',
+                    'icon' => 'fas fa-stream',
+                ],
+
+
+            ],
+        ],
+        [
+            'text' => 'Visitor Log',
+            'icon' => 'fas fa-database',
+            'submenu' => [
+                [
                     'text' => 'Visitor Log Template',
                     'url' => 'admin/visitorlog-templates',
                     'icon' => 'fas fa-list',
@@ -1062,11 +1075,6 @@ return [
                     'text' => 'Template Allocation',
                     'url' => 'admin/template-allocation',
                     'icon' => 'fas fa-square',
-                ],
-                [
-                    'text' => 'Terms And Conditions',
-                    'url' => 'admin/customer-terms-and-conditions',
-                    'icon' => 'fas fa-stream',
                 ],
                 [
                     'text' => 'Visitor Status',
@@ -1078,17 +1086,10 @@ return [
                     'url' => 'admin/visitor-log/screening-templates',
                     'icon' => 'fas fa-microchip',
                 ],
-
-            ],
-        ],
-        [
-            'text' => 'Visitor Log',
-            'icon' => 'fas fa-database',
-            'submenu' => [
                 [
                     'text' => 'Devices',
                     'url' => 'admin/visitor-log/devices',
-                    'icon' => 'fas fa-microchip',
+                    'icon' => 'fas fa-mobile-alt',
                 ]
             ],
         ],

@@ -101,7 +101,7 @@ class VisitorLogDeviceController extends Controller
                 }
             }
             if($trigger){
-                $this->trigerBroadcasting($deviceId);
+                $this->repository->trigerBroadcasting($deviceId);
             }
 
             \DB::commit();
@@ -131,7 +131,7 @@ class VisitorLogDeviceController extends Controller
             }
 
             $this->repository->updateEntry($inputs);
-            $this->trigerBroadcasting($data->id);
+            $this->repository->trigerBroadcasting($data->id);
             \DB::commit();
         return response()->json($this->helperService->returnTrueResponse());
         } catch (\Exception $e) {
@@ -140,11 +140,7 @@ class VisitorLogDeviceController extends Controller
         }
     }
 
-    public function trigerBroadcasting($id){
-        $configRequest['id'] = $id;
-        $configData = $this->repository->setConfigData($configRequest);
-        DeviceConfigUpdated::dispatch($configData);
-    }
+
 
     /**
      * Remove the specified resource from storage.

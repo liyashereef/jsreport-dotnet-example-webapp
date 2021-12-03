@@ -6,6 +6,7 @@ use Modules\VisitorLog\Transformers\VisitorLogDeviceResources;
 use Modules\VisitorLog\Models\VisitorLogDevices;
 use Modules\Admin\Repositories\VisitorLogTemplateRepository;
 use Modules\Admin\Repositories\VisitorLogScreeningTemplateCustomerAllocationRepository;
+use Modules\VisitorLog\Events\DeviceConfigUpdated;
 
 class VisitorLogDeviceRepository
 {
@@ -168,5 +169,21 @@ class VisitorLogDeviceRepository
             $device->screening = $this->screeningtemplateCustomerAllocationRepository->getTemplateByCustomerId($filter);
             return new VisitorLogDeviceResources($device);
         }
+    }
+
+    public function trigerBroadcasting($id)
+    {
+        $configRequest['id'] = $id;
+        $configData = $this->setConfigData($configRequest);
+        DeviceConfigUpdated::dispatch($configData);
+    }
+
+    public function getByTemplateId($template_id)
+    {
+        $devices = $this->model
+            ->whereHas("visitorLogDeviceSettings", function ($qry) use ($template_id) {
+                return $qry->where("template_id", $template_id);
+            })->first();
+        $this->trigerBroadcasting($devices->id);
     }
 }
