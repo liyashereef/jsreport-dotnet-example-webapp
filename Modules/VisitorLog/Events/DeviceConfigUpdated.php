@@ -3,10 +3,9 @@
 namespace Modules\VisitorLog\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class DeviceConfigUpdated implements ShouldBroadcast

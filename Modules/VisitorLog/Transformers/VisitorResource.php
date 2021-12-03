@@ -20,10 +20,8 @@ class VisitorResource extends ResourceCollection
                 'id' => $visitor->id,
                 'uid' => $visitor->uid,
                 'customerId' => $visitor->customerId,
-
                 'barCode' => $visitor->barCode,
-                'firstName' => $visitor->firstName,
-                'lastName' => $visitor->lastName,
+                'fullName' => $visitor->firstName . ' ' . $visitor->lastName,
                 'email' => $visitor->email,
                 'phone' => $visitor->phone,
                 'avatar' => $visitor->avatar,
