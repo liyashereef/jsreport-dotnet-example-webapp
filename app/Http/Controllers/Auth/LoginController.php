@@ -64,7 +64,6 @@ use AuthenticatesUsers;
             'ip' => $request->ip(),
             'success' => 0,
         ];
-        $saveLoginLog['success'] = 0;
         if (isset($user) && $user->hasPermissionTo('login')) {
             //$logKey = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
             $credentialsArr = [
