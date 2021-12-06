@@ -16,9 +16,11 @@ class ChatMessageController extends Controller
     }
     public function getAllChat()
     {
-        $chatData = $this->message->select(\DB::raw('*'))
+        $chatData = $this->message->select('id','from','text','created_at')
+        ->with(['fromContact' => function($query){
+           $query->select('id','first_name', 'last_name');
+             }])
             ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
-            ->with('fromContact')
             ->where('to',\Auth::id())
             //->orWhere('from',\Auth::id())
             ->get()
@@ -45,7 +47,9 @@ class ChatMessageController extends Controller
     public function getPersonalChat(Request $request)
     {
         $from = $request->input('from');
-        $chatData = $this->message->where('from',$from)->orWhere('to',$from)->with('fromContact')->where('to',\Auth::id())->orderBy('created_at','DESC')->get();   
+        $chatData = $this->message->select('id','from','text','created_at')->with(['fromContact' => function($query){
+           $query->select('id','first_name', 'last_name');
+             }])->where('from',$from)->orWhere('to',$from)->where('to',\Auth::id())->orderBy('created_at','DESC')->get();   
         if (count($chatData)) {
             $successcontent['success'] = true;
             $successcontent['message'] = 'Retrieved successfully';
