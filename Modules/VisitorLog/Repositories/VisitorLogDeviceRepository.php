@@ -183,7 +183,11 @@ class VisitorLogDeviceRepository
         $devices = $this->model
             ->whereHas("visitorLogDeviceSettings", function ($qry) use ($template_id) {
                 return $qry->where("template_id", $template_id);
-            })->first();
-        $this->trigerBroadcasting($devices->id);
+            })->get();
+
+        foreach($devices as $device){
+            $this->trigerBroadcasting($device->id);
+        }
+
     }
 }
