@@ -40,7 +40,7 @@
               <label style="float:right;padding-right: 5px;">Active</label>
             </div>
           <!-- Active Toggle button - End -->
-            <div class="form-group row" id="test_question">
+            <div class="form-group row col-lg-12" id="test_question">
               <label for="question" class="col-sm-12">Question</label>
                <div class="col-sm-10">
                  <textarea name="question"  id="question" maxlength="300" rows="3" class="form-control" placeholder="Question" required></textarea>
@@ -48,7 +48,7 @@
                </div>
             </div>
 
-             <div class="form-group row" id="display_order">
+             <div class="form-group row col-lg-12" id="display_order">
                <label for="display_order" class="col-sm-12">Display Order</label>
                  <div class="col-sm-10">
                   {{ Form::text('display_order',null,array('class' => 'form-control', 'Placeholder'=>'Order')) }}
@@ -57,7 +57,7 @@
           </div>
 
         <div class="form-group row" id="is_mandatory_display">
-            <div>
+            <div class="col-lg-12">
                 <label for="is_required" class="col-sm-3">Mandatory Question</label>
                 <div class="col-sm-1" style="margin-left: -7%;">
                 <input type="checkbox" name="is_required" id="mandatory" value="1">
@@ -72,7 +72,7 @@
         </div>
 
 
-        <div  class="form-group row dynamic-option-fields" id="answer_option_0">
+        <div  class="form-group row dynamic-option-fields col-lg-12" id="answer_option_0">
             <input type="hidden" name="position[]" class="pos"  id="0">
             <input type="hidden" name="option_id[]" id="optionid_0">
             <label for="feedback_id" class="col-sm-12">Answer Options</label>
@@ -349,7 +349,7 @@ function addRow()
 {
     position_num= $('.pos:last').attr('id');
     new_position_num=parseInt(position_num)+1;
-    var html='<div  class="form-group row new-fields dynamic-option-fields" id="answer_option_'+new_position_num+'"> <input type="hidden" name="option_id[]" id="optionid_'+new_position_num+'"> <input type="hidden" name="position[]" class="pos"  id="'+new_position_num+'"><div class="col-sm-10"><input type="text" name="answer_option[]" class="form-control" Placeholder="Option" required id="option_'+new_position_num+'"><small class="help-block"></small></div><div class="col-sm-2"><a title="Add another experience" href="javascript:;" class="add_button"><i class="fa fa-plus" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href="javascript:void(0);" class="remove_button" title="Remove field"><i class="fa fa-minus" aria-hidden="true"></i></a></div><div class="form-control-feedback"></div></div>';
+    var html='<div  class="form-group row new-fields dynamic-option-fields col-lg-12" id="answer_option_'+new_position_num+'"> <input type="hidden" name="option_id[]" id="optionid_'+new_position_num+'"> <input type="hidden" name="position[]" class="pos"  id="'+new_position_num+'"><div class="col-sm-10"><input type="text" name="answer_option[]" class="form-control" Placeholder="Option" required id="option_'+new_position_num+'"><small class="help-block"></small></div><div class="col-sm-2"><a title="Add another experience" href="javascript:;" class="add_button"><i class="fa fa-plus" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href="javascript:void(0);" class="remove_button" title="Remove field"><i class="fa fa-minus" aria-hidden="true"></i></a></div><div class="form-control-feedback"></div></div>';
     $("#answer_option_"+position_num).after(html);
     $('.dynamic-option-fields').find('.add_button').hide();
     $('.dynamic-option-fields:last').find('.add_button').show();
