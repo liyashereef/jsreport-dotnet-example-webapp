@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Modules\Admin\Models\User;
+use App\Models\LoginLog;
 
 class LoginController extends Controller {
     /*
@@ -58,6 +59,12 @@ use AuthenticatesUsers;
         $logKey = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         //$field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL) ? $this->username() : 'username';
         $user = User::where($logKey, $logValue)->whereActive(true)->first();
+        $saveLoginLog = [
+            'username' => $logValue,
+            'ip' => $request->ip(),
+            'success' => 0,
+        ];
+        $saveLoginLog['success'] = 0;
         if (isset($user) && $user->hasPermissionTo('login')) {
             //$logKey = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
             $credentialsArr = [
@@ -65,7 +72,15 @@ use AuthenticatesUsers;
                 'password' => $request->input('password'),
                 'active' => 1,
             ];
+            $saveLoginLog = [
+                'username' => $logValue,
+                'ip' => $request->ip(),
+                'success' => 1,
+            ];
         }
+
+        LoginLog::create($saveLoginLog);
+
         return $credentialsArr;
     }
 
