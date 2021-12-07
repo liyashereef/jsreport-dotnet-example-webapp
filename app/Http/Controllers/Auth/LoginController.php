@@ -66,7 +66,6 @@ use AuthenticatesUsers;
             'user_agent' => $request->header('user-agent'),
             'success' => 0,
         ];
-        $saveLoginLog['success'] = 0;
         if (isset($user) && $user->hasPermissionTo('login')) {
             //$logKey = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
             $credentialsArr = [
