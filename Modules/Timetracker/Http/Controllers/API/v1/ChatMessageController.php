@@ -16,13 +16,12 @@ class ChatMessageController extends Controller
     }
     public function getAllChat()
     {
-        $chatData = $this->message->select('id','from','text','created_at')
+        $chatData = $this->message->select('id','from','to','text','created_at')
         ->with(['fromContact' => function($query){
            $query->select('id','first_name', 'last_name');
              }])
             ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
             ->where('to',\Auth::id())
-            //->orWhere('from',\Auth::id())
             ->get()
             ->groupBy('from');
         foreach($chatData as $eachChat)
@@ -46,10 +45,18 @@ class ChatMessageController extends Controller
 
     public function getPersonalChat(Request $request)
     {
-        $from = $request->input('from');
-        $chatData = $this->message->select('id','from','text','created_at')->with(['fromContact' => function($query){
+        $id = $request->input('from');
+        $chatData = $this->message->select('id','from','to','text','created_at')->with(['fromContact' => function($query){
            $query->select('id','first_name', 'last_name');
-             }])->where('from',$from)->orWhere('to',$from)->where('to',\Auth::id())->orderBy('created_at','DESC')->get();   
+             }])
+        ->where(function ($q) use ($id) {
+            $q->where('from', \auth()->id());
+            $q->where('to', $id);
+        })->orWhere(function ($q) use ($id) {
+            $q->where('from', $id);
+            $q->where('to', \auth()->id());
+        })
+        ->orderBy('created_at','DESC')->get();   
         if (count($chatData)) {
             $successcontent['success'] = true;
             $successcontent['message'] = 'Retrieved successfully';
