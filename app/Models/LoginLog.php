@@ -19,6 +19,6 @@ class LoginLog extends Model
      * @var array
      */
     protected $fillable = [
-        'username', 'ip', 'success',
+        'username', 'ip', 'login_type', 'user_agent', 'success',
     ];
 }

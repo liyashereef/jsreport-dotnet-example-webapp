@@ -11,6 +11,7 @@ use Modules\Facility\Http\Requests\FacilityUserUpdatePasswordRequest;
 use Modules\Facility\Http\Requests\FacilityUserLoginRequest;
 use Modules\Facility\Repositories\FacilityUserRepository;
 use Modules\Facility\Repositories\FacilityBookingRepository;
+use App\Models\LoginLog;
 
 class FacilityUserController extends Controller
 {
@@ -53,6 +54,13 @@ class FacilityUserController extends Controller
     public function login(FacilityUserLoginRequest $request)
     {
 
+        $saveLoginLog = [
+            'username' => $request->input('username'),
+            'ip' => $request->ip(),
+            'login_type' => config('globals.login_type')['FACILITYLOGIN'],
+            'user_agent' => $request->header('user-agent'),
+            'success' => 0,
+        ];
         //check if the user has too many login attempts.
         if ($this->hasTooManyLoginAttempts($request)) {
             //Fire the lockout event
@@ -67,6 +75,7 @@ class FacilityUserController extends Controller
             $return["code"] = 200;
             $return["success"] = true;
             $return["message"] = "Success";
+            $saveLoginLog['success'] = 1;
         } else {
 
             //keep track of login attempts from the user.
@@ -75,7 +84,10 @@ class FacilityUserController extends Controller
             $return["code"] = 406;
             $return["success"] = false;
             $return["message"] = "Invalid Credentials/Account inactive";
+            $saveLoginLog['success'] = 0;
         }
+
+        LoginLog::create($saveLoginLog);
         return response()->json($return);
     }
 

@@ -62,6 +62,8 @@ use AuthenticatesUsers;
         $saveLoginLog = [
             'username' => $logValue,
             'ip' => $request->ip(),
+            'login_type' => config('globals.login_type')['WEBLOGIN'] ,
+            'user_agent' => $request->header('user-agent'),
             'success' => 0,
         ];
         $saveLoginLog['success'] = 0;
@@ -75,6 +77,8 @@ use AuthenticatesUsers;
             $saveLoginLog = [
                 'username' => $logValue,
                 'ip' => $request->ip(),
+                'login_type' => config('globals.login_type')['WEBLOGIN'],
+                'user_agent' => $request->header('user-agent'),
                 'success' => 1,
             ];
         }

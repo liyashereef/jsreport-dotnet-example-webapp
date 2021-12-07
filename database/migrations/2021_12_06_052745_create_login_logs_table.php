@@ -17,8 +17,11 @@ class CreateLoginLogsTable extends Migration
             $table->id();
             $table->string('username', 200);
             $table->string('ip',300)->nullable();
+            $table->string('login_type',300)->nullable();
+            $table->string('user_agent',300)->nullable();
             $table->boolean('success')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

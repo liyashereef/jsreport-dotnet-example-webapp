@@ -113,5 +113,6 @@ return [
     'ids_refund_rejected' => 3,
     'qrPatrolDailyReportTime' => '8:00',
     'editFontIcon'=>'far fa-edit',
-    'deleteFontIcon'=>'fas fa-trash'
+    'deleteFontIcon'=>'fas fa-trash',
+    'login_type' => ['WEBLOGIN' => 'web_login', 'APPLOGIN' => 'app_login', 'OSGCLOGIN' => 'osgc_login', 'FACILITYLOGIN' => 'facility_login', 'VISITORAPPLOGIN' => 'visitor_app_login'],
 ];

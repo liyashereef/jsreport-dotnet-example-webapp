@@ -10,13 +10,14 @@ use Modules\Osgc\Repositories\OsgcCourseRepository;
 use Modules\Osgc\Http\Requests\OsgcUserRequest;
 use Modules\Osgc\Http\Requests\OsgcChangePasswordRequest;
 use \Carbon\Carbon;
+use App\Models\LoginLog;
 class OsgcUserController extends Controller
 {
     protected $osgcUserrepository;
     public function __construct(OsgcUserRepository $osgcUserrepository,OsgcCourseRepository $osgcCourseRepository){
         $this->osgcUserrepository = $osgcUserrepository;
         $this->osgcCourseRepository = $osgcCourseRepository;
-        
+
     }
     /**
      * Display a listing of the resource.
@@ -71,7 +72,7 @@ class OsgcUserController extends Controller
       }else{
         return view('osgc::invalidUserActivation');
       }
-       
+
     }
     /**
      * login
@@ -89,6 +90,13 @@ class OsgcUserController extends Controller
         $content["success"] = false;
         $content["message"] = "Invalid user";
         $content["courseId"] =0;
+        $saveLoginLog = [
+            'username' => $request->email,
+            'ip' => $request->ip(),
+            'login_type' => config('globals.login_type')['OSGCLOGIN'],
+            'user_agent' => $request->header('user-agent'),
+            'success' => 0,
+        ];
         $userDetails=$this->osgcUserrepository->getUserByEmail($request->email);
         if($userDetails){
             if($userDetails->email_verified == 1 && $userDetails->active == 1)
@@ -99,20 +107,24 @@ class OsgcUserController extends Controller
                         $content["code"] = 200;
                         $content["success"] = true;
                         $content["message"] = "Welcome " . \Auth::guard('osgcuser')->user()->first_name . " " . \Auth::guard('osgcuser')->user()->last_name;
+                        $saveLoginLog['success'] = 1;
                 }
             }else{
                 $content["code"] = 406;
                 $content["success"] = false;
                 $content["message"] = "Account is Not Activated";
+                $saveLoginLog['success'] = 0;
             }
         }else{
             $content["code"] = 406;
             $content["success"] = false;
             $content["message"] = "Please check credentials and try again";
+            $saveLoginLog['success'] = 0;
         }
-            
+
+        LoginLog::create($saveLoginLog);
         return json_encode($content, true);
-        
+
     }
     public function logout()
     {
