@@ -74,7 +74,7 @@ Route::prefix('osgc')
 
         Route::get('/registration', 'OsgcUserController@registration')->name('registration')->middleware('guest:osgcuser');
         Route::get('/', 'OsgcUserController@login')->name('login')->middleware('guest:osgcuser');
-        Route::get('/login', 'OsgcUserController@login')->name('login');
+        Route::get('/login', 'OsgcUserController@login')->name('login')->middleware('guest:osgcuser');
         Route::post('/add-user', 'OsgcUserController@store');
         Route::get('/activate-account/{token}', 'OsgcUserController@activateAccount');
         Route::group(['middleware' => ['login-validation-log']], function () {
