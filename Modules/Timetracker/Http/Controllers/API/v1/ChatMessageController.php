@@ -22,17 +22,26 @@ class ChatMessageController extends Controller
              }])
             ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
             ->where('to',\Auth::id())
-            ->get()
-            ->groupBy('from');
-        foreach($chatData as $eachChat)
-        {
-            $latestRecord[]=$eachChat[0];
-        }
-
+            //->groupBy('from')
+            ->get();
+            //->groupBy('from');
+            
+        $chatData =$chatData->groupBy('from');
+        $unreadIds = Message::select(\DB::raw('`from` as sender_id, count(`from`) as messages_count'))
+       ->where('to', auth()->id())
+       ->where('read', false)
+       ->groupBy('from')
+       ->get();
+       $chatData = $chatData->map(function ($contact) use ($unreadIds) {
+            $contact=$contact[0];
+            $contactUnread = $unreadIds->where('sender_id', $contact->from)->first();
+            $contact->unread = $contactUnread ? $contactUnread->messages_count : 0;
+            return $contact;
+        });
         if (count($chatData)) {
             $successcontent['success'] = true;
             $successcontent['message'] = 'Retrieved successfully';
-            $successcontent['data'] = $latestRecord;
+            $successcontent['data'] = $chatData;
             $successcontent['code'] = 200;
         } else {
             $successcontent['success'] = false;
@@ -69,5 +78,21 @@ class ChatMessageController extends Controller
         }
 
         return response()->json($successcontent);
+    }
+
+     public function updateReadStatus(Request $request)
+    {
+       $id = $request->input('from');
+       $update=$this->message->where('from', $id)->where('to', \auth()->id())->update(['read' => true]);
+        if ($update) {
+            $successcontent['success'] = true;
+            $successcontent['message'] = 'Read status updated successfully';
+            $successcontent['code'] = 200;
+        } else {
+            $successcontent['success'] = false;
+            $successcontent['message'] = 'Something went wrong';
+            $successcontent['code'] = 406;
+        }
+         return response()->json($successcontent);
     }
 }
