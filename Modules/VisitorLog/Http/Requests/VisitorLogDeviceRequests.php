@@ -18,7 +18,8 @@ class VisitorLogDeviceRequests extends FormRequest
             'template_id' => "required",
             'name' => "required",
             'camera_mode' => "required",
-            'scaner_camera_mode' => "required"
+            'scaner_camera_mode' => "required",
+            'checkout_mode' => "required",
         ];
 
         //On edit mode
@@ -45,6 +46,7 @@ class VisitorLogDeviceRequests extends FormRequest
             'name.required' => 'Name is required.',
             'camera_mode.required' => 'Camera mode is required.',
             'scaner_camera_mode.required' => 'Scaner camera mode is required.',
+            'scaner_camera_mode.required' => 'Checkout mode field is required.',
         ];
     }
 
