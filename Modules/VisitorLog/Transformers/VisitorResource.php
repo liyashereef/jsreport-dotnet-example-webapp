@@ -14,14 +14,25 @@ class VisitorResource extends ResourceCollection
      */
     public function toArray($request)
     {
-
         return $this->collection->transform(function ($visitor) {
+            $fullName = '';
+            $shortName = '';
+            if (!empty($visitor->firstName)) {
+                $fullName .= $visitor->firstName;
+                $shortName .= $visitor->firstName[0];
+            }
+            if (!empty($visitor->lastName)) {
+                $fullName .= (' ' . $visitor->lastName);
+                $shortName .= $visitor->lastName[0];
+            }
+
             return [
                 'id' => $visitor->id,
                 'uid' => $visitor->uid,
                 'customerId' => $visitor->customerId,
                 'barCode' => $visitor->barCode,
-                'fullName' => $visitor->firstName . ' ' . $visitor->lastName,
+                'fullName' => $fullName,
+                'shortName' => $shortName,
                 'email' => $visitor->email,
                 'phone' => $visitor->phone,
                 'avatar' => $visitor->avatar,

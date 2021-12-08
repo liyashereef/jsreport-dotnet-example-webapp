@@ -162,7 +162,7 @@ class VisitorLogApiController
             } elseif ($request->input('checkInOption') === 'Qr' || $request->input('checkInOption') === 'Authorized Entrant') {
                 if ($request->has('visitor')) {
                     $data = json_decode($request->input('visitor'), true);
-                    $visitorLogs['first_name'] = $data['firstName'] . ' ' . $data['lastName'];
+                    $visitorLogs['first_name'] = $data['fullName'];
                     $visitorLogs['email'] = $data['email'];
                     $visitorLogs['phone'] = $data['phone'];
                     $visitorLogs['uid'] = $data['uid'];

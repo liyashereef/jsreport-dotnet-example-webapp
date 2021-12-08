@@ -22,6 +22,7 @@ class VisitorLogDeviceResources extends JsonResource
                 'isScreeningEnabled'=> ($this->screening_enabled == 1)? true : false,
                 'scannerCameraMode'=> $this->visitorLogDeviceSettings->scaner_camera_mode,
                 'cameraMode' => $this->visitorLogDeviceSettings->camera_mode,
+                'idCheckoutMode' => 'email',
                 'customerId'=> $this->customer_id,
                 'deviceId'=> $this->device_id,
                 'deviceUID'=> $this->uid,
