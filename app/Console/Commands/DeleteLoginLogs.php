@@ -44,7 +44,7 @@ class DeleteLoginLogs extends Command
         if(!$table->isEmpty()){
             $date = \Carbon::now()->subDays(180);
             $formatted = $date->format('Y-m-d H:i:s');
-            LoginLog::where('updated_at', '<=', $formatted)->delete();
+            LoginLog::where('created_at', '<=', $formatted)->delete();
         }
 
     }

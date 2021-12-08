@@ -73,13 +73,7 @@ use AuthenticatesUsers;
                 'password' => $request->input('password'),
                 'active' => 1,
             ];
-            $saveLoginLog = [
-                'username' => $logValue,
-                'ip' => $request->ip(),
-                'login_type' => config('globals.login_type')['WEBLOGIN'],
-                'user_agent' => $request->header('user-agent'),
-                'success' => 1,
-            ];
+            $saveLoginLog['success'] = 1;
         }
 
         LoginLog::create($saveLoginLog);

@@ -43,7 +43,6 @@ use Modules\Admin\Models\UserSkill;
 use Modules\Admin\Models\UserSkillOptionAllocation;
 use Modules\Admin\Models\UserSkillUserValue;
 use Modules\Admin\Models\UserSkillOptionValue;
-use App\Models\LoginLog;
 
 class UserRepository
 {
@@ -1147,13 +1146,6 @@ class UserRepository
      */
     public function loginForApp($request, $permission = 'allow-mobile-app-login')
     {
-        $saveLoginLog = [
-            'username' => $request->get('username'),
-            'ip' => $request->ip(),
-            'login_type' => config('globals.login_type')['APPLOGIN'],
-            'user_agent' => $request->header('user-agent'),
-            'success' => 0,
-        ];
         if ((Auth::attempt([
                 'username' => $request->get('username'),
                 'password' => $request->get('password'),
@@ -1161,13 +1153,10 @@ class UserRepository
             ])) &&
             Auth::user()->hasPermissionTo($permission)
         ) {
-            $saveLoginLog['success'] = 1;
             return Auth::user();
         } else {
-            $saveLoginLog['success'] = 0;
             return false;
         }
-        LoginLog::create($saveLoginLog);
     }
 
     /**
