@@ -186,6 +186,7 @@ Route::group([], function () {
         //Chat Module
         Route::post('getAllChat', 'API\v1\ChatMessageController@getAllChat');
         Route::post('getPersonalChat', 'API\v1\ChatMessageController@getPersonalChat');
+        Route::post('updateReadStatus', 'API\v1\ChatMessageController@updateReadStatus');
         
        
     });
