@@ -243,20 +243,16 @@
                         render: function(o) {
                             var actions = "";
                             @can('edit_masters')
-                            actions += '<a href="#" title="Edit" class="edit {{Config::get('
-                            globals.editFontIcon ')}}" data-id=' + o.id + '></a>'
+                            actions += '<a href="#" title="Edit" class="edit {{Config::get('globals.editFontIcon')}}" data-id=' + o.id + '></a>'
                             @endcan
                             @can('lookup-remove-entries')
                             if (o.is_activated == 0) {
-                                actions += '<a href="#" title="Delete" class="delete {{Config::get('
-                                globals.deleteFontIcon ')}}" data-id=' + o.id + '></a>';
+                                actions += '<a href="#" title="Delete" class="delete {{Config::get('globals.deleteFontIcon')}}" data-id=' + o.id + '></a>';
                             } else {
                                 if (o.is_blocked == 0) {
-                                    actions += '<a href="#" title="Block" class="block {{Config::get('
-                                    globals.blockFontIcon ')}}" data-id=' + o.id + ' data-block=' + o.is_blocked + '></a>';
+                                    actions += '<a href="#" title="Block" class="block {{Config::get('globals.blockFontIcon')}}" data-id=' + o.id + ' data-block=' + o.is_blocked + '></a>';
                                 } else {
-                                    actions += '<a href="#" title="Activate" class="block {{Config::get('
-                                    globals.activateFontIcon ')}}" data-id=' + o.id + ' data-block=' + o.is_blocked + '></a>';
+                                    actions += '<a href="#" title="Activate" class="block {{Config::get('globals.activateFontIcon')}}" data-id=' + o.id + ' data-block=' + o.is_blocked + '></a>';
                                 }
                             }
                             @endcan
