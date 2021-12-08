@@ -20,7 +20,7 @@ Route::prefix('facility')
         Route::get('/', 'FacilityUserController@index');
         Route::get('/login', 'FacilityUserController@index')->name('login')->middleware('guest:facilityuser');
         Route::group(['middleware' => ['login-validation-log']], function () {
-            Route::post('/login', 'FacilityUserController@login');
+            Route::post('/login', 'FacilityUserController@login')->name('user-login');
         });
         Route::group(['middleware' => ['auth:facilityuser']],function (){
             Route::post('/logout',  array('as' => 'logout', 'uses' => 'FacilityUserController@logout'));
