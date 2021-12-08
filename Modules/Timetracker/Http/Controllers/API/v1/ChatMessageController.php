@@ -21,27 +21,28 @@ class ChatMessageController extends Controller
            $query->select('id','first_name', 'last_name');
              }])
             ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
-            ->where('to',\Auth::id())
-            //->groupBy('from')
-            ->get();
-            //->groupBy('from');
-            
+            ->where('to',\Auth::id())    
+            ->get();     
         $chatData =$chatData->groupBy('from');
         $unreadIds = Message::select(\DB::raw('`from` as sender_id, count(`from`) as messages_count'))
        ->where('to', auth()->id())
        ->where('read', false)
        ->groupBy('from')
        ->get();
-       $chatData = $chatData->map(function ($contact) use ($unreadIds) {
-            $contact=$contact[0];
-            $contactUnread = $unreadIds->where('sender_id', $contact->from)->first();
-            $contact->unread = $contactUnread ? $contactUnread->messages_count : 0;
-            return $contact;
+       $chatData = $chatData->map(function ($eachChat) use ($unreadIds) {
+            $eachChat=$eachChat->first();
+            $contactUnread = $unreadIds->where('sender_id', $eachChat->from)->first();
+            $eachChat->unread = $contactUnread ? $contactUnread->messages_count : 0;
+            return $eachChat;
         });
-        if (count($chatData)) {
+       foreach($chatData as $each_chat)
+       {
+        $result[]=$each_chat;
+       }
+        if (count($result)) {
             $successcontent['success'] = true;
             $successcontent['message'] = 'Retrieved successfully';
-            $successcontent['data'] = $chatData;
+            $successcontent['data'] = $result;
             $successcontent['code'] = 200;
         } else {
             $successcontent['success'] = false;
