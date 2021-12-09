@@ -39,9 +39,6 @@ class LoginValidationMiddleware
      */
     public function terminate($request, $response)
     {
-
-
-       return $this->loginLogRepository->SaveLoginLog($request, $response);
-
+       return $this->loginLogRepository->saveLoginLog($request, $response);
     }
 }

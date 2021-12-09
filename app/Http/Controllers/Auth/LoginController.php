@@ -67,11 +67,12 @@ use AuthenticatesUsers;
                 'password' => $request->input('password'),
                 'active' => 1,
             ];
+            if ($request->isMethod('post'))
+            {
+                $this->loginLogRepository->saveLoginLog($request, $credentialsArr); 
+            }
 
         }
-
-        $this->loginLogRepository->SaveLoginLog($request, $credentialsArr);
-
         return $credentialsArr;
     }
 

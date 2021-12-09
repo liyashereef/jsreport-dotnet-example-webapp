@@ -16,41 +16,40 @@ class LoginValidationLogRepository
 
     }
 
-    public function SaveLoginLog($request, $response){
-
+    public function saveLoginLog($request, $response){
          $routeURI = Route::current()->uri();
          $routeName = \Request::route()->getName();
-         $username = "--";
-         $success_value = 0;
+         $userName = "--";
+         $successValue = 0;
 
          if($routeName == "osgc.check-login-user"){
              $loginType = 'OSGCLOGIN';
              if($response){
                 $res = $response->getContent();
                 $user = json_decode($res, true);
-                $username = $user['username'];
-                $success_value = $user['success'];
+                $userName = $user['username'];
+                $successValue = $user['success'];
             }
          }else if($routeName == "facility.user-login"){
              $loginType = 'FACILITYLOGIN';
              if($response){
                 $res = $response->getContent();
                 $user = json_decode($res, true);
-                $username = $user['username'];
-                $success_value = $user['success'];
+                $userName = $user['username'];
+                $successValue = $user['success'];
             }
          }else if($routeName == "app.login"){
              $loginType = 'APPLOGIN';
              if($response){
                 $user = $response->getdata();
-                $username = $user->content->user->full_name;
-                $success_value = 1;
+                $userName = $user->content->user->full_name;
+                $successValue = 1;
             }
          }else if($routeURI == "login"){
             $loginType = 'WEBLOGIN';
             if($response){
-                $username = $response['username'];
-                $success_value = 1;
+                $userName = $response['username'];
+                $successValue = 1;
             }
          }
 
@@ -58,8 +57,8 @@ class LoginValidationLogRepository
             'ip' => $request->ip(),
             'login_type' => config('globals.login_type')[$loginType],
             'user_agent' => $request->header('user-agent'),
-            'success' => $success_value,
-            'username' => $username,
+            'success' => $successValue,
+            'username' => $userName,
         ];
 
         LoginLog::create($saveLoginLog);
