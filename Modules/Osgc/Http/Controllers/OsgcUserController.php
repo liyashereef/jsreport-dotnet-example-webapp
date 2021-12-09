@@ -16,6 +16,7 @@ class OsgcUserController extends Controller
     public function __construct(OsgcUserRepository $osgcUserrepository,OsgcCourseRepository $osgcCourseRepository){
         $this->osgcUserrepository = $osgcUserrepository;
         $this->osgcCourseRepository = $osgcCourseRepository;
+
     }
     /**
      * Display a listing of the resource.
@@ -70,7 +71,6 @@ class OsgcUserController extends Controller
       }else{
         return view('osgc::invalidUserActivation');
       }
-
     }
     /**
      * login
@@ -113,7 +113,6 @@ class OsgcUserController extends Controller
             $content["message"] = "Please check credentials and try again";
         }
         return json_encode($content, true);
-
     }
     public function logout()
     {
