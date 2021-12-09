@@ -84,7 +84,7 @@
                 </li>
             </ul>
         </li>
-
+        @canany(['view_chat','view_chat_menu','view_chat_history'])
         <li class="block2 accordclass">
             <a href="homeSubmenu2" data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle">
                 <!--<img src="images/nav3.png">-->
@@ -92,12 +92,16 @@
                 <span class="singlelinespan">Chat</span>
             </a>
             <ul class="dropdown-menu menu-list" role="menu">
+                @can('view_chat_menu')
                     <li class="dropdown-submenu">
                             <a href="{{ route('chat.viewchat') }}"> Chat </a>
                     </li>
-
+                     @endcan
+                     @can('view_chat_history')
                     <li class="dropdown-submenu">
                         <a href="{{ route('chat.view-history') }}"> Chat History </a>
                     </li>
+                     @endcan
             </ul>
         </li>
+        @endcanany
