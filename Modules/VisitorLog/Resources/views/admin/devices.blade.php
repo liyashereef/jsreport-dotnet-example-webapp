@@ -59,8 +59,7 @@
                 <div id="customer_id" class="form-group row">
                     <label for="customer_id" class="col-sm-3 control-label">Customer</label>
                     <div class="col-sm-9">
-                        <!-- {{ Form::select('customer_id',[''=>'Select Customer']+$customers,old('customer_id'),array('class'=> 'form-control select2', 'id'=>'customerId','style'=>'width: 591px;')) }} -->
-                        <select class="form-control option-adjust client-filter select2" name="customer_id" id="customerId">
+                        <select class="form-control select2" name="customer_id" id="customerId">
                             <option value="">Select Customer</option>
                             @foreach($customers as $key=>$customer)
                                 <option value="{{ $key}}">{{ $customer }} </option>
@@ -73,9 +72,12 @@
                 <div id="template_id" class="form-group row">
                     <label for="template_id" class="col-sm-3 control-label">Template</label>
                     <div class="col-sm-9">
-                        <select name="template_id" id="templates" class="form-control">
-                            <option>Please Select</option>
-                        </select>
+                        <div class="row" style="margin: 0px;">
+                            <select name="template_id" id="templates" class="form-control col-sm-9">
+                                <option>Please Select</option>
+                            </select>
+                            <a class="form-control col-sm-3" target="_blank" href="#" id="templateEditLink"> Edit Template</a>
+                        </div>
                         <small class="help-block"></small>
                     </div>
                 </div>
@@ -98,15 +100,19 @@
                 <div class="form-group row" id="pin">
                     <label for="pin" class="col-sm-3 control-label">Pin</label>
                     <div class="col-sm-9">
-                        {{ Form::text('pin',null,array('class'=>'form-control','placeholder' => 'Device Pin')) }}
+                        <div class="row" style="margin: 0px;">
+                            {{ Form::text('pin',null,array('class'=>'form-control col-sm-9','placeholder' => 'Device Pin')) }}
+                            {{ Form::button('Generate Pin',array('class'=>'btn btn-primary blue col-sm-3','id'=>'generatePin')) }}
+                        </div>
                         <small class="help-block"></small>
                     </div>
+
                 </div>
                 <div class="form-group row" id="camera_mode">
                     <label for="camera_mode" class="col-sm-3 control-label">Camera Mode </label>
                     <div class="col-sm-9" style="margin-top: 8px;">
                         <input type="radio" id="front-camera" name="camera_mode" value="1"> <label for="">Front Camere</label>
-                          <input type="radio" id="rear-camera" name="camera_mode" value="0"> <label for="">Rear Camera</label>
+                         <input type="radio" id="rear-camera" name="camera_mode" value="0"> <label for="">Rear Camera</label>
                         <small class="help-block"></small>
                     </div>
                 </div>
@@ -157,6 +163,7 @@
 
 <script>
     $(function() {
+        $('#templateEditLink').hide();
         templateId = '';
         $('#customerId').select2();
         $.fn.dataTable.ext.errMode = 'throw';
@@ -202,20 +209,6 @@
                         data: 'activated_at',
                         name: 'activated_at'
                     },
-
-                    // {
-                    //     data: null,
-                    //     orderable: false,
-                    //     render: function(o) {
-                    //         var actions = "";
-                    //         if(o.is_activated == 1){
-                    //             actions = o.activated_by.name_with_emp_no;
-                    //         }else{
-                    //             actions = ""
-                    //         }
-                    //         return actions;
-                    //     },
-                    // },
                     {
                         data: 'last_active_time',
                         name: 'last_active_time'
@@ -272,11 +265,26 @@
             $("#myModal #customerId").val('').trigger('change');
             $('#devices-form #templates').empty()
                 .append($("<option></option>")
-                    .attr("value", '')
-                    .text('Please Select'));
+                .attr("value", '')
+                .text('Please Select'));
             $("#myModal #templates").val('');
-            $('#myModal input[name="pin"]').val(Math.floor(Math.random() * 100000))
+            $('#myModal input[name="pin"]').val(Math.floor(Math.random() * 100000));
+            $("#myModal #email").prop("checked", true);
+            $('#templateEditLink').hide();
 
+        });
+
+        $("#devices-form").on("click", "#generatePin", function(e) {
+            $('#myModal input[name="pin"]').val(Math.floor(Math.random() * 100000));
+        });
+
+        $("#devices-form").on("click", "#templates", function(e) {
+            let id = $(this).val();
+            if(id > 0){
+                var url = '{{route("visitorlog-templates.update", ["id" => ""])}}/'+ id +'';
+                $('#myModal #templateEditLink').attr("href", url);
+                $('#templateEditLink').show();
+            }
         });
 
         $("#devices-form").on("change", "#customerId", function(e) {
@@ -368,6 +376,10 @@
 
                         $("#myModal").modal();
                         $('#myModal .modal-title').text("Edit Device: " + data.name)
+                        var templateURL = '{{route("visitorlog-templates.update", ["id" => ""])}}/'+ templateId +'';
+                        $('#myModal #templateEditLink').attr("href", templateURL);
+                        $('#templateEditLink').show();
+
                     } else {
                         swal("Oops", "Edit was unsuccessful", "warning");
                     }
