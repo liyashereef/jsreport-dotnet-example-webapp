@@ -16,7 +16,6 @@ class OsgcUserController extends Controller
     public function __construct(OsgcUserRepository $osgcUserrepository,OsgcCourseRepository $osgcCourseRepository){
         $this->osgcUserrepository = $osgcUserrepository;
         $this->osgcCourseRepository = $osgcCourseRepository;
-
     }
     /**
      * Display a listing of the resource.
