@@ -62,7 +62,7 @@ class ChatHistoryController extends Controller
             ->groupBy('from');
             foreach($chats as $eachChat)
         {
-            $latestRecord[]=$eachChat[0];
+            $latestRecord[]=$eachChat->first();
         }
                  // Message::select('*')
                  // ->groupBy('from')->with('fromContact')->where('to', \auth()->id())->orderby('created_at','DESC')->get();

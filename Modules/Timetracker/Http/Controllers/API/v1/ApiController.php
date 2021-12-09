@@ -226,6 +226,7 @@ class ApiController extends Controller
         $mobile_app_settings = MobileAppSetting::first();
         $user = $this->userRepository->loginForApp($request);
         if ($user) {
+            $content['user']['user_id'] = $user->id;
             $content['user']['full_name'] = $user->first_name . ' ' . $user->last_name;
             $content['user']['first_name'] = $user->first_name;
             $content['user']['last_name'] = $user->last_name;

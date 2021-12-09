@@ -70,8 +70,8 @@ class ContactsController extends Controller
             'user_id' => $request->contact_id,
             'contact_id' => auth()->id(),
         ]);
-       // return response()->json($message);
-       return response()->json($this->helperService->returnTrueResponse());
+        return response()->json($message);
+      // return response()->json($this->helperService->returnTrueResponse());
     }
 
     public function saveForApp(Request $request)

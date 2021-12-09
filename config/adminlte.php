@@ -430,7 +430,7 @@ return [
                 [
                     'text' => 'Required Timings',
                     'url' => 'admin/recruitment/training-timing',
-                    'icon' => 'list',
+                    'icon' => 'fas fa-list',
                 ],
                 [
                     'text' => 'Required Trainings',
