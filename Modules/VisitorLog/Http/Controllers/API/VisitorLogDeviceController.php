@@ -115,10 +115,11 @@ class VisitorLogDeviceController extends Controller
         if ($visitorCount > 0) {
             VisitorNotify::dispatch($customerId);
         }
+        //Disabled for client sync at connect/reconnect
         //Visitor log updation/creation check.
-        $logCount = $this->visitorLogRepo->updateCount($inputs);
-        if ($logCount > 0) {
+        // $logCount = $this->visitorLogRepo->updateCount($inputs);
+        // if ($logCount > 0) {
             VisitorLogNotify::dispatch($customerId, 'unknown');
-        }
+        // }
     }
 }
