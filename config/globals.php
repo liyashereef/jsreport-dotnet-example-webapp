@@ -113,5 +113,8 @@ return [
     'ids_refund_rejected' => 3,
     'qrPatrolDailyReportTime' => '8:00',
     'editFontIcon'=>'far fa-edit',
-    'deleteFontIcon'=>'fas fa-trash'
+    'deleteFontIcon'=>'fas fa-trash',
+    'blockFontIcon'=>'fas fa-ban',
+    'activateFontIcon'=>'far fa-check-circle'
 ];
+

@@ -97,4 +97,70 @@ class VisitorLogTemplateRepository
             return false;
         }
     }
+
+    public function fetchTemplateDetails($templateId)
+    {
+
+        $templates = $this->model->find($templateId);
+        $templatelistarray = [];
+        $templatelistarray["id"] = $templates->id;
+        $templatelistarray["name"] = $templates->template_name;
+
+        foreach ($templates->template_feature as $temp_feature) {
+
+            // For Mandatory validation
+            $reqval = false;
+            if ($temp_feature->is_required == 1) {
+                $reqval = true;
+            }
+
+            // For Mandatory validation
+            $is_visible = false;
+            if ($temp_feature->is_visible    == 1) {
+                $is_visible = true;
+            }
+
+            if ($temp_feature->feature_name == "picture") {
+                $templatelistarray["reqImageCapture"] = $reqval;
+                $templatelistarray["enImageCapture"] = $is_visible;
+            }
+            if ($temp_feature->feature_name == "signature") {
+                $templatelistarray["reqSignature"] = $reqval;
+                $templatelistarray["enSignature"] = $is_visible;
+            }
+        }
+
+        $fieldarray = [];
+        $j = 0;
+        foreach ($templates->visible_template_fields as $temp_fields) {
+
+            // Validation
+            $reqval = false;
+            if ($temp_fields->is_required == 1) {
+                $reqval = true;
+            }
+            $templatelistarray["fields"][$j]["name"] = $temp_fields->fieldname;
+            if ($temp_fields->fieldname == "first_name") {
+                $field_type = "text";
+            } else if ($temp_fields->fieldname == "email") {
+                $field_type = "email";
+            } else if ($temp_fields->fieldname == "phone") {
+                $field_type = "phone";
+            } else if ($temp_fields->fieldname == "visitor_type_id") {
+                $field_type = "radio";
+            } else if ($temp_fields->fieldname == "checkin") {
+                $field_type = "time";
+            } else {
+                $field_type = "text";
+            }
+            $templatelistarray["fields"][$j]["type"] = $field_type;
+            $templatelistarray["fields"][$j]["label"] = $temp_fields->field_displayname;
+            $templatelistarray["fields"][$j]["mandatory"] = $reqval;
+            $templatelistarray["fields"][$j]["pattern"] = "";
+            $j++;
+        }
+
+        return  $templatelistarray;
+    }
+
 }

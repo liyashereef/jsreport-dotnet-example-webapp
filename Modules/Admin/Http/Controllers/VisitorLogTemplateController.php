@@ -10,6 +10,7 @@ use Modules\Admin\Models\VisitorLogTemplateFeature;
 use Modules\Admin\Models\VisitorLogTemplateFields;
 use Modules\Admin\Models\VisitorLogTemplates;
 use Modules\Admin\Repositories\VisitorLogTemplateRepository;
+use Modules\VisitorLog\Repositories\VisitorLogDeviceRepository;
 use Validator;
 
 class VisitorLogTemplateController extends Controller
@@ -17,9 +18,12 @@ class VisitorLogTemplateController extends Controller
 
     protected $repository;
 
-    public function __construct(VisitorLogTemplateRepository $visitorLogTemplateRepository)
-    {
+    public function __construct(
+        VisitorLogTemplateRepository $visitorLogTemplateRepository,
+        VisitorLogDeviceRepository $visitorLogDeviceRepository
+    ){
         $this->repository = $visitorLogTemplateRepository;
+        $this->visitorLogDeviceRepository = $visitorLogDeviceRepository;
     }
 
     /**
@@ -92,7 +96,7 @@ class VisitorLogTemplateController extends Controller
                 foreach ($request->get('uid') as  $uid) {
                     $rfn = $request->get('fieldname_' . $uid);
 
-                    $computedFieldName = ($rfn == null || empty($rfn)) 
+                    $computedFieldName = ($rfn == null || empty($rfn))
                     ? snake_case($request->get('field_displayname_' . $uid))
                     :$rfn;
 
@@ -124,6 +128,10 @@ class VisitorLogTemplateController extends Controller
                 }
 
                 $result = ($template->wasRecentlyCreated);
+                //Triger pusher on edit.
+                if($request->get('id')){
+                    $this->visitorLogDeviceRepository->getByTemplateId($request->get('id'));
+                }
             }
             DB::commit();
             return response()->json(array('success' => 'true', 'result' => $result));

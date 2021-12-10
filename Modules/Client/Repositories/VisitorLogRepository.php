@@ -327,10 +327,10 @@ class VisitorLogRepository
     public function getByFilters($inputs)
     {
         $query = $this->visitorLogDetails;
-        
+
         //Filter by customer Id
-        $query = $query->when(isset($inputs['customerId']), function ($query) use ($inputs) {
-            $query->where('customer_id', $inputs['customerId']);
+        $query = $query->when(isset($inputs['x-ci']), function ($query) use ($inputs) {
+            $query->where('customer_id', $inputs['x-ci']);
         });
 
         //Filter by updated timestamp
@@ -340,10 +340,18 @@ class VisitorLogRepository
 
         //Only get results of past 24 hrs
         $query->where('created_at', '>=', Carbon::now()->subDay());
-        
+
         //Fetch results contains valid payload
         $query = $query->whereNotNull('payload');
 
         return $query->get();
+    }
+
+    public function updateCount($inputs)
+    {
+        return $this->visitorLogDetails->where('customer_id', $inputs['x-ci'])
+        ->when(isset($inputs) && !empty($inputs['visitorLog']), function ($q) use ($inputs) {
+            return $q->where('updated_at','>=', $inputs['visitorLog']);
+        })->count();
     }
 }

@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "alpinejs": "^2.7.3",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
         "jquery": "^3.6",
@@ -20,18 +21,17 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
-        "vue": "^2.6.12",
+        "vue": "^2.6.14",
         "vue-loader": "^15.9.8",
-        "vue-template-compiler": "^2.6.12",
-        "alpinejs": "^2.7.3"
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "laravel-echo": "^1.11.0",
-        "pusher-js": "^4.4.0",
-        "vue-chat-scroll": "^1.4.0",
         "@uppy/aws-s3-multipart": "^2.0.2",
         "@uppy/core": "^2.0.2",
         "@uppy/drag-drop": "^2.0.1",
-        "@uppy/status-bar": "^2.0.1"
+        "@uppy/status-bar": "^2.0.1",
+        "laravel-echo": "^1.11.0",
+        "pusher-js": "^4.4.0",
+        "vue-chat-scroll": "^1.4.0"
     }
 }
