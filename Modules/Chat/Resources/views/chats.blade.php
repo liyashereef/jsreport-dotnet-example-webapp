@@ -27,9 +27,11 @@
                 <input class="button btn btn-primary blue" type="button" id="textbtn" value="Text">
 
             </div>
+            @can('view_chat_history')
             <div class="col-md-4" style="text-align: right;">
                 <a href="{{url('chat/view-history')}}" class="button btn btn-primary blue">View History</a>
             </div>
+            @endcan
         </div>
     </div>
     <br>

@@ -248,7 +248,7 @@ class ApiController extends Controller
             $content['user']['show_employee_feedback_inapp'] = (Auth::user()->hasPermissionTo('show_employee_feedback_inapp')) ? 1 : 0;
             $content['user']['view_video_post'] = (Auth::user()->hasPermissionTo('view_video_post_in_app')) ? 1 : 0;
             $content['user']['view_uniform'] = (Auth::user()->hasPermissionTo('view_uniform_in_app')) ? 1 : 0;
-
+            $content['user']['view_chat'] = (Auth::user()->hasPermissionTo('view_chat_in_api')) ? 1 : 0;
             if ($request->get('version') != null && $request->get('version') >= Config::get('globals.mobile_app_version')) {
                 $content['success'] = true;
                 $content['message'] = 'ok';
