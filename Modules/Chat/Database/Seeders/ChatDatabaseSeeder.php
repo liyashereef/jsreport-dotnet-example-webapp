@@ -15,7 +15,9 @@ class ChatDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
+        $this->call(ChatModuleTableSeeder::class);
+        $this->call(RoleAndPermissionsChatTableSeeder::class);
+        $this->call(ModulePermissionChatTableSeeder::class);
         // $this->call("OthersTableSeeder");
     }
 }

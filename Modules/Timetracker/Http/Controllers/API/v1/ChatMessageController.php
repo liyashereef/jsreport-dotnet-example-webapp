@@ -66,7 +66,7 @@ class ChatMessageController extends Controller
             $q->where('from', $id);
             $q->where('to', \auth()->id());
         })
-        ->orderBy('created_at','DESC')->get();   
+        ->orderBy('id','ASC')->get();   
         if (count($chatData)) {
             $successcontent['success'] = true;
             $successcontent['message'] = 'Retrieved successfully';

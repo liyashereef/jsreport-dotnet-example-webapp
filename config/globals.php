@@ -115,4 +115,7 @@ return [
     'editFontIcon'=>'far fa-edit',
     'deleteFontIcon'=>'fas fa-trash',
     'login_type' => ['WEBLOGIN' => 'web_login', 'APPLOGIN' => 'app_login', 'OSGCLOGIN' => 'osgc_login', 'FACILITYLOGIN' => 'facility_login', 'VISITORAPPLOGIN' => 'visitor_app_login'],
+    'blockFontIcon'=>'fas fa-ban',
+    'activateFontIcon'=>'far fa-check-circle'
 ];
+
