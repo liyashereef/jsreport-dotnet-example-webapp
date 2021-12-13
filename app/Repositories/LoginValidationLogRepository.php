@@ -41,12 +41,15 @@ class LoginValidationLogRepository
          }else if($routeName == "app.login"){
              $loginType = 'APPLOGIN';
              if($response){
-                $user = $response->getdata();
-                $userName = $user->content->user->full_name;
-                $successValue = 1;
+                $res = $response->getContent();
+                $user = json_decode($res, true);
+                $userName = $user['content']['loggedInUsername'];
+                $successValue = $user['content']['success'];
             }
          }else if($routeURI == "login"){
             $loginType = 'WEBLOGIN';
+            $parameter = $request->request->all();
+            $userName = $parameter['log'];
             if($response){
                 $userName = $response['username'];
                 $successValue = 1;

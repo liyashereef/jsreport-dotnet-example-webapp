@@ -97,19 +97,19 @@ class OsgcUserController extends Controller
                         $userDetails->save();
                         $content["code"] = 200;
                         $content["success"] = true;
-                        $content["username"] = \Auth::guard('osgcuser')->user()->first_name . " " . \Auth::guard('osgcuser')->user()->last_name;
+                        $content["username"] = $request->email;
                         $content["message"] = "Welcome " . \Auth::guard('osgcuser')->user()->first_name . " " . \Auth::guard('osgcuser')->user()->last_name;
                 }
             }else{
                 $content["code"] = 406;
                 $content["success"] = false;
-                $content["username"] = \Auth::guard('osgcuser')->user()->first_name . " " . \Auth::guard('osgcuser')->user()->last_name;
+                $content["username"] = $request->email;
                 $content["message"] = "Account is Not Activated";
             }
         }else{
             $content["code"] = 406;
             $content["success"] = false;
-            $content["username"] = \Auth::guard('osgcuser')->user()->first_name . " " . \Auth::guard('osgcuser')->user()->last_name;
+            $content["username"] = $request->email;
             $content["message"] = "Please check credentials and try again";
         }
         return json_encode($content, true);
