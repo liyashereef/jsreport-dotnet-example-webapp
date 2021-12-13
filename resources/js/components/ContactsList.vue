@@ -3,7 +3,8 @@
         <ul>
             <li v-for="contact in sortedContacts" :key="contact.contact_id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
                 <div class="avatar">
-                <img name="image" :src="'../images/uploads/' + contact.contact[0].employee.image"  class="profileImage">   
+                <div class="default-image" v-if="contact.imagepath.length < 3"><label style="padding: 5px 6px;">{{contact.imagepath}}</label></div>
+                <img v-else name="image" :src="'../images/uploads/' + contact.imagepath"  class="profileImage">   
                 </div>
                 <div class="contact">
                     <p class="name">{{ contact.contact[0].full_name }}</p>
@@ -25,7 +26,8 @@
         },
         data() {
             return {
-                selected: this.contacts.length ? this.contacts[0] : null
+                selected: this.contacts.length ? this.contacts[0] : null,
+
             };
         },
         methods: {
@@ -33,7 +35,7 @@
                 this.selected = contact;
 
                 this.$emit('selected', contact);
-            }
+            },
         },
         computed: {
             sortedContacts() {
@@ -50,6 +52,7 @@
 </script>
 
 <style lang="scss" scoped>
+
 .contacts-list {
     flex: 2;
     max-height: 100%;
@@ -99,6 +102,16 @@
                     border-radius: 50%;
                     margin: 0 auto;
                 }
+               .default-image{
+                 width: 52px;
+                 height: 52px;
+                 border-radius: 50%;
+                 background: #f35804;
+                 font-size: 25px;
+                 color: #fff;
+                 text-align: center;
+                  margin: 0 auto;
+               }
             }
             .contact {
                 flex: 3;
