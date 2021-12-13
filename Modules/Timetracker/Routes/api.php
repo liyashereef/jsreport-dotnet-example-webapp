@@ -14,7 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::group([], function () {
-    Route::post('login', 'API\v1\ApiController@login');
+    Route::group(['middleware' => ['login-validation-log']], function () {
+        Route::post('login', 'API\v1\ApiController@login')->name('app.login');
+    });
+
     Route::post('forgotPassword', 'API\v1\ApiController@forgotPassword');
 
     Route::group(['middleware' => ['auth:api']], function () {
@@ -187,8 +190,8 @@ Route::group([], function () {
         Route::post('getAllChat', 'API\v1\ChatMessageController@getAllChat');
         Route::post('getPersonalChat', 'API\v1\ChatMessageController@getPersonalChat');
         Route::post('updateReadStatus', 'API\v1\ChatMessageController@updateReadStatus');
-        
-       
+
+
     });
 });
 

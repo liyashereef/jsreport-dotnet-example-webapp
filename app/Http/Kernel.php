@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
         'read-osgc-course' => \Modules\Osgc\Http\Middleware\CanReadOsgcCourseMiddleware::class,
         'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
         'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        'login-validation-log' => \App\Http\Middleware\LoginValidationMiddleware::class,
     ];
 }

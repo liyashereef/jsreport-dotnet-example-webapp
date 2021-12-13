@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Modules\Admin\Models\User;
+use App\Repositories\LoginValidationLogRepository;
 
 class LoginController extends Controller {
     /*
@@ -33,8 +34,9 @@ use AuthenticatesUsers;
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(LoginValidationLogRepository $loginLogRepository) {
         $this->middleware('guest')->except('logout');
+        $this->loginLogRepository = $loginLogRepository;
     }
 
     /**
@@ -65,6 +67,10 @@ use AuthenticatesUsers;
                 'password' => $request->input('password'),
                 'active' => 1,
             ];
+        }
+        if ($request->isMethod('post'))
+        {
+            $this->loginLogRepository->saveLoginLog($request, $credentialsArr);
         }
         return $credentialsArr;
     }

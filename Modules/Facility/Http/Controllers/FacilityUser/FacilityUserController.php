@@ -66,6 +66,7 @@ class FacilityUserController extends Controller
             // if (\Auth::guard('facilityuser')->attempt($request->only('username', 'password'))) {
             $return["code"] = 200;
             $return["success"] = true;
+            $return["username"] = $request->input('username');
             $return["message"] = "Success";
         } else {
 
@@ -74,9 +75,11 @@ class FacilityUserController extends Controller
 
             $return["code"] = 406;
             $return["success"] = false;
+            $return["username"] = $request->input('username');
             $return["message"] = "Invalid Credentials/Account inactive";
         }
-        return response()->json($return);
+
+        return json_encode($return, true);
     }
 
     /**

@@ -224,6 +224,7 @@ class ApiController extends Controller
     public function login(Request $request)
     {
         $mobile_app_settings = MobileAppSetting::first();
+        $loggedInUsername = $request->get('username');
         $user = $this->userRepository->loginForApp($request);
         if ($user) {
             $content['user']['user_id'] = $user->id;
@@ -252,14 +253,17 @@ class ApiController extends Controller
             if ($request->get('version') != null && $request->get('version') >= Config::get('globals.mobile_app_version')) {
                 $content['success'] = true;
                 $content['message'] = 'ok';
+                $content['loggedInUsername'] = $loggedInUsername;
                 $content['code'] = $this->successStatus;
             } else {
+                $content['loggedInUsername'] = $loggedInUsername;
                 $content['success'] = false;
                 $content['message'] = 'A new version of CGL 360 is available. Please update the app to continue using CGL 360';
                 $content['code'] = 400;
             }
             return response()->json(['content' => $content], $content['code']);
         } else {
+            $content['loggedInUsername'] = $loggedInUsername;
             $content['success'] = false;
             $content['message'] = 'Invalid Username or Password or Check whether the user has permissions';
             $content['code'] = 401;
