@@ -16,27 +16,30 @@
                 type: Object,
                 required: true
             },
-            newcontact:{
-                type: Object,
-                required: false
-            }
         },
         data() {
             return {
                 selectedContact: null,
                 messages: [],
-                contacts: []
+                contacts: [],
             };
         },
         mounted() {
             console.log(this.user.id);
             Echo.channel(`messages.${this.user.id}`)
                 .listen('.client-NewMessage', (e) => {
-                    console.log("inssssssssssss");
+                    console.log("message received");
                     console.log(e);
                     this.hanleIncomingAppMessage(e.message);
                 });
             this.getContactList()
+
+            Echo.channel(`updateContact.${this.user.id}`)
+                .listen('.contact', (e) => {
+                    console.log("inside update contact");
+                    this.getContactList()
+                    this.startConversationWith(e.contacts)
+                });
 
         },
         methods: {

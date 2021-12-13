@@ -11,18 +11,20 @@ use Modules\Admin\Models\User;
 use Modules\Admin\Repositories\UserRepository;
 use Modules\Admin\Repositories\EmployeeAllocationRepository;
 use Modules\Admin\Repositories\CustomerRepository;
-
+use Modules\Chat\Models\ChatContacts;
 
 class ChatController extends Controller
 {
+    
+    protected $userModel;
 
-
-    public function __construct(CustomerRepository $customerRepository, UserRepository $userRepository, EmployeeAllocationRepository $employeeAllocationRepository)
+    public function __construct(User $userModel,CustomerRepository $customerRepository, UserRepository $userRepository, EmployeeAllocationRepository $employeeAllocationRepository)
     {
 
         $this->customerRepository = $customerRepository;
         $this->userRepository = $userRepository;
         $this->employeeAllocationRepository = $employeeAllocationRepository;
+        $this->userModel = $userModel;
     }
     
     /**
@@ -31,18 +33,22 @@ class ChatController extends Controller
      */
     public function index()
     {
-      //  $user = \Auth::user();
-    //  $rr = [1,2,3];
-    //    $user = User::where('id', 1)->first()->toArray();
     $user = \Auth::user();
+    $contacts = ChatContacts::where('user_id',\Auth::user()->id)->pluck('contact_id')->toArray();
     if ($user->can('view_all_customer_qrcode_summary')) {
-        $user_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
+        $all_users_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
         ->orderBy('first_name', 'asc')->get();
+        $user_list = $all_users_list->filter(function($value, $key) use ($contacts) {
+                if (!in_array($value['id'], $contacts)) {
+                return true;
+            }
+        });
         $customer_details_arr = $this->customerRepository->getProjectsDropdownList('all');
     }else if($user->can('view_allocated_customer_qrcode_summary')){
         $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
-        $user_list = $this->usermodel
+        $user_list = $this->userModel
         ->whereIn('id',$employees)->get();
+        //todo:: filter users
         $customer_details_arr = $this->customerRepository->getProjectsDropdownList('allocated');
     }else{
         $user_list = [];

@@ -10723,10 +10723,6 @@ __webpack_require__.r(__webpack_exports__);
     user: {
       type: Object,
       required: true
-    },
-    newcontact: {
-      type: Object,
-      required: false
     }
   },
   data: function data() {
@@ -10741,12 +10737,19 @@ __webpack_require__.r(__webpack_exports__);
 
     console.log(this.user.id);
     Echo.channel("messages.".concat(this.user.id)).listen('.client-NewMessage', function (e) {
-      console.log("inssssssssssss");
+      console.log("message received");
       console.log(e);
 
       _this.hanleIncomingAppMessage(e.message);
     });
     this.getContactList();
+    Echo.channel("updateContact.".concat(this.user.id)).listen('.contact', function (e) {
+      console.log("inside update contact");
+
+      _this.getContactList();
+
+      _this.startConversationWith(e.contacts);
+    });
   },
   methods: {
     getContactList: function getContactList() {
@@ -10830,6 +10833,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -15643,7 +15647,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".contacts-list[data-v-484f3208] {\n  flex: 2;\n  max-height: 100%;\n  height: 600px;\n  overflow: scroll;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: #f35804;\n  color: #fff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  justify-content: center;\n  align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 53px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".contacts-list[data-v-484f3208] {\n  flex: 2;\n  max-height: 100%;\n  height: 600px;\n  overflow: scroll;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: #f35804;\n  color: #fff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  justify-content: center;\n  align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 53px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .avatar .default-image[data-v-484f3208] {\n  width: 52px;\n  height: 52px;\n  border-radius: 50%;\n  background: #f35804;\n  font-size: 25px;\n  color: #fff;\n  text-align: center;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -59165,13 +59169,19 @@ var render = function () {
           },
           [
             _c("div", { staticClass: "avatar" }, [
-              _c("img", {
-                staticClass: "profileImage",
-                attrs: {
-                  name: "image",
-                  src: "../images/uploads/" + contact.contact[0].employee.image,
-                },
-              }),
+              contact.imagepath.length < 3
+                ? _c("div", { staticClass: "default-image" }, [
+                    _c("label", { staticStyle: { padding: "5px 6px" } }, [
+                      _vm._v(_vm._s(contact.imagepath)),
+                    ]),
+                  ])
+                : _c("img", {
+                    staticClass: "profileImage",
+                    attrs: {
+                      name: "image",
+                      src: "../images/uploads/" + contact.imagepath,
+                    },
+                  }),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "contact" }, [

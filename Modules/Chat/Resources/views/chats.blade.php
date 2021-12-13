@@ -8,11 +8,11 @@
 
     <div class="col-md-12 filter-wrapper">
         <div class="row">
-            <div class="col-md-1"><label class="label-name">Customer</label></div>
-            <div class="col-md-2" style="margin-left: -30px;">
+            <div class="col-lg-1 col-md-2"><label class="label-name">Customer</label></div>
+            <div class="col-md-2" >
                 {{ Form::select('clientname-filter',[''=>'Select customer']+$customer_details_arr,null,array('class'=>'form-control select2 option-adjust client-filter', 'id'=>'clientname-filter', 'style'=>"width: 100%;")) }}
             </div>
-            <div class="col-md-1 " style="text-align: right;"><label class="label-name">Employee </label></div>
+            <div class="col-lg-1 col-md-2 " style="text-align: right;"><label class="label-name">Employee </label></div>
             <div class="col-md-2">
                 <select class="form-control option-adjust employee-filter select2" name="employee-filter" id="employee-name-filter">
                     <option value="0">Select Employee</option>
@@ -28,7 +28,7 @@
 
             </div>
             @can('view_chat_history')
-            <div class="col-md-4" style="text-align: right;">
+            <div class="col-lg-4 col-md-2" style="text-align: right;">
                 <a href="{{url('chat/view-history')}}" class="button btn btn-primary blue">View History</a>
             </div>
             @endcan
@@ -36,7 +36,7 @@
     </div>
     <br>
     <div class="container">
-        <chat-app :user="{{ auth()->user() }}" :newcontact="{{ auth()->user() }}"></chat-app>
+        <chat-app :user="{{ auth()->user() }}"></chat-app>
     </div>
 </div>
 
@@ -83,7 +83,7 @@
 
     .container {
         max-width: 100% !important;
-        padding: 0px 31% 0px 0px;
+        padding: 0px 25% 0px 0px;
     }
 
     .col-form-label {
@@ -92,6 +92,10 @@
 
     .modal-footer {
         justify-content: center !important;
+    }
+    label{
+        margin-bottom: 0px !important;
+        vertical-align: middle;
     }
 </style>
 @endsection
@@ -120,9 +124,7 @@
                 },
                 success: function(data) {
                     if (data) {
-                        window.location.reload();
-                        localStorage.setItem('contact_list', 1);
-
+                //        window.location.reload();
                     } else {
                         console.log(data);
                         swal("Oops", "Edit was unsuccessful", "warning");
@@ -139,7 +141,7 @@
                 contentType: false,
                 processData: false,
             });
-        });
+         });
 
 
 
