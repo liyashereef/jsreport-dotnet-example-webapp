@@ -65,7 +65,7 @@ class ContactsController extends Controller
             $q->where('from', $id);
             $q->where('to', \auth()->id());
         })
-            ->get();
+            ->limit(100)->get();
         return response()->json($messages);
     }
 
@@ -75,7 +75,8 @@ class ContactsController extends Controller
         $message = Message::create([
             'from' => auth()->id(),
             'to' => $request->contact_id,
-            'text' => $request->text
+            'text' => $request->text,
+            'type' => (isset($request->type) ? $request->type : 0)
         ]);
         broadcast(new NewMessage($message));
         $contacts = ChatContacts::firstOrCreate([
