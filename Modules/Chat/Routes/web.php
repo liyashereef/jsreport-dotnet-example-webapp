@@ -25,6 +25,8 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'chat'], function () 
     Route::get('/view-history-list', array('as' => 'chat.view-history.list', 'uses' => 'ChatHistoryController@getChatHistoryList'));
      });
      Route::get('/view-chat-list/{id}', array('as' => 'chat.show-message', 'uses' => 'ChatHistoryController@getChatList'));
+     Route::get('/view-chat-allocated-employee/{id}', array('as' => 'chat.allocated-employee', 'uses' => 'ChatController@getAllocatedEmployeesByCustomer'));
+     
     Route::post('/contact/store', array('as' => 'chat.contact.store', 'uses' => 'ContactsController@store'));
    
     

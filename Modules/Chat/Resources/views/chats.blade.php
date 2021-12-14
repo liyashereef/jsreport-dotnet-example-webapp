@@ -106,6 +106,39 @@
         $('#clientname-filter').on('change', function(e) {
             type = $('input[name=customer-contract-type]:checked').val();
             var client_id = $('#clientname-filter').val() ? $('#clientname-filter').val() : 0;
+            var base_url = "{{route('chat.allocated-employee',[':client_id'])}}";
+            var url = base_url.replace(':client_id', client_id);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: client_id,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    if (data.success) {
+                        $('#employee-name-filter').find('option:not(:first)').remove();
+                        $.each(data.data, function(key, value) {
+                        $('#employee-name-filter').append($("<option></option>")
+                               .attr("value",value.id)
+                             .text(value.name));
+                    });
+                    } else {
+                        console.log(data);
+                        swal("Oops", "Edit was unsuccessful", "warning");
+                    }
+                },
+                error: function(xhr, textStatus, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                    swal("Oops", "Something went wrong", "warning");
+                    if (xhr.status === 401) {
+                        window.location = "{{ route('login') }}";
+                    }
+                },
+                contentType: false,
+                processData: false,
+            });
 
         });
 

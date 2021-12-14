@@ -12,19 +12,21 @@ use Modules\Admin\Repositories\UserRepository;
 use Modules\Admin\Repositories\EmployeeAllocationRepository;
 use Modules\Admin\Repositories\CustomerRepository;
 use Modules\Chat\Models\ChatContacts;
+use Modules\Admin\Repositories\CustomerEmployeeAllocationRepository;
 
 class ChatController extends Controller
 {
     
     protected $userModel;
 
-    public function __construct(User $userModel,CustomerRepository $customerRepository, UserRepository $userRepository, EmployeeAllocationRepository $employeeAllocationRepository)
+    public function __construct(User $userModel,CustomerRepository $customerRepository, UserRepository $userRepository, EmployeeAllocationRepository $employeeAllocationRepository,CustomerEmployeeAllocationRepository $CustomerEmployeeAllocationRepository)
     {
 
         $this->customerRepository = $customerRepository;
         $this->userRepository = $userRepository;
         $this->employeeAllocationRepository = $employeeAllocationRepository;
         $this->userModel = $userModel;
+        $this->CustomerEmployeeAllocationRepository=$CustomerEmployeeAllocationRepository;
     }
     
     /**
@@ -35,7 +37,7 @@ class ChatController extends Controller
     {
     $user = \Auth::user();
     $contacts = ChatContacts::where('user_id',\Auth::user()->id)->pluck('contact_id')->toArray();
-    if ($user->can('view_all_customer_qrcode_summary')) {
+    if ($user->can('view_all_customer_chatlist')) {
         $all_users_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
         ->orderBy('first_name', 'asc')->get();
         $user_list = $all_users_list->filter(function($value, $key) use ($contacts) {
@@ -44,7 +46,7 @@ class ChatController extends Controller
             }
         });
         $customer_details_arr = $this->customerRepository->getProjectsDropdownList('all');
-    }else if($user->can('view_allocated_customer_qrcode_summary')){
+    }else if($user->can('view_allocated_customer_chatlist')){
         $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
         $user_list = $this->userModel
         ->whereIn('id',$employees)->get();
@@ -132,5 +134,49 @@ class ChatController extends Controller
         broadcast(new MessageSent($message->load('user')))->toOthers();
 
         return ['status' => 'success'];
+    }
+
+     /*
+     *fetch employee select box values by customer array
+     *@param  Request $request
+     *@return json
+     */
+    public function getAllocatedEmployeesByCustomer($id)
+    {
+        $empArr = [];
+        $user = \Auth::user();
+        if($id!=0)
+        {
+        $allocList = $this->CustomerEmployeeAllocationRepository->allocationList($id);
+        }
+        else
+        {
+         if ($user->can('view_all_customer_chatlist')) {
+         $allocList = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
+        ->orderBy('first_name', 'asc')->get(); 
+         }
+         else if($user->can('view_allocated_customer_chatlist')){
+          $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
+          $allocList = $this->userModel->whereIn('id',$employees)->get();
+        }
+        else{
+         $allocList = [];
+         }
+
+        foreach ($allocList as $key => $empList) {
+            $empArr[] = [
+                'id' => $empList->id,
+                'name' => $empList->full_name . ' (' . $empList->employee->employee_no . ')',
+            ];
+        }
+
+        if (!empty($empArr)) {
+            $users = array_column($empArr, 'name');
+            array_multisort($users, SORT_ASC, $empArr);
+        }    
+        return response()->json([
+            'success' => true,
+            'data' => $empArr,
+        ]);
     }
 }
