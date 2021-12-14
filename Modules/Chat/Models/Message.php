@@ -21,5 +21,9 @@ class Message extends Model
     {
         return $this->hasOne('Modules\Admin\Models\User', 'id', 'from');
     }
+    public function toContact()
+    {
+        return $this->hasOne('Modules\Admin\Models\User', 'id', 'to');
+    }
    
 }
