@@ -51,6 +51,8 @@
             </div>
             {{ Form::open(array('url'=>'#','id'=>'text-chat-form','class'=>'form-horizontal', 'method'=> 'POST')) }}
             {{ Form::hidden('candidate-id', null) }}
+            {{ Form::hidden('type', 1) }}
+            
             <div class="modal-body">
                 <div class="form-group row" id="password_reset_mail">
                     <label for="emailScript" class="col-sm-2 col-form-label">To</label>
@@ -216,7 +218,7 @@
                 type: 'POST',
                 data: formData,
                 success: function (data) {
-                    if (data.success) {
+                    if (data.id !=null) {
 
                         swal({
                                 title: "Success",
@@ -233,7 +235,7 @@
 
 
                     } else {
-                        alert(data);
+                        alert("Not able to send message");
                     }
                 },
                 fail: function (response) {
