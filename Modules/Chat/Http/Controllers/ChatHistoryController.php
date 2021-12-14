@@ -33,19 +33,6 @@ class ChatHistoryController extends Controller
     {
     //  $rr = [1,2,3];
     //    $user = User::where('id', 1)->first()->toArray();
-    // $user = \Auth::user();
-    // if ($user->can('view_all_customer_chatlist')) {
-    //     $user_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
-    //     ->orderBy('first_name', 'asc')->get();
-    //     $project_list = $this->customerRepository->getProjectsDropdownList('all');
-    // }else if($user->can('view_allocated_customer_chatlist')){
-    //     $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
-    //     $user_list = User::whereIn('id',$employees)->get();
-    //     $project_list = $this->customerRepository->getProjectsDropdownList('allocated');
-    // }else{
-    //     $user_list = [];
-    //     $project_list = [];
-    // }
      return view('chat::view-history');
     }
 
