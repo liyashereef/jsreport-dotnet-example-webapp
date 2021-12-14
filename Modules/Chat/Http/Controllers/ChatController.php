@@ -36,13 +36,8 @@ class ChatController extends Controller
     $user = \Auth::user();
     $contacts = ChatContacts::where('user_id',\Auth::user()->id)->pluck('contact_id')->toArray();
     if ($user->can('view_all_customer_qrcode_summary')) {
-        $all_users_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
+        $user_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
         ->orderBy('first_name', 'asc')->get();
-        $user_list = $all_users_list->filter(function($value, $key) use ($contacts) {
-                if (!in_array($value['id'], $contacts)) {
-                return true;
-            }
-        });
         $customer_details_arr = $this->customerRepository->getProjectsDropdownList('all');
     }else if($user->can('view_allocated_customer_qrcode_summary')){
         $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
