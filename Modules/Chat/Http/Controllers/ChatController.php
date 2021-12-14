@@ -39,7 +39,7 @@ class ChatController extends Controller
     $contacts = ChatContacts::where('user_id',\Auth::user()->id)->pluck('contact_id')->toArray();
 
     if ($user->can('view_all_customer_chatlist')) {
-        $all_users_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
+        $user_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
         ->orderBy('first_name', 'asc')->get();
         $customer_details_arr = $this->customerRepository->getProjectsDropdownList('all');
     }else if($user->can('view_allocated_customer_chatlist')){
