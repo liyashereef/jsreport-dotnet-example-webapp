@@ -11,7 +11,8 @@ use Modules\Chat\Models\ChatContacts;
 use Auth;
 use App\Services\HelperService;
 use Config;
-
+use Modules\Admin\Repositories\UserRepository;
+use Modules\Admin\Repositories\EmployeeAllocationRepository;
 use App\Events\NewMessage;
 use App\Events\UpdateContact;
 
@@ -19,15 +20,30 @@ class ContactsController extends Controller
 {
 
 
-    public function __construct(HelperService $helperService)
+    public function __construct(HelperService $helperService,UserRepository $userRepository, EmployeeAllocationRepository $employeeAllocationRepository)
     {
         $this->helperService = $helperService;
+        $this->userRepository = $userRepository;
+        $this->employeeAllocationRepository = $employeeAllocationRepository;
     }
 
     public function get()
     {
+         $user = \Auth::user();
+         if ($user->can('view_all_customer_chatlist')) {
+        $employees_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
+        ->orderBy('first_name', 'asc')->pluck('id')->toArray();
+    }else if($user->can('view_allocated_customer_chatlist')){
+        $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
+        $employees_list = $this->userModel
+        ->whereIn('id',$employees)->pluck('id')->toArray();
+    }else{
+        $employees_list = [];
+    }
+    
         $contacts = ChatContacts::with('contact.employee')
         ->where('user_id',auth()->id())
+        ->whereIn('contact_id',$employees_list)
         ->where('contact_id', '!=', auth()->id())->get();
        //  $contacts = User::with('employee')->where('id', '!=', auth()->id())->where('id','<',10)->get();
        $unreadIds = Message::select(\DB::raw('`from` as sender_id, count(`from`) as messages_count'))
@@ -35,7 +51,7 @@ class ContactsController extends Controller
        ->where('read', false)
        ->groupBy('from')
        ->get();
-     //  dd($contacts);
+       
        $contacts = $contacts->map(function ($contact) use ($unreadIds) {
 
            if (($contact->contact[0]->employee->image == null) || (!file_exists(public_path() . Config::get('globals.profilePicPath').$contact->contact[0]->employee->image))) {

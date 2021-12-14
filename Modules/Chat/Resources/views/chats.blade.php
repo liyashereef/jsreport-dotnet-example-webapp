@@ -125,7 +125,7 @@
                     });
                     } else {
                         console.log(data);
-                        swal("Oops", "Edit was unsuccessful", "warning");
+                        swal("Oops", "Something went wrong", "warning");
                     }
                 },
                 error: function(xhr, textStatus, thrownError) {

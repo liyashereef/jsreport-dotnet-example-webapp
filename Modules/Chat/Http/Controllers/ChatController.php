@@ -162,7 +162,7 @@ class ChatController extends Controller
         else{
          $allocList = [];
          }
-
+          }
         foreach ($allocList as $key => $empList) {
             $empArr[] = [
                 'id' => $empList->id,
@@ -178,5 +178,6 @@ class ChatController extends Controller
             'success' => true,
             'data' => $empArr,
         ]);
-    }
+   
+}
 }
