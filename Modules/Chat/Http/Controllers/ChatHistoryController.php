@@ -31,41 +31,35 @@ class ChatHistoryController extends Controller
      */
     public function index()
     {
-      //  $user = \Auth::user();
     //  $rr = [1,2,3];
     //    $user = User::where('id', 1)->first()->toArray();
-    $user = \Auth::user();
-    if ($user->can('view_all_customer_qrcode_summary')) {
-        $user_list = $this->userRepository->getUserLookup(null,['admin','super_admin'],null,true,null,true)
-        ->orderBy('first_name', 'asc')->get();
-        $project_list = $this->customerRepository->getProjectsDropdownList('all');
-    }else if($user->can('view_allocated_customer_qrcode_summary')){
-        $employees = $this->employeeAllocationRepository->getEmployeeIdAssigned(\Auth::user()->id);
-        $user_list = $this->usermodel
-        ->whereIn('id',$employees)->get();
-        $project_list = $this->customerRepository->getProjectsDropdownList('allocated');
-    }else{
-        $user_list = [];
-        $project_list = [];
-    }
-     return view('chat::view-history', compact('user_list', 'project_list'));
+     return view('chat::view-history');
     }
 
     public function getChatHistoryList()
     {
-            $chats = Message::select(\DB::raw('*'))
+            $recievedChat = Message::select(\DB::raw('*'))
             ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
             ->with('fromContact')
             ->where('to',\Auth::id())
-            //->orWhere('from',\Auth::id())
             ->get()
             ->groupBy('from');
-            foreach($chats as $eachChat)
+             foreach($recievedChat as $eachChat)
+        {
+            $latestRecord[]=$eachChat->first();
+            $from_arr[]=$eachChat->first()['from'];
+        } 
+            $sendChat = Message::select(\DB::raw('*'))
+            ->from(\DB::raw('(SELECT * FROM messages ORDER BY created_at DESC) t'))
+            ->with('toContact')
+            ->where('from',\Auth::id())
+            ->whereNotIn('to',$from_arr)
+            ->get()
+            ->groupBy('to');
+           foreach($sendChat as $eachChat)
         {
             $latestRecord[]=$eachChat->first();
         }
-                 // Message::select('*')
-                 // ->groupBy('from')->with('fromContact')->where('to', \auth()->id())->orderby('created_at','DESC')->get();
         return datatables()->of($this->prepareHistoryList($latestRecord))->addIndexColumn()->toJson();
     }
 
@@ -74,12 +68,12 @@ class ChatHistoryController extends Controller
 
         $datatable_rows = array();
         foreach ($chats as $key => $each_chat) {
-            $each_row["from_id"] = $each_chat->from;
+            $each_row["from_id"] = $each_chat->from!=\Auth::id()?$each_chat->from:$each_chat->to;
             $each_row["date"] = $each_chat->created_at->format('Y-m-d');
             $each_row["time"] = $each_chat->created_at->format('h:i A');
             $each_row["text"] = $each_chat->text;
-            $each_row["from"] = $each_chat->fromContact->full_name;
-            $each_row["employee_no"] = $each_chat->fromContact->employee->employee_no;
+            $each_row["from"] =$each_chat->from!=\Auth::id()?$each_chat->fromContact->full_name:$each_chat->toContact->full_name;
+            $each_row["employee_no"] = $each_chat->from!=\Auth::id()?$each_chat->fromContact->employee->employee_no:$each_chat->toContact->employee->employee_no;
             $each_row["id"] = $each_chat->id;
             array_push($datatable_rows, $each_row);
         }

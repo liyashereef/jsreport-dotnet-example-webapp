@@ -22,6 +22,7 @@ class ContactsController extends Controller
     public function __construct(HelperService $helperService)
     {
         $this->helperService = $helperService;
+       
     }
 
     public function get()
@@ -35,7 +36,7 @@ class ContactsController extends Controller
        ->where('read', false)
        ->groupBy('from')
        ->get();
-     //  dd($contacts);
+       
        $contacts = $contacts->map(function ($contact) use ($unreadIds) {
 
            if (($contact->contact[0]->employee->image == null) || (!file_exists(public_path() . Config::get('globals.profilePicPath').$contact->contact[0]->employee->image))) {
