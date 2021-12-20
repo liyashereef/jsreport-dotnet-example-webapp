@@ -55,6 +55,15 @@ class LoginValidationLogRepository
                 $successValue = 1;
             }
          }
+         else if($routeName == "visitorlog-login"){
+            $loginType = 'VISITORAPPLOGIN';
+            if($response){
+                $res = $response->getContent();
+                $user = json_decode($res, true);
+                $userName = $user['user_name'];
+                $successValue = $user['success'];
+            }
+         }
 
         $saveLoginLog = [
             'ip' => $request->ip(),

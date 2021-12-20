@@ -22,7 +22,9 @@ class AuthController
             $user = $this->userRepository->loginForApp($request, 'visitorlog_app_admin');
             if (!$user) {
                 return response()->json([
-                    'message' => 'Invalid Username or Password or Check whether the user has permissions'
+                    'user_name' => $request->get('username'),
+                    'message' => 'Invalid Username or Password or Check whether the user has permissions',
+                    'success' => false
                 ], 401);
             }
 
@@ -34,9 +36,11 @@ class AuthController
 
             //Return access token
             return response()->json([
+                'user_name' => $request->get('username'),
                 'tokenType' => 'Bearer',
                 'accessToken' => $tr->accessToken,
-                'id' => $user->id
+                'id' => $user->id,
+                'success' => true
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

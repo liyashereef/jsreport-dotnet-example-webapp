@@ -25,7 +25,10 @@ Route::group(
     function () {
         // Visitor log devices
         Route::get('activate/device', 'VisitorLogDeviceController@activateDevice');
-        Route::post('login', 'AuthController@login');
+        Route::group(['middleware' => ['login-validation-log']], function () {
+            Route::post('login', 'AuthController@login')->name('visitorlog-login');
+        });
+
         // Route::post('app/health', 'ApplicationController@applicationHealth');
 
         //Only logged in users can access these routes
