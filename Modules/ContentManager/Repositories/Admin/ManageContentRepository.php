@@ -89,12 +89,22 @@ class ManageContentRepository
     public function save($request)
     {
         $contentId = $request->id;
-        $data = [
-            'key' => strtoupper(md5(time())),
-            'status' => 1,
-            'video' => 1,
-            'expiry_date' => $request->expiry_date,
-        ];
+        if($contentId>0){
+
+            $data = [
+                'status' => 1,
+                'video' => 1,
+                'expiry_date' => $request->expiry_date,
+            ];
+        }else{
+
+            $data = [
+                'key' => strtoupper(md5(time())),
+                'status' => 1,
+                'video' => 1,
+                'expiry_date' => $request->expiry_date,
+            ];
+        }
         if ($contentId > 0) {
             $contentVideoAttachment = ContentAttachments::where(
                 [
