@@ -1,58 +1,91 @@
 <template>
     <div class="contacts-list">
         <ul>
-            <li v-for="contact in sortedContacts" :key="contact.contact_id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+            <li
+                v-for="contact in sortedContacts"
+                :key="contact.contact_id"
+                @click="selectContact(contact)"
+                :class="{ selected: contact == selected }"
+            >
                 <div class="avatar">
-                <div class="default-image" v-if="contact.imagepath.length < 3"><label style="padding: 5px 6px;">{{contact.imagepath}}</label></div>
-                <img v-else name="image" :src="'../images/uploads/' + contact.imagepath"  class="profileImage">   
+                    <div
+                        class="default-image"
+                        v-if="contact.imagepath.length < 3"
+                    >
+                        <label style="padding: 5px 6px">{{
+                            contact.imagepath
+                        }}</label>
+                    </div>
+                    <img
+                        v-else
+                        name="image"
+                        :src="'../images/uploads/' + contact.imagepath"
+                        class="profileImage"
+                    />
                 </div>
                 <div class="contact">
                     <p class="name">{{ contact.contact[0].full_name }}</p>
                     <p class="email">{{ contact.contact[0].email }}</p>
                 </div>
-                <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
+                <span class="unread" v-if="contact.unread">{{
+                    contact.unread
+                }}</span>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            contacts: {
-                type: Array,
-                default: []
-            }
+export default {
+    props: {
+        contacts: {
+            type: Array,
+            default: [],
         },
-        data() {
-            return {
-                selected: this.contacts.length ? this.contacts[0] : null,
-
-            };
+        newcontact: Number,
+    },
+    data() {
+        return {
+            selected: this.contacts.length ? this.contacts[0] : null,
+        };
+    },
+    methods: {
+        selectContact(contact) {
+            this.selected = contact;
+            this.$emit("selected", contact);
         },
-        methods: {
-            selectContact(contact) {
-                this.selected = contact;
-
-                this.$emit('selected', contact);
-            },
-        },
-        computed: {
-            sortedContacts() {
-                return _.sortBy(this.contacts, [(contact) => {
+    },
+    computed: {
+        sortedContacts() {
+            return _.sortBy(this.contacts, [
+                (contact) => {
                     if (contact == this.selected) {
                         return Infinity;
                     }
 
                     return contact.unread;
-                }]).reverse();
+                },
+            ]).reverse();
+        },
+    },
+    watch: {
+        newcontact(val) {
+            if (val != null) {
+                var valObj = {};
+                valObj = this.contacts.filter(function (elem) {
+                    if (elem.contact_id == val) return elem;
+                });
+                if (valObj.length) {
+                    this.selected = valObj[0];
+                    this.$emit("selected", valObj[0]);
+                }
             }
-        }
-    }
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-
 .contacts-list {
     flex: 2;
     max-height: 100%;
@@ -98,20 +131,20 @@
                 align-items: center;
 
                 img {
-                   width: 53px;
+                    width: 53px;
                     border-radius: 50%;
                     margin: 0 auto;
                 }
-               .default-image{
-                 width: 52px;
-                 height: 52px;
-                 border-radius: 50%;
-                 background: #f35804;
-                 font-size: 25px;
-                 color: #fff;
-                 text-align: center;
-                  margin: 0 auto;
-               }
+                .default-image {
+                    width: 52px;
+                    height: 52px;
+                    border-radius: 50%;
+                    background: #f35804;
+                    font-size: 25px;
+                    color: #fff;
+                    text-align: center;
+                    margin: 0 auto;
+                }
             }
             .contact {
                 flex: 3;

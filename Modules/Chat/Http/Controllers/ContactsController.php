@@ -103,12 +103,16 @@ class ContactsController extends Controller
         try {
             \DB::beginTransaction();
             $contact_id = (int) $request->get('contact_id');
-            if($contact_id != 0){
-                $contacts = ChatContacts::firstOrCreate([
-                    'user_id' => auth()->id(),
-                    'contact_id' => $contact_id,
-                ]);
-                broadcast(new UpdateContact(auth()->id(),$contact_id));
+            if (ChatContacts::where('contact_id', $contact_id)->where('user_id', auth()->id())->exists()) {
+                return response()->json($this->helperService->returnFalseResponse()); 
+            }else{
+                if($contact_id != 0){
+                    $contacts = ChatContacts::firstOrCreate([
+                        'user_id' => auth()->id(),
+                        'contact_id' => $contact_id,
+                    ]);
+                    broadcast(new UpdateContact(auth()->id(),$contact_id));
+                }
             }
             \DB::commit();
            if ($contacts) {

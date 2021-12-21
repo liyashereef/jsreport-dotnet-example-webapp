@@ -77,7 +77,9 @@
         </div>
     </div>
 </div>
+
 <style>
+    
     div.filter-wrapper {
         padding: .5rem !important;
         border: 1px solid #e9ecef !important;
@@ -104,7 +106,7 @@
 @section('scripts')
 <script>
     $(function() {
-
+       // $('.select2').select2();
         $('#clientname-filter').on('change', function(e) {
             type = $('input[name=customer-contract-type]:checked').val();
             var client_id = $('#clientname-filter').val() ? $('#clientname-filter').val() : 0;
@@ -158,11 +160,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    if (data) {
-                //        window.location.reload();
+                    if (data.success) {
+                        console.log(data);
                     } else {
                         console.log(data);
-                        swal("Oops", "Edit was unsuccessful", "warning");
+                        swal("Oops", "Employee is already in your contact", "warning");
                     }
                 },
                 error: function(xhr, textStatus, thrownError) {
@@ -182,7 +184,7 @@
 
 
 
-        //  $('#employee-name-filter').select2();
+
         $("#textbtn").on("click", function(e) {
             if ($("#employee-name-filter option:selected").text() != 'Select Employee') {
                 $('#textModal #to').text($("#employee-name-filter option:selected").text());
