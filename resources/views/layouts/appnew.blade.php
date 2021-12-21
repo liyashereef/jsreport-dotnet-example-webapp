@@ -46,10 +46,8 @@
      <link href="https://vjs.zencdn.net/7.5.4/video-js.css" rel="stylesheet">
 
     <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-    <script src="{{ asset('js/dashboard-filter.js') }}" > </script>
+  {{--  <script src="{{ asset('js/dashboard-filter.js') }}" > </script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-    <script src="{{ asset('js/html2canvas.min.js') }}"></script>
 @yield('css')
 <style>
     #footer{
@@ -159,7 +157,6 @@
             </footer>-->
         </div>
     </div>
-    @include('layouts.customer-filter-script')
     @include('layouts.footer')
 </body>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.3/css/fixedHeader.dataTables.min.css">

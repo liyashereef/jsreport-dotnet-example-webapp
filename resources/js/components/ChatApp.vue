@@ -1,7 +1,7 @@
 <template>
     <div class="chat-app">
         <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
-        <ContactsList :contacts="contacts" @selected="startConversationWith"/>
+        <ContactsList :contacts="contacts" :newcontact="newcontact"  @selected="startConversationWith"/>
     </div>
 </template>
 
@@ -22,6 +22,7 @@
                 selectedContact: null,
                 messages: [],
                 contacts: [],
+                newcontact:null
             };
         },
         mounted() {
@@ -37,22 +38,21 @@
             Echo.channel(`updateContact.${this.user.id}`)
                 .listen('.contact', (e) => {
                     console.log("inside update contact");
-                    this.getContactList()
-                    this.startConversationWith(e.contacts)
+                    this.getContactList(e.newcontact)
                 });
 
         },
         methods: {
-            getContactList(){
+            getContactList(newcontact_id){
               axios.get('/chat/contacts')
                   .then((response) => {
-                      console.log("ppppppp");
                       this.contacts = response.data;
+                        this.newcontact = newcontact_id;
                   });
             },
             startConversationWith(contact) {
-             //   this.updateUnreadCount(contact, true);
-
+                this.updateUnreadCount(contact, true);
+                 console.log(contact);
                 axios.get(`/chat/conversation/${contact.contact_id}`)
                     .then((response) => {
                         this.messages = response.data;
@@ -93,7 +93,7 @@
 
                // this.updateUnreadCount(message.from_contact, false);
             },
-          /*  updateUnreadCount(contact, reset) {
+            updateUnreadCount(contact, reset) {
                 console.log(contact);
                 this.contacts = this.contacts.map((single) => {
                     if (single.contact_id !== contact.contact_id) {
@@ -107,7 +107,7 @@
 
                     return single;
                 })
-            }*/
+            }
         },
         components: {Conversation, ContactsList}
     }

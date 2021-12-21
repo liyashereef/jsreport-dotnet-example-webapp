@@ -41,9 +41,9 @@ class UpdateContact implements ShouldBroadcast
 
      public function broadcastWith()
      {
-        $contacts = ChatContacts::with('contact.employee')->where('user_id',$this->user_id)->where('contact_id', '=', $this->contact_id)->get();
+       // $contacts = ChatContacts::with('contact.employee')->where('user_id',$this->user_id)->where('contact_id', '=', $this->contact_id)->get();
 
-         return ["contacts" =>  $contacts];
+         return ["newcontact" =>  $this->contact_id];
        //  return response()->json($contacts);
      }
 
