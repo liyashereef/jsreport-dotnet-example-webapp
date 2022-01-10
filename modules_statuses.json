@@ -34,5 +34,6 @@
     "Vehicle": true,
     "VideoPost": true,
     "VisitorLog": true,
-    "Chat": true
+    "Chat": true,
+    "Generator": true
 }
