@@ -30,7 +30,7 @@ class CellPhoneProviderTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'providername' => 'CGL',
+                'providername' => 'SECTURE',
                 'status' => 1,
                 'createdby' => 1,
                 'created_at' => '2019-05-21 06:04:47',

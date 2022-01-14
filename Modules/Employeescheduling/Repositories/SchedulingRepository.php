@@ -456,7 +456,7 @@ class SchedulingRepository
         $schedule->avgworkhours = $avghoursperweek;
         $schedule->status = 0;
         $schedule->update_by = 0;
-        $schedule->created_by = Auth::user()->id;
+        $schedule->created_by = null!==(Auth::user())?Auth::user()->id:0;
         $schedule->save();
         return $schedule->id;
     }
@@ -957,7 +957,7 @@ class SchedulingRepository
                 $resultArray[$scheduleId]['is_rescheduled'] = !empty($scheduleObject->initial_schedule_id) ? true : false;
                 $resultArray[$scheduleId]['id'] = $scheduleObject->id;
                 // dd($scheduleObject);
-                $resultArray[$scheduleId]['created_by'] = $scheduleObject->createdUser->getFullNameAttribute();
+                $resultArray[$scheduleId]['created_by'] = (null!=$scheduleObject->createdUser)?$scheduleObject->createdUser->getFullNameAttribute():"";
                 // dd($scheduleObject);
                 $resultArray[$scheduleId]['updated_by'] = ($scheduleObject->statusUpdatedUser ? $scheduleObject->statusUpdatedUser->getFullNameAttribute() : ($scheduleObject->updatedUser ? $scheduleObject->updatedUser->getFullNameAttribute() : ''));
                 $resultArray[$scheduleId]['updated_date'] = (($scheduleObject->statusUpdatedUser && $scheduleObject->status_update_date) ? $scheduleObject->status_update_date : (($scheduleObject->updatedUser && $scheduleObject->updated_at) ? $scheduleObject->updated_at->format("d-m-Y") : ''));
@@ -1102,7 +1102,7 @@ class SchedulingRepository
             return false;
         }
         $date = Carbon::now();
-        $authUserId = Auth::user()->id;
+        $authUserId = null!==(Auth::user())?Auth::user()->id:0;
         $status = $this->model->where('id', $id)->update(['status' => 2, 'status_update_date' => $date, 'status_updated_by' => $authUserId, 'status_notes' => $statusNote]);
         if ($status) {
             $logStatus = $this->timeLogModel->where('employee_schedule_id', $id)->update(['approved' => 0]);
@@ -1111,15 +1111,19 @@ class SchedulingRepository
             if (!empty($customerObject)) {
                 $helper_variable = array(
                     '{receiverFullName}' => '',
-                    '{loggedInUserEmployeeNumber}' => Auth::user()->employee->employee_no,
+                    '{loggedInUserEmployeeNumber}' => null!==(Auth::user())?Auth::user()->employee->employee_no:"",
                     '{scheduleReasonNote}' => $statusNote,
                     '{thresholdexceededlist}' => '',
-                    '{loggedInUser}' => Auth::user()->getFullNameAttribute(),
+                    '{loggedInUser}' => null!==(Auth::user())?Auth::user()->getFullNameAttribute():null,
                     '{client}' => $customerObject->client_name,
                     '{projectNumber}' => $customerObject->project_number,
                     '{scheduleStatus}' => 'rejected',
                 );
-                $this->MailQueueRepository->prepareMailTemplate("scheduling_approved_request_notification", $scheduleObj->customer_id, $helper_variable, "Modules\Employeescheduling\Models\EmployeeSchedule", Auth::user()->id);
+                try {
+                    $this->MailQueueRepository->prepareMailTemplate("scheduling_approved_request_notification", $scheduleObj->customer_id, $helper_variable, "Modules\Employeescheduling\Models\EmployeeSchedule", Auth::user()->id);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
             }
             return true;
         }

@@ -89,6 +89,11 @@ class Customer extends Model
         return $this->hasMany('Modules\Supervisorpanel\Models\CustomerPayperiodTemplate');
     }
 
+    public function employeeSchedule()
+    {
+        return $this->hasMany('Modules\Employeescheduling\Models\EmployeeSchedule');
+    }
+
     public function latestContract()
     {
         return $this->hasOne('Modules\Contracts\Models\Cmuf', "contract_name")->latest();

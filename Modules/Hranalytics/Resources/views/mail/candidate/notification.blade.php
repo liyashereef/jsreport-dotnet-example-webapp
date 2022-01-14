@@ -17,7 +17,7 @@ I would ask you to be patient. Now that you are in our database, I or a member o
 <br>
 Now, as the SVP/COO of Commissionaires Great Lakes, I have a company to run. However, if you don’t hear anything from us over the next 3 months, I will give you my email to contact me. I or my assistant will do our best to get back to you and let you know what is available. My personal email address is:
 <br>
-<a href="mailto:benjamin.alexander@commissionaires-cgl.ca">benjamin.alexander@commissionaires-cgl.ca</a>
+<a href="mailto:benjamin.alexander@secture360.ca.ca">benjamin.alexander@secture360.ca.ca</a>
 <br>
 Please do not abuse this. If you send me multiple emails or contact me within 3 months – I will have no choice but to block you. We have over 1,700 employees so you can appreciate my inbox often gets flooded. However, recruiting is so strategic to what we do that I do take time to get back to legitimate inquiries if you are looking to find out about the status of your application. Remember, give it a minimum of 3 months before you email me if you haven't been contacted and I'll inquire about the status of your application.
 <br>

@@ -61,7 +61,10 @@ class InheritScheduleController extends Controller
             if ($status) {
                 return response()->json(['success' => false, 'msg' => "Operation restricted, Approved schedules found with selected destination payperiods"]);
             }
-            $this->inheritScheduleRepository->inheritProcess($request);
+            $customerId = $request->get('customer_id');
+            $sourcePayPeriod = $request->get('source_payperiod');
+            $destinationPayPeriod = $request->get('destination_payperiod');
+            $this->inheritScheduleRepository->inheritProcess($customerId,$sourcePayPeriod,$destinationPayPeriod);
             \DB::commit();
             return response()->json($this->helperService->returnTrueResponse());
         } catch (\Exception $e) {

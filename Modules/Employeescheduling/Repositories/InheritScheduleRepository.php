@@ -143,12 +143,10 @@ class InheritScheduleRepository
         return false;
     }
 
-    public function inheritProcess($request)
+    public function inheritProcess($customerId,$sourcePayPeriod,$destinationPayPeriod)
     {
         $outArray = $dateIndex = [];
-        $customerId = $request->get('customer_id');
-        $sourcePayPeriod = $request->get('source_payperiod');
-        $destinationPayPeriod = $request->get('destination_payperiod');
+        
         $sourceScheduleID = null;
 
         if (!is_array($destinationPayPeriod)) {
@@ -472,7 +470,7 @@ class InheritScheduleRepository
                             "hours" => $log['hours'],
                             "approved_by" => null,
                             "approved_Date" => null,
-                            "created_by" => Auth::user()->id,
+                            "created_by" => null!==(Auth::user())?Auth::user()->id:0,
                             "approved" => 0,
                             'overlaps' => $log['overlaps'],
                         ]);

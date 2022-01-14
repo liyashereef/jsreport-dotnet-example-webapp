@@ -38,7 +38,7 @@ return [
     'candidate_application_folder' => 'candidate_application',
     'rec_candidate_application' => 'rec_candidate_application',
     'mobile_app_version' => 3,
-    'coo_email' => 'balexander@commissionaires-cgl.ca',
+    'coo_email' => 'balexander@secture360.ca',
     'coo_mail_valid' => false,
     'shift_module_attachment_folder' => 'shift_module_attachment',
     'expense-send-statements' => 'expense-send-statements',

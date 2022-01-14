@@ -63,7 +63,7 @@
                 <li class="prerequest-messages">Copy of Your Wallet Card (Record of Military Service - If Applicable)</li>
                 <li class="prerequest-messages">Copy of Your Current Resume</li>
             </ul>
-           {{--  <p class="applyjob-page h-gutter-20"><span style="font-size:13px;">To get any help, please contact Sam Philip; Cell: 416 807 4906,Email: sphilip@commissionaires-cgl.ca</span></p>           --}}
+           {{--  <p class="applyjob-page h-gutter-20"><span style="font-size:13px;">To get any help, please contact Sam Philip; Cell: 416 807 4906,Email: sphilip@secture360.ca.ca</span></p>           --}}
         </div>
         <div id="block5" style="margin-top: 0%;">
             <p class="applyjob-page">Please listen to a brief message from our SVP/COO before you begin the application process</p>
